@@ -1,0 +1,108 @@
+<div class="row" style="padding-top: 10px">
+  <div class="col-lg-6">
+    <h1>
+      Historial de Planillas
+      <i
+        nz-icon
+        nzType="info-circle"
+        nzTheme="twotone"
+        nz-popover
+        class="center"
+        [nzPopoverContent]="contentTemplate"
+        nzPopoverTrigger="hover"
+      ></i>
+    </h1>
+  </div>
+</div>
+<ng-template #contentTemplate>
+  <div>
+    <p>Puedes buscar planillas por su nombre.</p>
+    <p>Puedes volver a descargar planillas que calculaste con anterioridad.</p>
+  </div>
+</ng-template>
+<br />
+<div class="top">
+  <div class="mb-3">
+    <form>
+      <input
+        class="form-control"
+        type="file"
+        (change)="onFileChange($event)"
+        multiple="false"
+        id="formFile"
+      />
+    </form>
+  </div>
+</div>
+<br />
+<nz-input-group [nzPrefix]="prefixTemplateUser">
+  <input
+    type="text"
+    (ngModelChange)="Search($event)"
+    [(ngModel)]="historial"
+    nz-input
+    placeholder="Buscar historial por nombre de planilla"
+  />
+</nz-input-group>
+<ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
+
+<div>
+  <nz-spin nzTip="Cargando..." *ngIf="loading">
+    <nz-alert
+      nzType="info"
+      nzMessage="ALERTA"
+      nzDescription="El historial se mostrará en breve."
+    >
+    </nz-alert>
+  </nz-spin>
+  <nz-table
+    #basicTable
+    [nzData]="listHistory"
+    nzPaginationPosition="top"
+    nzBordered
+    nzTemplateMode
+    id="cssTable"
+  >
+    <thead>
+      <tr>
+        <th scope="col" style="text-align: center">Planilla</th>
+        <th scope="col" style="text-align: center">ID</th>
+        <th scope="col" style="text-align: center">Fecha Inicio</th>
+        <th scope="col" style="text-align: center">Fecha Final</th>
+        <th scope="col" style="text-align: center">Total Pagado</th>
+        <th scope="col" style="text-align: center">Descargar Archivo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="6" *ngIf="listHistory?.length <= 0">
+          <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+          <ng-template #contentTpl>
+            <span>
+              No hay datos.<a routerLink="/calculo">
+                Puede crear planillas aquí.</a
+              >
+            </span>
+          </ng-template>
+        </td>
+      </tr>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.descripcion }}</td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.fechaInicial | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.fechaFinal | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.totalPlanilla }}</td>
+        <td>
+          <!-- <button
+              class="btn btn-lg btn btn-info"
+              (click)="downloadPlanilla(data.archivo)"
+              data-placement="bottom"
+              title="Descargar planilla en formato Excel"
+            >
+              <i nz-icon nzType="cloud-download"></i>
+            </button> -->
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

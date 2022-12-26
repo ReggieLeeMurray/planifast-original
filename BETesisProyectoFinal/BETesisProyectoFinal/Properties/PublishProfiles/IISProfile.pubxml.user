@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/hh7hVyHJUWYjdblssUYUgAAAAACAAAAAAAQZgAAAAEAACAAAABjsW8Wrz6GB8fx1zv7i+zgzMRdqs+GkJ/gczxC1trQ1wAAAAAOgAAAAAIAACAAAADQKqrTh3zGmAXtr9ymiTRe0Gw2bb6TyLh8R/F4Nf/V/yAAAAAT9LiPl+cTsHj0Xn9TbBIBDBNOjxjOrktuOubPiW+EgEAAAAAH3hi2JDkoqmNpVijuhHu3Wswwft2OlKoElLH6/xGGPkvTZKaSN45E6LQQYA0zqnL/cu1Vu64g04p7AdhOURxc</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="Conexion">
+      <Value>Server=planifast-my-sql-db.mysql.database.azure.com%3bDatabase=PlaniFast%3bUid=reggiemurray%40planifast-my-sql-db%3bPwd=Incorrect201</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,268 @@
+<nz-back-top></nz-back-top>
+<div class="row" style="padding-top: 10px">
+  <div class="col-lg-6">
+    <h1>
+      Listado de Eventos
+      <i
+        nz-icon
+        nzType="info-circle"
+        nzTheme="twotone"
+        class="center"
+        nz-popover
+        [nzPopoverContent]="contentTemplate"
+        nzPopoverTrigger="hover"
+      ></i>
+    </h1>
+  </div>
+</div>
+<ng-template #contentTemplate>
+  <div>
+    <p>
+      Agrega eventos solamente con seleccionar el rango de fechas en el
+      calendario.
+    </p>
+    <p>
+      Puedes eliminar un evento al hacer click en la papelera roja de la lista
+      de eventos o al hacer click sobre el evento en el calendario.
+    </p>
+    <p>Si eliminas un evento tendrás que volverlo a crear.</p>
+    <p>
+      Puedes buscar eventos por su tipo o por el nombre del colaborador al que
+      pertenece.
+    </p>
+    <p>
+      Al hacer uso del buscador, los eventos seleccionados se actualizarán en el
+      calendario automáticamente.
+    </p>
+  </div>
+</ng-template>
+
+<div>
+  <tr>
+    <td>
+      <nz-modal
+        [nzFooter]="null"
+        nzCentered
+        [(nzVisible)]="isVisible"
+        nzTitle="Nuevo Ingreso de Vacaciones"
+        (nzOnCancel)="handleCancel()"
+        nzClosable="false"
+      >
+        <ng-container *nzModalContent>
+          <form nz-form [formGroup]="EventoForm">
+            <nz-form-item>
+              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired
+                >Colaborador</nz-form-label
+              >
+
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-select
+                  nzShowSearch
+                  nzPlaceHolder="Seleccione"
+                  formControlName="colaborador"
+                >
+                  <nz-option
+                    type="number"
+                    *ngFor="let empleado of listEmpleados"
+                    nzValue="{{ empleado.id }}"
+                    nzLabel="{{ empleado.nombres }} {{ empleado.apellidos }}"
+                  ></nz-option>
+                </nz-select> </nz-form-control
+            ></nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired
+                >Tipo de Evento</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Seleccione un evento válido"
+              >
+                <nz-select
+                  nzShowSearch
+                  nzAllowClear
+                  formControlName="tipo"
+                  nzPlaceHolder="Seleccione"
+                  [(ngModel)]="selectedColor"
+                >
+                  <nz-option
+                    nzCustomContent
+                    nzLabel="Vacacion"
+                    nzValue="Vacacion"
+                    ><i
+                      nz-icon
+                      [nzType]="'check-circle'"
+                      [nzTheme]="'twotone'"
+                      [nzTwotoneColor]="'#52c41a'"
+                    ></i>
+                    Vacacion</nz-option
+                  >
+                  <nz-option
+                    nzCustomContent
+                    nzLabel="Incapacidad"
+                    nzValue="Incapacidad"
+                    ><i
+                      nz-icon
+                      [nzType]="'check-circle'"
+                      [nzTheme]="'twotone'"
+                      [nzTwotoneColor]="'#FFF100'"
+                    ></i>
+                    Incapacidad</nz-option
+                  >
+                  <nz-option nzCustomContent nzLabel="Falta" nzValue="Falta"
+                    ><i
+                      nz-icon
+                      [nzType]="'check-circle'"
+                      [nzTheme]="'twotone'"
+                      [nzTwotoneColor]="'#EE1224'"
+                    ></i>
+                    Falta
+                  </nz-option>
+                </nz-select></nz-form-control
+              >
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired
+                >Comentario</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Escriba un comentario"
+              >
+                <input
+                  nz-input
+                  type="text"
+                  formControlName="comentario"
+                  placeholder="Describe el evento"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <tr>
+              <td>
+                <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                  <button
+                    nz-button
+                    nzType="primary"
+                    style="margin: 10px"
+                    [disabled]="EventoForm.invalid"
+                    (click)="guardar()"
+                  >
+                    Registrar Evento
+                  </button>
+                </nz-form-control>
+              </td>
+              <td>
+                <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                  <button
+                    nz-button
+                    nzType="default"
+                    style="margin: 10px"
+                    (click)="clear()"
+                  >
+                    Limpiar
+                  </button>
+                </nz-form-control>
+              </td>
+              <td>
+                <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                  <button
+                    nz-button
+                    nzType="primary"
+                    (click)="handleCancel()"
+                    nzDanger
+                  >
+                    Cancelar
+                  </button>
+                </nz-form-control>
+              </td>
+            </tr>
+          </form>
+        </ng-container>
+      </nz-modal>
+    </td>
+  </tr>
+</div>
+<div class="main-container">
+  <nz-alert
+    nzMessage="Leyenda de Eventos"
+    nzDescription="
+    🟢 Vacaciones
+    🟡 Incapacidades
+    🔴 Faltas"
+  ></nz-alert>
+  <!-- <p>#16C60C #EE1224 #FFF100</p> -->
+  <br />
+  <body>
+    <div id="calendar" *ngIf="calendarVisible"></div>
+  </body>
+</div>
+<br />
+
+<nz-input-group [nzPrefix]="prefixTemplateUser">
+  <input
+    type="text"
+    (ngModelChange)="Search($event)"
+    [(ngModel)]="eventos"
+    nz-input
+    placeholder="Buscar eventos por tipo o por beneficiado"
+  />
+</nz-input-group>
+<ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
+
+<div>
+  <nz-spin nzTip="Cargando..." *ngIf="loading">
+    <nz-alert
+      nzType="info"
+      nzMessage="ALERTA"
+      nzDescription="Los eventos se mostrarán en breve."
+    >
+    </nz-alert>
+  </nz-spin>
+  <nz-table
+    #basicTable
+    [nzData]="listEventos"
+    nzPaginationPosition="top"
+    nzBordered
+    nzTemplateMode
+    id="cssTable"
+    [nzPageSize]="pageSize"
+  >
+    <thead>
+      <tr>
+        <th scope="col" style="text-align: center">Tipo de Evento</th>
+        <th scope="col" style="text-align: center">ID</th>
+        <th scope="col" style="text-align: center">Nombre Completo</th>
+        <th scope="col" style="text-align: center">Comentario</th>
+        <th scope="col" style="text-align: center">Fecha y Hora Inicial</th>
+        <th scope="col" style="text-align: center">Fecha y Hora Final</th>
+        <th style="text-align: center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="7" *ngIf="listEventos?.length <= 0">
+          <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+          <ng-template #contentTpl>
+            <span> No hay eventos creados. </span>
+          </ng-template>
+        </td>
+      </tr>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.tipo }}</td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.nombres }} {{ data.apellidos }}</td>
+        <td>{{ data.comentario }}</td>
+        <td>{{ data.fechaInicio | date : "dd/MM/yyyy HH:mm" }}</td>
+        <td>{{ data.fechaFinal | date : "dd/MM/yyyy HH:mm" }}</td>
+
+        <td>
+          <button class="btn btn-danger" (click)="showDeleteConfirm(data.id)">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

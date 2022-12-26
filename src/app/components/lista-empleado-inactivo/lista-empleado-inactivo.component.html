@@ -1,0 +1,113 @@
+<div class="row" style="padding-top: 10px">
+  <div class="col-lg-6">
+    <h1>
+      Lista de Colaboradores Inactivos
+      <i
+        nz-icon
+        nzType="info-circle"
+        nzTheme="twotone"
+        nz-popover
+        class="center"
+        [nzPopoverContent]="contentTemplate"
+        nzPopoverTrigger="hover"
+      ></i>
+    </h1>
+  </div>
+</div>
+<ng-template #contentTemplate>
+  <div>
+    <p>
+      Haz click sobre el lapiz azul para editar los datos de baja del
+      colaborador.
+    </p>
+    <p>
+      Si eliminas un colaborador de la lista de inactivos al hacer click en la
+      papelera roja se le dara de alta automáticamente.
+    </p>
+    <p>Puedes buscar colaboradores por su nombre o motivo de baja</p>
+  </div>
+</ng-template>
+<nz-content>
+  <div class="logo"></div>
+  <ul nz-menu nzTheme="light" nzMode="horizontal">
+    <li nz-menu-item><a href="/listado">Activos</a></li>
+    <li nz-menu-item nzSelected><a href="/inactivos">Inactivos</a></li>
+  </ul>
+</nz-content>
+<br />
+<nz-input-group [nzPrefix]="prefixTemplateUser">
+  <input
+    type="text"
+    (ngModelChange)="Search($event)"
+    [(ngModel)]="nombres"
+    nz-input
+    placeholder="Buscar colaboradores por nombre o por motivo de baja"
+  />
+</nz-input-group>
+<ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
+<div>
+  <nz-spin nzTip="Cargando..." *ngIf="loading">
+    <nz-alert
+      nzType="info"
+      nzMessage="ALERTA"
+      nzDescription="Los colaboradores se mostrarán en breve."
+    >
+    </nz-alert>
+  </nz-spin>
+  <nz-table
+    #basicTable
+    [nzData]="listEmpleadoInactivo"
+    nzPaginationPosition="top"
+    nzBordered
+    nzTemplateMode
+    id="cssTable"
+  >
+    <thead>
+      <tr>
+        <th scope="col" style="text-align: center">Nombre Completo</th>
+        <th scope="col" style="text-align: center">ID de Baja</th>
+        <th scope="col" style="text-align: center">Valor Pagado</th>
+        <th scope="col" style="text-align: center">Motivo de Baja</th>
+        <th scope="col" style="text-align: center">Nota</th>
+        <th scope="col" style="text-align: center">Fecha Salida</th>
+        <th style="text-align: center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="7" *ngIf="listEmpleadoInactivo?.length <= 0">
+          <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+          <ng-template #contentTpl>
+            <span>
+              No hay datos.<a routerLink="/rebajar">
+                Puede dar de baja a colaboradores aquí.</a
+              >
+            </span>
+          </ng-template>
+        </td>
+      </tr>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.nombres }} {{ data.apellidos }}</td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.valor }}</td>
+        <td>{{ data.motivo }}</td>
+        <td>{{ data.nota }}</td>
+        <td>{{ data.fechaSalida | date : "dd/MM/yyyy" }}</td>
+        <td>
+          <button
+            class="btn btn-primary btn-sm"
+            [routerLink]="['/editarbaja', data.id]"
+          >
+            <i class="bi bi-pencil-fill"></i>
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="showDeleteConfirm(data.id)"
+          >
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

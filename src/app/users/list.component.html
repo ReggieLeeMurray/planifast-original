@@ -1,0 +1,120 @@
+﻿<div class="row" style="padding-top: 10px">
+  <div class="col-lg-6">
+    <h1>
+      Lista de Usuarios
+      <i
+        nz-icon
+        nzType="info-circle"
+        nzTheme="twotone"
+        nz-popover
+        class="center"
+        style="vertical-align: middle; text-align: center; margin-bottom: 5px"
+        [nzPopoverContent]="contentTemplate"
+        nzPopoverTrigger="hover"
+      ></i>
+    </h1>
+  </div>
+</div>
+<br />
+<ng-template #contentTemplate>
+  <div>
+    <p>
+      TEN CUIDADO al eliminar usuarios, si eliminas tu usuario al hacer click en
+      la papelera roja te sacará automáticamente del sistema y perderás acceso.
+    </p>
+    <p>Puedes buscar usuarios por su nombre o rol al que pertenece.</p>
+    <p>No debe dejar ningún campo vacío para crear un nuevo del usuario.</p>
+    <p>
+      No se permite eliminar ni editar los usuarios de otros administradores,
+      asegúrate de dar este acceso solamente a personal de confianza.
+    </p>
+  </div>
+</ng-template>
+
+<div>
+  <tr>
+    <td>
+      <button
+        style="margin-right: 10px"
+        nz-button
+        routerLink="add"
+        nzSize="default"
+        nzType="primary"
+      >
+        Nuevo Usuario
+      </button>
+    </td>
+    <td style="width: 100%">
+      <nz-input-group [nzPrefix]="prefixTemplateUser">
+        <input
+          type="text"
+          (ngModelChange)="Search($event)"
+          [(ngModel)]="usuarios"
+          nz-input
+          placeholder="Buscar por nombre, usuario o rol al que pertenece"
+        />
+      </nz-input-group>
+    </td>
+  </tr>
+</div>
+
+<ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
+<nz-spin nzTip="Cargando..." *ngIf="loading">
+  <nz-alert
+    nzType="info"
+    nzMessage="ALERTA"
+    nzDescription="Los usuarios se mostrarán en breve."
+  >
+  </nz-alert>
+</nz-spin>
+
+<nz-table
+  #basicTable
+  [nzData]="listUsers"
+  nzPaginationPosition="top"
+  nzBordered
+  nzTemplateMode
+>
+  <thead>
+    <tr>
+      <th scope="col" style="text-align: center">Nombre Completo</th>
+      <th scope="col" style="text-align: center">Usuario</th>
+      <th scope="col" style="text-align: center">E-mail</th>
+      <th scope="col" style="text-align: center">Rol</th>
+      <th style="text-align: center">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="5" *ngIf="listUsers?.length <= 0">
+        <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+        <ng-template #contentTpl>
+          <span>No hay usuarios ingresados.</span>
+        </ng-template>
+      </td>
+    </tr>
+    <tr *ngFor="let data of basicTable.data" style="text-align: center">
+      <td>{{ data.firstName }} {{ data.lastName }}</td>
+      <td>{{ data.username }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.role }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" routerLink="edit/{{ data.id }}">
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteUser(data.id)"
+          [disabled]="data.isDeleting"
+        >
+          <span
+            *ngIf="data.isDeleting"
+            class="spinner-border spinner-border-sm"
+          ></span>
+          <span *ngIf="!data.isDeleting"></span>
+          <i class="bi bi-trash-fill"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

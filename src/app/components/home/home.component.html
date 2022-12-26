@@ -1,0 +1,88 @@
+<div class="row" style="padding-top: 10px">
+  <div class="col-lg-6">
+    <h1>
+      Reportes
+      <i
+        nz-icon
+        nzType="info-circle"
+        nzTheme="twotone"
+        class="center"
+        nz-popover
+        [nzPopoverContent]="contentTemplate"
+        nzPopoverTrigger="hover"
+      ></i>
+    </h1>
+  </div>
+</div>
+<br />
+<ng-template #contentTemplate>
+  <div>
+    <p>
+      Los gráficos se actualizarán automáticamente cuando se ingresen más datos
+      a la aplicación.
+    </p>
+  </div>
+</ng-template>
+<div>
+  <div class="card">
+    <div class="card-body">
+      <table>
+        <td style="height: 400px">
+          <h1 class="text-uppercase small mb-2">
+            <strong>EMPLEADOS</strong>
+          </h1>
+          <h5 class="font-weight-bold mb-0">Por Departamento</h5>
+          <canvas style="height: 400px" class="card-body" id="canvas">{{
+            chart
+          }}</canvas>
+        </td>
+        <td>
+          <div style="height: 350px">
+            <h1 class="text-uppercase small mb-2">
+              <strong>TOTAL ABONADO</strong>
+            </h1>
+            <h5 class="font-weight-bold mb-0">
+              Por Planilla (Mes actual por defecto)
+            </h5>
+            <nz-form-label [nzSm]="8" [nzXs]="24"
+              >Seleccionar Fecha</nz-form-label
+            >
+            <nz-range-picker
+              [(ngModel)]="date"
+              (ngModelChange)="onChange($event)"
+            ></nz-range-picker>
+            <canvas class="card-body" id="canvas5">{{ chart5 }}</canvas>
+          </div>
+        </td>
+      </table>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="card">
+    <div class="card-body">
+      <table>
+        <td>
+          <h1 class="text-uppercase small mb-2">
+            <strong>EMPLEADOS</strong>
+          </h1>
+          <h5 class="font-weight-bold mb-0">Por Planilla</h5>
+          <canvas class="card-body" id="canvas2">{{ chart2 }}</canvas>
+        </td>
+
+        <!-- <td>
+          <h1 class="text-uppercase small mb-2"><strong>EVENTOS</strong></h1>
+          <h5 class="font-weight-bold mb-0">Por Tipo</h5>
+          <canvas class="card-body" id="canvas3">{{ chart3 }}</canvas>
+        </td> -->
+        <td>
+          <h1 class="text-uppercase small mb-2">
+            <strong>EMPLEADOS</strong>
+          </h1>
+          <h5 class="font-weight-bold mb-0">Por Disponibilidad</h5>
+          <canvas class="card-body" id="canvas4">{{ chart4 }}</canvas>
+        </td>
+      </table>
+    </div>
+  </div>
+</div>

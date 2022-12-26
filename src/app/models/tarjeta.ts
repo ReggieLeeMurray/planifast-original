@@ -1,0 +1,30 @@
+export class Tarjeta {
+  id?: number;
+  nombres: string;
+  apellidos: string;
+  luI: string;
+  luO: string;
+  maI: string;
+  maO: string;
+  miI: string;
+  miO: string;
+  juI: string;
+  juO: string;
+  viI: string;
+  viO: string;
+  saI: string;
+  saO: string;
+  doI: string;
+  doO: string;
+  hoursLunes: number;
+  hoursMartes: number;
+  hoursMiercoles: number;
+  hoursJueves: number;
+  hoursViernes: number;
+  hoursSabado: number;
+  hoursDomingo: number;
+  extrasDiurna: number;
+  extrasNocturna: number;
+  extrasMixta: number;
+  empleadoID: number;
+}

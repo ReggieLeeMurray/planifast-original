@@ -1,0 +1,375 @@
+<body>
+  <div class="row" style="padding-top: 10px">
+    <div class="col-lg-6">
+      <h1>
+        Carga Masiva de Colaboradores
+        <i
+          nz-icon
+          nzType="info-circle"
+          nzTheme="twotone"
+          nz-popover
+          [nzPopoverContent]="contentTemplate"
+          nzPopoverTrigger="hover"
+          class="center"
+        ></i>
+      </h1>
+    </div>
+  </div>
+  <ng-template #contentTemplate>
+    <div>
+      <p>
+        Este módulo le permite ingresar multiples colaboradores con un solo
+        archivo formato Excel
+      </p>
+    </div>
+  </ng-template>
+  <div class="main_content">
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <h1>Requerido</h1>
+          <nz-collapse>
+            <nz-collapse-panel
+              [nzActive]="isActive"
+              (nzActiveChange)="onChange($event)"
+              nzHeader="💡 INSTRUCCIONES IMPORTANTES 💡"
+            >
+              <div style="overflow: hidden; text-align: left">
+                <tr>
+                  <td class="mix">
+                    <label><strong>1.-</strong></label>
+                  </td>
+                  <td class="mix">
+                    <p style="font-style: italic">
+                      Descargue nuestra plantilla e ingrese los datos requeridos
+                      para cada colaborador.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mix">
+                    <label><strong>2.-</strong></label>
+                  </td>
+                  <td class="mix">
+                    <p style="font-style: italic">
+                      Llenar las cédulas en formato texto y sin guiones.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mix">
+                    <label><strong>3.-</strong></label>
+                  </td>
+                  <td class="mix">
+                    <p style="font-style: italic">
+                      Llenar las fechas en formato corto (DD/MM/YYYY).
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mix">
+                    <label><strong>4.-</strong></label>
+                  </td>
+                  <td class="mix">
+                    <p style="font-style: italic">
+                      El genero debe detallarse como "Masculino" o "Femenino",
+                      "M" o "F", puede ignorar mayusculas.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mix">
+                    <label><strong>5.-</strong></label>
+                  </td>
+                  <td class="mix">
+                    <p style="font-style: italic">
+                      Elija el archivo y previsualize los datos, luego haga
+                      click sobre el boton "Subir".
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mix">
+                    <label><strong>6.-</strong></label>
+                  </td>
+                  <td class="mix">
+                    <p style="font-style: italic">
+                      Los ID's de los departamentos y planillas a ingresar en el
+                      archivo se detallan en las siguientes tablas.
+                    </p>
+                  </td>
+                </tr>
+              </div>
+              <div class="secundary_content">
+                <tr class="divcenter">
+                  <td style="margin-right: 2%">
+                    <nz-table
+                      id="deptos"
+                      nzPaginationPosition="top"
+                      nzBordered
+                      nzTemplateMode
+                    >
+                      <thead>
+                        <tr>
+                          <th style="text-align: center">Departamento ID</th>
+                          <th style="text-align: center">Descripcion</th>
+                        </tr>
+                      </thead>
+                      <tbody style="text-align: center">
+                        <tr *ngFor="let depto of listDeptos">
+                          <td>{{ depto.id }}</td>
+                          <td>{{ depto.descripcion }}</td>
+                        </tr>
+                      </tbody>
+                    </nz-table>
+                  </td>
+                  <td>
+                    <nz-table
+                      id="planillas"
+                      nzPaginationPosition="top"
+                      nzBordered
+                      nzTemplateMode
+                    >
+                      <thead>
+                        <tr>
+                          <th style="text-align: center">Planilla ID</th>
+                          <th style="text-align: center">Descripcion — Tipo</th>
+                        </tr>
+                      </thead>
+                      <tbody style="text-align: center">
+                        <tr *ngFor="let plani of listTP">
+                          <td>{{ plani.id }}</td>
+                          <td>
+                            {{ plani.descripcion }} —
+                            {{ plani.tipo }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </nz-table>
+                  </td>
+                </tr>
+                <div class="divcenter">
+                  <button
+                    nz-button
+                    nzType="primary"
+                    nzSize="large"
+                    nzShape="round"
+                    (click)="exportExcel()"
+                  >
+                    <i
+                      nz-icon
+                      nzType="cloud-download"
+                      class="center"
+                      nzTheme="outline"
+                    ></i
+                    >Descargar plantilla en formato Excel
+                  </button>
+                </div>
+              </div>
+            </nz-collapse-panel>
+          </nz-collapse>
+
+          <div class="top">
+            <div class="mb-3">
+              <form [formGroup]="reqForm">
+                <input
+                  class="form-control"
+                  type="file"
+                  formControlName="archivo"
+                  (change)="onFileChange($event)"
+                  multiple="false"
+                  id="formFile"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nz-table id="template" nzBordered nzTemplateMode hidden>
+    <thead>
+      <tr>
+        <th>nombres</th>
+        <th>apellidos</th>
+        <th>email</th>
+        <th>n_Cedula</th>
+        <th>direccion</th>
+        <th>fechaNac</th>
+        <th>fechaIngreso</th>
+        <th>genero</th>
+        <th>salarioBase</th>
+        <th>departamentoID</th>
+        <th>planillaID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <br />
+  <nz-table
+    #basicTable
+    [nzData]="listFinal"
+    nzPaginationPosition="top"
+    nzBordered
+    nzTemplateMode
+    id="table"
+  >
+    <thead>
+      <tr>
+        <th scope="col" style="text-align: center">Nombre Completo</th>
+        <th scope="col" style="text-align: center">N° Cédula</th>
+        <th scope="col" style="text-align: center">Dirección</th>
+        <th scope="col" style="text-align: center">Email</th>
+        <th scope="col" style="text-align: center">Genero</th>
+        <th scope="col" style="text-align: center">Fecha de Nacimiento</th>
+        <th scope="col" style="text-align: center">Fecha de Ingreso</th>
+        <th scope="col" style="text-align: center">Salario Base</th>
+        <th scope="col" style="text-align: center">Departamento</th>
+        <th scope="col" style="text-align: center">Planilla</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="11" *ngIf="listFinal?.length <= 0">
+          <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+          <ng-template #contentTpl>
+            <span> No hay datos. </span>
+          </ng-template>
+        </td>
+      </tr>
+      <tr></tr>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.nombres }} {{ data.apellidos }}</td>
+        <td>{{ data.n_Cedula }}</td>
+        <td>{{ data.direccion }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.genero }}</td>
+        <td>
+          {{ data.fechaNac | date: "dd/MM/yyyy" }}
+        </td>
+        <td>
+          {{ data.fechaIngreso | date: "dd/MM/yyyy" }}
+        </td>
+        <td>{{ data.salarioBase }}</td>
+        <td>{{ data.departamentoID }}</td>
+        <td>{{ data.planillaID }} - {{ data.tipo }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <div class="main_content" style="padding-top: 2%">
+    <button
+      nz-button
+      (click)="upload()"
+      id="btnSubir"
+      style="margin-right: 2%"
+      nzSize="large"
+      nzType="primary"
+      [disabled]="reqForm.invalid && this.listFinal == null"
+    >
+      <i nz-icon nzType="upload" class="center" nzTheme="outline"></i>Subir
+    </button>
+    <button
+      nz-button
+      (click)="clean()"
+      nzSize="large"
+      nzType="primary"
+      nzDanger
+    >
+      <i nz-icon nzType="delete" class="center" nzTheme="fill"></i>Limpiar
+    </button>
+  </div>
+</body>

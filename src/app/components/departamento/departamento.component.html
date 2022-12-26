@@ -1,0 +1,127 @@
+<div class="row" style="padding-top: 10px">
+  <div class="col-lg-6"></div>
+  <h1>Administración de Departamentos</h1>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="{{ accion }} Departamentos"
+  (nzOnCancel)="handleCancel()"
+  [nzOkDisabled]="departamentosForm.invalid"
+  (nzOnOk)="guardarDepartamentos()"
+  nzCentered
+  nzClosable="false"
+>
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="departamentosForm">
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="8" [nzXs]="24"
+          >Descripción</nz-form-label
+        >
+        <nz-form-control
+          [nzSm]="14"
+          [nzXs]="24"
+          nzHasFeedback
+          [nzErrorTip]="descriErrorTpl"
+        >
+          <input
+            reset=""
+            value=""
+            nz-input
+            type="text"
+            formControlName="descripcion"
+            style="width: 90%"
+            placeholder="ej. Contabilidad , RRHH, Produccion"
+          /><ng-template #descriErrorTpl let-control>
+            <ng-container
+              *ngIf="departamentosForm.get('descripcion').hasError('required')"
+            >
+              Ups! No dejes este campo en blanco
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+
+<div>
+  <tr>
+    <td>
+      <button
+        nz-button
+        style="margin-right: 10px"
+        nzSize="default"
+        nzType="primary"
+        (click)="showModal()"
+      >
+        Nuevo Departamento
+      </button>
+    </td>
+    <td style="width: 100%">
+      <nz-input-group [nzPrefix]="prefixTemplateUser">
+        <input
+          type="text"
+          (ngModelChange)="Search($event)"
+          [(ngModel)]="departamento"
+          nz-input
+          placeholder="Buscar por departamento"
+        />
+      </nz-input-group>
+      <ng-template #prefixTemplateUser
+        ><i nz-icon nzType="user"></i
+      ></ng-template>
+    </td>
+  </tr>
+</div>
+
+<nz-spin nzTip="Cargando..." *ngIf="loading">
+  <nz-alert
+    nzType="info"
+    nzMessage="ALERTA"
+    nzDescription="Los departamentos se mostrarán en breve"
+  >
+  </nz-alert>
+</nz-spin>
+<nz-table
+  #basicTable
+  [nzData]="listDeptos"
+  id="myTable"
+  nzPaginationPosition="top"
+  nzBordered
+  [nzPageSize]="pageSize"
+  nzTemplateMode
+>
+  <thead>
+    <tr>
+      <th scope="col" style="text-align: center">ID</th>
+      <th scope="col" style="text-align: center">Descripción</th>
+      <th scope="col" style="text-align: center">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="3" *ngIf="listDeptos?.length <= 0">
+        <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+        <ng-template #contentTpl>
+          <span>No hay departamentos ingresados.</span>
+        </ng-template>
+      </td>
+    </tr>
+    <tr *ngFor="let data of basicTable.data" style="text-align: center">
+      <td>{{ data.id }}</td>
+      <td>{{ data.descripcion }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="esEditar(data.id)">
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="showDeleteConfirm(data.id)"
+        >
+          <i class="bi bi-trash-fill"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
