@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SIKUJHI+BgOC4CXJLCnunLmvpg4t++qDYWb51Q0dqOoksf9xLMtyjKGhjNN621It4Km4myKDiutCTX0OZhft9Q==",
+  "dgSpecHash": "F1GFnP4TvW1iGbj14xxuyr2s7XT6Ir+aBuqQ4PM33OjXvTczbNnuENSmxtPAc39vMC8WiQhN4fQDFdUtZRxp+Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thaRe\\repo\\TesisProyectoFinal\\BETesisProyectoFinal\\BETesisProyectoFinal\\BEProyectoFinal.csproj",
+  "projectFilePath": "C:\\Users\\thaRe\\repo\\planifast\\BETesisProyectoFinal\\BETesisProyectoFinal\\BEProyectoFinal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thaRe\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\thaRe\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",

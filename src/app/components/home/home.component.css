@@ -3,3 +3,6 @@
   text-align: center;
   margin-bottom: 5px;
 }
+.myDiv {
+  border: 5px outset red;
+}

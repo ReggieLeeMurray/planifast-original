@@ -16,6 +16,8 @@ export class EmpleadosService {
   myCustomApiUrl4 = 'CountEmpleadoInactivo';
   myCustomApiUrl5 = 'byPlanilla?id=';
   myCustomApiUrl6 = 'CargaMasiva';
+  myCustomApiUrl7 = 'PersonalByFechaIngreso';
+  myCustomApiUrl8 = 'PersonalByFechaSalida';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -79,6 +81,18 @@ export class EmpleadosService {
   getCountInactivo(): Observable<Empleado[]> {
     return this.http.get<Empleado[]>(
       this.myAppUrl + this.myApiUrl + this.myCustomApiUrl4
+    );
+  }
+  //get count personal contratado por fecha
+  getCountPersonalByFechaIngreso(): Observable<Empleado[]> {
+    return this.http.get<Empleado[]>(
+      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl7
+    );
+  }
+  //get count personal despedido por fecha
+  getCountPersonalByFechaSalida(): Observable<Empleado[]> {
+    return this.http.get<Empleado[]>(
+      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl8
     );
   }
   //put

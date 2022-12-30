@@ -2354,11 +2354,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thaRe\\repo\\TesisProyectoFinal\\BETesisProyectoFinal\\BETesisProyectoFinal\\BEProyectoFinal.csproj",
+      "projectUniqueName": "C:\\Users\\thaRe\\repo\\planifast\\BETesisProyectoFinal\\BETesisProyectoFinal\\BEProyectoFinal.csproj",
       "projectName": "BEProyectoFinal",
-      "projectPath": "C:\\Users\\thaRe\\repo\\TesisProyectoFinal\\BETesisProyectoFinal\\BETesisProyectoFinal\\BEProyectoFinal.csproj",
+      "projectPath": "C:\\Users\\thaRe\\repo\\planifast\\BETesisProyectoFinal\\BETesisProyectoFinal\\BEProyectoFinal.csproj",
       "packagesPath": "C:\\Users\\thaRe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thaRe\\repo\\TesisProyectoFinal\\BETesisProyectoFinal\\BETesisProyectoFinal\\obj\\",
+      "outputPath": "C:\\Users\\thaRe\\repo\\planifast\\BETesisProyectoFinal\\BETesisProyectoFinal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\thaRe\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -99,6 +99,46 @@ namespace BETesisProyectoFinal.Controllers
     }
 
     [Route("[action]")]
+    public IActionResult PersonalByFechaIngreso()
+    {
+      using (AplicationDBContext db = new AplicationDBContext())
+      {
+        //LINQ
+
+        //SELECT COUNT(*) as Cantidad,
+        //date(FechaIngreso) as Fecha
+        //FROM abmproyectofinal.empleados
+        //GROUP BY month(FechaIngreso), year(FechaIngreso);
+
+        var query = from x in db.Empleados
+                    group x by new { x.FechaIngreso.Month, x.FechaIngreso.Year } into grp
+                    select new { Fecha = grp.Key, Cantidad = grp.Count() };
+
+      return Ok(query.ToList());
+      }
+    }
+
+    [Route("[action]")]
+    public IActionResult PersonalByFechaSalida()
+    {
+      using (AplicationDBContext db = new AplicationDBContext())
+      {
+        //LINQ
+
+        //SELECT COUNT(*) as Cantidad,
+        //date(FechaSalida) as Fecha
+        //FROM abmproyectofinal.empleadosinactivos
+        //GROUP BY 2;
+
+        var query = from x in db.EmpleadosInactivos
+                    group x by new { x.FechaSalida.Month, x.FechaSalida.Year } into grp
+                    select new { Fecha = grp.Key, Cantidad = grp.Count() };
+
+        return Ok(query.ToList());
+      }
+    }
+
+    [Route("[action]")]
     public IActionResult CountEmpleadobyPlanilla(int id)
     {
       using (AplicationDBContext db = new AplicationDBContext())
@@ -118,6 +158,7 @@ namespace BETesisProyectoFinal.Controllers
         return Ok(query.ToList());
       }
     }
+
     [Route("[action]")]
     public IActionResult CountEmpleadoActivo(int id)
     {
@@ -139,6 +180,7 @@ namespace BETesisProyectoFinal.Controllers
         return Ok(query);
       }
     }
+
     [Route("[action]")]
     public IActionResult CountEmpleadoInactivo(int id)
     {
@@ -155,6 +197,7 @@ namespace BETesisProyectoFinal.Controllers
         return Ok(query);
       }
     }
+
     [Route("[action]")]
     public IActionResult CountEmpleadobyDepto(int id)
     {
@@ -191,6 +234,7 @@ namespace BETesisProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
+
     [HttpPost("[action]")]
     public ActionResult CargaMasiva([FromBody] Empleados[] empleados)
     {
