@@ -36,7 +36,6 @@ export class DarBajaComponent implements OnInit {
       nombre: ['', Validators.required],
       valor: ['', Validators.required],
       motivo: ['', Validators.required],
-      nota: ['', Validators.required],
       fechasalida: ['', Validators.required],
     });
     if (+this.route.snapshot.paramMap.get('id') > 0) {
@@ -67,7 +66,7 @@ export class DarBajaComponent implements OnInit {
         Math.round(this.empleadosForm.get('valor').value * 100) / 100
       ).toFixed(2);
       const empleadoinactivo: EmpleadoInactivo = {
-        nota: this.empleadosForm.get('nota').value,
+        nota: this.empleadosForm.get('motivo').value,
         motivo: this.empleadosForm.get('motivo').value,
         valor: parseFloat(valor),
         empleadoID: parseInt(this.empleadosForm.get('nombre').value),
@@ -87,7 +86,7 @@ export class DarBajaComponent implements OnInit {
         fechaSalida: this.empleadosForm.get('fechasalida').value,
         valor: parseFloat(valor),
         motivo: this.empleadosForm.get('motivo').value,
-        nota: this.empleadosForm.get('nota').value,
+        nota: this.empleadosForm.get('motivo').value,
         empleadoID: this.idEmp,
       };
       this.EmpleadoinactivoService.actualizarEmpleadosInactivos(
@@ -110,7 +109,7 @@ export class DarBajaComponent implements OnInit {
           valor: data.valor,
           motivo: data.motivo,
           fechasalida: data.fechaSalida,
-          nota: data.nota,
+          nota: data.motivo,
         });
         this.idEmp = data.empleadoID;
         console.log(this.empleadosForm);
