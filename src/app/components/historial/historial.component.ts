@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HistorialService } from 'src/app/services/historial.service';
-import { AzureBlobStorageService } from 'src/app/services/azure-blob-storage.service';
+// import { AzureBlobStorageService } from 'src/app/services/azure-blob-storage.service';
 import { GoogledriveService } from 'src/app/services/googledrive.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class HistorialComponent implements OnInit {
 
   constructor(
     private HistorialService: HistorialService,
-    private AzureBlobStorageService: AzureBlobStorageService,
+    // private AzureBlobStorageService: AzureBlobStorageService,
     private GoogledriveService: GoogledriveService
   ) {}
   ngOnInit(): void {

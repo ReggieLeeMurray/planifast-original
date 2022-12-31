@@ -12,7 +12,7 @@ import { PageEvent } from '@angular/material/paginator';
 import * as XLSX from 'xlsx';
 import { PuedeDesactivar } from 'src/app/can-deactivate.guard';
 import { Observable } from 'rxjs';
-import { AzureBlobStorageService } from 'src/app/services/azure-blob-storage.service';
+// import { AzureBlobStorageService } from 'src/app/services/azure-blob-storage.service';
 import { startOfWeek, endOfMonth, startOfMonth } from 'date-fns';
 import { Time } from '@angular/common';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -323,7 +323,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     private EmpleadosService: EmpleadosService,
     private TipoplanillaService: TipoplanillaService,
     private HistorialService: HistorialService,
-    private AzureBlobStorageService: AzureBlobStorageService,
+    // private AzureBlobStorageService: AzureBlobStorageService,
     private NzMessageService: NzMessageService
   ) {
     this.horasForm = this.fb.group({
@@ -1706,17 +1706,17 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     const data: Blob = new Blob([excelBuffer], { type: EXCEL_TYPE });
     console.log(data);
     /* upload file */
-    this.uploadFile(data);
+    // this.uploadFile(data);
   }
   //viejo metodo subir archivo
-  uploadFile(file: Blob) {
-    this.AzureBlobStorageService.uploadBlob(
-      this.AzureBlobStorageService.code,
-      file,
-      this.nombre + '.xlsx',
-      () => {}
-    );
-  }
+  // uploadFile(file: Blob) {
+  //   this.AzureBlobStorageService.uploadBlob(
+  //     this.AzureBlobStorageService.code,
+  //     file,
+  //     this.nombre + '.xlsx',
+  //     () => {}
+  //   );
+  // }
   //nuevo metodo subir archivo
   // uploadFile(files: Blob) {
   //   this.BlobsService.upload(files).subscribe(
