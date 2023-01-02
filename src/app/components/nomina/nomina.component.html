@@ -4740,22 +4740,14 @@
         this.nombre
       }} en formato de Excel con resumen detallado del control de asistencia y comprobantes de pago."
     >
-      <div nz-result-content>
-        <h3>
-          <strong>
-            <span>
-              Además, fue subido a la nube. Si lo pierdes,
-              <a routerLink="/historial">
-                puedes descargarlo desde aquí:
-                <span nz-icon nzType="cloud-download" nzTheme="outline"></span>
-              </a>
-            </span>
-          </strong>
-        </h3>
+      <div nz-result-extra>
+        <button nz-button nzType="primary" onclick="window.location.reload()">
+          Calcular otra Planilla
+        </button>
+        <button routerLink="/historial" nz-button>Descargar otra vez</button>
       </div>
     </nz-result>
   </div>
-
   <div class="steps-action">
     <button
       nz-button
