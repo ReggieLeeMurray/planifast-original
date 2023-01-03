@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { GoogleApis } from 'googleapis';
-const fs = require('fs');
+import * as fs from 'fs';
+import { google } from 'googleapis';
+
 //excel file type
 const EXCEL_TYPE =
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const GOOGLE_API_FOLDER_ID = '1R2L1fFHddFIXQWBU51r4nwFOn-T2hi7p';
-declare const google: GoogleApis;
 
 @Injectable({
   providedIn: 'root',
@@ -13,23 +13,21 @@ declare const google: GoogleApis;
 export class GoogledriveService {
   constructor() {}
 
-  public async uploadFile(archivo: any, name: string) {
-    console.log(archivo, name);
+  public async uploadFile() {
     const auth = new google.auth.GoogleAuth({
-      keyFile: 'googlekey.json',
-      scopes: 'https://www.googleapis.com/auth/drive',
+      scopes: ['https://www.googleapis.com/auth/drive'],
     });
     const driveService = google.drive({
       version: 'v3',
       auth,
     });
     const fileMetaData = {
-      name: name,
+      name: 'Book1.xlsx',
       parents: [GOOGLE_API_FOLDER_ID],
     };
     const media = {
       mimeType: EXCEL_TYPE,
-      body: fs.createReadStream(archivo),
+      body: fs.createReadStream('./Book1.xlsx'),
     };
     try {
       const response = await driveService.files.create({
@@ -37,10 +35,41 @@ export class GoogledriveService {
         media: media,
         fields: 'id',
       });
-      console.log('File Id:', response.data.id);
+      console.log('File Uploaded', response.data.id);
       return response.data.id;
     } catch (err) {
-      throw err;
+      console.log('Upload File Error', err);
+      return err;
     }
   }
 }
+// public async uploadFile(archivo: any, name: string) {
+//   console.log(archivo, name);
+//   const auth = new google.auth.GoogleAuth({
+//     keyFile: './googlekey.json',
+//     scopes: 'https://www.googleapis.com/auth/drive',
+//   });
+//   const driveService = google.drive({
+//     version: 'v3',
+//     auth,
+//   });
+// const fileMetaData = {
+//   name: name,
+//   parents: [GOOGLE_API_FOLDER_ID],
+// };
+// const media = {
+//   mimeType: EXCEL_TYPE,
+//   body: fs.createReadStream(archivo),
+// };
+//   try {
+//     const response = await driveService.files.create({
+//       requestBody: fileMetaData,
+//       media: media,
+//       fields: 'id',
+//     });
+//     console.log('File Id:', response.data.id);
+//     return response.data.id;
+//   } catch (err) {
+//     throw err;
+//   }
+// }
