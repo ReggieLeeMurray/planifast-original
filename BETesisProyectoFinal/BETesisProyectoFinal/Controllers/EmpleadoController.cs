@@ -243,7 +243,7 @@ namespace BETesisProyectoFinal.Controllers
         _context.Add(empleados[i]);
         i++;
         _context.SaveChanges();
-        //return Created("Player created", empleados[i]);
+        //return Created("User created", empleados[i]);
       }
       return Ok();
     }

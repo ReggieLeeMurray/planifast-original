@@ -146,6 +146,19 @@ namespace BETesisProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
+
+    [HttpPost("[action]")]
+    public ActionResult CargaMasivaInactivos([FromBody] EmpleadosInactivos[] empleados)
+    {
+      for (int i = 0; i < empleados.Length;)
+      {
+        _context.Add(empleados[i]);
+        i++;
+        _context.SaveChanges();
+        //return Created("User created", empleados[i]);
+      }
+      return Ok();
+    }
     // PUT api/<EmpleadoInactivoController>/5
     [HttpPut("{id}")]
     public ActionResult Put(int id, [FromBody] EmpleadosInactivos empleados)
