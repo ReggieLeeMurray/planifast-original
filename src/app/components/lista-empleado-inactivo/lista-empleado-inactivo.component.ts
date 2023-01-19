@@ -70,7 +70,7 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
     this.modal.confirm({
       nzTitle: '¿Está seguro que desea eliminar este empleado?',
       nzContent: '<b style="color: red;">Esta acción es permanente.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {

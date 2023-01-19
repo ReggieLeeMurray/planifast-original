@@ -294,7 +294,7 @@ export class ListaEmpleadosComponent implements OnInit {
       nzTitle: '¿Está seguro que desea eliminar este empleado?',
       nzContent:
         '<b style="color: red;">Se eliminará permanente toda la informacion del colaborador en el sistema. Esta acción no equivale a dar de baja.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {

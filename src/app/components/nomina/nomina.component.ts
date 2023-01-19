@@ -5157,7 +5157,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzTitle: 'CONFIRMACIÓN',
       nzContent:
         '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Diurna?. Perderá los datos ingresados.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
@@ -5173,7 +5173,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzTitle: 'CONFIRMACIÓN',
       nzContent:
         '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Nocturna?. Perderá los datos ingresados.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
@@ -5189,7 +5189,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzTitle: 'CONFIRMACIÓN',
       nzContent:
         '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Mixta?. Perderá los datos ingresados.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {

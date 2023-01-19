@@ -182,7 +182,7 @@ export class EventosComponent implements OnInit {
     this.modal.confirm({
       nzTitle: '¿Está que desea eliminar este evento?',
       nzContent: '<b style="color: red;">Esta acción es permanente.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {

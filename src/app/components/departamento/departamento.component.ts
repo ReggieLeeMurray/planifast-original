@@ -156,7 +156,7 @@ export class DepartamentoComponent implements OnInit {
       nzTitle: '¿Está seguro que desea eliminar este departamento?',
       nzContent:
         '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se eliminarán todos los colaboradores dentro del mismo.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {

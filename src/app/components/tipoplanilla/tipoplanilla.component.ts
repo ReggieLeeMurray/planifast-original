@@ -171,7 +171,7 @@ export class TipoplanillaComponent implements OnInit {
       nzTitle: 'Está seguro que desea eliminar esta planilla?',
       nzContent:
         '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se eliminarán todos los colaboradores dentro de la misma.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {

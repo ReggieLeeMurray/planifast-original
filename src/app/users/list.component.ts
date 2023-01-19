@@ -55,7 +55,7 @@ export class ListComponent implements OnInit {
       nzTitle: '¿Está seguro que desea eliminar este usuario?',
       nzContent:
         '<b style="color: red;">Esta acción es permanente. SI USTED ELIMINA EL USUARIO CON EL QUE INICIO SESIÓN, SERÁ EXPULSADO DEL SISTEMA.</b>',
-      nzOkText: 'Yes',
+      nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
