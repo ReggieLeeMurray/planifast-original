@@ -38,7 +38,7 @@ export class EventosComponent implements OnInit {
   //propiedades de calendario
   calendarVisible = true;
   themeSystem: 'materia';
-  DEBUG = true;
+  DEBUG = false;
 
   constructor(
     private modal: NzModalService,

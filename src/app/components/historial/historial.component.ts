@@ -15,7 +15,7 @@ export class HistorialComponent implements OnInit {
   listTemporal = null;
   file: any;
   fileName: string = '';
-  DEBUG = true;
+  DEBUG = false;
 
   constructor(
     private HistorialService: HistorialService,
