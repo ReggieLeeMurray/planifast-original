@@ -15,175 +15,147 @@
       nzDescription="Descarga la planilla"
     ></nz-step>
   </nz-steps>
-  <div class="steps-content" *ngIf="current == 0">
-    <nz-modal
-      [nzStyle]="{ top: '20px' }"
-      [(nzVisible)]="isVisibleArchivo"
-      nzTitle="Control de Asistencia"
-      nzWidth="75%"
-      nzClosable="false"
-      (nzOnCancel)="handleCancelArchivo()"
-      [nzFooter]="null"
-      nzCentered
-    >
-      <ng-container *nzModalContent>
-        <div
-          id="main_reviewcontent"
-          class="inner-content"
-          style="overflow: hidden"
-        >
-          <div class="card">
-            <div class="card-body">
-              <nz-table
-                nzSize="small"
-                [nzScroll]="{ x: '1150px', y: '480px' }"
-                nzBordered
-                nzTemplateMode
-                id="reviewUpload"
-                class="table table-md table-hover"
-              >
-                <thead>
-                  <tr>
-                    <th colspan="2">Información</th>
-                    <th colspan="3">Lunes</th>
-                    <th colspan="3">Martes</th>
-                    <th colspan="3">Miércoles</th>
-                    <th colspan="3">Jueves</th>
-                    <th colspan="3">Viernes</th>
-                    <th colspan="3">Sabado</th>
-                    <th colspan="3">Domingo</th>
-                  </tr>
-                  <tr>
-                    <th rowspan="1">ID</th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="user" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="login" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="logout" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        nzTheme="outline"
-                      ></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="login" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="logout" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        nzTheme="outline"
-                      ></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="login" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="logout" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        nzTheme="outline"
-                      ></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="login" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="logout" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        nzTheme="outline"
-                      ></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="login" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="logout" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        nzTheme="outline"
-                      ></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="login" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="logout" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        nzTheme="outline"
-                      ></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="login" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span nz-icon nzType="logout" nzTheme="outline"></span>
-                    </th>
-                    <th rowspan="1">
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        nzTheme="outline"
-                      ></span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let data of this.jDatos">
-                    <td>{{ data.id }}</td>
-                    <td>{{ data.nombre }}</td>
-                    <td>{{ data.lunesEntrada | date : "shortTime" }}</td>
-                    <td>{{ data.lunesSalida | date : "shortTime" }}</td>
-                    <td>{{ data.lunesEvento }}</td>
-                    <td>{{ data.martesEntrada | date : "shortTime" }}</td>
-                    <td>{{ data.martesSalida | date : "shortTime" }}</td>
-                    <td>{{ data.martesEvento }}</td>
-                    <td>{{ data.miercolesEntrada | date : "shortTime" }}</td>
-                    <td>{{ data.miercolesSalida | date : "shortTime" }}</td>
-                    <td>{{ data.miercolesEvento }}</td>
-                    <td>{{ data.juevesEntrada | date : "shortTime" }}</td>
-                    <td>{{ data.juevesSalida | date : "shortTime" }}</td>
-                    <td>{{ data.juevesEvento }}</td>
-                    <td>{{ data.viernesEntrada | date : "shortTime" }}</td>
-                    <td>{{ data.viernesSalida | date : "shortTime" }}</td>
-                    <td>{{ data.viernesEvento }}</td>
-                    <td>{{ data.sabadoEntrada | date : "shortTime" }}</td>
-                    <td>{{ data.sabadoSalida | date : "shortTime" }}</td>
-                    <td>{{ data.sabadoEvento }}</td>
-                    <td>{{ data.domingoEntrada | date : "shortTime" }}</td>
-                    <td>{{ data.domingoSalida | date : "shortTime" }}</td>
-                    <td>{{ data.domingoEvento }}</td>
-                  </tr>
-                </tbody>
-              </nz-table>
-            </div>
+  <nz-modal
+    [nzStyle]="{ top: '20px' }"
+    [(nzVisible)]="isVisibleArchivo"
+    nzTitle="Control de Asistencia"
+    nzWidth="90%"
+    nzClosable="false"
+    (nzOnCancel)="handleCancelArchivo()"
+    [nzFooter]="null"
+    nzCentered
+  >
+    <ng-container *nzModalContent>
+      <div
+        id="main_reviewcontent"
+        class="inner-content"
+        style="overflow: hidden"
+      >
+        <div class="card">
+          <div class="card-body">
+            <nz-table
+              nzSize="small"
+              [nzScroll]="{ x: '1150px', y: '480px' }"
+              nzBordered
+              nzTemplateMode
+              id="reviewUpload"
+              class="table table-md table-hover"
+            >
+              <thead>
+                <tr>
+                  <th colspan="2">Información</th>
+                  <th colspan="3">Lunes</th>
+                  <th colspan="3">Martes</th>
+                  <th colspan="3">Miércoles</th>
+                  <th colspan="3">Jueves</th>
+                  <th colspan="3">Viernes</th>
+                  <th colspan="3">Sabado</th>
+                  <th colspan="3">Domingo</th>
+                </tr>
+                <tr>
+                  <th rowspan="1">ID</th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="user" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="login" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="login" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="login" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="login" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="login" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="login" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="login" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                  </th>
+                  <th rowspan="1">
+                    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of this.jDatos">
+                  <td>{{ data.id }}</td>
+                  <td>{{ data.nombreCompleto }}</td>
+                  <td>{{ data.lunesEntrada | date : "shortTime" }}</td>
+                  <td>{{ data.lunesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.lunesEvento }}</td>
+                  <td>{{ data.martesEntrada | date : "shortTime" }}</td>
+                  <td>{{ data.martesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.martesEvento }}</td>
+                  <td>{{ data.miercolesEntrada | date : "shortTime" }}</td>
+                  <td>{{ data.miercolesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.miercolesEvento }}</td>
+                  <td>{{ data.juevesEntrada | date : "shortTime" }}</td>
+                  <td>{{ data.juevesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.juevesEvento }}</td>
+                  <td>{{ data.viernesEntrada | date : "shortTime" }}</td>
+                  <td>{{ data.viernesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.viernesEvento }}</td>
+                  <td>{{ data.sabadoEntrada | date : "shortTime" }}</td>
+                  <td>{{ data.sabadoSalida | date : "shortTime" }}</td>
+                  <td>{{ data.sabadoEvento }}</td>
+                  <td>{{ data.domingoEntrada | date : "shortTime" }}</td>
+                  <td>{{ data.domingoSalida | date : "shortTime" }}</td>
+                  <td>{{ data.domingoEvento }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
           </div>
         </div>
-      </ng-container>
-    </nz-modal>
+      </div>
+    </ng-container>
+  </nz-modal>
+  <div class="steps-content" *ngIf="current == 0">
     <form [formGroup]="inicialForm">
       <nz-form-item>
         <nz-form-label [nzSm]="8" nzRequired>Planilla</nz-form-label>
@@ -1840,132 +1812,174 @@
               <td colspan="2">
                 <div class="card">
                   <div class="card-body">
-                    <nz-collapse>
-                      <nz-collapse-panel
-                        nzHeader="Leyenda de los Tipos de Observación 💡"
-                      >
-                        <div>
-                          <tr>
-                            <td class="mix">
-                              <label><strong>1. Autorizado:</strong></label>
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                Se completa la jornada con horas extras, sino
-                                hay suficientes se le hace promedio.
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label><strong>2. Feriado:</strong></label>
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                No se paga el dia, se remunera por separado.
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label
-                                ><strong>3. Incapacidad Pública:</strong></label
-                              >
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                Al ser menos de 4 instancias se paga el valor
-                                del dia, caso contrario se ingresa valor a
-                                pagar.
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label
-                                ><strong>4. Incapacidad Parcial:</strong></label
-                              >
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                Se paga por partes, debe especificar valor total
-                                y cantidad total de dias que abarcará.
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label
-                                ><strong>5. Incapacidad Privada:</strong></label
-                              >
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                Es igual al dia Autorizado.
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label
-                                ><strong
-                                  >6. Incapacidad / Vacacion Cancelada:</strong
-                                ></label
-                              >
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                No se paga el dia, representa que fue remunerada
-                                con anterioridad.
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label><strong>7. Séptimo dia:</strong></label>
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">Libre.</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label><strong>8. Vacación:</strong></label>
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                Es igual al dia Feriado.
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label
-                                ><strong>9. Falta / Suspensión:</strong></label
-                              >
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                No se paga el dia, además, no se le remunera el
-                                séptimo dia.
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="mix">
-                              <label><strong>10. Renuncia:</strong></label>
-                            </td>
-                            <td class="mix">
-                              <p style="font-style: italic">
-                                No continua laborando, automáticamente se
-                                rellena los dias posteriores como tal. Se
-                                recomienda dar de baja.
-                              </p>
-                            </td>
-                          </tr>
-                        </div>
-                      </nz-collapse-panel>
-                    </nz-collapse>
+                    <table style="width: 100%">
+                      <tr>
+                        <td style="width: 70%">
+                          <nz-collapse>
+                            <nz-collapse-panel
+                              nzHeader="Leyenda de los Tipos de Observación 💡"
+                            >
+                              <div>
+                                <tr>
+                                  <td class="mix">
+                                    <label
+                                      ><strong>1. Autorizado:</strong></label
+                                    >
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      Se completa la jornada con horas extras,
+                                      sino hay suficientes se le hace promedio.
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label><strong>2. Feriado:</strong></label>
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      No se paga el dia, se remunera por
+                                      separado.
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label
+                                      ><strong
+                                        >3. Incapacidad Pública:</strong
+                                      ></label
+                                    >
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      Al ser menos de 4 instancias se paga el
+                                      valor del dia, caso contrario se ingresa
+                                      valor a pagar.
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label
+                                      ><strong
+                                        >4. Incapacidad Parcial:</strong
+                                      ></label
+                                    >
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      Se paga por partes, debe especificar valor
+                                      total y cantidad total de dias que
+                                      abarcará.
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label
+                                      ><strong
+                                        >5. Incapacidad Privada:</strong
+                                      ></label
+                                    >
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      Es igual al dia Autorizado.
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label
+                                      ><strong
+                                        >6. Incapacidad / Vacacion
+                                        Cancelada:</strong
+                                      ></label
+                                    >
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      No se paga el dia, representa que fue
+                                      remunerada con anterioridad.
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label
+                                      ><strong>7. Séptimo dia:</strong></label
+                                    >
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">Libre.</p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label><strong>8. Vacación:</strong></label>
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      Es igual al dia Feriado.
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label
+                                      ><strong
+                                        >9. Falta / Suspensión:</strong
+                                      ></label
+                                    >
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      No se paga el dia, además, no se le
+                                      remunera el séptimo dia.
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mix">
+                                    <label
+                                      ><strong>10. Renuncia:</strong></label
+                                    >
+                                  </td>
+                                  <td class="mix">
+                                    <p style="font-style: italic">
+                                      No continua laborando, automáticamente se
+                                      rellena los dias posteriores como tal.
+                                    </p>
+                                  </td>
+                                </tr>
+                              </div>
+                            </nz-collapse-panel>
+                          </nz-collapse>
+                        </td>
+                        <td
+                          style="width: 30%"
+                          *ngIf="this.fileUploaded === true"
+                        >
+                          <button
+                            nz-button
+                            nzType="primary"
+                            nzSize="large"
+                            nzShape="round"
+                            (click)="showArchivo()"
+                          >
+                            <span
+                              nz-icon
+                              class="center"
+                              nzType="eye"
+                              nzTheme="outline"
+                            ></span
+                            >Ver Horarios
+                          </button>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
                 </div>
               </td>

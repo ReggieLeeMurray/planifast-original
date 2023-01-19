@@ -67,7 +67,6 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   msgFaltantesSobrantes: string = '';
   msgInfo: string = '';
   jDatos = [];
-  tempjDatos = [];
   //formgroups
   inicialForm: FormGroup;
   periodoForm: FormGroup;
@@ -102,6 +101,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   current = 0;
   //blob storage
   // imageSource = '';
+  file: File;
   //entradas y salidas
   luI: Time;
   luO: Time;
@@ -283,7 +283,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   diaDiurno = 0;
   diaMixto = 0;
   diaNocturno = 0;
-  DEBUG = false;
+  DEBUG = true;
   //tarjetas
   jornada: string = '';
   jornadaL: number = 0;
@@ -851,13 +851,44 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   handleChange(evt: any) {
     this.jDatos = [];
+    this.file = evt;
     const target: DataTransfer = <DataTransfer>evt.target;
     const reader: FileReader = new FileReader();
     reader.onload = (e: any) => {
+      const headers = [
+        'id',
+        'nombreCompleto',
+        'lunesEntrada',
+        'lunesSalida',
+        'lunesEvento',
+        'martesEntrada',
+        'martesSalida',
+        'martesEvento',
+        'miercolesEntrada',
+        'miercolesSalida',
+        'miercolesEvento',
+        'juevesEntrada',
+        'juevesSalida',
+        'juevesEvento',
+        'viernesEntrada',
+        'viernesSalida',
+        'viernesEvento',
+        'sabadoEntrada',
+        'sabadoSalida',
+        'sabadoEvento',
+        'domingoEntrada',
+        'domingoSalida',
+        'domingoEvento',
+      ];
       const bstr: string = e.target.result;
       const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
       var nombreHoja = wb.SheetNames; // regresa un array
-      let datos = XLSX.utils.sheet_to_json(wb.Sheets[nombreHoja[0]]);
+      let datos = XLSX.utils.sheet_to_json(wb.Sheets[nombreHoja[0]], {
+        header: headers,
+      });
+      //remueve las instrucciones del archivo antes de leerlo, no incluye titulos
+      datos = datos.slice(6);
+      console.log('DATOS', datos);
       for (let i = 0; i < datos.length; i++) {
         const dato = datos[i];
         this.jDatos.push({
@@ -972,8 +1003,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
     let Timestringb = hourb + ':' + minuteb;
     var finalb = moment(Timestringb, 'HH:mm a');
-    console.log('A ' + Timestring, 'B ' + Timestringb);
-    console.log('FINALES: ', dia, final, finalb, posicion);
+    console.log('A ' + Timestring, 'B ' + Timestringb, 'POS ', posicion);
+    // console.log('FINALES: ', dia, final, finalb, posicion);
 
     if (dia === 'lunes') {
       if (Timestring === 'NaN:NaN' || Timestringb === 'NaN:NaN') {
@@ -1042,13 +1073,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   handleCancelArchivo() {
     this.isVisibleArchivo = false;
   }
-  // handleOkArchivo(){
-
-  // }
   showArchivo(): void {
     this.isVisibleArchivo = true;
   }
-  invalidDate(date: any) {}
   handlePage(e: PageEvent) {
     this.page_size = e.pageSize;
     this.page_number = e.pageIndex + 1;
