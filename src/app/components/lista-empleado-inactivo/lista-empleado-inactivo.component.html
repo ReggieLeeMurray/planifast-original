@@ -65,10 +65,10 @@
     <thead>
       <tr>
         <th scope="col" style="text-align: center">Nombre Completo</th>
-        <th scope="col" style="text-align: center">ID de Baja</th>
+        <th scope="col" style="text-align: center">ID del Colaborador</th>
         <th scope="col" style="text-align: center">Valor Pagado</th>
         <th scope="col" style="text-align: center">Motivo de Baja</th>
-        <th scope="col" style="text-align: center">Nota</th>
+        <!-- <th scope="col" style="text-align: center">Nota</th> -->
         <th scope="col" style="text-align: center">Fecha Salida</th>
         <th style="text-align: center">Acciones</th>
       </tr>
@@ -88,10 +88,11 @@
       </tr>
       <tr *ngFor="let data of basicTable.data">
         <td>{{ data.nombres }} {{ data.apellidos }}</td>
-        <td>{{ data.id }}</td>
-        <td>{{ data.valor }}</td>
+        <td>{{ data.empleadoID }}</td>
+        <td *ngIf="data.valor === 0">{{ "N/E" }}</td>
+        <td *ngIf="data.valor !== 0">{{ data.valor }}</td>
         <td>{{ data.motivo }}</td>
-        <td>{{ data.nota }}</td>
+        <!-- <td >{{ data.nota }}</td> -->
         <td>{{ data.fechaSalida | date : "dd/MM/yyyy" }}</td>
         <td>
           <button

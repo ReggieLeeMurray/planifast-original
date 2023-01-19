@@ -34,7 +34,8 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
       (data) => {
         this.loading = false;
         this.listEmpleadoInactivo = data;
-        this.listEmpleadoInactivo.sort((a, b) => a.id - b.id);
+        console.log(data);
+        this.listEmpleadoInactivo.sort((a, b) => a.empleadoID - b.empleadoID);
       }
     );
   }

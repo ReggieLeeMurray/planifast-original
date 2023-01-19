@@ -59,9 +59,7 @@ export class HistorialComponent implements OnInit {
   }
   upload(archivo: any, name: string) {
     console.log(archivo, name);
-    this.GoogledriveService.uploadFile().then((data) => {
-      console.log(data);
-    });
+    // this.GoogledriveService.uploadFile(archivo, name).then((data) => {});
   }
   Search(value: string) {
     if (this.listTemporal == null) {
