@@ -1735,6 +1735,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     /* upload file */
     // this.uploadFile(data);
   }
+  descargarPlantilla(): void {
+    let link = document.createElement('a');
+    link.href = '/assets/plantillaNomina.xlsx';
+    link.click();
+  }
   //viejo metodo subir archivo
   // uploadFile(file: Blob) {
   //   this.AzureBlobStorageService.uploadBlob(

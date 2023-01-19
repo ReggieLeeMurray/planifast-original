@@ -403,11 +403,8 @@ export class ListaEmpleadosComponent implements OnInit {
   }
   descargarMacro() {
     let link = document.createElement('a');
-    link.setAttribute('type', 'hidden');
     link.href = '/assets/PERSONAL.XLSB';
     link.download = 'macroPlanifast.XLSB';
-    document.body.appendChild(link);
     link.click();
-    link.remove();
   }
 }

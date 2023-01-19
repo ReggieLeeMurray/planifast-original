@@ -193,7 +193,7 @@
       <nz-form-item>
         <nz-form-label
           [nzSm]="8"
-          nzTooltipTitle="Debe contener el Control de Asistencia de los empleados en la planilla seleccionada."
+          nzTooltipTitle="Debe contener el Control de Asistencia de los empleados en la planilla seleccionada. También puedes descargar la plantilla original."
           >Archivo</nz-form-label
         >
         <nz-form-control [nzSm]="8">
@@ -206,9 +206,6 @@
             id="formFile"
           />
           <div class="form-text" style="text-align: left">(Opcional)</div>
-          <!-- <div class="form-text" style="text-align: left">
-            <strong>{{ fileStatus }}</strong>
-          </div> -->
         </nz-form-control>
       </nz-form-item>
 
@@ -274,7 +271,10 @@
             [disabled]="this.jDatos.length == 0"
             (click)="showArchivo()"
           >
-            <span>Revisar Archivo</span>
+            Revisar Archivo
+          </button>
+          <button nz-button nzType="primary" (click)="descargarPlantilla()">
+            <i nz-icon class="center" nzType="download" nzTheme="outline"></i>
           </button>
         </nz-form-control>
       </nz-form-item>
