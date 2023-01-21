@@ -62,6 +62,7 @@ export class TipoplanillaComponent implements OnInit {
         '<b style="color: red;">ADVERTENCIA: Ya existe una planilla similar.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.handleCancel(),
     });
@@ -173,6 +174,7 @@ export class TipoplanillaComponent implements OnInit {
         '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se eliminarán todos los colaboradores dentro de la misma.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.delete(id);

@@ -60,6 +60,7 @@ export class DepartamentoComponent implements OnInit {
         '<b style="color: red;">ADVERTENCIA: Ya existe un departamento similar.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.handleCancel(),
     });
@@ -158,6 +159,7 @@ export class DepartamentoComponent implements OnInit {
         '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se eliminarán todos los colaboradores dentro del mismo.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.delete(id);

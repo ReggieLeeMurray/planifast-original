@@ -97,6 +97,7 @@ export class AgregarRolesComponent implements OnInit {
         '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se elimináran todos los usuarios con dicho rol.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.delete(id),
       nzCancelText: 'No',

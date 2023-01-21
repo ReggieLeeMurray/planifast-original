@@ -296,6 +296,7 @@ export class ListaEmpleadosComponent implements OnInit {
         '<b style="color: red;">Se eliminará permanente toda la informacion del colaborador en el sistema. Esta acción no equivale a dar de baja.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.delete(id);

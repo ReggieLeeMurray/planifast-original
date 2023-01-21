@@ -57,6 +57,7 @@ export class ListComponent implements OnInit {
         '<b style="color: red;">Esta acción es permanente. SI USTED ELIMINA EL USUARIO CON EL QUE INICIO SESIÓN, SERÁ EXPULSADO DEL SISTEMA.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.usuarioPorID(id);

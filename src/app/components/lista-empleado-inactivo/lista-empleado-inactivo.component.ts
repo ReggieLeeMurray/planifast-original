@@ -72,6 +72,7 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
       nzContent: '<b style="color: red;">Esta acción es permanente.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.delete(id);

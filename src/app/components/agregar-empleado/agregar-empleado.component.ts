@@ -111,6 +111,7 @@ export class AgregarEmpleadoComponent implements OnInit {
         '<b style="color: red;">ADVERTENCIA: Colaborador ya existentente en el sistema.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.resetForm();

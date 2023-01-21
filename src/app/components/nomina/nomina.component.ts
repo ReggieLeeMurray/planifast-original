@@ -619,6 +619,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         '<b style="color: red;">¿Está seguro que la fecha y la planilla seleccionada son correctas?.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         let arreglo = [];
@@ -886,7 +887,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       let datos = XLSX.utils.sheet_to_json(wb.Sheets[nombreHoja[0]], {
         header: headers,
       });
-      //remueve las instrucciones del archivo antes de leerlo, no incluye titulos
+      //remueve las instrucciones del archivo antes de leerlo, no debe incluir titulos
       datos = datos.slice(6);
       console.log('DATOS', datos);
       for (let i = 0; i < datos.length; i++) {
@@ -960,6 +961,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         '<b style="color: red;">ADVERTENCIA: Asegúrate de elejir el archivo correcto. Revise si hay campos en blanco.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.clean(),
       nzOnCancel: () => this.clean(),
@@ -1532,6 +1534,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzContent:
         '<b style="color: red;">ADVERTENCIA: Colaborador tiene mas observaciones que dias trabajados.</b>',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.limpiar(),
     });
@@ -1545,6 +1548,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         '<b style="color: red;">¿Esta seguro de haber ingresado todas los ingresos y deducciones? ADVERTENCIA: A partir de este punto el archivo se generará con los datos proporcionados.</b>',
       nzOkText: '¡Si, genera el archivo!',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.exportexcel(), this.current++;
@@ -2251,6 +2255,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzContent:
         '<b style="color: red;">ADVERTENCIA: Colaborador tiene mas deducciones que ingresos.</b>',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.limpiarMainDeduccion(),
     });
@@ -2796,6 +2801,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzContent:
         '<b style="color: red;">ADVERTENCIA: Dias inválidos. Reingrese.</b>',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.extraFormTercero.get('dias').setValue(''),
     });
@@ -2808,6 +2814,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzContent:
         '<b style="color: red;">ADVERTENCIA: Horas inválidas. Reingrese.</b>',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.limpiarResumen(),
     });
@@ -2820,6 +2827,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzContent:
         '<b style="color: red;">ADVERTENCIA: Horas iguales. Reingrese.</b>',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.limpiarResumen(),
     });
@@ -2832,6 +2840,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzContent:
         '<b style="color: red;">ADVERTENCIA: Solo puede tener un séptimo día a la semana.</b>',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.limpiarResumen(),
     });
@@ -5159,6 +5168,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Diurna?. Perderá los datos ingresados.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.limpiarMain(), this.autofillDiurna();
@@ -5175,6 +5185,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Nocturna?. Perderá los datos ingresados.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.limpiarMain(), this.autofillNocturna();
@@ -5191,6 +5202,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Mixta?. Perderá los datos ingresados.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
         this.limpiarMain(), this.autofillMixta();
@@ -5629,6 +5641,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         '<b style="color: red;">¿Esta seguro de haber ingresado las horas correctas?</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
+      nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => this.calcularMain(),
       nzCancelText: 'No',
