@@ -108,46 +108,49 @@ export class AgregarEmpleadoComponent implements OnInit {
       nzCentered: true,
       nzTitle: 'Datos Inconsistentes',
       nzContent:
-        '<b style="color: red;">ADVERTENCIA: Colaborador ya existentente en el sistema.</b>',
+        '<b style="color: red;">ADVERTENCIA: Colaborador ya existentente en el sistema. Revise el nombre o número de cédula</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
-        this.resetForm();
-        this.router.navigate(['/listado']);
+        this.duplicado = false;
+        this.isVisibleExistente = false;
+        this.empleadosForm.get('nombre').setValue('');
+        this.empleadosForm.get('apellido').setValue('');
+        this.empleadosForm.get('n_cedula').setValue('');
       },
-      nzOnCancel: () => this.resetForm(),
     });
   }
   guardarEmpleados() {
-    if (this.accion == 'Agregar') {
+    console.log(this.accion);
+    if (this.accion === 'Agregar') {
       var valor = (
         Math.round(this.empleadosForm.get('salariobase').value * 100) / 100
       ).toFixed(2);
       const empleado: Empleado = {
         fechaIngreso: this.empleadosForm.get('fechaingreso').value,
-        nombres: this.empleadosForm.get('nombre').value,
-        apellidos: this.empleadosForm.get('apellido').value,
+        nombres: this.empleadosForm.get('nombre').value.trim(),
+        apellidos: this.empleadosForm.get('apellido').value.trim(),
         genero: this.empleadosForm.get('genero').value,
         // email: this.empleadosForm.get('email').value,
         email: 'email@xyz.com',
         fechaNac: this.empleadosForm.get('fechanac').value,
-        direccion: this.empleadosForm.get('direccion').value,
+        direccion: this.empleadosForm.get('direccion').value.trim(),
         n_Cedula: this.empleadosForm.get('n_cedula').value,
         salarioBase: parseFloat(valor),
         departamentoID: parseInt(this.empleadosForm.get('depto').value),
         planillaID: parseInt(this.empleadosForm.get('tplanilla').value),
       };
-      console.log(this.listEmpleadoActivo);
+      console.log(this.listEmpleadoActivo, this.accion, empleado);
       for (let k = 0; k < this.listEmpleadoActivo.length; k++) {
         if (
-          (empleado.n_Cedula == this.listEmpleadoActivo[k].n_Cedula ||
-            empleado.nombres + ' ' + empleado.apellidos ==
+          (empleado.n_Cedula === this.listEmpleadoActivo[k].n_Cedula ||
+            empleado.nombres + ' ' + empleado.apellidos ===
               this.listEmpleadoActivo[k].nombres +
                 ' ' +
                 this.listEmpleadoActivo[k].apellidos) &&
-          this.isVisibleExistente == false
+          this.isVisibleExistente === false
         ) {
           this.existente();
           this.duplicado = true;
@@ -159,7 +162,7 @@ export class AgregarEmpleadoComponent implements OnInit {
           this.router.navigate(['/listado']);
         });
       }
-    } else if (this.accion == 'Editar') {
+    } else if (this.accion === 'Editar') {
       var valor = (
         Math.round(this.empleadosForm.get('salariobase').value * 100) / 100
       ).toFixed(2);
