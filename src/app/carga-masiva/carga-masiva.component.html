@@ -228,9 +228,12 @@
     <tbody>
       <tr>
         <td colspan="11" *ngIf="listFinal?.length <= 0">
-          <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+          <nz-empty
+            [nzNotFoundImage]="notFound"
+            [nzNotFoundContent]="contentTpl"
+          ></nz-empty>
           <ng-template #contentTpl>
-            <span> No hay datos. </span>
+            <span>No hay datos.</span>
           </ng-template>
         </td>
       </tr>

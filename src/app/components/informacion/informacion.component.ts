@@ -15,6 +15,7 @@ export class InformacionComponent implements OnInit {
   loading = false;
   listInfo;
   idInfo;
+  notFound = './assets/empty.svg';
   accion = 'Agregar';
   isVisible = false;
   date = null;

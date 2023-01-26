@@ -45,6 +45,7 @@ export class CargaMasivaComponent implements OnInit {
   isVisibleId = false;
   isVisibleRepetidos = false;
   isVisibleCedula = false;
+  notFound = './assets/empty.svg';
   DEBUG = true;
   httpClient: HttpClient;
 

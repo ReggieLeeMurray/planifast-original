@@ -15,6 +15,7 @@ export class HistorialComponent implements OnInit {
   listTemporal = null;
   file: any;
   fileName: string = '';
+  notFound = './assets/empty.svg';
   DEBUG = false;
 
   constructor(

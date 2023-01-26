@@ -13,6 +13,7 @@ export class ListComponent implements OnInit {
   listUsers = null;
   listTemporal = null;
   isVisible = false;
+  notFound = './assets/empty.svg';
 
   constructor(
     private accountService: AccountService,

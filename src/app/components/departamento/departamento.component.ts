@@ -20,6 +20,7 @@ export class DepartamentoComponent implements OnInit {
   idDepto = 0;
   isVisible = false;
   pageSize = 10;
+  notFound = './assets/empty.svg';
   accion = 'Agregar';
   DEBUG = false;
 

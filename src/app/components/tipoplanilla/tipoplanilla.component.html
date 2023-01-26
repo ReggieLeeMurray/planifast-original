@@ -119,7 +119,10 @@
   <tbody>
     <tr>
       <td colspan="4" *ngIf="listTP?.length <= 0">
-        <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+        <nz-empty
+          [nzNotFoundImage]="notFound"
+          [nzNotFoundContent]="contentTpl"
+        ></nz-empty>
         <ng-template #contentTpl>
           <span>No hay planillas ingresadas.</span>
         </ng-template>

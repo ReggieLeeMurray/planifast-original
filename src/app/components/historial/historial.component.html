@@ -76,7 +76,10 @@
     <tbody>
       <tr>
         <td colspan="6" *ngIf="listHistory?.length <= 0">
-          <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+          <nz-empty
+            [nzNotFoundImage]="notFound"
+            [nzNotFoundContent]="contentTpl"
+          ></nz-empty>
           <ng-template #contentTpl>
             <span>
               No hay datos.<a routerLink="/calculo">

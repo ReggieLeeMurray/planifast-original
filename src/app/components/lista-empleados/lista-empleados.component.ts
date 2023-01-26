@@ -55,6 +55,7 @@ export class ListaEmpleadosComponent implements OnInit {
   listEmpleadoThird: Empleados[] = [];
   tipoSemana: string;
   date = null;
+  notFound = './assets/empty.svg';
   DEBUG = false;
 
   constructor(

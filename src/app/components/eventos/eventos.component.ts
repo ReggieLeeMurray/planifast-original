@@ -38,6 +38,7 @@ export class EventosComponent implements OnInit {
   //propiedades de calendario
   calendarVisible = true;
   themeSystem: 'materia';
+  notFound = './assets/empty.svg';
   DEBUG = false;
 
   constructor(

@@ -14,6 +14,7 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
   size: NzButtonSize = 'large';
   nombres: string;
   listTemporal = null;
+  notFound = './assets/empty.svg';
   DEBUG = false;
 
   constructor(

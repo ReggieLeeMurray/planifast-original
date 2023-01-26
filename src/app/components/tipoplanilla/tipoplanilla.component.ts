@@ -20,6 +20,7 @@ export class TipoplanillaComponent implements OnInit {
   planillas: string;
   selectedValuePlanilla: string = 'Seleccione';
   accion = 'Agregar';
+  notFound = './assets/empty.svg';
   pageSize = 10;
   isVisible = false;
   DEBUG = false;

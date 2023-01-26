@@ -102,7 +102,10 @@
   <tbody>
     <tr>
       <td colspan="3" *ngIf="listDeptos?.length <= 0">
-        <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+        <nz-empty
+          [nzNotFoundImage]="notFound"
+          [nzNotFoundContent]="contentTpl"
+        ></nz-empty>
         <ng-template #contentTpl>
           <span>No hay departamentos ingresados.</span>
         </ng-template>
