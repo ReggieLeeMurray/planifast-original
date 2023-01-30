@@ -65,8 +65,8 @@ namespace BETesisProyectoFinal.Controllers
       {
         //LINQ QUERY
 
-        //SELECT c.id , c.nombres, c.apellidos, m.empleadoid FROM abmproyectofinal.empleados c
-        //LEFT JOIN abmproyectofinal.empleadosinactivos m ON c.Id = m.empleadoID where m.empleadoid is null;
+        //SELECT c.id , c.nombres, c.apellidos, m.empleadoid FROM planifast.empleados c
+        //LEFT JOIN planifast.empleadosinactivos m ON c.Id = m.empleadoID where m.empleadoid is null;
 
         //JOIN SYNTAX LINQ
 
@@ -105,8 +105,8 @@ namespace BETesisProyectoFinal.Controllers
       {
         //LINQ QUERY
 
-        //SELECT m.*, c.id , c.nombres, c.apellidos FROM abmproyectofinal.empleados c
-        //LEFT JOIN abmproyectofinal.empleadosinactivos m ON m.empleadoID = c.Id where m.empleadoID > 0
+        //SELECT m.*, c.id , c.nombres, c.apellidos FROM planifast.empleados c
+        //LEFT JOIN planifast.empleadosinactivos m ON m.empleadoID = c.Id where m.empleadoID > 0
 
         //JOIN SYNTAX LINQ
 

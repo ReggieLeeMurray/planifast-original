@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BEProyectoFinal.Migrations
 {
-    public partial class first : Migration
+    public partial class MyFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -156,6 +156,7 @@ namespace BEProyectoFinal.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     FechaInicio = table.Column<DateTime>(nullable: false),
                     FechaFinal = table.Column<DateTime>(nullable: false),
+                    FechaCreacion = table.Column<DateTime>(nullable: false),
                     TotalPlanilla = table.Column<decimal>(nullable: false),
                     Archivo = table.Column<string>(nullable: false),
                     PlanillaID = table.Column<int>(nullable: false)

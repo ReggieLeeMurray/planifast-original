@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BEProyectoFinal.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20220115193855_first")]
-    partial class first
+    [Migration("20230128193904_MyFirstMigration")]
+    partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,6 +108,9 @@ namespace BEProyectoFinal.Migrations
                     b.Property<string>("Archivo")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("FechaFinal")
                         .HasColumnType("datetime(6)");

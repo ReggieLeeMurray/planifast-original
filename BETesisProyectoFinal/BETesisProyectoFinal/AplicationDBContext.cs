@@ -24,7 +24,7 @@ namespace BEProyectoFinal
     {
       if (!optionsBuilder.IsConfigured)
       {
-        optionsBuilder.UseMySql("Server=localhost;Database=ABMProyectoFinal;Uid=root;Pwd=admin");
+        optionsBuilder.UseMySql("Server=localhost;Database=planifast;Uid=root;Pwd=admin");
         //optionsBuilder.UseMySql("Server=planifast-my-sql-db.mysql.database.azure.com;Database=PlaniFast;Uid=reggiemurray@planifast-my-sql-db;Pwd=Incorrect201");
       }
 

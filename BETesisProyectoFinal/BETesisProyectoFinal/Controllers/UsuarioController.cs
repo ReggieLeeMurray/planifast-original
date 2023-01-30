@@ -49,7 +49,7 @@ namespace BEProyectoFinal.Controllers
       {
         //LINQ
 
-        //select* from abmproyectofinal.usuarios where usuarios.nombreUsuario = "elmalo"
+        //select* from planifast.usuarios where usuarios.nombreUsuario = "elmalo"
 
         var query = from x in db.Usuarios
                     where x.NombreUsuario == user
@@ -72,8 +72,8 @@ namespace BEProyectoFinal.Controllers
       {
         //LINQ QUERY
 
-        //SELECT* FROM abmproyectofinal.roles r
-        //LEFT JOIN abmproyectofinal.usuarios u ON r.id = u.rolid
+        //SELECT* FROM planifast.roles r
+        //LEFT JOIN planifast.usuarios u ON r.id = u.rolid
 
         //JOIN SYNTAX LINQ
 

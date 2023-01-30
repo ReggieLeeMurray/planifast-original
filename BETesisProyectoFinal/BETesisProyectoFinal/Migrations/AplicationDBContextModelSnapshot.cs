@@ -107,6 +107,9 @@ namespace BEProyectoFinal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("FechaFinal")
                         .HasColumnType("datetime(6)");
 

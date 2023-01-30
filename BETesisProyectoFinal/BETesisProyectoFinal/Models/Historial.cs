@@ -26,6 +26,8 @@ namespace BEProyectoFinal.Models
 
     //[Required]
     //public string Link { get; set; }
+    [Required]
+    public DateTime FechaCreacion { get; set; }
 
     [Required]
     public int PlanillaID { get; set; }

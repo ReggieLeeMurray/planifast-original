@@ -64,8 +64,8 @@ namespace BEProyectoFinal.Controllers
       {
         //LINQ QUERY
 
-        //SELECT h.*, p.descripcion FROM abmproyectofinal.historial h
-        //LEFT JOIN abmproyectofinal.tipoplanillas p on h.PlanillaID where h.id = p.id;
+        //SELECT h.*, p.descripcion FROM planifast.historial h
+        //LEFT JOIN planifast.tipoplanillas p on h.PlanillaID where h.id = p.id;
 
         //JOIN SYNTAX LINQ
 
@@ -76,11 +76,12 @@ namespace BEProyectoFinal.Controllers
                     select new
                     {
                       Id=x.Id,
-                      FechaInicial=x.FechaInicio,
-                      FechaFinal=x.FechaFinal,
-                      TotalPlanilla=x.TotalPlanilla,
-                      Archivo=x.Archivo,
-                      Descripcion=y.Descripcion
+                      FechaInicio = x.FechaInicio,
+                      FechaFinal = x.FechaFinal,
+                      FechaCreacion = x.FechaCreacion,
+                      TotalPlanilla = x.TotalPlanilla,
+                      Archivo = x.Archivo,
+                      Descripcion = y.Descripcion
                     };
 
         return Ok(query.ToList());
@@ -93,7 +94,7 @@ namespace BEProyectoFinal.Controllers
       {
         //LINQ QUERY
 
-        //SELECT SUM(TotalPlanilla) AS Total  FROM abmproyectofinal.historial WHERE FechaInicio >= "2021-09-01" and
+        //SELECT SUM(TotalPlanilla) AS Total  FROM planifast.historial WHERE FechaInicio >= "2021-09-01" and
         // FechaFinal<= "2021-09-30" and planillaID = 8
 
         var query = from x in db.Historial

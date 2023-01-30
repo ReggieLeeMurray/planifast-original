@@ -69,7 +69,8 @@ namespace BETesisProyectoFinal.Controllers
       {
         //LINQ
 
-        //select * from abmproyectofinal.empleados c where c.planillaId = 2;
+        //select * from
+        //.empleados c where c.planillaId = 2;
 
         var query = from x in db.Empleados
                     join y in db.EmpleadosInactivos on x.Id equals y.EmpleadoID into pp
@@ -107,7 +108,7 @@ namespace BETesisProyectoFinal.Controllers
 
         //SELECT COUNT(*) as Cantidad,
         //date(FechaIngreso) as Fecha
-        //FROM abmproyectofinal.empleados
+        //FROM planifast.empleados
         //GROUP BY month(FechaIngreso), year(FechaIngreso);
 
         var query = from x in db.Empleados
@@ -127,7 +128,7 @@ namespace BETesisProyectoFinal.Controllers
 
         //SELECT COUNT(*) as Cantidad,
         //date(FechaSalida) as Fecha
-        //FROM abmproyectofinal.empleadosinactivos
+        //FROM planifast.empleadosinactivos
         //GROUP BY 2;
 
         var query = from x in db.EmpleadosInactivos
@@ -146,7 +147,7 @@ namespace BETesisProyectoFinal.Controllers
         //LINQ
 
         //SELECT d.descripcion, COUNT(*) as cantidad
-        //FROM abmproyectofinal.empleados e, abmproyectofinal.tipoplanillas d
+        //FROM planifast.empleados e, planifast.tipoplanillas d
         //WHERE e.planillaid = d.id group by d.descripcion;
 
         var query = from x in db.Empleados
@@ -167,9 +168,9 @@ namespace BETesisProyectoFinal.Controllers
         //LINQ
 
         //select COUNT(*) as cantidad
-        //from abmproyectofinal.empleados as a
+        //from planifast.empleados as a
         //where a.id NOT IN(select b.empleadoId
-        //                  from abmproyectofinal.empleadosinactivos as b) 
+        //                  from planifast.empleadosinactivos as b) 
 
         var query = (from x in db.Empleados 
                      where !(from o in db.EmpleadosInactivos
@@ -188,7 +189,7 @@ namespace BETesisProyectoFinal.Controllers
       {
         //LINQ
 
-        //select COUNT(*) as CantidadActivos from abmproyectofinal.empleados;
+        //select COUNT(*) as CantidadActivos from planifast.empleados;
         //var qry = (from x in y
         //           select x).Count()
 
@@ -206,7 +207,7 @@ namespace BETesisProyectoFinal.Controllers
         //LINQ
 
         //SELECT d.descripcion, COUNT(*) as cantidad
-        //FROM abmproyectofinal.empleados e, abmproyectofinal.departamentos d
+        //FROM planifast.empleados e, planifast.departamentos d
         //WHERE e.departamentoid = d.id group by d.descripcion;
 
         var query = from x in db.Empleados

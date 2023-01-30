@@ -107,8 +107,13 @@ namespace BETesisProyectoFinal.Controllers
       {
         //LINQ QUERY
 
-        //SELECT e.nombres, e.apellidos, ev.* FROM abmproyectofinal.empleados e
-        //LEFT JOIN abmproyectofinal.eventos ev on e.id where e.id = ev.empleadosID;
+        //SELECT e.nombres, e.apellidos, ev.* FROM
+        //
+        //
+        //.empleados e
+        //LEFT JOIN
+        //
+        //.eventos ev on e.id where e.id = ev.empleadosID;
 
         //JOIN SYNTAX LINQ
 
@@ -139,7 +144,7 @@ namespace BETesisProyectoFinal.Controllers
       {
         //LINQ
 
-        //select e.tipo, COUNT(*) as cantidad from abmproyectofinal.eventos e  group by e.tipo;
+        //select e.tipo, COUNT(*) as cantidad from planifast.eventos e  group by e.tipo;
 
 
         var query = from x in db.Eventos
