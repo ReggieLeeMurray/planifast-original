@@ -16,12 +16,11 @@
 </div>
 <ng-template #contentTemplate>
   <div>
-    <p>Puedes buscar planillas por su nombre.</p>
+    <p>Puedes buscar planillas por su nombre y fecha.</p>
     <p>Puedes volver a descargar planillas que calculaste con anterioridad.</p>
   </div>
 </ng-template>
-<br />
-<div class="top">
+<!-- <div class="top">
   <div class="mb-3">
     <form>
       <input
@@ -33,8 +32,7 @@
       />
     </form>
   </div>
-</div>
-<br />
+</div> -->
 <nz-input-group [nzPrefix]="prefixTemplateUser">
   <input
     type="text"
@@ -44,8 +42,23 @@
     placeholder="Buscar historial por nombre de planilla"
   />
 </nz-input-group>
+<br />
+<br />
+<table>
+  <tr>
+    <td>
+      <nz-form-label>Seleccionar Fecha</nz-form-label>
+    </td>
+    <td>
+      <nz-range-picker
+        [(ngModel)]="date"
+        (ngModelChange)="onChange($event)"
+      ></nz-range-picker>
+      <h5 class="font-weight-bold mb-0">Mes actual por defecto</h5>
+    </td>
+  </tr>
+</table>
 <ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
-
 <div>
   <nz-spin nzTip="Cargando..." *ngIf="loading">
     <nz-alert
@@ -92,10 +105,11 @@
       <tr *ngFor="let data of basicTable.data">
         <td>{{ data.descripcion }}</td>
         <td>{{ data.id }}</td>
-        <td>{{ data.fechaInicial | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.fechaInicio | date : "dd/MM/yyyy" }}</td>
         <td>{{ data.fechaFinal | date : "dd/MM/yyyy" }}</td>
-        <td>{{ data.totalPlanilla }}</td>
+        <td>{{ data.totalPlanilla | currency : "LPS " }}</td>
         <td>
+          PROXIMAMENTE!
           <!-- <button
               class="btn btn-lg btn btn-info"
               (click)="downloadPlanilla(data.archivo)"
