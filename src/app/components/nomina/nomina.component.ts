@@ -956,7 +956,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
       // this.error();
       this.isVisibleArchivo = true;
-      this.listFinal = this.jDatos;
+      this.listFinal = [...this.jDatos];
       console.log('RESULTADO FINAL ', this.jDatos);
       this.fileUploaded = true;
     };
@@ -1091,7 +1091,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.isVisibleArchivo = true;
     for (let x = 0; x < this.jDatos.length; x++) {
       if (this.jDatos[x].id === this.idEmpleado) {
-        this.listFinal[0] = this.jDatos[x];
+        this.listFinal.length = 0;
+        this.listFinal.push(this.jDatos[x]);
         x = this.jDatos.length;
       }
     }
