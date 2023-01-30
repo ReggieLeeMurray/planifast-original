@@ -93,7 +93,7 @@
         <td>{{ data.nombres }} {{ data.apellidos }}</td>
         <td>{{ data.empleadoID }}</td>
         <td *ngIf="data.valor === 0">{{ "N/E" }}</td>
-        <td *ngIf="data.valor !== 0">{{ data.valor }}</td>
+        <td *ngIf="data.valor !== 0">{{ data.valor | currency : "LPS " }}</td>
         <td>{{ data.motivo }}</td>
         <!-- <td >{{ data.nota }}</td> -->
         <td>{{ data.fechaSalida | date : "dd/MM/yyyy" }}</td>

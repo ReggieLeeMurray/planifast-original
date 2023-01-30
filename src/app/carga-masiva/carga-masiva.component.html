@@ -46,13 +46,7 @@
       </nz-form-control>
     </nz-form-item>
   </form>
-  <nz-table
-    id="deptos"
-    nzPaginationPosition="top"
-    nzBordered
-    hidden
-    nzTemplateMode
-  >
+  <nz-table id="deptos" nzTemplateMode hidden>
     <thead>
       <tr>
         <th style="text-align: center">ID</th>
@@ -66,13 +60,7 @@
       </tr>
     </tbody>
   </nz-table>
-  <nz-table
-    id="planillas"
-    nzPaginationPosition="top"
-    nzBordered
-    hidden
-    nzTemplateMode
-  >
+  <nz-table id="planillas" nzTemplateMode hidden>
     <thead>
       <tr>
         <th style="text-align: center">ID</th>
@@ -92,7 +80,7 @@
       </tr>
     </tbody>
   </nz-table>
-  <nz-table id="template" nzBordered nzTemplateMode hidden>
+  <nz-table id="template" nzTemplateMode hidden>
     <thead>
       <tr>
         <th>nombres</th>
@@ -202,7 +190,6 @@
       </tr>
     </tbody>
   </nz-table>
-  <br />
   <nz-table
     #basicTable
     [nzData]="listFinal"
@@ -250,13 +237,12 @@
         <td>
           {{ data.fechaIngreso | date : "dd/MM/yyyy" }}
         </td>
-        <td>{{ data.salarioBase }}</td>
+        <td>{{ data.salarioBase | currency : "LPS " }}</td>
         <td>{{ data.departamentoID }}</td>
         <td>{{ data.planillaID }} - {{ data.tipo }}</td>
       </tr>
     </tbody>
   </nz-table>
-
   <div class="main_content" style="padding-top: 2%">
     <button
       nz-button
