@@ -9,7 +9,7 @@ export const environment = {
   // myAppUrl: 'http://192.168.0.111/',
   // myAppUrlAccount: 'http://192.168.0.111',
 };
-/* Moficicar los contenedores de MS-Azure y console.logs DEBUG = false IMPORTANTE - IMPORTANTE*/
+/********** MODIFICAR IMPORTATNTE: Hide console.logs with DEBUG = FALSE **********/
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
