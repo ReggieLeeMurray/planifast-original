@@ -28,7 +28,7 @@ const EXCEL_TYPE =
 export class NominaComponent implements OnInit, PuedeDesactivar {
   //salir modulo
   permitirSalidaDeRuta(): boolean | Observable<boolean> | Promise<boolean> {
-    if (this.current == 2) {
+    if (this.current === 2) {
       return true;
     } else {
       const confirmacion = window.confirm(
@@ -41,12 +41,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   inicioSemana = startOfWeek(new Date());
   finalSemana = startOfWeek(new Date());
   inicioQuincena: Date = new Date();
+  fechaCreacionPlanilla: Date = new Date();
   finalQuincena = endOfMonth(new Date());
   today = new Date();
   ranges: any;
   diferencia: number;
-  start: any;
-  end: any;
+  start: Date;
+  end: Date;
   nombre: any;
   planidescrip: any;
   planitipo: any;
@@ -91,6 +92,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   listNomina = null;
   listNominaFinal = null;
   listTemporal = null;
+  listFinal = null;
+  notFound = './assets/empty.svg';
   listComprobantes = [];
   listTarjeta = [];
   listIncapacidadPrivada = [];
@@ -437,9 +440,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.inicioQuincena = startOfMonth(new Date());
       this.finalQuincena.setDate(this.inicioQuincena.getDate() + 14);
     } else if (this.today.getDate() >= 16 && this.today.getDate() <= 31) {
-      if (endOfMonth(this.today).getDate() == 30) {
+      if (endOfMonth(this.today).getDate() === 30) {
         this.inicioQuincena.setDate(this.finalQuincena.getDate() - 14);
-      } else if (endOfMonth(this.today).getDate() == 31) {
+      } else if (endOfMonth(this.today).getDate() === 31) {
         this.inicioQuincena.setDate(this.finalQuincena.getDate() - 15);
       }
     }
@@ -501,6 +504,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     const history: Historial = {
       fechaInicio: this.start,
       fechaFinal: this.end,
+      fechaCreacion: this.fechaCreacionPlanilla,
       totalPlanilla: this.round2Decimal(this.totalAPagar),
       archivo: this.nombre + '.xlsx',
       planillaID: this.idTP,
@@ -537,7 +541,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       );
       // determinar nombre de la planilla
       this.yearAguinaldo = yearInicio;
-      if (monthInicio == 'diciembre') {
+      if (monthInicio === 'diciembre') {
         this.mesAguinaldo = 'treceavo';
       } else {
         this.mesAguinaldo = 'catorceavo';
@@ -771,7 +775,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (arreglo.length > 0) {
           this.hideErroneos = false;
           this.msgErroneos =
-            "Id's inválidos: " + arreglo.length + ' ⇄ ' + 'ID: ' + arreglo;
+            "Cantidad de Id's inválidos: " +
+            arreglo.length +
+            ' ⇄ ' +
+            'Lista: ' +
+            arreglo;
         }
         if (faltante > 0 || sobrante > 0 || invalido > 0) {
           this.hideFaltantesSobrantes = false;
@@ -948,6 +956,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
       // this.error();
       this.isVisibleArchivo = true;
+      this.listFinal = this.jDatos;
       console.log('RESULTADO FINAL ', this.jDatos);
       this.fileUploaded = true;
     };
@@ -1078,6 +1087,15 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   showArchivo(): void {
     this.isVisibleArchivo = true;
   }
+  showArchivoById(): void {
+    this.isVisibleArchivo = true;
+    for (let x = 0; x < this.jDatos.length; x++) {
+      if (this.jDatos[x].id === this.idEmpleado) {
+        this.listFinal[0] = this.jDatos[x];
+        x = this.jDatos.length;
+      }
+    }
+  }
   handlePage(e: PageEvent) {
     this.page_size = e.pageSize;
     this.page_number = e.pageIndex + 1;
@@ -1171,8 +1189,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.cantOI = 1;
     console.log('CANTIDADIO ' + this.cantOI);
     for (let i = 0; i < this.listNomina.length; i++) {
-      if (this.listNomina[i].id == id) {
-        if (this.listNomina[i].totalPagar == 0) {
+      if (this.listNomina[i].id === id) {
+        if (this.listNomina[i].totalPagar === 0) {
           this.totalCalculados = this.totalCalculados + 1;
         } else if (this.listNomina[i].totalPagar > 0) {
           this.totalAPagar = this.round2Decimal(
@@ -1187,7 +1205,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             this.listNomina[i].ingresos - this.listNomina[i].deducciones
           );
         } else {
-          this.listNomina[i].deducciones == 0;
+          this.listNomina[i].deducciones === 0;
         }
         this.totalAPagar = this.round2Decimal(
           this.totalAPagar + this.listNomina[i].totalPagar
@@ -1217,7 +1235,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.isDisabledAguinaldo = false;
     this.idEmpleado = id;
     for (let i = 0; i < this.listNomina.length; i++) {
-      if (this.listNomina[i].id == id) {
+      if (this.listNomina[i].id === id) {
         salario = this.listNomina[i].salarioBase;
         ingresos = this.listNomina[i].ingresos;
         console.log(
@@ -1249,10 +1267,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.totalAPagar,
       this.totalAguinaldo
     );
-    if (this.current == 1) {
+    if (this.current === 1) {
       this.onItemChecked(this.idEmpleado, true);
     }
-    if (this.switchValueAguinaldo == true) {
+    if (this.switchValueAguinaldo === true) {
       this.valorAguinaldo = this.round2Decimal(
         this.resumenForm.get('aguinaldo').value
       );
@@ -1274,7 +1292,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.totalAguinaldo
     );
     for (let i = 0; i < this.listNomina.length; i++) {
-      if (this.listNomina[i].id == this.idEmpleado) {
+      if (this.listNomina[i].id === this.idEmpleado) {
         console.log(
           '1: ',
           this.listNomina[i].ingresos,
@@ -1316,7 +1334,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   handleCancelAguinaldoSem() {
     console.log(this.idEmpleado, this.limpiarTotalAguinaldo);
-    if (this.limpiarTotalAguinaldo == true) {
+    if (this.limpiarTotalAguinaldo === true) {
       this.handleEmpleadoClear(this.idEmpleado);
     }
     this.valorAguinaldo = 0;
@@ -1356,12 +1374,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     //valor ajuste
     this.valorAjuste = this.round2Decimal(this.resumenForm.get('ajuste').value);
     this.resumenForm.get('ajuste').disable();
-    if (this.valorAjuste == 0) {
+    if (this.valorAjuste === 0) {
       this.resumenForm.get('ajuste').setValue(0);
     }
     //valor aguinaldo
-    if (this.isCheckedAguinaldo == true) {
-      if (this.switchValueAguinaldo == true) {
+    if (this.isCheckedAguinaldo === true) {
+      if (this.switchValueAguinaldo === true) {
         this.valorAguinaldo = this.round2Decimal(
           this.resumenForm.get('aguinaldo').value
         );
@@ -1438,7 +1456,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (this.valorAjuste > 0) {
       this.cantOI = this.cantOI + 1;
     }
-    if (this.isCheckedAguinaldo != false) {
+    if (this.isCheckedAguinaldo !== false) {
       this.cantOI = this.cantOI + 1;
     }
     console.log(this.cantOI, this.isCheckedAguinaldo);
@@ -1446,7 +1464,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (obsv > 15) {
       this.diasCorrectos();
     } else {
-      if (this.isCheckedAguinaldo == true) {
+      if (this.isCheckedAguinaldo === true) {
         this.sueldo = this.valorAguinaldo;
         this.sueldoNormal = this.valorAguinaldo;
       } else {
@@ -1483,8 +1501,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.valorVacacion
       );
       for (let i = 0; i < this.listNomina.length; i++) {
-        if (this.listNomina[i].id == this.idEmpleado) {
-          if (this.listNomina[i].totalPagar == 0) {
+        if (this.listNomina[i].id === this.idEmpleado) {
+          if (this.listNomina[i].totalPagar === 0) {
             this.totalCalculados = this.totalCalculados + 1;
           } else if (this.listNomina[i].totalPagar > 0) {
             this.totalAPagar = this.totalAPagar - this.listNomina[i].totalPagar;
@@ -1500,7 +1518,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.listNominaFinal[i].feriado = this.valorFeriado;
           this.listNominaFinal[i].incapacidad = this.valorIncapacidadPub;
           this.listNominaFinal[i].vacacion = this.valorVacacion;
-          if (this.isCheckedAguinaldo == true) {
+          if (this.isCheckedAguinaldo === true) {
             this.listNominaFinal[i].aguinaldo = this.valorAguinaldo;
           } else {
             this.listNominaFinal[i].aguinaldo = 0;
@@ -1551,7 +1569,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
-        this.exportexcel(), this.current++;
+        this.exportExcel(), this.current++;
       },
       nzCancelText: 'No, regrésame',
       nzOnCancel: () => {
@@ -1561,7 +1579,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   limpiar(): void {
     console.log(this.idEmpleado, this.limpiarTotalAguinaldo);
-    if (this.limpiarTotalAguinaldo == true) {
+    if (this.limpiarTotalAguinaldo === true) {
       this.handleEmpleadoClear(this.idEmpleado);
     }
     this.valorAguinaldo = 0;
@@ -1638,12 +1656,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   // stepper
   next(): void {
     console.log(this.current, this.totalCalculados);
-    if (this.current == 0) {
+    if (this.current === 0) {
       this.current += 1;
       this.resetNominaFinal();
       document.getElementById('btnnext').setAttribute('disabled', 'disabled');
     }
-    if (this.current == 1 && this.totalCalculados > 0) {
+    if (this.current === 1 && this.totalCalculados > 0) {
       let comprobantesTemp = [];
       comprobantesTemp.push(...this.listNominaFinal);
       const array = Array.from(this.setOfCheckedId);
@@ -1690,7 +1708,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   //SheetJS
-  exportexcel(): void {
+  exportExcel(): void {
     console.log(this.totalAguinaldo);
     /* post historial */
     this.guardarHistorial();
@@ -1759,7 +1777,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   //     ({ path }) => (this.imageSource = path)
   //   );
   // }
-  // modal segundo paso diferencia == 7
+  // modal segundo paso diferencia === 7
   handleEmpleado(
     id: number,
     salario: number,
@@ -1767,6 +1785,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     apellido: string
   ): void {
     console.log(id, salario, nombre + ' ' + apellido);
+    console.log(this.jDatos, this.listFinal);
     this.isMainVisible = true;
     this.salarioString = this.numberWithCommas(salario);
     this.salarioMinimoPerDia = salario / 30;
@@ -1775,7 +1794,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.idEmpleado = id;
     this.nombreCompleto = nombre + ' ' + apellido;
 
-    if (this.fileUploaded == true) {
+    if (this.fileUploaded === true) {
       var luIControl: string = '';
       var luOControl: string = '';
       var maIControl: string = '';
@@ -1868,8 +1887,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.nombreCompleto = nombre + ' ' + apellido;
     this.salario = salario;
     for (let i = 0; i < this.listNomina.length; i++) {
-      if (this.listNomina[i].id == this.idEmpleado) {
-        if (this.listNomina[i].ingresos == 0) {
+      if (this.listNomina[i].id === this.idEmpleado) {
+        if (this.listNomina[i].ingresos === 0) {
           this.sueldoAlDeducirString = '0.00';
         } else {
           this.sueldoAlDeducirString = this.numberWithCommas(
@@ -1885,8 +1904,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.idEmpleado = id;
     this.valorAguinaldo = 0;
     for (let i = 0; i < this.listNomina.length; i++) {
-      if (this.listNomina[i].id == this.idEmpleado) {
-        if (this.totalCalculados > 0 && this.listNomina[i].totalPagar != 0) {
+      if (this.listNomina[i].id === this.idEmpleado) {
+        if (this.totalCalculados > 0 && this.listNomina[i].totalPagar !== 0) {
           this.totalCalculados = this.totalCalculados - 1;
         }
         this.listNomina[i].ingresos = 0;
@@ -1946,7 +1965,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
     // console.log(this.listTarjeta.length);
     for (let j = 0; j < this.listTarjeta.length; j++) {
-      if (this.listTarjeta[j].id == this.idEmpleado) {
+      if (this.listTarjeta[j].id === this.idEmpleado) {
         this.listTarjeta[j].XDD = 0;
         this.listTarjeta[j].XDJ = 0;
         this.listTarjeta[j].XDL = 0;
@@ -2001,10 +2020,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.listTarjeta[j].viernesS = '00:00';
       }
     }
-    if (this.current == 1) {
+    if (this.current === 1) {
       this.onItemChecked(id, false);
     }
-    if (this.current == 1 && this.totalCalculados == 0) {
+    if (this.current === 1 && this.totalCalculados === 0) {
       document.getElementById('btnnext').setAttribute('disabled', 'disabled');
       this.switchValueAguinaldo = false;
     }
@@ -2019,23 +2038,23 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   btnDeduccionEnable() {
     if (this.totalAguinaldo > 0) {
-      if (this.isCheckedAjuste == false && this.isCheckedVarios == false) {
+      if (this.isCheckedAjuste === false && this.isCheckedVarios === false) {
         document
           .getElementById('btnCalcularDeduccion')
           .removeAttribute('disabled');
       }
     } else {
       if (
-        (this.isCheckedIHSS == true ||
-          this.isCheckedISR == true ||
-          this.isCheckedAFPC == true) &&
-        this.isCheckedImpVecinal == false &&
-        this.isCheckedPrestamoRap == false &&
-        this.isCheckedAnticipo == false &&
-        this.isCheckedCTAEmpresa == false &&
-        this.isCheckedTransporte == false &&
-        this.isCheckedAjuste == false &&
-        this.isCheckedVarios == false
+        (this.isCheckedIHSS === true ||
+          this.isCheckedISR === true ||
+          this.isCheckedAFPC === true) &&
+        this.isCheckedImpVecinal === false &&
+        this.isCheckedPrestamoRap === false &&
+        this.isCheckedAnticipo === false &&
+        this.isCheckedCTAEmpresa === false &&
+        this.isCheckedTransporte === false &&
+        this.isCheckedAjuste === false &&
+        this.isCheckedVarios === false
       ) {
         document
           .getElementById('btnCalcularDeduccion')
@@ -2193,7 +2212,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
     this.deduccion = this.round2Decimal(this.deduccion);
     console.log('DEDUCCION: ', this.deduccion);
-    if (this.deduccion == 0) {
+    if (this.deduccion === 0) {
       this.deduccionString = '0.00';
     } else {
       this.deduccionString = this.numberWithCommas(this.deduccion);
@@ -2202,7 +2221,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       .getElementById('btnCalcularDeduccion')
       .setAttribute('disabled', 'true');
     for (let i = 0; i < this.listNomina.length; i++) {
-      if (this.listNomina[i].id == this.idEmpleado) {
+      if (this.listNomina[i].id === this.idEmpleado) {
         var temp = this.listNomina[i].ingresos;
       }
     }
@@ -2210,7 +2229,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.masDeduccionesMenosIngresos();
     } else {
       for (let i = 0; i < this.listNomina.length; i++) {
-        if (this.listNomina[i].id == this.idEmpleado) {
+        if (this.listNomina[i].id === this.idEmpleado) {
           this.listNomina[i].deducciones = this.deduccion;
           console.log('AJUSTE POSITIVO ' + this.listNomina[i].ajusteP);
           this.listNomina[i].totalPagar = this.round2Decimal(
@@ -2261,12 +2280,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     });
   }
   jornadaIncapacidadPriv(jornada: string) {
-    if (jornada == 'Diurna') {
+    if (jornada === 'Diurna') {
       this.requiredCompletarIncapacidadPrivada =
         8 * this.incapacidadpriv - this.incapacidadReal * 4;
-    } else if (jornada == 'Mixta') {
+    } else if (jornada === 'Mixta') {
       this.requiredCompletarIncapacidadPrivada = 7 * this.incapacidadpriv;
-    } else if (jornada == 'Nocturna') {
+    } else if (jornada === 'Nocturna') {
       this.requiredCompletarIncapacidadPrivada = 6 * this.incapacidadpriv;
     }
   }
@@ -2286,7 +2305,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   onAllChecked(value: boolean): void {
-    if (value == false) {
+    if (value === false) {
       if (this.totalAguinaldo > 0) {
         this.isCheckedAjuste = false;
         this.isCheckedVarios = false;
@@ -2330,7 +2349,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.automaticForm.disable();
         this.allFake();
       }
-    } else if (value == true) {
+    } else if (value === true) {
       if (this.totalAguinaldo > 0) {
         this.isCheckedAjuste = true;
         this.isCheckedVarios = true;
@@ -2353,12 +2372,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   Search(value: string) {
-    if (this.listTemporal == null) {
+    if (this.listTemporal === null) {
       var sorted = this.listNominaFinal.slice().sort();
       var listTemp = sorted.sort((a, b) => a.id - b.id);
       console.log(this.listNominaFinal, this.listNomina, listTemp, sorted);
     }
-    if (value != '' && value != undefined && value != null) {
+    if (value !== '' && value !== undefined && value !== null) {
       this.listNomina = listTemp.filter((res) => {
         return (
           res.nombres.toLocaleLowerCase().match(value.toLocaleLowerCase()) ||
@@ -2373,7 +2392,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   allFake() {
     if (this.totalAguinaldo > 0) {
-      if (this.isCheckedAjuste == false && this.isCheckedVarios == false) {
+      if (this.isCheckedAjuste === false && this.isCheckedVarios === false) {
         this.indeterminate = false;
         this.allChecked = false;
         document
@@ -2382,16 +2401,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
     } else {
       if (
-        this.isCheckedIHSS == false &&
-        this.isCheckedISR == false &&
-        this.isCheckedAFPC == false &&
-        this.isCheckedImpVecinal == false &&
-        this.isCheckedPrestamoRap == false &&
-        this.isCheckedAnticipo == false &&
-        this.isCheckedCTAEmpresa == false &&
-        this.isCheckedTransporte == false &&
-        this.isCheckedAjuste == false &&
-        this.isCheckedVarios == false
+        this.isCheckedIHSS === false &&
+        this.isCheckedISR === false &&
+        this.isCheckedAFPC === false &&
+        this.isCheckedImpVecinal === false &&
+        this.isCheckedPrestamoRap === false &&
+        this.isCheckedAnticipo === false &&
+        this.isCheckedCTAEmpresa === false &&
+        this.isCheckedTransporte === false &&
+        this.isCheckedAjuste === false &&
+        this.isCheckedVarios === false
       ) {
         this.indeterminate = false;
         this.allChecked = false;
@@ -2403,7 +2422,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   allReal() {
     if (this.totalAguinaldo > 0) {
-      if (this.isCheckedAjuste == true && this.isCheckedVarios == true) {
+      if (this.isCheckedAjuste === true && this.isCheckedVarios === true) {
         this.allChecked = true;
         this.indeterminate = false;
       } else {
@@ -2411,16 +2430,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
     } else {
       if (
-        this.isCheckedIHSS == true &&
-        this.isCheckedISR == true &&
-        this.isCheckedAFPC == true &&
-        this.isCheckedImpVecinal == true &&
-        this.isCheckedPrestamoRap == true &&
-        this.isCheckedAnticipo == true &&
-        this.isCheckedCTAEmpresa == true &&
-        this.isCheckedTransporte == true &&
-        this.isCheckedAjuste == true &&
-        this.isCheckedVarios == true
+        this.isCheckedIHSS === true &&
+        this.isCheckedISR === true &&
+        this.isCheckedAFPC === true &&
+        this.isCheckedImpVecinal === true &&
+        this.isCheckedPrestamoRap === true &&
+        this.isCheckedAnticipo === true &&
+        this.isCheckedCTAEmpresa === true &&
+        this.isCheckedTransporte === true &&
+        this.isCheckedAjuste === true &&
+        this.isCheckedVarios === true
       ) {
         this.allChecked = true;
         this.indeterminate = false;
@@ -2431,7 +2450,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   logIHSS(value): void {
     console.log(value);
-    if (value == false) {
+    if (value === false) {
       this.indeterminate = true;
       this.allFake();
       this.automaticForm.get('ihss').disable();
@@ -2447,7 +2466,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   logISR(value): void {
     console.log(value);
-    if (value == false) {
+    if (value === false) {
       this.indeterminate = true;
       this.allFake();
       this.automaticForm.get('isr').disable();
@@ -2462,7 +2481,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logAguinaldo(value): void {
-    if (value == false) {
+    if (value === false) {
       this.isDisabledAguinaldo = true;
       this.switchValueAguinaldo = false;
       this.resumenForm.enable();
@@ -2470,7 +2489,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.resumenForm.get('aguinaldo').setValue(0);
     } else {
       for (let i = 0; i < this.listNomina.length; i++) {
-        if (this.listNomina[i].id == this.idEmpleado) {
+        if (this.listNomina[i].id === this.idEmpleado) {
           var salario = this.listNomina[i].salarioBase;
         }
       }
@@ -2480,7 +2499,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logAFPC(value): void {
-    if (value == false) {
+    if (value === false) {
       this.indeterminate = true;
       this.allFake();
       this.automaticForm.get('afpc').disable();
@@ -2495,7 +2514,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logImpVecinal(value): void {
-    if (value == false) {
+    if (value === false) {
       this.deduccionForm.get('impvecinal').disable();
       this.deduccionForm.get('impvecinal').setValue(0);
       this.deduccionFormQuincenal.get('impvecinal').disable();
@@ -2513,7 +2532,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logAnticipo(value): void {
-    if (value == false) {
+    if (value === false) {
       this.deduccionFormQuincenal.get('anticipo').disable();
       this.deduccionFormQuincenal.get('anticipo').setValue(0);
       this.indeterminate = true;
@@ -2528,7 +2547,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logPrestamoRap(value): void {
-    if (value == false) {
+    if (value === false) {
       this.deduccionFormQuincenal.get('prestamorap').disable();
       this.deduccionFormQuincenal.get('prestamorap').setValue(0);
       this.indeterminate = true;
@@ -2543,7 +2562,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logCTA(value): void {
-    if (value == false) {
+    if (value === false) {
       this.deduccionForm.get('ctaempresa').disable();
       this.deduccionForm.get('ctaempresa').setValue(0);
       this.deduccionFormQuincenal.get('ctaempresa').disable();
@@ -2561,7 +2580,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logTransporte(value): void {
-    if (value == false) {
+    if (value === false) {
       this.deduccionForm.get('transporte').disable();
       this.deduccionForm.get('transporte').setValue(0);
       this.deduccionFormQuincenal.get('transporte').disable();
@@ -2579,7 +2598,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logAjuste(value): void {
-    if (value == false) {
+    if (value === false) {
       if (this.totalAguinaldo > 0) {
         this.aguinaldoForm.get('ajuste').disable();
         this.aguinaldoForm.get('ajuste').setValue(0);
@@ -2612,7 +2631,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   logVarios(value): void {
-    if (value == false) {
+    if (value === false) {
       if (this.totalAguinaldo > 0) {
         this.aguinaldoForm.get('varios').disable();
         this.aguinaldoForm.get('varios').setValue(0);
@@ -2732,43 +2751,43 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.resetObservacion();
   }
   enableIHSS() {
-    if (this.switchValueIHSS == false) {
+    if (this.switchValueIHSS === false) {
       this.automaticForm.get('ihss').disable();
       this.IHSS();
-    } else if (this.switchValueIHSS == true) {
+    } else if (this.switchValueIHSS === true) {
       this.automaticForm.get('ihss').enable();
       this.automaticForm.get('ihss').setValue('');
     }
   }
   enableISR() {
-    if (this.switchValueISR == false) {
+    if (this.switchValueISR === false) {
       this.automaticForm.get('isr').disable();
       this.ISR();
-    } else if (this.switchValueISR == true) {
+    } else if (this.switchValueISR === true) {
       this.automaticForm.get('isr').enable();
       this.automaticForm.get('isr').setValue('');
     }
   }
   validAguinaldo(value): void {
     console.log(value);
-    if (value != null && value != 0) {
+    if (value !== null && value !== 0) {
       this.isValidAguinaldo = false;
     } else {
       this.isValidAguinaldo = true;
     }
   }
   enableAguinaldo() {
-    if (this.switchValueAguinaldo == false) {
+    if (this.switchValueAguinaldo === false) {
       this.resumenForm.get('aguinaldo').disable();
       for (let i = 0; i < this.listNomina.length; i++) {
-        if (this.listNomina[i].id == this.idEmpleado) {
+        if (this.listNomina[i].id === this.idEmpleado) {
           var salario = this.listNomina[i].salarioBase;
         }
       }
       this.resumenForm.get('aguinaldo').setValue(salario);
       this.isDisabledAguinaldo = false;
       this.isValidAguinaldo = false;
-    } else if (this.switchValueAguinaldo == true) {
+    } else if (this.switchValueAguinaldo === true) {
       this.resumenForm.get('aguinaldo').enable();
       this.resumenForm.get('aguinaldo').setValue('');
       this.isValidAguinaldo = true;
@@ -2776,10 +2795,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.resumenForm.get('aguinaldo').value);
   }
   enableAFPC() {
-    if (this.switchValueAFPC == false) {
+    if (this.switchValueAFPC === false) {
       this.automaticForm.get('afpc').disable();
       this.AFPC();
-    } else if (this.switchValueAFPC == true) {
+    } else if (this.switchValueAFPC === true) {
       this.automaticForm.get('afpc').enable();
       this.automaticForm.get('afpc').setValue(0);
     }
@@ -2861,40 +2880,40 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   ) {
     var a = moment(entrada).format('hh:mm a');
     var b = moment(salida).format('hh:mm a');
-    if (observacion == 'conpermiso') {
+    if (observacion === 'conpermiso') {
       observacion = 'Con Permiso';
-    } else if (observacion == 'feriado') {
+    } else if (observacion === 'feriado') {
       observacion = 'Feriado';
-    } else if (observacion == 'notrabajaba') {
+    } else if (observacion === 'notrabajaba') {
       observacion = 'No Laboraba';
     } else if (
-      observacion == 'incapacidadpub' ||
-      observacion == 'incapacidadpubparcial' ||
-      observacion == 'incapacidadcancelada'
+      observacion === 'incapacidadpub' ||
+      observacion === 'incapacidadpubparcial' ||
+      observacion === 'incapacidadcancelada'
     ) {
       observacion = 'IHSS';
-    } else if (observacion == 'incapacidadpriv') {
+    } else if (observacion === 'incapacidadpriv') {
       observacion = 'IP';
-    } else if (observacion == 'septimo') {
+    } else if (observacion === 'septimo') {
       observacion = 'Libre';
     } else if (
-      observacion == 'vacacion' ||
-      observacion == 'vacacioncancelada'
+      observacion === 'vacacion' ||
+      observacion === 'vacacioncancelada'
     ) {
       observacion = 'Vacaciones';
-    } else if (observacion == 'falta') {
+    } else if (observacion === 'falta') {
       observacion = 'Sin Permiso';
-    } else if (observacion == 'suspension') {
+    } else if (observacion === 'suspension') {
       observacion = 'Suspensión';
-    } else if (observacion == 'abandono') {
+    } else if (observacion === 'abandono') {
       observacion = 'Renuncia';
     }
 
-    if (a && b == 'Fecha inválida') {
+    if (a && b === 'Fecha inválida') {
       a = observacion;
       b = observacion;
     }
-    if (horas == undefined) {
+    if (horas === undefined) {
       horas = 0;
     }
     const array = [];
@@ -2939,7 +2958,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       observacion
     );
     for (let i = 0; i < this.listTarjeta.length; i++) {
-      if (this.listTarjeta[i].id == this.idEmpleado) {
+      if (this.listTarjeta[i].id === this.idEmpleado) {
         console.log('entro', this.listTarjeta[i].id);
         const obj3 = { ...this.listTarjeta[i], ...reformattedArray[0] };
         console.log(obj3);
@@ -2949,78 +2968,105 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.listTarjeta, this.idEmpleado);
   }
   detectarIncapacidad() {
-    if (this.descriForm.get('lunesSelect').value == 'incapacidadpub') {
+    if (this.descriForm.get('lunesSelect').value === 'incapacidadpub') {
       this.incapacidadpub = this.incapacidadpub + 1;
     }
-    if (this.descriForm.get('martesSelect').value == 'incapacidadpub') {
+    if (this.descriForm.get('martesSelect').value === 'incapacidadpub') {
       this.incapacidadpub = this.incapacidadpub + 1;
     }
-    if (this.descriForm.get('miercolesSelect').value == 'incapacidadpub') {
+    if (this.descriForm.get('miercolesSelect').value === 'incapacidadpub') {
       this.incapacidadpub = this.incapacidadpub + 1;
     }
-    if (this.descriForm.get('juevesSelect').value == 'incapacidadpub') {
+    if (this.descriForm.get('juevesSelect').value === 'incapacidadpub') {
       this.incapacidadpub = this.incapacidadpub + 1;
     }
-    if (this.descriForm.get('viernesSelect').value == 'incapacidadpub') {
+    if (this.descriForm.get('viernesSelect').value === 'incapacidadpub') {
       this.incapacidadpub = this.incapacidadpub + 1;
     }
-    if (this.descriForm.get('sabadoSelect').value == 'incapacidadpub') {
+    if (this.descriForm.get('sabadoSelect').value === 'incapacidadpub') {
       this.incapacidadpub = this.incapacidadpub + 1;
     }
-    if (this.descriForm.get('domingoSelect').value == 'incapacidadpub') {
+    if (this.descriForm.get('domingoSelect').value === 'incapacidadpub') {
       this.incapacidadpub = this.incapacidadpub + 1;
     }
   }
-
   detectarJornada() {
-    if (this.descriForm.get('lunesSelect').value == '') {
+    if (
+      this.descriForm.get('lunesSelect').value === '' ||
+      this.descriForm.get('lunesSelect').value === undefined
+    ) {
       this.revisarLunes(this.lunesDesde, this.lunesHasta);
       this.jornadaL = this.retornarJornadaOld(this.jornada, 'Lunes');
+      console.log('LUNES JORNADA: ', this.jornadaL, this.jornada);
     } else this.jornadaL = 0;
 
-    if (this.descriForm.get('martesSelect').value == '') {
+    if (
+      this.descriForm.get('martesSelect').value === '' ||
+      this.descriForm.get('martesSelect').value === undefined
+    ) {
       this.revisarMartes(this.martesDesde, this.martesHasta);
       this.jornadaM = this.retornarJornadaOld(this.jornada, 'Martes');
+      console.log('MARTES JORNADA: ', this.jornadaM, this.jornada);
     } else this.jornadaM = 0;
 
-    if (this.descriForm.get('miercolesSelect').value == '') {
+    if (
+      this.descriForm.get('miercolesSelect').value === '' ||
+      this.descriForm.get('martesSelect').value === undefined
+    ) {
       this.revisarMiercoles(this.miercolesDesde, this.miercolesHasta);
       this.jornadaMi = this.retornarJornadaOld(this.jornada, 'Miercoles');
+      console.log('MIERCOLES JORNADA: ', this.jornadaMi, this.jornada);
     } else this.jornadaMi = 0;
 
-    if (this.descriForm.get('juevesSelect').value == '') {
+    if (
+      this.descriForm.get('juevesSelect').value === '' ||
+      this.descriForm.get('juevesSelect').value === undefined
+    ) {
       this.revisarJueves(this.juevesDesde, this.juevesHasta);
       this.jornadaJ = this.retornarJornadaOld(this.jornada, 'Jueves');
+      console.log('JUEVES JORNADA: ', this.jornadaJ, this.jornada);
     } else this.jornadaJ = 0;
 
-    if (this.descriForm.get('viernesSelect').value == '') {
+    if (
+      this.descriForm.get('viernesSelect').value === '' ||
+      this.descriForm.get('viernesSelect').value === undefined
+    ) {
       this.revisarViernes(this.viernesDesde, this.viernesHasta);
       this.jornadaV = this.retornarJornadaOld(this.jornada, 'Viernes');
+      console.log('VIERNES JORNADA: ', this.jornadaV, this.jornada);
     } else this.jornadaV = 0;
 
-    if (this.descriForm.get('sabadoSelect').value == '') {
+    if (
+      this.descriForm.get('sabadoSelect').value === '' ||
+      this.descriForm.get('sabadoSelect').value === undefined
+    ) {
       this.revisarSabado(this.sabadoDesde, this.sabadoHasta);
       this.jornadaS = this.retornarJornadaOld(this.jornada, 'Sabado');
+      console.log('SABADO JORNADA: ', this.jornadaS, this.jornada);
     } else this.jornadaS = 0;
 
-    if (this.descriForm.get('domingoSelect').value == '') {
+    if (
+      this.descriForm.get('domingoSelect').value === '' ||
+      this.descriForm.get('domingoSelect').value === undefined
+    ) {
       this.revisarDomingo(this.domingoDesde, this.domingoHasta);
       this.jornadaD = this.retornarJornadaOld(this.jornada, 'Domingo');
+      console.log('DOMINGO JORNADA: ', this.jornadaD, this.jornada);
     } else this.jornadaD = 0;
   }
   sumRequiredTipo(jornada: number) {
     console.log('JORNADA ' + jornada + ' ' + this.requiredCompletarDiurna);
-    if (jornada != 0) {
-      if (jornada == 8) {
+    if (jornada !== 0) {
+      if (jornada === 8) {
         this.requiredCompletarDiurna = this.requiredCompletarDiurna + jornada;
         this.ajusteDias = this.ajusteDias + 1;
-      } else if (jornada == 4) {
+      } else if (jornada === 4) {
         this.requiredCompletarDiurna =
           this.requiredCompletarDiurna + jornada - 8;
-      } else if (jornada == 7) {
+      } else if (jornada === 7) {
         this.requiredCompletarMixta = this.requiredCompletarMixta + jornada;
         this.ajusteDias = this.ajusteDias + 1;
-      } else if (jornada == 6) {
+      } else if (jornada === 6) {
         this.requiredCompletarNocturna =
           this.requiredCompletarNocturna + jornada;
         this.ajusteDias = this.ajusteDias + 1;
@@ -3030,13 +3076,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   retornarJornadaOld(jornada: string, dia: string) {
     var jor: number;
     console.log('AQUI OLD', jornada, dia);
-    if (jornada == 'Diurna' && dia == 'Sabado') {
+    if (jornada === 'Diurna' && dia === 'Sabado') {
       jor = this.hrsJornadaDiurna - 4;
-    } else if (jornada == 'Diurna' && dia != 'Sabado') {
+    } else if (jornada === 'Diurna' && dia !== 'Sabado') {
       jor = this.hrsJornadaDiurna;
-    } else if (jornada == 'Mixta') {
+    } else if (jornada === 'Mixta') {
       jor = this.hrsJornadaMixta;
-    } else if (jornada == 'Nocturna') {
+    } else if (jornada === 'Nocturna') {
       jor = this.hrsJornadaNocturna;
     }
     return jor;
@@ -3044,46 +3090,46 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   retornarJornada(jornada: string, dia: string, obs: string) {
     var jor: number = 0;
     console.log('AQUI', jornada, dia, obs);
-    if (obs == 'incapacidadpub' && this.incapacidadpub > 3) {
+    if (obs === 'incapacidadpub' && this.incapacidadpub > 3) {
       obs = 'incapacidadpubmax';
     }
     if (
-      obs == '' ||
-      obs == 'conpermiso' ||
-      obs == 'feriado' ||
-      obs == 'vacacion' ||
-      obs == 'incapacidadpub'
+      obs === '' ||
+      obs === undefined ||
+      obs === 'conpermiso' ||
+      obs === 'feriado' ||
+      obs === 'vacacion' ||
+      obs === 'incapacidadpub'
     ) {
-      if (jornada == 'Diurna' && dia == 'Sabado') {
+      if (jornada === 'Diurna' && dia === 'Sabado') {
         jor = this.hrsJornadaDiurna - 4;
-      } else if (jornada == 'Diurna' && dia != 'Sabado') {
+      } else if (jornada === 'Diurna' && dia !== 'Sabado') {
         jor = this.hrsJornadaDiurna;
-      } else if (jornada == 'Mixta') {
+      } else if (jornada === 'Mixta') {
         jor = this.hrsJornadaMixta;
-      } else if (jornada == 'Nocturna') {
+      } else if (jornada === 'Nocturna') {
         jor = this.hrsJornadaNocturna;
       }
       return jor;
     } else if (
-      obs == 'septimo' ||
-      obs == 'falta' ||
-      obs == 'suspension' ||
-      obs == 'abandono' ||
-      obs == 'vacacioncancelada' ||
-      obs == 'incapacidadcancelada' ||
-      obs == 'incapacidadpubparcial' ||
-      obs == 'incapacidadpubmax'
+      obs === 'septimo' ||
+      obs === 'falta' ||
+      obs === 'suspension' ||
+      obs === 'abandono' ||
+      obs === 'vacacioncancelada' ||
+      obs === 'incapacidadcancelada' ||
+      obs === 'incapacidadpubparcial' ||
+      obs === 'incapacidadpubmax'
     ) {
       jor = 0;
       return jor;
     }
     return jor;
   }
-
   revisarLunes(entrada: moment.Moment, salida: moment.Moment) {
     if (entrada.isValid() && salida.isValid()) {
       if (entrada.isSame(salida)) {
-        if (this.isVisibleValidasIguales == false) {
+        if (this.isVisibleValidasIguales === false) {
           this.validasIguales();
         }
         this.horasForm.get('luIControl').setValue('');
@@ -3095,78 +3141,80 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.dia = 'Lunes';
         this.horas(entrada, salida, this.hoursLunes, this.dia);
       }
-    } else if (this.descriForm.get('lunesSelect').value != '') {
-      if (this.descriForm.get('lunesSelect').value == 'conpermiso') {
+    } else if (this.descriForm.get('lunesSelect').value !== '') {
+      if (this.descriForm.get('lunesSelect').value === 'conpermiso') {
         this.conpermiso = this.conpermiso + 1;
-        if (this.jornadaM != 0) {
+        if (this.jornadaM !== 0) {
           this.sumRequiredTipo(this.jornadaM);
           this.hoursLunes = this.jornadaM;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.sumRequiredTipo(this.jornadaMi);
           this.hoursLunes = this.jornadaMi;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.sumRequiredTipo(this.jornadaJ);
           this.hoursLunes = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.sumRequiredTipo(this.jornadaV);
           this.hoursLunes = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.sumRequiredTipo(this.jornadaS);
           this.hoursLunes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.sumRequiredTipo(this.jornadaD);
           this.hoursLunes = this.jornadaD;
         } else this.hoursLunes = 0;
-      } else if (this.descriForm.get('lunesSelect').value == 'feriado') {
+      } else if (this.descriForm.get('lunesSelect').value === 'feriado') {
         this.feriado = this.feriado + 1;
-        if (this.jornadaM != 0) {
+        if (this.jornadaM !== 0) {
           this.hoursLunes = this.jornadaM;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursLunes = this.jornadaMi;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursLunes = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursLunes = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursLunes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursLunes = this.jornadaD;
         } else this.hoursLunes = 0;
-      } else if (this.descriForm.get('lunesSelect').value == 'incapacidadpub') {
-        if (this.jornadaM != 0) {
+      } else if (
+        this.descriForm.get('lunesSelect').value === 'incapacidadpub'
+      ) {
+        if (this.jornadaM !== 0) {
           this.hoursLunes = this.jornadaM;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursLunes = this.jornadaMi;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursLunes = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursLunes = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursLunes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursLunes = this.jornadaD;
         } else this.hoursLunes = 0;
         if (this.incapacidadpub > 3) {
           this.hoursLunes = 0;
         }
       } else if (
-        this.descriForm.get('lunesSelect').value == 'incapacidadpubparcial'
+        this.descriForm.get('lunesSelect').value === 'incapacidadpubparcial'
       ) {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursLunes = 0;
       } else if (
-        this.descriForm.get('lunesSelect').value == 'incapacidadpriv'
+        this.descriForm.get('lunesSelect').value === 'incapacidadpriv'
       ) {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
       } else if (
-        this.descriForm.get('lunesSelect').value == 'incapacidadcancelada'
+        this.descriForm.get('lunesSelect').value === 'incapacidadcancelada'
       ) {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursLunes = 0;
-      } else if (this.descriForm.get('lunesSelect').value == 'septimo') {
+      } else if (this.descriForm.get('lunesSelect').value === 'septimo') {
         this.septimo = this.septimo + 1;
-        if (this.isVisibleLibres == false) {
+        if (this.isVisibleLibres === false) {
           if (this.septimo > 1) {
             this.libres();
           }
@@ -3178,50 +3226,50 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.septimo = 0;
         }
         this.hoursLunes = 0;
-      } else if (this.descriForm.get('lunesSelect').value == 'vacacion') {
+      } else if (this.descriForm.get('lunesSelect').value === 'vacacion') {
         this.vacacion = this.vacacion + 1;
-        if (this.jornadaM != 0) {
+        if (this.jornadaM !== 0) {
           this.hoursLunes = this.jornadaM;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursLunes = this.jornadaMi;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursLunes = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursLunes = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursLunes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursLunes = this.jornadaD;
         } else this.hoursLunes = 0;
       } else if (
-        this.descriForm.get('lunesSelect').value == 'vacacioncancelada'
+        this.descriForm.get('lunesSelect').value === 'vacacioncancelada'
       ) {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursLunes = 0;
-      } else if (this.descriForm.get('lunesSelect').value == 'falta') {
+      } else if (this.descriForm.get('lunesSelect').value === 'falta') {
         this.falta = this.falta + 1;
         if (this.falta >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursLunes = 0;
-      } else if (this.descriForm.get('lunesSelect').value == 'suspension') {
+      } else if (this.descriForm.get('lunesSelect').value === 'suspension') {
         this.suspension = this.suspension + 1;
         if (this.suspension >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursLunes = 0;
-      } else if (this.descriForm.get('lunesSelect').value == 'abandono') {
+      } else if (this.descriForm.get('lunesSelect').value === 'abandono') {
         this.abandono = this.abandono + 1;
         this.hoursLunes = 0;
       }
     } else {
-      if (this.isVisibleInvalidas == false) {
+      if (this.isVisibleInvalidas === false) {
         this.invalidas();
       }
       this.horasForm.get('luIControl').setValue('');
       this.horasForm.get('luOControl').setValue('');
     }
-    if (this.incPriv == true) {
+    if (this.incPriv === true) {
       this.listIncapacidadPrivada.push('lunes');
     } else {
       this.tarjetas(
@@ -3253,7 +3301,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   revisarMartes(entrada: moment.Moment, salida: moment.Moment) {
     if (entrada.isValid() && salida.isValid()) {
       if (entrada.isSame(salida)) {
-        if (this.isVisibleValidasIguales == false) {
+        if (this.isVisibleValidasIguales === false) {
           this.validasIguales();
         }
         this.horasForm.get('maIControl').setValue('');
@@ -3265,80 +3313,80 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.dia = 'Martes';
         this.horas(entrada, salida, this.hoursMartes, this.dia);
       }
-    } else if (this.descriForm.get('martesSelect').value != '') {
-      if (this.descriForm.get('martesSelect').value == 'conpermiso') {
+    } else if (this.descriForm.get('martesSelect').value !== '') {
+      if (this.descriForm.get('martesSelect').value === 'conpermiso') {
         this.conpermiso = this.conpermiso + 1;
-        if (this.jornadaL != 0) {
+        if (this.jornadaL !== 0) {
           this.sumRequiredTipo(this.jornadaL);
           this.hoursMartes = this.jornadaL;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.sumRequiredTipo(this.jornadaMi);
           this.hoursMartes = this.jornadaMi;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.sumRequiredTipo(this.jornadaJ);
           this.hoursMartes = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.sumRequiredTipo(this.jornadaV);
           this.hoursMartes = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.sumRequiredTipo(this.jornadaS);
           this.hoursMartes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.sumRequiredTipo(this.jornadaD);
           this.hoursMartes = this.jornadaD;
         } else this.hoursMartes = 0;
-      } else if (this.descriForm.get('martesSelect').value == 'feriado') {
+      } else if (this.descriForm.get('martesSelect').value === 'feriado') {
         this.feriado = this.feriado + 1;
-        if (this.jornadaL != 0) {
+        if (this.jornadaL !== 0) {
           this.hoursMartes = this.jornadaL;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursMartes = this.jornadaMi;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursMartes = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursMartes = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursMartes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursMartes = this.jornadaD;
         } else this.hoursMartes = 0;
       } else if (
-        this.descriForm.get('martesSelect').value == 'incapacidadpub'
+        this.descriForm.get('martesSelect').value === 'incapacidadpub'
       ) {
-        if (this.jornadaL != 0) {
+        if (this.jornadaL !== 0) {
           this.hoursMartes = this.jornadaL;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursMartes = this.jornadaMi;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursMartes = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursMartes = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursMartes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursMartes = this.jornadaD;
         } else this.hoursMartes = 0;
         if (this.incapacidadpub > 3) {
           this.hoursMartes = 0;
         }
       } else if (
-        this.descriForm.get('martesSelect').value == 'incapacidadpubparcial'
+        this.descriForm.get('martesSelect').value === 'incapacidadpubparcial'
       ) {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursMartes = 0;
       } else if (
-        this.descriForm.get('martesSelect').value == 'incapacidadpriv'
+        this.descriForm.get('martesSelect').value === 'incapacidadpriv'
       ) {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
       } else if (
-        this.descriForm.get('martesSelect').value == 'incapacidadcancelada'
+        this.descriForm.get('martesSelect').value === 'incapacidadcancelada'
       ) {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursMartes = 0;
-      } else if (this.descriForm.get('martesSelect').value == 'septimo') {
+      } else if (this.descriForm.get('martesSelect').value === 'septimo') {
         this.septimo = this.septimo + 1;
-        if (this.isVisibleLibres == false) {
+        if (this.isVisibleLibres === false) {
           if (this.septimo > 1) {
             this.libres();
           }
@@ -3350,50 +3398,50 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.septimo = 0;
         }
         this.hoursMartes = 0;
-      } else if (this.descriForm.get('martesSelect').value == 'vacacion') {
+      } else if (this.descriForm.get('martesSelect').value === 'vacacion') {
         this.vacacion = this.vacacion + 1;
-        if (this.jornadaL != 0) {
+        if (this.jornadaL !== 0) {
           this.hoursMartes = this.jornadaL;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursMartes = this.jornadaMi;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursMartes = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursMartes = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursMartes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursMartes = this.jornadaD;
         } else this.hoursMartes = 0;
       } else if (
-        this.descriForm.get('martesSelect').value == 'vacacioncancelada'
+        this.descriForm.get('martesSelect').value === 'vacacioncancelada'
       ) {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursMartes = 0;
-      } else if (this.descriForm.get('martesSelect').value == 'falta') {
+      } else if (this.descriForm.get('martesSelect').value === 'falta') {
         this.falta = this.falta + 1;
         if (this.falta >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursMartes = 0;
-      } else if (this.descriForm.get('martesSelect').value == 'suspension') {
+      } else if (this.descriForm.get('martesSelect').value === 'suspension') {
         this.suspension = this.suspension + 1;
         if (this.suspension >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursMartes = 0;
-      } else if (this.descriForm.get('martesSelect').value == 'abandono') {
+      } else if (this.descriForm.get('martesSelect').value === 'abandono') {
         this.abandono = this.abandono + 1;
         this.hoursMartes = 0;
       }
     } else {
-      if (this.isVisibleInvalidas == false) {
+      if (this.isVisibleInvalidas === false) {
         this.invalidas();
       }
       this.horasForm.get('maIControl').setValue('');
       this.horasForm.get('maOControl').setValue('');
     }
-    if (this.incPriv == true) {
+    if (this.incPriv === true) {
       this.listIncapacidadPrivada.push('martes');
     } else {
       this.tarjetas(
@@ -3425,7 +3473,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   revisarMiercoles(entrada: moment.Moment, salida: moment.Moment) {
     if (entrada.isValid() && salida.isValid()) {
       if (entrada.isSame(salida)) {
-        if (this.isVisibleValidasIguales == false) {
+        if (this.isVisibleValidasIguales === false) {
           this.validasIguales();
         }
         this.horasForm.get('miIControl').setValue('');
@@ -3437,80 +3485,80 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.dia = 'Miercoles';
         this.horas(entrada, salida, this.hoursMiercoles, this.dia);
       }
-    } else if (this.descriForm.get('miercolesSelect').value != '') {
-      if (this.descriForm.get('miercolesSelect').value == 'conpermiso') {
+    } else if (this.descriForm.get('miercolesSelect').value !== '') {
+      if (this.descriForm.get('miercolesSelect').value === 'conpermiso') {
         this.conpermiso = this.conpermiso + 1;
-        if (this.jornadaM != 0) {
+        if (this.jornadaM !== 0) {
           this.sumRequiredTipo(this.jornadaM);
           this.hoursMiercoles = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.sumRequiredTipo(this.jornadaL);
           this.hoursMiercoles = this.jornadaL;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.sumRequiredTipo(this.jornadaJ);
           this.hoursMiercoles = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.sumRequiredTipo(this.jornadaV);
           this.hoursMiercoles = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.sumRequiredTipo(this.jornadaS);
           this.hoursMiercoles = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.sumRequiredTipo(this.jornadaD);
           this.hoursMiercoles = this.jornadaD;
         } else this.hoursMiercoles = 0;
-      } else if (this.descriForm.get('miercolesSelect').value == 'feriado') {
+      } else if (this.descriForm.get('miercolesSelect').value === 'feriado') {
         this.feriado = this.feriado + 1;
-        if (this.jornadaM != 0) {
+        if (this.jornadaM !== 0) {
           this.hoursMiercoles = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursMiercoles = this.jornadaL;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursMiercoles = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursMiercoles = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursMiercoles = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursMiercoles = this.jornadaD;
         } else this.hoursMiercoles = 0;
       } else if (
-        this.descriForm.get('miercolesSelect').value == 'incapacidadpub'
+        this.descriForm.get('miercolesSelect').value === 'incapacidadpub'
       ) {
-        if (this.jornadaM != 0) {
+        if (this.jornadaM !== 0) {
           this.hoursMiercoles = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursMiercoles = this.jornadaL;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursMiercoles = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursMiercoles = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursMiercoles = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursMiercoles = this.jornadaD;
         } else this.hoursMiercoles = 0;
         if (this.incapacidadpub > 3) {
           this.hoursMiercoles = 0;
         }
       } else if (
-        this.descriForm.get('miercolesSelect').value == 'incapacidadpubparcial'
+        this.descriForm.get('miercolesSelect').value === 'incapacidadpubparcial'
       ) {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursMiercoles = 0;
       } else if (
-        this.descriForm.get('miercolesSelect').value == 'incapacidadpriv'
+        this.descriForm.get('miercolesSelect').value === 'incapacidadpriv'
       ) {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
       } else if (
-        this.descriForm.get('miercolesSelect').value == 'incapacidadcancelada'
+        this.descriForm.get('miercolesSelect').value === 'incapacidadcancelada'
       ) {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursMiercoles = 0;
-      } else if (this.descriForm.get('miercolesSelect').value == 'septimo') {
+      } else if (this.descriForm.get('miercolesSelect').value === 'septimo') {
         this.septimo = this.septimo + 1;
-        if (this.isVisibleLibres == false) {
+        if (this.isVisibleLibres === false) {
           if (this.septimo > 1) {
             this.libres();
           }
@@ -3522,50 +3570,52 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.septimo = 0;
           this.hoursMiercoles = 0;
         }
-      } else if (this.descriForm.get('miercolesSelect').value == 'vacacion') {
+      } else if (this.descriForm.get('miercolesSelect').value === 'vacacion') {
         this.vacacion = this.vacacion + 1;
-        if (this.jornadaM != 0) {
+        if (this.jornadaM !== 0) {
           this.hoursMiercoles = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursMiercoles = this.jornadaL;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursMiercoles = this.jornadaJ;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursMiercoles = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursMiercoles = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursMiercoles = this.jornadaD;
         } else this.hoursMiercoles = 0;
       } else if (
-        this.descriForm.get('miercolesSelect').value == 'vacacioncancelada'
+        this.descriForm.get('miercolesSelect').value === 'vacacioncancelada'
       ) {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursMiercoles = 0;
-      } else if (this.descriForm.get('miercolesSelect').value == 'falta') {
+      } else if (this.descriForm.get('miercolesSelect').value === 'falta') {
         this.falta = this.falta + 1;
         if (this.falta >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursMiercoles = 0;
-      } else if (this.descriForm.get('miercolesSelect').value == 'suspension') {
+      } else if (
+        this.descriForm.get('miercolesSelect').value === 'suspension'
+      ) {
         this.suspension = this.suspension + 1;
         if (this.suspension >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursMiercoles = 0;
-      } else if (this.descriForm.get('miercolesSelect').value == 'abandono') {
+      } else if (this.descriForm.get('miercolesSelect').value === 'abandono') {
         this.abandono = this.abandono + 1;
         this.hoursMiercoles = 0;
       }
     } else {
-      if (this.isVisibleInvalidas == false) {
+      if (this.isVisibleInvalidas === false) {
         this.invalidas();
       }
       this.horasForm.get('miIControl').setValue('');
       this.horasForm.get('miOControl').setValue('');
     }
-    if (this.incPriv == true) {
+    if (this.incPriv === true) {
       this.listIncapacidadPrivada.push('miercoles');
     } else {
       this.tarjetas(
@@ -3597,7 +3647,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   revisarJueves(entrada: moment.Moment, salida: moment.Moment) {
     if (entrada.isValid() && salida.isValid()) {
       if (entrada.isSame(salida)) {
-        if (this.isVisibleValidasIguales == false) {
+        if (this.isVisibleValidasIguales === false) {
           this.validasIguales();
         }
         this.horasForm.get('juIControl').setValue('');
@@ -3609,80 +3659,80 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.dia = 'Jueves';
         this.horas(entrada, salida, this.hoursJueves, this.dia);
       }
-    } else if (this.descriForm.get('juevesSelect').value != '') {
-      if (this.descriForm.get('juevesSelect').value == 'conpermiso') {
+    } else if (this.descriForm.get('juevesSelect').value !== '') {
+      if (this.descriForm.get('juevesSelect').value === 'conpermiso') {
         this.conpermiso = this.conpermiso + 1;
-        if (this.jornadaMi != 0) {
+        if (this.jornadaMi !== 0) {
           this.sumRequiredTipo(this.jornadaMi);
           this.hoursJueves = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.sumRequiredTipo(this.jornadaM);
           this.hoursJueves = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.sumRequiredTipo(this.jornadaL);
           this.hoursJueves = this.jornadaL;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.sumRequiredTipo(this.jornadaV);
           this.hoursJueves = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.sumRequiredTipo(this.jornadaS);
           this.hoursJueves = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.sumRequiredTipo(this.jornadaD);
           this.hoursJueves = this.jornadaD;
         } else this.hoursJueves = 0;
-      } else if (this.descriForm.get('juevesSelect').value == 'feriado') {
+      } else if (this.descriForm.get('juevesSelect').value === 'feriado') {
         this.feriado = this.feriado + 1;
-        if (this.jornadaMi != 0) {
+        if (this.jornadaMi !== 0) {
           this.hoursJueves = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursJueves = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursJueves = this.jornadaL;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursJueves = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursJueves = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursJueves = this.jornadaD;
         } else this.hoursJueves = 0;
       } else if (
-        this.descriForm.get('juevesSelect').value == 'incapacidadpub'
+        this.descriForm.get('juevesSelect').value === 'incapacidadpub'
       ) {
-        if (this.jornadaMi != 0) {
+        if (this.jornadaMi !== 0) {
           this.hoursJueves = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursJueves = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursJueves = this.jornadaL;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursJueves = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursJueves = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursJueves = this.jornadaD;
         } else this.hoursJueves = 0;
         if (this.incapacidadpub > 3) {
           this.hoursJueves = 0;
         }
       } else if (
-        this.descriForm.get('juevesSelect').value == 'incapacidadpubparcial'
+        this.descriForm.get('juevesSelect').value === 'incapacidadpubparcial'
       ) {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursJueves = 0;
       } else if (
-        this.descriForm.get('juevesSelect').value == 'incapacidadpriv'
+        this.descriForm.get('juevesSelect').value === 'incapacidadpriv'
       ) {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
       } else if (
-        this.descriForm.get('juevesSelect').value == 'incapacidadcancelada'
+        this.descriForm.get('juevesSelect').value === 'incapacidadcancelada'
       ) {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursJueves = 0;
-      } else if (this.descriForm.get('juevesSelect').value == 'septimo') {
+      } else if (this.descriForm.get('juevesSelect').value === 'septimo') {
         this.septimo = this.septimo + 1;
-        if (this.isVisibleLibres == false) {
+        if (this.isVisibleLibres === false) {
           if (this.septimo > 1) {
             this.libres();
           }
@@ -3694,50 +3744,50 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.septimo = 0;
         }
         this.hoursJueves = 0;
-      } else if (this.descriForm.get('juevesSelect').value == 'vacacion') {
+      } else if (this.descriForm.get('juevesSelect').value === 'vacacion') {
         this.vacacion = this.vacacion + 1;
-        if (this.jornadaMi != 0) {
+        if (this.jornadaMi !== 0) {
           this.hoursJueves = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursJueves = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursJueves = this.jornadaL;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursJueves = this.jornadaV;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursJueves = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursJueves = this.jornadaD;
         } else this.hoursJueves = 0;
       } else if (
-        this.descriForm.get('juevesSelect').value == 'vacacioncancelada'
+        this.descriForm.get('juevesSelect').value === 'vacacioncancelada'
       ) {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursJueves = 0;
-      } else if (this.descriForm.get('juevesSelect').value == 'falta') {
+      } else if (this.descriForm.get('juevesSelect').value === 'falta') {
         this.falta = this.falta + 1;
         if (this.falta >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursJueves = 0;
-      } else if (this.descriForm.get('juevesSelect').value == 'suspension') {
+      } else if (this.descriForm.get('juevesSelect').value === 'suspension') {
         this.suspension = this.suspension + 1;
         if (this.suspension >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursJueves = 0;
-      } else if (this.descriForm.get('juevesSelect').value == 'abandono') {
+      } else if (this.descriForm.get('juevesSelect').value === 'abandono') {
         this.abandono = this.abandono + 1;
         this.hoursJueves = 0;
       }
     } else {
-      if (this.isVisibleInvalidas == false) {
+      if (this.isVisibleInvalidas === false) {
         this.invalidas();
       }
       this.horasForm.get('juIControl').setValue('');
       this.horasForm.get('juOControl').setValue('');
     }
-    if (this.incPriv == true) {
+    if (this.incPriv === true) {
       this.listIncapacidadPrivada.push('jueves');
     } else {
       this.tarjetas(
@@ -3769,7 +3819,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   revisarViernes(entrada: moment.Moment, salida: moment.Moment) {
     if (entrada.isValid() && salida.isValid()) {
       if (entrada.isSame(salida)) {
-        if (this.isVisibleValidasIguales == false) {
+        if (this.isVisibleValidasIguales === false) {
           this.validasIguales();
         }
         this.horasForm.get('viIControl').setValue('');
@@ -3781,81 +3831,81 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.dia = 'Viernes';
         this.horas(entrada, salida, this.hoursViernes, this.dia);
       }
-    } else if (this.descriForm.get('viernesSelect').value != '') {
-      if (this.descriForm.get('viernesSelect').value == 'conpermiso') {
+    } else if (this.descriForm.get('viernesSelect').value !== '') {
+      if (this.descriForm.get('viernesSelect').value === 'conpermiso') {
         this.conpermiso = this.conpermiso + 1;
-        if (this.jornadaJ != 0) {
+        if (this.jornadaJ !== 0) {
           this.sumRequiredTipo(this.jornadaJ);
           this.hoursViernes = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.sumRequiredTipo(this.jornadaMi);
           this.hoursViernes = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.sumRequiredTipo(this.jornadaM);
           this.hoursViernes = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.sumRequiredTipo(this.jornadaL);
           this.hoursViernes = this.jornadaL;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.sumRequiredTipo(this.jornadaS);
           this.hoursViernes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.sumRequiredTipo(this.jornadaD);
           this.hoursViernes = this.jornadaD;
         } else this.hoursViernes = 0;
         console.log(this.hoursSabado);
-      } else if (this.descriForm.get('viernesSelect').value == 'feriado') {
+      } else if (this.descriForm.get('viernesSelect').value === 'feriado') {
         this.feriado = this.feriado + 1;
-        if (this.jornadaJ != 0) {
+        if (this.jornadaJ !== 0) {
           this.hoursViernes = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursViernes = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursViernes = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursViernes = this.jornadaL;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursViernes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursViernes = this.jornadaD;
         } else this.hoursViernes = 0;
       } else if (
-        this.descriForm.get('viernesSelect').value == 'incapacidadpub'
+        this.descriForm.get('viernesSelect').value === 'incapacidadpub'
       ) {
-        if (this.jornadaJ != 0) {
+        if (this.jornadaJ !== 0) {
           this.hoursViernes = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursViernes = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursViernes = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursViernes = this.jornadaL;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursViernes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursViernes = this.jornadaD;
         } else this.hoursViernes = 0;
         if (this.incapacidadpub > 3) {
           this.hoursViernes = 0;
         }
       } else if (
-        this.descriForm.get('viernesSelect').value == 'incapacidadpubparcial'
+        this.descriForm.get('viernesSelect').value === 'incapacidadpubparcial'
       ) {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursViernes = 0;
       } else if (
-        this.descriForm.get('viernesSelect').value == 'incapacidadpriv'
+        this.descriForm.get('viernesSelect').value === 'incapacidadpriv'
       ) {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
       } else if (
-        this.descriForm.get('viernesSelect').value == 'incapacidadcancelada'
+        this.descriForm.get('viernesSelect').value === 'incapacidadcancelada'
       ) {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursViernes = 0;
-      } else if (this.descriForm.get('viernesSelect').value == 'septimo') {
+      } else if (this.descriForm.get('viernesSelect').value === 'septimo') {
         this.septimo = this.septimo + 1;
-        if (this.isVisibleLibres == false) {
+        if (this.isVisibleLibres === false) {
           if (this.septimo > 1) {
             this.libres();
           }
@@ -3867,50 +3917,50 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.septimo = 0;
         }
         this.hoursViernes = 0;
-      } else if (this.descriForm.get('viernesSelect').value == 'vacacion') {
+      } else if (this.descriForm.get('viernesSelect').value === 'vacacion') {
         this.vacacion = this.vacacion + 1;
-        if (this.jornadaJ != 0) {
+        if (this.jornadaJ !== 0) {
           this.hoursViernes = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursViernes = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursViernes = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursViernes = this.jornadaL;
-        } else if (this.jornadaS != 0) {
+        } else if (this.jornadaS !== 0) {
           this.hoursViernes = this.jornadaS;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursViernes = this.jornadaD;
         } else this.hoursViernes = 0;
       } else if (
-        this.descriForm.get('viernesSelect').value == 'vacacioncancelada'
+        this.descriForm.get('viernesSelect').value === 'vacacioncancelada'
       ) {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursViernes = 0;
-      } else if (this.descriForm.get('viernesSelect').value == 'falta') {
+      } else if (this.descriForm.get('viernesSelect').value === 'falta') {
         this.falta = this.falta + 1;
         if (this.falta >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursViernes = 0;
-      } else if (this.descriForm.get('viernesSelect').value == 'suspension') {
+      } else if (this.descriForm.get('viernesSelect').value === 'suspension') {
         this.suspension = this.suspension + 1;
         if (this.suspension >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursViernes = 0;
-      } else if (this.descriForm.get('viernesSelect').value == 'abandono') {
+      } else if (this.descriForm.get('viernesSelect').value === 'abandono') {
         this.abandono = this.abandono + 1;
         this.hoursViernes = 0;
       }
     } else {
-      if (this.isVisibleInvalidas == false) {
+      if (this.isVisibleInvalidas === false) {
         this.invalidas();
       }
       this.horasForm.get('viIControl').setValue('');
       this.horasForm.get('viOControl').setValue('');
     }
-    if (this.incPriv == true) {
+    if (this.incPriv === true) {
       this.listIncapacidadPrivada.push('viernes');
     } else {
       this.tarjetas(
@@ -3943,7 +3993,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   revisarSabado(entrada: moment.Moment, salida: moment.Moment) {
     if (entrada.isValid() && salida.isValid()) {
       if (entrada.isSame(salida)) {
-        if (this.isVisibleValidasIguales == false) {
+        if (this.isVisibleValidasIguales === false) {
           this.validasIguales();
         }
         this.horasForm.get('saIControl').setValue('');
@@ -3973,92 +4023,92 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.horas(entrada, salida, this.hoursSabado, this.dia);
         }
       }
-    } else if (this.descriForm.get('sabadoSelect').value != '') {
-      if (this.descriForm.get('sabadoSelect').value == 'conpermiso') {
+    } else if (this.descriForm.get('sabadoSelect').value !== '') {
+      if (this.descriForm.get('sabadoSelect').value === 'conpermiso') {
         this.conpermiso = this.conpermiso + 1;
-        if (this.jornadaV != 0) {
+        if (this.jornadaV !== 0) {
           this.sumRequiredTipo(this.jornadaV);
           this.hoursSabado = this.jornadaV;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.sumRequiredTipo(this.jornadaJ);
           this.hoursSabado = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.sumRequiredTipo(this.jornadaMi);
           this.hoursSabado = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.sumRequiredTipo(this.jornadaM);
           this.hoursSabado = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.sumRequiredTipo(this.jornadaL);
           this.hoursSabado = this.jornadaL;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.sumRequiredTipo(this.jornadaD);
           this.hoursSabado = this.jornadaD;
         } else this.hoursSabado = 0;
-        if (this.hoursSabado / 8 == 1) {
+        if (this.hoursSabado / 8 === 1) {
           this.hoursSabado = 4;
           this.sumRequiredTipo(this.hoursSabado);
         }
         console.log(this.hoursSabado);
-      } else if (this.descriForm.get('sabadoSelect').value == 'feriado') {
+      } else if (this.descriForm.get('sabadoSelect').value === 'feriado') {
         this.feriado = this.feriado + 1;
-        if (this.jornadaV != 0) {
+        if (this.jornadaV !== 0) {
           this.hoursSabado = this.jornadaV;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursSabado = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursSabado = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursSabado = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursSabado = this.jornadaL;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursSabado = this.jornadaD;
         } else this.hoursSabado = 0;
-        if (this.hoursSabado / 8 == 1) {
+        if (this.hoursSabado / 8 === 1) {
           this.hoursSabado = 4;
         }
       } else if (
-        this.descriForm.get('sabadoSelect').value == 'incapacidadpub'
+        this.descriForm.get('sabadoSelect').value === 'incapacidadpub'
       ) {
-        if (this.jornadaV != 0) {
+        if (this.jornadaV !== 0) {
           this.hoursSabado = this.jornadaV;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursSabado = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursSabado = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursSabado = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursSabado = this.jornadaL;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursSabado = this.jornadaD;
         } else this.hoursSabado = 0;
-        if (this.hoursSabado / 8 == 1) {
+        if (this.hoursSabado / 8 === 1) {
           this.hoursSabado = 4;
         }
         if (this.incapacidadpub > 3) {
           this.hoursSabado = 0;
         }
       } else if (
-        this.descriForm.get('sabadoSelect').value == 'incapacidadpubparcial'
+        this.descriForm.get('sabadoSelect').value === 'incapacidadpubparcial'
       ) {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursSabado = 0;
       } else if (
-        this.descriForm.get('sabadoSelect').value == 'incapacidadpriv'
+        this.descriForm.get('sabadoSelect').value === 'incapacidadpriv'
       ) {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incapacidadReal = 1;
         this.incPriv = true;
       } else if (
-        this.descriForm.get('sabadoSelect').value == 'incapacidadcancelada'
+        this.descriForm.get('sabadoSelect').value === 'incapacidadcancelada'
       ) {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursSabado = 0;
-      } else if (this.descriForm.get('sabadoSelect').value == 'septimo') {
+      } else if (this.descriForm.get('sabadoSelect').value === 'septimo') {
         this.septimo = this.septimo + 1;
-        if (this.isVisibleLibres == false) {
+        if (this.isVisibleLibres === false) {
           if (this.septimo > 1) {
             this.libres();
           }
@@ -4070,53 +4120,53 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.septimo = 0;
         }
         this.hoursSabado = 0;
-      } else if (this.descriForm.get('sabadoSelect').value == 'vacacion') {
+      } else if (this.descriForm.get('sabadoSelect').value === 'vacacion') {
         this.vacacion = this.vacacion + 1;
-        if (this.jornadaV != 0) {
+        if (this.jornadaV !== 0) {
           this.hoursSabado = this.jornadaV;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursSabado = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursSabado = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursSabado = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursSabado = this.jornadaL;
-        } else if (this.jornadaD != 0) {
+        } else if (this.jornadaD !== 0) {
           this.hoursSabado = this.jornadaD;
         } else this.hoursSabado = 0;
-        if (this.hoursSabado / 8 == 1) {
+        if (this.hoursSabado / 8 === 1) {
           this.hoursSabado = 4;
         }
       } else if (
-        this.descriForm.get('sabadoSelect').value == 'vacacioncancelada'
+        this.descriForm.get('sabadoSelect').value === 'vacacioncancelada'
       ) {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursSabado = 0;
-      } else if (this.descriForm.get('sabadoSelect').value == 'falta') {
+      } else if (this.descriForm.get('sabadoSelect').value === 'falta') {
         this.falta = this.falta + 1;
         if (this.falta >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursSabado = 0;
-      } else if (this.descriForm.get('sabadoSelect').value == 'suspension') {
+      } else if (this.descriForm.get('sabadoSelect').value === 'suspension') {
         this.suspension = this.suspension + 1;
         if (this.suspension >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursSabado = 0;
-      } else if (this.descriForm.get('sabadoSelect').value == 'abandono') {
+      } else if (this.descriForm.get('sabadoSelect').value === 'abandono') {
         this.abandono = this.abandono + 1;
         this.hoursSabado = 0;
       }
     } else {
-      if (this.isVisibleInvalidas == false) {
+      if (this.isVisibleInvalidas === false) {
         this.invalidas();
       }
       this.horasForm.get('saIControl').setValue('');
       this.horasForm.get('saOControl').setValue('');
     }
-    if (this.incPriv == true) {
+    if (this.incPriv === true) {
       this.listIncapacidadPrivada.push('sabado');
     } else {
       this.tarjetas(
@@ -4148,7 +4198,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   revisarDomingo(entrada: moment.Moment, salida: moment.Moment) {
     if (entrada.isValid() && salida.isValid()) {
       if (entrada.isSame(salida)) {
-        if (this.isVisibleValidasIguales == false) {
+        if (this.isVisibleValidasIguales === false) {
           this.validasIguales();
         }
         this.horasForm.get('doIControl').setValue('');
@@ -4160,80 +4210,80 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.dia = 'Domingo';
         this.horas(entrada, salida, this.hoursDomingo, this.dia);
       }
-    } else if (this.descriForm.get('domingoSelect').value != '') {
-      if (this.descriForm.get('domingoSelect').value == 'conpermiso') {
+    } else if (this.descriForm.get('domingoSelect').value !== '') {
+      if (this.descriForm.get('domingoSelect').value === 'conpermiso') {
         this.conpermiso = this.conpermiso + 1;
-        if (this.jornadaS != 0) {
+        if (this.jornadaS !== 0) {
           this.sumRequiredTipo(this.jornadaS);
           this.hoursDomingo = this.jornadaS;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.sumRequiredTipo(this.jornadaV);
           this.hoursDomingo = this.jornadaV;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.sumRequiredTipo(this.jornadaJ);
           this.hoursDomingo = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.sumRequiredTipo(this.jornadaMi);
           this.hoursDomingo = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.sumRequiredTipo(this.jornadaM);
           this.hoursDomingo = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.sumRequiredTipo(this.jornadaL);
           this.hoursDomingo = this.jornadaL;
         } else this.hoursDomingo = 0;
-      } else if (this.descriForm.get('domingoSelect').value == 'feriado') {
+      } else if (this.descriForm.get('domingoSelect').value === 'feriado') {
         this.feriado = this.feriado + 1;
-        if (this.jornadaS != 0) {
+        if (this.jornadaS !== 0) {
           this.hoursDomingo = this.jornadaS;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursDomingo = this.jornadaV;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursDomingo = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursDomingo = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursDomingo = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursDomingo = this.jornadaL;
         } else this.hoursDomingo = 0;
       } else if (
-        this.descriForm.get('domingoSelect').value == 'incapacidadpub'
+        this.descriForm.get('domingoSelect').value === 'incapacidadpub'
       ) {
-        if (this.jornadaS != 0) {
+        if (this.jornadaS !== 0) {
           this.hoursDomingo = this.jornadaS;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursDomingo = this.jornadaV;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursDomingo = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursDomingo = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursDomingo = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursDomingo = this.jornadaL;
         } else this.hoursDomingo = 0;
         if (this.incapacidadpub > 3) {
           this.hoursDomingo = 0;
         }
       } else if (
-        this.descriForm.get('domingoSelect').value == 'incapacidadpubparcial'
+        this.descriForm.get('domingoSelect').value === 'incapacidadpubparcial'
       ) {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursDomingo = 0;
       } else if (
-        this.descriForm.get('domingoSelect').value == 'incapacidadpriv'
+        this.descriForm.get('domingoSelect').value === 'incapacidadpriv'
       ) {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
       } else if (
-        this.descriForm.get('domingoSelect').value == 'incapacidadcancelada'
+        this.descriForm.get('domingoSelect').value === 'incapacidadcancelada'
       ) {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursDomingo = 0;
-      } else if (this.descriForm.get('domingoSelect').value == 'septimo') {
+      } else if (this.descriForm.get('domingoSelect').value === 'septimo') {
         this.septimo = this.septimo + 1;
-        if (this.isVisibleLibres == false) {
+        if (this.isVisibleLibres === false) {
           if (this.septimo > 1) {
             this.libres();
           }
@@ -4246,50 +4296,50 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.septimo = 0;
         }
         this.hoursDomingo = 0;
-      } else if (this.descriForm.get('domingoSelect').value == 'vacacion') {
+      } else if (this.descriForm.get('domingoSelect').value === 'vacacion') {
         this.vacacion = this.vacacion + 1;
-        if (this.jornadaS != 0) {
+        if (this.jornadaS !== 0) {
           this.hoursDomingo = this.jornadaS;
-        } else if (this.jornadaV != 0) {
+        } else if (this.jornadaV !== 0) {
           this.hoursDomingo = this.jornadaV;
-        } else if (this.jornadaJ != 0) {
+        } else if (this.jornadaJ !== 0) {
           this.hoursDomingo = this.jornadaJ;
-        } else if (this.jornadaMi != 0) {
+        } else if (this.jornadaMi !== 0) {
           this.hoursDomingo = this.jornadaMi;
-        } else if (this.jornadaM != 0) {
+        } else if (this.jornadaM !== 0) {
           this.hoursDomingo = this.jornadaM;
-        } else if (this.jornadaL != 0) {
+        } else if (this.jornadaL !== 0) {
           this.hoursDomingo = this.jornadaL;
         } else this.hoursDomingo = 0;
       } else if (
-        this.descriForm.get('domingoSelect').value == 'vacacioncancelada'
+        this.descriForm.get('domingoSelect').value === 'vacacioncancelada'
       ) {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursDomingo = 0;
-      } else if (this.descriForm.get('domingoSelect').value == 'falta') {
+      } else if (this.descriForm.get('domingoSelect').value === 'falta') {
         this.falta = this.falta + 1;
         if (this.falta >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursDomingo = 0;
-      } else if (this.descriForm.get('domingoSelect').value == 'suspension') {
+      } else if (this.descriForm.get('domingoSelect').value === 'suspension') {
         this.suspension = this.suspension + 1;
         if (this.suspension >= 1 && this.septimo >= 1) {
           this.septimo = 0;
         }
         this.hoursDomingo = 0;
-      } else if (this.descriForm.get('domingoSelect').value == 'abandono') {
+      } else if (this.descriForm.get('domingoSelect').value === 'abandono') {
         this.abandono = this.abandono + 1;
       }
       this.hoursDomingo = 0;
     } else {
-      if (this.isVisibleInvalidas == false) {
+      if (this.isVisibleInvalidas === false) {
         this.invalidas();
       }
       this.horasForm.get('doIControl').setValue('');
       this.horasForm.get('doOControl').setValue('');
     }
-    if (this.incPriv == true) {
+    if (this.incPriv === true) {
       this.listIncapacidadPrivada.push('domingo');
     } else {
       this.tarjetas(
@@ -4344,7 +4394,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.totalExtrasMixtas = 0;
     this.totalExtrasNocturnas = 0;
     console.log(normales, this.diaDiurno, this.diaMixto, this.diaNocturno);
-    if (this.isVisiblePromedio == false) {
+    if (this.isVisiblePromedio === false) {
       this.totalTrabNormales = (this.totalTrabRealesCompletas / normales) * 48;
       var number = Math.trunc(this.totalTrabNormales * 100) / 100;
       this.totalTrabNormales = number;
@@ -4405,7 +4455,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.totalExtrasDiurnas +
       this.totalExtrasMixtas +
       this.totalExtrasNocturnas;
-    if (this.switchValuePP == true) {
+    if (this.switchValuePP === true) {
       if (this.totalTrabNormales + sumExtras >= 48) {
         this.totalTrabNormales = 48;
         this.totalExtrasDiurnas = 4;
@@ -4450,7 +4500,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.totalExtrasNocturnas = 0;
         this.septimo = 0;
       }
-    } else if (this.switchValuePP == false) {
+    } else if (this.switchValuePP === false) {
       if (this.totalTrabNormales >= 44) {
         console.log('completo');
       } else if (
@@ -4497,11 +4547,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
     }
     if (
-      this.isVisibleInvalidas == false &&
-      this.isVisibleValidasIguales == false &&
-      this.isVisibleLibres == false
+      this.isVisibleInvalidas === false &&
+      this.isVisibleValidasIguales === false &&
+      this.isVisibleLibres === false
     ) {
-      if (this.btnEnable == true) {
+      if (this.btnEnable === true) {
         document.getElementById('btnCalcular').removeAttribute('disabled');
       }
       document.getElementById('btnRevisar').setAttribute('disabled', 'true');
@@ -4555,7 +4605,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.totalExtrasNocturnas
     );
     console.log(sumExtras, sumRequired);
-    if (sumExtras >= sumRequired && sumExtras != 0 && sumRequired != 0) {
+    if (sumExtras >= sumRequired && sumExtras !== 0 && sumRequired !== 0) {
       if (this.requiredCompletarDiurna > this.totalExtrasDiurnas) {
         faltante = this.requiredCompletarDiurna - this.totalExtrasDiurnas;
         this.totalExtrasDiurnas = 0;
@@ -4686,9 +4736,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.totalExtrasNocturnas
       );
       if (
-        this.requiredCompletarAutorizado == 0 &&
-        this.requiredCompletarAutorizadoReal == 0 &&
-        this.requiredCompletarIncapacidadPrivada == 0
+        this.requiredCompletarAutorizado === 0 &&
+        this.requiredCompletarAutorizadoReal === 0 &&
+        this.requiredCompletarIncapacidadPrivada === 0
       ) {
         var ajuste = this.ajusteDias * 8;
         console.log(
@@ -4758,7 +4808,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.valorIncapacidadPub = 0;
     } else {
       if (
-        this.descriForm.get('sabadoSelect').value == 'incapacidadpubparcial' &&
+        this.descriForm.get('sabadoSelect').value === 'incapacidadpubparcial' &&
         this.incapacidadpendiente > 0
       ) {
         this.septimo = 0;
@@ -4802,7 +4852,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       );
       var valorDeducir = this.incapacidadpub * this.salarioMinimoPerDia;
       for (let i = 0; i < this.listNomina.length; i++) {
-        if (this.listNomina[i].id == this.idEmpleado) {
+        if (this.listNomina[i].id === this.idEmpleado) {
           this.listNominaFinal[i].ingresoBruto = this.round2Decimal(
             this.listNominaFinal[i].ingresoBruto - valorDeducir
           );
@@ -4845,19 +4895,19 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.completar();
     for (let i = 0; i < this.listIncapacidadPrivada.length; i++) {
       var letra: string = '';
-      if (this.listIncapacidadPrivada[i] == 'lunes') {
+      if (this.listIncapacidadPrivada[i] === 'lunes') {
         letra = 'L';
-      } else if (this.listIncapacidadPrivada[i] == 'martes') {
+      } else if (this.listIncapacidadPrivada[i] === 'martes') {
         letra = 'M';
-      } else if (this.listIncapacidadPrivada[i] == 'miercoles') {
+      } else if (this.listIncapacidadPrivada[i] === 'miercoles') {
         letra = 'Mi';
-      } else if (this.listIncapacidadPrivada[i] == 'jueves') {
+      } else if (this.listIncapacidadPrivada[i] === 'jueves') {
         letra = 'J';
-      } else if (this.listIncapacidadPrivada[i] == 'viernes') {
+      } else if (this.listIncapacidadPrivada[i] === 'viernes') {
         letra = 'V';
-      } else if (this.listIncapacidadPrivada[i] == 'sabado') {
+      } else if (this.listIncapacidadPrivada[i] === 'sabado') {
         letra = 'S';
-      } else if (this.listIncapacidadPrivada[i] == 'domingo') {
+      } else if (this.listIncapacidadPrivada[i] === 'domingo') {
         letra = 'D';
       }
       console.log(
@@ -4974,7 +5024,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     );
     this.sueldo = this.round2Decimal(this.sueldo);
     console.log(this.sueldo);
-    if (this.sueldo == 0) {
+    if (this.sueldo === 0) {
       this.sueldoString = '0.00';
       document.getElementById('btnCalcular').setAttribute('disabled', 'true');
     } else {
@@ -4982,8 +5032,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       document.getElementById('btnCalcular').setAttribute('disabled', 'true');
     }
     for (let i = 0; i < this.listNomina.length; i++) {
-      if (this.listNomina[i].id == this.idEmpleado) {
-        if (this.listNomina[i].totalPagar == 0) {
+      if (this.listNomina[i].id === this.idEmpleado) {
+        if (this.listNomina[i].totalPagar === 0) {
           this.totalCalculados = this.totalCalculados + 1;
         }
         console.log(
@@ -5054,7 +5104,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.setOfCheckedId.delete(this.idEmpleado);
           this.idEmpleado = 0;
           this.refreshCheckedStatus();
-        } else if (this.switchValuePP === false && this.current == 1) {
+        } else if (this.switchValuePP === false && this.current === 1) {
           this.onItemChecked(this.idEmpleado, true);
         }
         console.log(
@@ -5074,17 +5124,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     var number = Math.trunc(valor * 100) / 100;
     return number;
   }
-
   autofillDiurna() {
     this.notrabajaba = 0;
     if (
-      this.descriForm.get('lunesSelect').value == '' &&
-      this.descriForm.get('martesSelect').value == '' &&
-      this.descriForm.get('miercolesSelect').value == '' &&
-      this.descriForm.get('juevesSelect').value == '' &&
-      this.descriForm.get('viernesSelect').value == '' &&
-      this.descriForm.get('sabadoSelect').value == '' &&
-      this.descriForm.get('domingoSelect').value == ''
+      this.descriForm.get('lunesSelect').value === '' &&
+      this.descriForm.get('martesSelect').value === '' &&
+      this.descriForm.get('miercolesSelect').value === '' &&
+      this.descriForm.get('juevesSelect').value === '' &&
+      this.descriForm.get('viernesSelect').value === '' &&
+      this.descriForm.get('sabadoSelect').value === '' &&
+      this.descriForm.get('domingoSelect').value === ''
     ) {
       this.horasForm.get('luIControl').setValue('06:00');
       this.horasForm.get('luOControl').setValue('18:00');
@@ -5106,13 +5155,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   autofillNocturna() {
     this.notrabajaba = 0;
     if (
-      this.descriForm.get('lunesSelect').value == '' &&
-      this.descriForm.get('martesSelect').value == '' &&
-      this.descriForm.get('miercolesSelect').value == '' &&
-      this.descriForm.get('juevesSelect').value == '' &&
-      this.descriForm.get('viernesSelect').value == '' &&
-      this.descriForm.get('sabadoSelect').value == '' &&
-      this.descriForm.get('domingoSelect').value == ''
+      this.descriForm.get('lunesSelect').value === '' &&
+      this.descriForm.get('martesSelect').value === '' &&
+      this.descriForm.get('miercolesSelect').value === '' &&
+      this.descriForm.get('juevesSelect').value === '' &&
+      this.descriForm.get('viernesSelect').value === '' &&
+      this.descriForm.get('sabadoSelect').value === '' &&
+      this.descriForm.get('domingoSelect').value === ''
     ) {
       this.horasForm.get('luIControl').setValue('18:00');
       this.horasForm.get('luOControl').setValue('06:00');
@@ -5134,13 +5183,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   autofillMixta() {
     this.notrabajaba = 0;
     if (
-      this.descriForm.get('lunesSelect').value == '' &&
-      this.descriForm.get('martesSelect').value == '' &&
-      this.descriForm.get('miercolesSelect').value == '' &&
-      this.descriForm.get('juevesSelect').value == '' &&
-      this.descriForm.get('viernesSelect').value == '' &&
-      this.descriForm.get('sabadoSelect').value == '' &&
-      this.descriForm.get('domingoSelect').value == ''
+      this.descriForm.get('lunesSelect').value === '' &&
+      this.descriForm.get('martesSelect').value === '' &&
+      this.descriForm.get('miercolesSelect').value === '' &&
+      this.descriForm.get('juevesSelect').value === '' &&
+      this.descriForm.get('viernesSelect').value === '' &&
+      this.descriForm.get('sabadoSelect').value === '' &&
+      this.descriForm.get('domingoSelect').value === ''
     ) {
       this.horasForm.get('luIControl').setValue('12:00');
       this.horasForm.get('luOControl').setValue('20:00');
@@ -5231,7 +5280,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       salida > this.diurnaI &&
       salida > entrada
     ) {
-      if (dia == 'Sabado' && horas >= 4) {
+      if (dia === 'Sabado' && horas >= 4) {
         this.totalExtrasDiurnas = this.totalExtrasDiurnas + this.extrasSabados;
         console.log(
           'jornada diurna ' + 'extras diurnas ' + this.extrasSabados,
@@ -5244,7 +5293,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.diaDiurno = this.diaDiurno + 1;
         this.totalTrabRealesCompletas =
           this.totalTrabRealesCompletas + this.hoursSabado;
-      } else if (dia == 'Sabado' && horas < 4) {
+      } else if (dia === 'Sabado' && horas < 4) {
         this.requiredCompletarDiurna = this.requiredCompletarDiurna + 4 - horas;
         this.totalTrabReales = this.totalTrabReales + horas;
         console.log('jornada diurna no completo ' + horas);
@@ -5305,7 +5354,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     ) {
       a = moment.duration(this.diurnaO.diff(entrada)).asHours();
       //dia sabado
-      if (dia == 'Sabado') {
+      if (dia === 'Sabado') {
         if (a >= 4) {
           if (salida > this.nocturnaI && salida <= this.mixtaOc) {
             exd = a - 4;
@@ -5354,7 +5403,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           }
         }
         //dia normal
-      } else if (dia != 'Sabado') {
+      } else if (dia !== 'Sabado') {
         if (a >= this.hrsJornadaDiurna) {
           if (salida > this.nocturnaI && salida <= this.mixtaOc) {
             exd = a - this.hrsJornadaDiurna;
@@ -5501,21 +5550,21 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         }
       }
     } else {
-      if (this.isVisibleInvalidas == false) {
+      if (this.isVisibleInvalidas === false) {
         this.invalidas();
-        if (dia == 'Lunes') {
+        if (dia === 'Lunes') {
           this.descriForm.get('lunesSelect').setValue('');
-        } else if (dia == 'Martes') {
+        } else if (dia === 'Martes') {
           this.descriForm.get('martesSelect').setValue('');
-        } else if (dia == 'Miercoles') {
+        } else if (dia === 'Miercoles') {
           this.descriForm.get('miercolesSelect').setValue('');
-        } else if (dia == 'Jueves') {
+        } else if (dia === 'Jueves') {
           this.descriForm.get('juevesSelect').setValue('');
-        } else if (dia == 'Viernes') {
+        } else if (dia === 'Viernes') {
           this.descriForm.get('viernesSelect').setValue('');
-        } else if (dia == 'Sabado') {
+        } else if (dia === 'Sabado') {
           this.descriForm.get('sabadoSelect').setValue('');
-        } else if (dia == 'Domingo') {
+        } else if (dia === 'Domingo') {
           this.descriForm.get('domingoSelect').setValue('');
         }
       }
@@ -5523,7 +5572,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   ConvertStringToNumber(input: string) {
     if (!input) return NaN;
-    if (input.trim().length == 0) {
+    if (input.trim().length === 0) {
       return NaN;
     }
     return Number(input);
@@ -5579,7 +5628,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(id, idEmp);
     this.EmpleadosService.cargarEmpleadosByPlanillaId(id).subscribe((data) => {
       for (let i = 0; i < this.listNomina.length; i++) {
-        if (this.listNomina[i].id == idEmp) {
+        if (this.listNomina[i].id === idEmp) {
           this.listNomina[i].salarioBase = data[i].salarioBase;
           this.listNominaFinal[i].salarioBase = data[i].salarioBase;
         }
@@ -5691,12 +5740,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.doO = value;
   }
   onChangeLunes() {
-    if (this.descriForm.get('lunesSelect').value != '') {
+    if (this.descriForm.get('lunesSelect').value !== '') {
       this.horasForm.get('luIControl').disable();
       this.horasForm.get('luOControl').disable();
       this.horasForm.get('luIControl').setValue('');
       this.horasForm.get('luOControl').setValue('');
-      if (this.descriForm.get('lunesSelect').value == 'abandono') {
+      if (this.descriForm.get('lunesSelect').value === 'abandono') {
         this.descriForm.get('martesSelect').setValue('abandono');
         this.descriForm.get('miercolesSelect').setValue('abandono');
         this.descriForm.get('juevesSelect').setValue('abandono');
@@ -5704,7 +5753,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.descriForm.get('sabadoSelect').setValue('abandono');
         this.descriForm.get('domingoSelect').setValue('abandono');
       }
-      if (this.descriForm.get('lunesSelect').value == 'notrabajaba') {
+      if (this.descriForm.get('lunesSelect').value === 'notrabajaba') {
         this.switchValuePP = true;
         this.notrabajaba++;
       }
@@ -5718,19 +5767,19 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.notrabajaba);
   }
   onChangeMartes() {
-    if (this.descriForm.get('martesSelect').value != '') {
+    if (this.descriForm.get('martesSelect').value !== '') {
       this.horasForm.get('maIControl').disable();
       this.horasForm.get('maOControl').disable();
       this.horasForm.get('maIControl').setValue('');
       this.horasForm.get('maOControl').setValue('');
-      if (this.descriForm.get('martesSelect').value == 'abandono') {
+      if (this.descriForm.get('martesSelect').value === 'abandono') {
         this.descriForm.get('miercolesSelect').setValue('abandono');
         this.descriForm.get('juevesSelect').setValue('abandono');
         this.descriForm.get('viernesSelect').setValue('abandono');
         this.descriForm.get('sabadoSelect').setValue('abandono');
         this.descriForm.get('domingoSelect').setValue('abandono');
       }
-      if (this.descriForm.get('martesSelect').value == 'notrabajaba') {
+      if (this.descriForm.get('martesSelect').value === 'notrabajaba') {
         this.switchValuePP = true;
         this.notrabajaba++;
       }
@@ -5744,18 +5793,18 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.notrabajaba);
   }
   onChangeMiercoles() {
-    if (this.descriForm.get('miercolesSelect').value != '') {
+    if (this.descriForm.get('miercolesSelect').value !== '') {
       this.horasForm.get('miIControl').disable();
       this.horasForm.get('miOControl').disable();
       this.horasForm.get('miIControl').setValue('');
       this.horasForm.get('miOControl').setValue('');
-      if (this.descriForm.get('miercolesSelect').value == 'abandono') {
+      if (this.descriForm.get('miercolesSelect').value === 'abandono') {
         this.descriForm.get('juevesSelect').setValue('abandono');
         this.descriForm.get('viernesSelect').setValue('abandono');
         this.descriForm.get('sabadoSelect').setValue('abandono');
         this.descriForm.get('domingoSelect').setValue('abandono');
       }
-      if (this.descriForm.get('miercolesSelect').value == 'notrabajaba') {
+      if (this.descriForm.get('miercolesSelect').value === 'notrabajaba') {
         this.switchValuePP = true;
         this.notrabajaba++;
       }
@@ -5769,17 +5818,17 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.notrabajaba);
   }
   onChangeJueves() {
-    if (this.descriForm.get('juevesSelect').value != '') {
+    if (this.descriForm.get('juevesSelect').value !== '') {
       this.horasForm.get('juIControl').disable();
       this.horasForm.get('juOControl').disable();
       this.horasForm.get('juIControl').setValue('');
       this.horasForm.get('juOControl').setValue('');
-      if (this.descriForm.get('juevesSelect').value == 'abandono') {
+      if (this.descriForm.get('juevesSelect').value === 'abandono') {
         this.descriForm.get('viernesSelect').setValue('abandono');
         this.descriForm.get('sabadoSelect').setValue('abandono');
         this.descriForm.get('domingoSelect').setValue('abandono');
       }
-      if (this.descriForm.get('juevesSelect').value == 'notrabajaba') {
+      if (this.descriForm.get('juevesSelect').value === 'notrabajaba') {
         this.switchValuePP = true;
         this.notrabajaba++;
       }
@@ -5793,16 +5842,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.notrabajaba);
   }
   onChangeViernes() {
-    if (this.descriForm.get('viernesSelect').value != '') {
+    if (this.descriForm.get('viernesSelect').value !== '') {
       this.horasForm.get('viIControl').disable();
       this.horasForm.get('viOControl').disable();
       this.horasForm.get('viIControl').setValue('');
       this.horasForm.get('viOControl').setValue('');
-      if (this.descriForm.get('viernesSelect').value == 'abandono') {
+      if (this.descriForm.get('viernesSelect').value === 'abandono') {
         this.descriForm.get('sabadoSelect').setValue('abandono');
         this.descriForm.get('domingoSelect').setValue('abandono');
       }
-      if (this.descriForm.get('viernesSelect').value == 'notrabajaba') {
+      if (this.descriForm.get('viernesSelect').value === 'notrabajaba') {
         this.switchValuePP = true;
         this.notrabajaba++;
       }
@@ -5816,15 +5865,15 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.notrabajaba);
   }
   onChangeSabado() {
-    if (this.descriForm.get('sabadoSelect').value != '') {
+    if (this.descriForm.get('sabadoSelect').value !== '') {
       this.horasForm.get('saIControl').disable();
       this.horasForm.get('saOControl').disable();
       this.horasForm.get('saIControl').setValue('');
       this.horasForm.get('saOControl').setValue('');
-      if (this.descriForm.get('sabadoSelect').value == 'abandono') {
+      if (this.descriForm.get('sabadoSelect').value === 'abandono') {
         this.descriForm.get('domingoSelect').setValue('abandono');
       }
-      if (this.descriForm.get('sabadoSelect').value == 'notrabajaba') {
+      if (this.descriForm.get('sabadoSelect').value === 'notrabajaba') {
         this.switchValuePP = true;
         this.notrabajaba++;
       }
@@ -5838,12 +5887,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.notrabajaba);
   }
   onChangeDomingo() {
-    if (this.descriForm.get('domingoSelect').value != '') {
+    if (this.descriForm.get('domingoSelect').value !== '') {
       this.horasForm.get('doIControl').disable();
       this.horasForm.get('doOControl').disable();
       this.horasForm.get('doIControl').setValue('');
       this.horasForm.get('doOControl').setValue('');
-      if (this.descriForm.get('domingoSelect').value == 'notrabajaba') {
+      if (this.descriForm.get('domingoSelect').value === 'notrabajaba') {
         this.switchValuePP = true;
         this.notrabajaba++;
       }

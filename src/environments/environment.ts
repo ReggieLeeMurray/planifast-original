@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  // myAppUrl: 'https://localhost:44301/',
-  // myAppUrlAccount: 'http://localhost:53852',
-  myAppUrl: 'http://192.168.0.111/',
-  myAppUrlAccount: 'http://192.168.0.111',
+  myAppUrl: 'https://localhost:44301/',
+  myAppUrlAccount: 'http://localhost:53852',
+  // myAppUrl: 'http://192.168.0.111/',
+  // myAppUrlAccount: 'http://192.168.0.111',
 };
 /* Moficicar los contenedores de MS-Azure y console.logs DEBUG = false IMPORTANTE - IMPORTANTE*/
 /*
