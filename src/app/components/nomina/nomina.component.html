@@ -4790,22 +4790,26 @@
       }} en formato de Excel con resumen detallado del control de asistencia y comprobantes de pago."
     >
       <div nz-result-extra>
-        <button nz-button onClick="window.location.reload()">
+        <button
+          type="button"
+          class="btn btn-primary"
+          onClick="window.location.reload()"
+        >
           <i
             nz-icon
             nzType="file-done"
             class="centerSmall"
             nzTheme="outline"
           ></i
-          >Calcular nueva Planilla
+          > Calcular nueva Planilla
         </button>
-        <button routerLink="/historial" nz-button>
+        <button type="button" class="btn btn-info" routerLink="/historial">
           <i nz-icon nzType="history" class="centerSmall" nzTheme="outline"></i
-          >Revisar Historial
+          > Revisar Historial
         </button>
-        <button nz-button (click)="exportExcel()">
+        <button type="button" class="btn btn-success" (click)="exportExcel()">
           <i nz-icon nzType="download" class="centerSmall" nzTheme="outline"></i
-          >Descargar XLSX otra vez
+          > Descargar XLSX otra vez
         </button>
       </div>
     </nz-result>
