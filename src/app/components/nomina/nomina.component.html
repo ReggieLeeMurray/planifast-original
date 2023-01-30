@@ -3790,6 +3790,41 @@
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
+              <tr *ngIf="totalAguinaldo > 0 && data.ajuste <= 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0 && data.otros <= 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
               <tr>
                 <th>:</th>
                 <th>:</th>
@@ -4094,6 +4129,21 @@
                 <td colspan="2"></td>
                 <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
                 <td colspan="2"></td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0 && data.ajuste <= 0">
+                <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0 && data.otros <= 0">
+                <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
               </tr>
               <tr>
                 <td>:</td>
