@@ -4462,6 +4462,7 @@
           <button
             nz-button
             nzType="primary"
+            nzDanger
             [disabled]="true"
             id="btnreintentar"
             (click)="retry()"
@@ -4471,12 +4472,13 @@
 
           <button
             nz-button
-            [nzType]="'primary'"
+            nzType="primary"
             [disabled]="this.jDatos.length === 0"
             (click)="showArchivo()"
           >
             Revisar Archivo
           </button>
+
           <button
             nz-button
             nzType="primary"
