@@ -249,7 +249,6 @@
       (click)="upload()"
       id="btnSubir"
       style="margin-right: 2%"
-      nzSize="large"
       nzType="primary"
       [disabled]="reqForm.invalid && this.listFinal == null"
     >
@@ -259,13 +258,12 @@
       nz-button
       style="margin-right: 2%"
       (click)="clean()"
-      nzSize="large"
       nzType="primary"
       nzDanger
     >
       <i nz-icon nzType="delete" class="center" nzTheme="fill"></i>Limpiar
     </button>
-    <button nz-button nzType="primary" nzSize="large" (click)="exportExcel()">
+    <button nz-button nzType="primary" (click)="exportExcel()">
       <i nz-icon nzType="cloud-download" class="center" nzTheme="outline"></i
       >Descargar plantilla
     </button>
