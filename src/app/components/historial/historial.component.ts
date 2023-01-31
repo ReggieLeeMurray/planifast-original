@@ -22,7 +22,7 @@ export class HistorialComponent implements OnInit {
   date = [startOfMonth(new Date()), endOfMonth(new Date())];
   inicioMes: Moment = moment().startOf('month');
   finalMes: Moment = moment().endOf('month');
-  DEBUG = true;
+  DEBUG = false;
 
   constructor(
     private HistorialService: HistorialService // private AzureBlobStorageService: AzureBlobStorageService
