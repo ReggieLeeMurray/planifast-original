@@ -1096,6 +1096,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.listFinal.length = 0;
         this.listFinal.push(this.jDatos[x]);
         x = this.jDatos.length;
+      } else {
+        this.listFinal.length = 0;
+        this.listFinal = [...this.jDatos];
       }
     }
   }
