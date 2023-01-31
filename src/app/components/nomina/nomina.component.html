@@ -4450,7 +4450,7 @@
           nzTooltipTitle="Debe contener el Control de Asistencia de los empleados en la planilla seleccionada. También puedes descargar la plantilla original."
           >Archivo</nz-form-label
         >
-        <nz-form-control [nzSm]="8">
+        <nz-form-control [nzSm]="6">
           <input
             nz-input
             class="form-control"
@@ -4461,6 +4461,17 @@
           />
           <div class="form-text" style="text-align: left">(Opcional)</div>
         </nz-form-control>
+
+        <nz-form-control style="text-align: left">
+          <button
+            nz-button
+            nzType="link"
+            [disabled]="this.jDatos.length === 0"
+            (click)="showArchivo()"
+          >
+            Revisar Archivo
+          </button>
+        </nz-form-control>
       </nz-form-item>
 
       <nz-form-item [hidden]="hideObv">
@@ -4469,7 +4480,7 @@
           <nz-alert
             style="padding-bottom: 1%"
             nzType="info"
-            nzMessage="Información General"
+            nzMessage="⇝INFORMACIÓN GENERAL⇜"
             [nzDescription]="msgInfo"
             nzShowIcon
           ></nz-alert>
@@ -4521,27 +4532,17 @@
           </button>
 
           <button
-            nz-button
-            nzType="primary"
-            [disabled]="this.jDatos.length === 0"
-            (click)="showArchivo()"
-          >
-            Revisar Archivo
-          </button>
-
-          <button
-            nz-button
-            nzType="primary"
-            nzShape="round"
+            type="button"
             (click)="descargarPlantilla()"
+            class="btn btn-success btn-sm"
           >
             <i
               nz-icon
               nzType="cloud-download"
               class="centerSmall"
               nzTheme="outline"
-            ></i
-            >Descargar plantilla
+            ></i>
+            Descargar plantilla
           </button>
         </nz-form-control>
       </nz-form-item>
@@ -4800,16 +4801,21 @@
             nzType="file-done"
             class="centerSmall"
             nzTheme="outline"
-          ></i
-          > Calcular nueva Planilla
+          ></i>
+          Calcular nueva Planilla
         </button>
         <button type="button" class="btn btn-info" routerLink="/historial">
-          <i nz-icon nzType="history" class="centerSmall" nzTheme="outline"></i
-          > Revisar Historial
+          <i nz-icon nzType="history" class="centerSmall" nzTheme="outline"></i>
+          Revisar Historial
         </button>
         <button type="button" class="btn btn-success" (click)="exportExcel()">
-          <i nz-icon nzType="download" class="centerSmall" nzTheme="outline"></i
-          > Descargar XLSX otra vez
+          <i
+            nz-icon
+            nzType="download"
+            class="centerSmall"
+            nzTheme="outline"
+          ></i>
+          Descargar XLSX otra vez
         </button>
       </div>
     </nz-result>
@@ -4818,7 +4824,7 @@
     <button
       nz-button
       id="btnnext"
-      nzType="default"
+      nzType="primary"
       (click)="next()"
       disabled
       *ngIf="current < 2"

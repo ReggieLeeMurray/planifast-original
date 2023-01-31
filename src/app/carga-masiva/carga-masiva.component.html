@@ -263,14 +263,19 @@
     >
       <i nz-icon nzType="delete" class="center" nzTheme="fill"></i>Limpiar
     </button>
-    <button nz-button nzType="primary" nzShape="round" (click)="exportExcel()">
+
+    <button
+      type="button"
+      (click)="exportExcel()"
+      class="btn btn-success btn-sm"
+    >
       <i
         nz-icon
         nzType="cloud-download"
         class="centerSmall"
         nzTheme="outline"
-      ></i
-      >Descargar plantilla
+      ></i>
+      Descargar plantilla
     </button>
   </div>
 </body>

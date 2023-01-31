@@ -735,7 +735,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             '(' +
             duplicados +
             ')' +
-            ' repetidos' +
+            ' duplicados' +
             ' / ' +
             this.listNominaFinal.length +
             ' colaboradores en la planilla seleccionada';
@@ -766,8 +766,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.hideDetectados = false;
           this.msgDetectados =
             'Detectados: ' + iguales + ' / ' + this.listNominaFinal.length;
+          faltante = this.listNominaFinal.length - iguales;
+        } else {
+          faltante = this.listNominaFinal.length;
         }
-        faltante = this.listNominaFinal.length - this.jDatos.length;
         if (faltante < 0) {
           sobrante = faltante * -1;
           faltante = 0;
@@ -775,10 +777,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (arreglo.length > 0) {
           this.hideErroneos = false;
           this.msgErroneos =
-            "Cantidad de Id's inválidos: " +
+            'Cantidad de registros inválidos: ' +
             arreglo.length +
             ' ⇄ ' +
-            'Lista: ' +
+            "Lista Id's: " +
             arreglo;
         }
         if (faltante > 0 || sobrante > 0 || invalido > 0) {
