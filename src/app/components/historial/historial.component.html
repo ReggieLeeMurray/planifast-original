@@ -16,7 +16,7 @@
 </div>
 <ng-template #contentTemplate>
   <div>
-    <p>Puedes buscar planillas por su nombre y fecha.</p>
+    <p>Puedes buscar planillas por su nombre, tipo o rango de fecha.</p>
     <p>Puedes volver a descargar planillas que calculaste con anterioridad.</p>
   </div>
 </ng-template>
@@ -39,7 +39,7 @@
     (ngModelChange)="Search($event)"
     [(ngModel)]="historial"
     nz-input
-    placeholder="Buscar historial por nombre de planilla"
+    placeholder="Buscar historial por nombre o tipo de planilla"
   />
 </nz-input-group>
 <br />
@@ -80,7 +80,7 @@
       <tr>
         <th scope="col" style="text-align: center">Planilla</th>
         <th scope="col" style="text-align: center">ID</th>
-        <th scope="col" style="text-align: center">Fecha Inicio</th>
+        <th scope="col" style="text-align: center">Fecha Inicial</th>
         <th scope="col" style="text-align: center">Fecha Final</th>
         <th scope="col" style="text-align: center">Total Pagado</th>
         <th scope="col" style="text-align: center">Descargar Archivo</th>

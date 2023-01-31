@@ -140,9 +140,12 @@ export class HistorialComponent implements OnInit {
     }
     if (value != '' && value != undefined && value != null) {
       this.listHistory = this.listTemporal.filter((res) => {
-        return res.descripcion
-          .toLocaleLowerCase()
-          .match(value.toLocaleLowerCase());
+        return (
+          res.descripcion
+            .toLocaleLowerCase()
+            .match(value.toLocaleLowerCase()) ||
+          res.tipo.toLocaleLowerCase().match(value.toLocaleLowerCase())
+        );
       });
     } else {
       this.listHistory = this.listTemporal;
