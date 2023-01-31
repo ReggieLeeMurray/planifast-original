@@ -81,7 +81,8 @@ namespace BEProyectoFinal.Controllers
                       FechaCreacion = x.FechaCreacion,
                       TotalPlanilla = x.TotalPlanilla,
                       Archivo = x.Archivo,
-                      Descripcion = y.Descripcion
+                      Descripcion = y.Descripcion,
+                      Tipo = y.Tipo
                     };
 
         return Ok(query.ToList());
