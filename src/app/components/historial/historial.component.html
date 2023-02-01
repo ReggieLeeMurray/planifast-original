@@ -51,6 +51,7 @@
     </td>
     <td>
       <nz-range-picker
+        [nzRanges]="ranges"
         [(ngModel)]="date"
         (ngModelChange)="onChange($event)"
       ></nz-range-picker>
