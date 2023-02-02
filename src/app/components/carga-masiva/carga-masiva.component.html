@@ -243,6 +243,13 @@
       </tr>
     </tbody>
   </nz-table>
+  <br />
+  <nz-progress
+    *ngIf="porcentaje > 0"
+    [nzPercent]="porcentaje"
+    [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
+  >
+  </nz-progress>
   <div class="main_content" style="padding-top: 2%">
     <button
       nz-button

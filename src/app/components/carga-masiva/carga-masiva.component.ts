@@ -18,6 +18,7 @@ interface Ingresos {
   email: string;
   fechaIngreso: Date;
   fechaNac: Date;
+  fechaCreacion: Date;
   genero: string;
   n_Cedula: string;
   nombres: string;
@@ -37,10 +38,12 @@ export class CargaMasivaComponent implements OnInit {
   listFinal = null;
   jDatos = [];
   data = [];
+  porcentaje: number = 0;
   isActive = false;
   listTP = null;
   listDeptos = null;
-  today = moment().format('LL');
+  now = moment().format('LL');
+  today: Date = new Date();
   isVisibleExistente = false;
   isVisibleId = false;
   isVisibleRepetidos = false;
@@ -235,6 +238,7 @@ export class CargaMasivaComponent implements OnInit {
             ...(dato as object),
           });
           this.jDatos[i].email = 'email@xyz.com';
+          this.jDatos[i].fechaCreacion = this.today;
           console.log(this.jDatos, dato);
           if (
             this.jDatos[i].fechaNac != undefined ||
@@ -314,6 +318,7 @@ export class CargaMasivaComponent implements OnInit {
             this.listEmpleadoActivo[i].n_Cedula = this.jDatos[i].n_Cedula;
             this.listEmpleadoActivo[i].salarioBase = this.jDatos[i].salarioBase;
             this.listEmpleadoActivo[i].fechaNac = this.jDatos[i].fechaNac;
+            this.listEmpleadoActivo[i].fechaCreacion = this.today;
             this.listEmpleadoActivo[i].fechaIngreso =
               this.jDatos[i].fechaIngreso;
           }
@@ -367,6 +372,7 @@ export class CargaMasivaComponent implements OnInit {
           }
         }
       };
+      this.porcentaje = 30;
       reader.readAsBinaryString(target.files[0]);
     }
   }
@@ -395,7 +401,7 @@ export class CargaMasivaComponent implements OnInit {
         XLSX.utils.book_append_sheet(wb, wsDeptos, 'Departamentos ID');
         XLSX.utils.book_append_sheet(wb, wsPlanillas, 'Planillas ID');
         /* save to excel-file which will be downloaded */
-        XLSX.writeFile(wb, 'Carga Masiva del ' + this.today + '.xlsx');
+        XLSX.writeFile(wb, 'Carga Masiva del ' + this.now + '.xlsx');
         /* write and save file */
         const excelBuffer: any = XLSX.write(wb, {
           bookType: 'xlsx',
@@ -405,9 +411,11 @@ export class CargaMasivaComponent implements OnInit {
       });
   }
   upload() {
+    this.porcentaje = 60;
     document.getElementById('btnSubir').setAttribute('disabled', 'disabled');
     this.EmpleadosService.guardarMuchosEmpleados(this.jDatos).subscribe(
       (data) => {
+        this.porcentaje = 100;
         this.success();
       },
       (err) => {
@@ -425,6 +433,7 @@ export class CargaMasivaComponent implements OnInit {
         direccion: '',
         salarioBase: 0,
         email: 'email@xyz.com',
+        fechaCreacion: new Date(),
         fechaIngreso: new Date(),
         fechaNac: new Date(),
         genero: '',
@@ -437,6 +446,7 @@ export class CargaMasivaComponent implements OnInit {
     this.isActive = result;
   }
   clean() {
+    this.porcentaje = 0;
     this.isActive = false;
     this.isVisibleId = false;
     this.isVisibleExistente = false;
@@ -450,6 +460,5 @@ export class CargaMasivaComponent implements OnInit {
       this.reqForm.controls[key].markAsPristine();
       this.reqForm.controls[key].updateValueAndValidity();
     }
-    console.log(this.listFinal, this.reqForm, this.isActive);
   }
 }

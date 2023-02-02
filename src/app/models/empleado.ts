@@ -4,6 +4,7 @@ export class Empleado {
   apellidos: string;
   email: string;
   n_Cedula: string;
+  fechaCreacion: Date;
   direccion: string;
   fechaNac: Date;
   fechaIngreso: Date;
