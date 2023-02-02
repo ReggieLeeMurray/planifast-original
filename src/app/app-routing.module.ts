@@ -17,7 +17,7 @@ import { CanDeactivateGuard } from './can-deactivate.guard';
 import { AuthGuard } from './_helpers';
 import { Role } from 'src/app/_models/role';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { CargaMasivaComponent } from './carga-masiva/carga-masiva.component';
+import { CargaMasivaComponent } from './components/carga-masiva/carga-masiva.component';
 
 const accountModule = () =>
   import('./account/account.module').then((x) => x.AccountModule);

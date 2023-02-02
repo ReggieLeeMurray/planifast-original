@@ -18,7 +18,7 @@ import { DarBajaComponent } from './components/dar-baja/dar-baja.component';
 import { ListaEmpleadoInactivoComponent } from './components/lista-empleado-inactivo/lista-empleado-inactivo.component';
 import { HomeComponent } from './components/home/home.component';
 import { InformacionComponent } from './components/informacion/informacion.component';
-import { CargaMasivaComponent } from './carga-masiva/carga-masiva.component';
+import { CargaMasivaComponent } from './components/carga-masiva/carga-masiva.component';
 //ng zorro - boostrap imports
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
