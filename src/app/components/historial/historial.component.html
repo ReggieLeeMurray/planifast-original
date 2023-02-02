@@ -80,6 +80,7 @@
     <thead>
       <tr>
         <th scope="col" style="text-align: center">Planilla</th>
+        <th scope="col" style="text-align: center">Fecha de Calculo</th>
         <th scope="col" style="text-align: center">ID</th>
         <th scope="col" style="text-align: center">Fecha Inicial</th>
         <th scope="col" style="text-align: center">Fecha Final</th>
@@ -89,7 +90,7 @@
     </thead>
     <tbody>
       <tr>
-        <td colspan="6" *ngIf="listHistory?.length <= 0">
+        <td colspan="7" *ngIf="listHistory?.length <= 0">
           <nz-empty
             [nzNotFoundImage]="notFound"
             [nzNotFoundContent]="contentTpl"
@@ -105,6 +106,7 @@
       </tr>
       <tr *ngFor="let data of basicTable.data">
         <td>{{ data.descripcion }} - {{ data.tipo }}</td>
+        <td>{{ data.fechaCreacion | date : "dd/MM/yyyy" }}</td>
         <td>{{ data.id }}</td>
         <td>{{ data.fechaInicio | date : "dd/MM/yyyy" }}</td>
         <td>{{ data.fechaFinal | date : "dd/MM/yyyy" }}</td>
