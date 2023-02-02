@@ -38,6 +38,9 @@ namespace BETesisProyectoFinal.Models
     public DateTime FechaIngreso { get; set; }
 
     [Required]
+    public DateTime FechaCreacion { get; set; }
+
+    [Required]
     public string Genero { get; set; }
 
     [Required]
