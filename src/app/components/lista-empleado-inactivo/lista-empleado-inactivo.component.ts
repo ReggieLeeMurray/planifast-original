@@ -71,7 +71,7 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
     this.modal.confirm({
       nzTitle: '¿Está seguro que desea eliminar esta baja?',
       nzContent:
-        '<b style="color: red;">El colaborador pasará a estado Activo y estará disponible para calculos.</b>',
+        '<b style="color: red;">El colaborador pasará a estado "Activo" y estará disponible para calculos.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,
