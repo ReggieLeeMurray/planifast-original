@@ -69,8 +69,9 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
   }
   showDeleteConfirm(id): void {
     this.modal.confirm({
-      nzTitle: '¿Está seguro que desea eliminar este empleado?',
-      nzContent: '<b style="color: red;">Esta acción es permanente.</b>',
+      nzTitle: '¿Está seguro que desea eliminar esta baja?',
+      nzContent:
+        '<b style="color: red;">El colaborador pasará al listado de Activos.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,
