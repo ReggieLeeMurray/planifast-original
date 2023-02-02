@@ -25,6 +25,7 @@ export class AgregarEmpleadoComponent implements OnInit {
   duplicado = false;
   accion = 'Agregar';
   loading = false;
+  today = new Date();
   empleado: Empleado;
   departamento: Departamento;
   tp: TipoPlanilla;
@@ -135,6 +136,7 @@ export class AgregarEmpleadoComponent implements OnInit {
         genero: this.empleadosForm.get('genero').value,
         // email: this.empleadosForm.get('email').value,
         email: 'email@xyz.com',
+        fechaCreacion: this.today,
         fechaNac: this.empleadosForm.get('fechanac').value,
         direccion: this.empleadosForm.get('direccion').value.trim(),
         n_Cedula: this.empleadosForm.get('n_cedula').value,
@@ -173,6 +175,7 @@ export class AgregarEmpleadoComponent implements OnInit {
         genero: this.empleadosForm.get('genero').value,
         // email: this.empleadosForm.get('email').value,
         email: 'email@xyz.com',
+        fechaCreacion: this.today,
         fechaNac: this.empleadosForm.get('fechanac').value,
         apellidos: this.empleadosForm.get('apellido').value,
         direccion: this.empleadosForm.get('direccion').value,
