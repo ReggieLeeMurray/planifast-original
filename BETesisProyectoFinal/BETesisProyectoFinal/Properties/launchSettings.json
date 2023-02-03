@@ -11,8 +11,8 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchBrowser": false,
+      "launchUrl": "https://localhost:44301/api/empleado",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -20,8 +20,8 @@
     },
     "BETesisProyectoFinal": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchBrowser": false,
+      "launchUrl": "https://localhost:44301/api/empleado",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
