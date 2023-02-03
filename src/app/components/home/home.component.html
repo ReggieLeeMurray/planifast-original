@@ -82,6 +82,7 @@
             >
             <nz-range-picker
               [(ngModel)]="date"
+              [nzRanges]="ranges"
               (ngModelChange)="onChange($event)"
             ></nz-range-picker>
             <canvas class="card-body" style="width: 700px" id="canvas5">{{

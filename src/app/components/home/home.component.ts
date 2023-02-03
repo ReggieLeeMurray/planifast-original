@@ -37,6 +37,15 @@ export class HomeComponent implements OnInit {
   listEventosByTipo = [];
   listPlanillas = [];
   loading = false;
+  today = new Date();
+  ranges = {
+    'Mes Anterior': [
+      startOfMonth(
+        new Date(this.today.getFullYear(), this.today.getMonth() - 1)
+      ),
+      endOfMonth(new Date(this.today.getFullYear(), this.today.getMonth(), 0)),
+    ],
+  };
   user: User;
   userFromApi: User;
   DEBUG = false;
