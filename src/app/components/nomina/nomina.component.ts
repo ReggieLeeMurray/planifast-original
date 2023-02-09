@@ -32,7 +32,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       return true;
     } else {
       const confirmacion = window.confirm(
-        '¿Desea salir del formulario y perder los cambios realizados?'
+        '¿Desea salir del módulo y perder los cambios realizados?'
       );
       return confirmacion;
     }
@@ -286,7 +286,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   diaDiurno = 0;
   diaMixto = 0;
   diaNocturno = 0;
-  DEBUG = false;
+  DEBUG = true;
   //tarjetas
   jornada: string = '';
   jornadaL: number = 0;
@@ -1193,6 +1193,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   // modal segundo paso > 7
   ingresoCompleto(id: number): void {
     this.cantOI = 1;
+    this.idEmpleado = id;
     console.log('CANTIDADIO ' + this.cantOI);
     for (let i = 0; i < this.listNomina.length; i++) {
       if (this.listNomina[i].id === id) {
@@ -1229,6 +1230,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         console.log(this.listNominaFinal[i].totalObs, this.cantOI);
       }
     }
+    this.onItemChecked(this.idEmpleado, true);
     document.getElementById('btnnext').removeAttribute('disabled');
     this.cantOI = 0;
   }
@@ -1542,6 +1544,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
         }
       }
+      this.onItemChecked(this.idEmpleado, true);
       this.sueldoString = this.numberWithCommas(this.sueldoNormal);
       document.getElementById('btnnext').removeAttribute('disabled');
       this.resumenForm.get('aguinaldo').disable();
@@ -1569,7 +1572,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzCentered: true,
       nzTitle: 'CONFIRMACIÓN',
       nzContent:
-        '<b style="color: red;">¿Esta seguro de haber ingresado todas los ingresos y deducciones? ADVERTENCIA: A partir de este punto el archivo se generará con los datos proporcionados.</b>',
+        '<b style="color: red;">¿Esta seguro que la información ingresada es correcta y desea proceder al cálculo de la planilla? ADVERTENCIA: A partir de este punto el archivo se generará con los datos proporcionados.</b>',
       nzOkText: '¡Si, genera el archivo!',
       nzOkType: 'primary',
       nzClosable: false,
@@ -5611,6 +5614,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           genero: data.genero,
           email: data.email,
           fechaNac: data.fechaNac,
+          fechaCreacion: this.today,
           direccion: data.direccion,
           n_Cedula: data.n_Cedula,
           salarioBase: z,

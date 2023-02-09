@@ -1,7 +1,7 @@
 <div style="padding-top: 10px">
   <h1>Nuevo Cálculo</h1>
   <br />
-  <nz-steps nzSize="small" [nzCurrent]="current">
+  <nz-steps [nzCurrent]="current">
     <nz-step
       nzTitle="Planilla y Fecha"
       nzDescription="Información General"
@@ -942,13 +942,7 @@
       </ng-container>
     </nz-modal>
     <!-- AQUI TABLAS -->
-    <nz-table
-      nzSize="small"
-      id="nominaFinal"
-      style="display: none"
-      nzBordered
-      nzTemplateMode
-    >
+    <nz-table id="nominaFinal" nzTemplateMode hidden>
       <thead>
         <tr>
           <th colspan="20">{{ this.planidescrip | uppercase }}</th>
@@ -1021,7 +1015,7 @@
         </tr>
       </tbody>
     </nz-table>
-    <nz-table id="finalv2" style="display: none" nzTemplateMode>
+    <nz-table id="finalv2" nzTemplateMode hidden>
       <tbody>
         <td class="mix">
           <nz-table
@@ -1113,12 +1107,12 @@
               </tr>
             </thead>
             <tbody *ngIf="i % 2 === 0">
-              <tr>
+              <tr *ngIf="this.totalAguinaldo <= 0">
                 <td>:</td>
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">SALARIO NORMAL</td>
-                <td colspan="2">{{ data.ingresoBruto }}</td>
+                <td colspan="2">{{ data.ingresoBruto | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1128,7 +1122,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">{{ this.mesAguinaldo | uppercase }}</td>
-                <td colspan="2">{{ data.aguinaldo }}</td>
+                <td colspan="2">{{ data.aguinaldo | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1138,7 +1132,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">FERIADO</td>
-                <td colspan="2">{{ data.feriado }}</td>
+                <td colspan="2">{{ data.feriado | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1148,7 +1142,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">INCAPACIDAD</td>
-                <td colspan="2">{{ data.incapacidad }}</td>
+                <td colspan="2">{{ data.incapacidad | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1158,7 +1152,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">VACACION</td>
-                <td colspan="2">{{ data.vacacion }}</td>
+                <td colspan="2">{{ data.vacacion | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1168,7 +1162,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">(+) AJUSTE</td>
-                <td colspan="2">{{ data.ajusteP }}</td>
+                <td colspan="2">{{ data.ajusteP | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1179,7 +1173,7 @@
                 <td>:</td>
                 <td colspan="2">IHSS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ihss }}</td>
+                <td colspan="2">{{ data.ihss | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1189,7 +1183,7 @@
                 <td>:</td>
                 <td colspan="2">RETENCION ISRENTA {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.isr }}</td>
+                <td colspan="2">{{ data.isr | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1199,7 +1193,7 @@
                 <td>:</td>
                 <td colspan="2">AFPC</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.afpc }}</td>
+                <td colspan="2">{{ data.afpc | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1209,7 +1203,7 @@
                 <td>:</td>
                 <td colspan="2">IMP. PER MUNI {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.impvecinal }}</td>
+                <td colspan="2">{{ data.impvecinal | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1219,7 +1213,7 @@
                 <td>:</td>
                 <td colspan="2">PRESTAMO RAP</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.prestamorap }}</td>
+                <td colspan="2">{{ data.prestamorap | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1229,7 +1223,7 @@
                 <td>:</td>
                 <td colspan="2">(-) ANTICIPO</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.anticipo }}</td>
+                <td colspan="2">{{ data.anticipo | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1239,7 +1233,7 @@
                 <td>:</td>
                 <td colspan="2">CTA. EMPRESA</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.cta }}</td>
+                <td colspan="2">{{ data.cta | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1249,7 +1243,7 @@
                 <td>:</td>
                 <td colspan="2">TRANSPORTE</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.viaticos }}</td>
+                <td colspan="2">{{ data.viaticos | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1259,7 +1253,7 @@
                 <td>:</td>
                 <td colspan="2">(-) AJUSTE</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ajuste }}</td>
+                <td colspan="2">{{ data.ajuste | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1269,7 +1263,7 @@
                 <td>:</td>
                 <td colspan="2">OTROS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.otros }}</td>
+                <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1287,9 +1281,9 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">TOTALES</td>
-                <td colspan="2">{{ data.ingresos }}</td>
-                <td colspan="2">{{ data.deducciones }}</td>
-                <td colspan="2">{{ data.totalPagar }}</td>
+                <td colspan="2">{{ data.ingresos | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.deducciones | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
                 <td>:</td>
               </tr>
               <tr>
@@ -1385,7 +1379,7 @@
                   RECIBI
                   CONFORME:_________________________________________________.
                 </td>
-                <td colspan="2">{{ data.totalPagar }}</td>
+                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
                 <td>:</td>
               </tr>
               <tr>
@@ -1403,7 +1397,7 @@
         </td>
       </tbody>
     </nz-table>
-    <nz-table id="final" style="display: none" nzTemplateMode>
+    <nz-table id="final" nzTemplateMode hidden>
       <tbody>
         <td class="mix">
           <nz-table
@@ -1468,45 +1462,45 @@
               </tr>
             </thead>
             <tbody *ngIf="i % 2 === 1">
-              <tr>
+              <tr *ngIf="this.totalAguinaldo <= 0">
                 <td>:</td>
                 <td colspan="2">SALARIO NORMAL</td>
-                <td colspan="2">{{ data.ingresoBruto }}</td>
+                <td colspan="2">{{ data.ingresoBruto | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.aguinaldo > 0">
                 <td>:</td>
                 <td colspan="2">{{ this.mesAguinaldo | uppercase }}</td>
-                <td colspan="2">{{ data.aguinaldo }}</td>
+                <td colspan="2">{{ data.aguinaldo | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.feriado > 0">
                 <td>:</td>
                 <td colspan="2">FERIADO</td>
-                <td colspan="2">{{ data.feriado }}</td>
+                <td colspan="2">{{ data.feriado | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.incapacidad > 0">
                 <td>:</td>
                 <td colspan="2">INCAPACIDAD</td>
-                <td colspan="2">{{ data.incapacidad }}</td>
+                <td colspan="2">{{ data.incapacidad | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.vacacion > 0">
                 <td>:</td>
                 <td colspan="2">VACACION</td>
-                <td colspan="2">{{ data.vacacion }}</td>
+                <td colspan="2">{{ data.vacacion | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.ajusteP > 0">
                 <td>:</td>
                 <td colspan="2">(+) AJUSTE</td>
-                <td colspan="2">{{ data.ajusteP }}</td>
+                <td colspan="2">{{ data.ajusteP | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
@@ -1514,70 +1508,70 @@
                 <td>:</td>
                 <td colspan="2">IHSS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ihss }}</td>
+                <td colspan="2">{{ data.ihss | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.isr > 0">
                 <td>:</td>
                 <td colspan="2">RETENCION ISRENTA {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.isr }}</td>
+                <td colspan="2">{{ data.isr | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.afpc > 0">
                 <td>:</td>
                 <td colspan="2">AFPC</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.afpc }}</td>
+                <td colspan="2">{{ data.afpc | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.impvecinal > 0">
                 <td>:</td>
                 <td colspan="2">IMP. PER MUNI {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.impvecinal }}</td>
+                <td colspan="2">{{ data.impvecinal | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.prestamorap > 0">
                 <td>:</td>
                 <td colspan="2">PRESTAMO RAP</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.prestamorap }}</td>
+                <td colspan="2">{{ data.prestamorap | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.anticipo > 0">
                 <td>:</td>
                 <td colspan="2">(-) ANTICIPO</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.anticipo }}</td>
+                <td colspan="2">{{ data.anticipo | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.cta > 0">
                 <td>:</td>
                 <td colspan="2">CTA. EMPRESA</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.cta }}</td>
+                <td colspan="2">{{ data.cta | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.viaticos > 0">
                 <td>:</td>
                 <td colspan="2">TRANSPORTE</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.viaticos }}</td>
+                <td colspan="2">{{ data.viaticos | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.ajuste > 0">
                 <td>:</td>
                 <td colspan="2">(-) AJUSTE</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ajuste }}</td>
+                <td colspan="2">{{ data.ajuste | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.otros > 0">
                 <td>:</td>
                 <td colspan="2">OTROS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.otros }}</td>
+                <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr>
@@ -1589,9 +1583,9 @@
               <tr *ngIf="data.totalPagar > 0">
                 <td>:</td>
                 <td colspan="2">TOTALES</td>
-                <td colspan="2">{{ data.ingresos }}</td>
-                <td colspan="2">{{ data.deducciones }}</td>
-                <td colspan="2">{{ data.totalPagar }}</td>
+                <td colspan="2">{{ data.ingresos | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.deducciones | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
               </tr>
               <tr>
                 <th>:</th>
@@ -1656,7 +1650,7 @@
                   RECIBI
                   CONFORME:_________________________________________________.
                 </td>
-                <td colspan="2">{{ data.totalPagar }}</td>
+                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
               </tr>
               <tr>
                 <th>:</th>
@@ -4469,7 +4463,7 @@
             [disabled]="this.jDatos.length === 0"
             (click)="showArchivo()"
           >
-            Ver Archivo
+            Revisar Archivo
           </button>
         </nz-form-control>
       </nz-form-item>
@@ -4731,17 +4725,17 @@
           </td>
           <td width="15%">
             <button
-              *ngIf="diferencia >= 15"
-              class="btn btn-success btn-sm"
+              *ngIf="this.totalAguinaldo === 0 && diferencia >= 15"
+              class="btn btn-info btn-sm"
               (click)="ingresoCompleto(data.id)"
               title="Jornada Completa"
             >
-              <i class="bi bi-check-all"></i>
+              <i class="bi bi-check2-circle"></i>
             </button>
             <button
               *ngIf="
                 (this.totalAguinaldo === 0 && diferencia <= 7) ||
-                diferencia >= 15
+                (this.totalAguinaldo === 0 && diferencia >= 15)
               "
               class="btn btn-primary btn-sm"
               (click)="
