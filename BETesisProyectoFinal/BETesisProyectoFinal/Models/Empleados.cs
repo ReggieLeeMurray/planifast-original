@@ -41,21 +41,13 @@ namespace BETesisProyectoFinal.Models
     public DateTime FechaCreacion { get; set; }
 
     [Required]
+    public bool Permanente { get; set; }
+
+    [Required]
     public string Genero { get; set; }
 
     [Required]
     public decimal SalarioBase { get; set; }
-
-    [Required]
-    public int DiasLaborados { get; set; }
-    [Required]
-    public decimal Ingresos { get; set; }
-
-    [Required]
-    public decimal Deducciones { get; set; }
-
-    [Required]
-    public decimal TotalPagar { get; set; }
 
     [Required]
     public int DepartamentoID { get; set; }
@@ -66,6 +58,7 @@ namespace BETesisProyectoFinal.Models
     public int PlanillaID { get; set; }
     [ForeignKey("PlanillaID")]
     public TipoPlanillas TipoPlanillas { get; set; }
+
     public EmpleadosInactivos EmpleadosInactivos { get; set; }
 
   }

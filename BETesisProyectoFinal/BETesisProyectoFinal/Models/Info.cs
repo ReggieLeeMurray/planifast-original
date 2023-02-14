@@ -31,5 +31,38 @@ namespace BEProyectoFinal.Models
 
     [Required]
     public string Bio { get; set; }
+
+    [Required]
+    public decimal TechoExento_ISR { get; set; }
+
+    [Required]
+    public decimal Techo15_ISR { get; set; }
+
+    [Required]
+    public decimal Techo20_ISR { get; set; }
+
+    [Required]
+    public decimal Techo25_ISR { get; set; }
+
+    [Required]
+    public decimal MontoServicioMedico_ISR { get; set; }
+
+    [Required]
+    public decimal TechoEM_IHSS { get; set; }
+
+    [Required]
+    public decimal TechoIVM_IHSS { get; set; }
+
+    [Required]
+    public decimal PorcentajeContribucionTrabajadorEM_IHSS { get; set; }
+
+    [Required]
+    public decimal PorcentajeContribucionTrabajadorIVM_IHSS { get; set; }
+
+    [Required]
+    public decimal TechoIVM_RAP { get; set; }
+
+    [Required]
+    public decimal PorcentajeContribucionTrabajador_RAP { get; set; }
   }
 }

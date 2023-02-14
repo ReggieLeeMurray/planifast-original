@@ -89,6 +89,7 @@ namespace BETesisProyectoFinal.Controllers
                       FechaNac=x.FechaNac,
                       FechaIngreso=x.FechaIngreso,
                       Genero=x.Genero,
+                      Permanente = x.Permanente,
                       SalarioBase=x.SalarioBase,
                       descriDepto=d.Descripcion,
                       tipoPlanilla=p.Tipo,

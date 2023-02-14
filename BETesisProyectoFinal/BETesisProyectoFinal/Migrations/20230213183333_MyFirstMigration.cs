@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BEProyectoFinal.Migrations
 {
-    public partial class myFirstMigration : Migration
+    public partial class MyFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,18 @@ namespace BEProyectoFinal.Migrations
                     DireccionPrincipal = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     CodigoPostal = table.Column<int>(nullable: false),
-                    Bio = table.Column<string>(nullable: false)
+                    Bio = table.Column<string>(nullable: false),
+                    TechoExento_ISR = table.Column<decimal>(nullable: false),
+                    Techo15_ISR = table.Column<decimal>(nullable: false),
+                    Techo20_ISR = table.Column<decimal>(nullable: false),
+                    Techo25_ISR = table.Column<decimal>(nullable: false),
+                    MontoServicioMedico_ISR = table.Column<decimal>(nullable: false),
+                    TechoEM_IHSS = table.Column<decimal>(nullable: false),
+                    TechoIVM_IHSS = table.Column<decimal>(nullable: false),
+                    PorcentajeContribucionTrabajadorEM_IHSS = table.Column<decimal>(nullable: false),
+                    PorcentajeContribucionTrabajadorIVM_IHSS = table.Column<decimal>(nullable: false),
+                    TechoIVM_RAP = table.Column<decimal>(nullable: false),
+                    PorcentajeContribucionTrabajador_RAP = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,12 +134,9 @@ namespace BEProyectoFinal.Migrations
                     FechaNac = table.Column<DateTime>(nullable: false),
                     FechaIngreso = table.Column<DateTime>(nullable: false),
                     FechaCreacion = table.Column<DateTime>(nullable: false),
+                    Permanente = table.Column<bool>(nullable: false),
                     Genero = table.Column<string>(nullable: false),
                     SalarioBase = table.Column<decimal>(nullable: false),
-                    DiasLaborados = table.Column<int>(nullable: false),
-                    Ingresos = table.Column<decimal>(nullable: false),
-                    Deducciones = table.Column<decimal>(nullable: false),
-                    TotalPagar = table.Column<decimal>(nullable: false),
                     DepartamentoID = table.Column<int>(nullable: false),
                     PlanillaID = table.Column<int>(nullable: false)
                 },
@@ -179,7 +187,7 @@ namespace BEProyectoFinal.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Valor = table.Column<float>(nullable: false),
+                    Valor = table.Column<decimal>(nullable: false),
                     Motivo = table.Column<string>(nullable: false),
                     Nota = table.Column<string>(nullable: false),
                     FechaSalida = table.Column<DateTime>(nullable: false),

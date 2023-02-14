@@ -87,13 +87,10 @@ namespace BETesisProyectoFinal.Controllers
                       FechaIngreso = x.FechaIngreso,
                       FechaNac = x.FechaNac,
                       Genero = x.Genero,
+                      Permanente = x.Permanente,
                       SalarioBase = x.SalarioBase,
                       DepartamentoID = x.DepartamentoID,
-                      PlanillaID = x.PlanillaID,
-                      DiasLaborados = x.DiasLaborados,
-                      Ingresos=x.Ingresos,
-                      Deducciones=x.Deducciones,
-                      TotalPagar=x.TotalPagar
+                      PlanillaID = x.PlanillaID
                     };
         return Ok(query.ToList());
       }

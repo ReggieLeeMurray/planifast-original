@@ -14,7 +14,7 @@ namespace BEProyectoFinal.Models
     public int Id { get; set; }
 
     [Required]
-    public float Valor { get; set; }
+    public decimal Valor { get; set; }
 
     [Required]
     public string Motivo { get; set; }

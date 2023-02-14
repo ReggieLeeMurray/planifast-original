@@ -52,8 +52,8 @@ namespace BEProyectoFinal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<float>("Valor")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
@@ -153,6 +153,18 @@ namespace BEProyectoFinal.Migrations
                     b.Property<DateTime>("FechaFundacion")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<decimal>("MontoServicioMedico_ISR")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("PorcentajeContribucionTrabajadorEM_IHSS")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("PorcentajeContribucionTrabajadorIVM_IHSS")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("PorcentajeContribucionTrabajador_RAP")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<string>("RazonSocial")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -160,6 +172,27 @@ namespace BEProyectoFinal.Migrations
                     b.Property<string>("SitioWeb")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<decimal>("Techo15_ISR")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("Techo20_ISR")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("Techo25_ISR")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("TechoEM_IHSS")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("TechoExento_ISR")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("TechoIVM_IHSS")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("TechoIVM_RAP")
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
@@ -238,13 +271,7 @@ namespace BEProyectoFinal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<decimal>("Deducciones")
-                        .HasColumnType("decimal(65,30)");
-
                     b.Property<int>("DepartamentoID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DiasLaborados")
                         .HasColumnType("int");
 
                     b.Property<string>("Direccion")
@@ -268,9 +295,6 @@ namespace BEProyectoFinal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<decimal>("Ingresos")
-                        .HasColumnType("decimal(65,30)");
-
                     b.Property<string>("N_Cedula")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -279,13 +303,13 @@ namespace BEProyectoFinal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("Permanente")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("PlanillaID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("SalarioBase")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("TotalPagar")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
