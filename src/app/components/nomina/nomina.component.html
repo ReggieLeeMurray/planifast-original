@@ -170,6 +170,154 @@
       </div>
     </ng-container>
   </nz-modal>
+  <nz-modal
+    [(nzVisible)]="isVisibleDeducible"
+    nzTitle="Establecer Deducibles"
+    nzClosable="false"
+    [nzStyle]="{ top: '20px' }"
+    nzCentered
+    (nzOnCancel)="handleCancelDeducibles()"
+  >
+    <ng-container *nzModalContent>
+      <form nz-form [formGroup]="automaticForm">
+        <p></p>
+        <tr>
+          <td>
+            <div nz-row>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="cboxIHSS"
+                  [(ngModel)]="isCheckedIHSS"
+                  (ngModelChange)="logIHSS($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                ></label>
+              </div>
+            </div>
+          </td>
+          <td>
+            <nz-form-label [nzSm]="24" [nzXs]="24">IHSS</nz-form-label>
+          </td>
+          <td>
+            <input
+              formControlName="ihss"
+              nz-input
+              placeholder="0"
+              type="number"
+              min="0"
+              nzSize="default"
+            />
+          </td>
+          <td style="padding-left: 0px">
+            <nz-switch
+              [(ngModel)]="switchValueIHSS"
+              [nzCheckedChildren]="checkedTemplate"
+              [nzUnCheckedChildren]="unCheckedTemplate"
+              (ngModelChange)="enableIHSS()"
+              [nzDisabled]="isDisabledIHSS"
+              [ngModelOptions]="{ standalone: true }"
+            ></nz-switch>
+            <ng-template #checkedTemplate
+              ><i nz-icon nzType="edit" nzTheme="outline"></i
+            ></ng-template>
+            <ng-template #unCheckedTemplate
+              ><i nz-icon nzType="check"></i
+            ></ng-template>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div nz-row>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="cboxISR"
+                  [(ngModel)]="isCheckedISR"
+                  (ngModelChange)="logISR($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                ></label>
+              </div>
+            </div>
+          </td>
+          <td>
+            <nz-form-label [nzSm]="24" [nzXs]="24">ISR</nz-form-label>
+          </td>
+          <td>
+            <input
+              formControlName="isr"
+              nz-input
+              placeholder="0"
+              type="number"
+              min="0"
+              nzSize="default"
+            />
+          </td>
+          <td style="padding-left: 0px">
+            <nz-switch
+              [(ngModel)]="switchValueISR"
+              [nzCheckedChildren]="checkedTemplate"
+              [nzUnCheckedChildren]="unCheckedTemplate"
+              (ngModelChange)="enableISR()"
+              [nzDisabled]="isDisabledISR"
+              [ngModelOptions]="{ standalone: true }"
+            ></nz-switch>
+            <ng-template #checkedTemplate
+              ><i nz-icon nzType="edit" nzTheme="outline"></i
+            ></ng-template>
+            <ng-template #unCheckedTemplate
+              ><i nz-icon nzType="check"></i
+            ></ng-template>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div nz-row>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="cboxAFPC"
+                  [(ngModel)]="isCheckedAFPC"
+                  (ngModelChange)="logAFPC($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                ></label>
+              </div>
+            </div>
+          </td>
+          <td>
+            <nz-form-label [nzSm]="24" [nzXs]="24">AFPC</nz-form-label>
+          </td>
+          <td>
+            <input
+              formControlName="afpc"
+              nz-input
+              placeholder="0"
+              type="number"
+              min="0"
+              nzSize="default"
+            />
+          </td>
+          <td style="padding-left: 0px">
+            <nz-switch
+              [(ngModel)]="switchValueAFPC"
+              [nzCheckedChildren]="checkedTemplate"
+              [nzUnCheckedChildren]="unCheckedTemplate"
+              (ngModelChange)="enableAFPC()"
+              [nzDisabled]="isDisableAFPC"
+              [ngModelOptions]="{ standalone: true }"
+            ></nz-switch>
+            <ng-template #checkedTemplate
+              ><i nz-icon nzType="edit" nzTheme="outline"></i
+            ></ng-template>
+            <ng-template #unCheckedTemplate
+              ><i nz-icon nzType="check"></i
+            ></ng-template>
+          </td>
+        </tr>
+      </form>
+    </ng-container>
+  </nz-modal>
   <div [(ngModel)]="diferencia" ngDefaultControl *ngIf="diferencia >= 15">
     <!-- AQUI ESTOY -->
     <nz-modal
@@ -4417,7 +4565,7 @@
               type="number"
               *ngFor="let tp of listTP"
               nzValue="{{ tp.id }}"
-              nzLabel="{{ tp.descripcion | uppercase }} - {{
+              nzLabel="{{ tp.descripcion | uppercase }} ⇄ {{
                 tp.tipo | uppercase
               }}"
             >
@@ -4428,10 +4576,12 @@
 
       <nz-form-item>
         <nz-form-label [nzSm]="8" nzRequired>Fecha</nz-form-label>
-        <nz-form-control [nzSm]="4">
+        <nz-form-control [nzSm]="8">
           <nz-range-picker
+            style="display: flex; width: 75%"
             formControlName="fecha"
             [nzRanges]="this.ranges"
+            [nzFormat]="this.dateFormat"
             (ngModelChange)="onChange($event)"
           >
           </nz-range-picker>
@@ -4523,6 +4673,15 @@
             (click)="retry()"
           >
             Re-Ingresar Datos
+          </button>
+
+          <button
+            nz-button
+            nzType="primary"
+            id="btncontinuar"
+            (click)="modificarDeducibles()"
+          >
+            Deducibles
           </button>
 
           <button
