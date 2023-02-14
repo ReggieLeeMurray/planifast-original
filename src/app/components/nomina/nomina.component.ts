@@ -43,6 +43,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   inicioQuincena: Date = new Date();
   fechaCreacionPlanilla: Date = new Date();
   finalQuincena = endOfMonth(new Date());
+  dateFormat = 'dd/MM/yyyy';
   today = new Date();
   ranges: any;
   diferencia: number;
@@ -170,6 +171,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   isVisibleGenerar = false;
   isVisibleInicial = false;
   isVisibleAguinaldo = false;
+  isVisibleDeducible = false;
   switchValueIHSS = false;
   switchValueISR = false;
   switchValueAFPC = false;
@@ -1115,14 +1117,17 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     { label: '25%', value: 'L. 610,347.17 - en adelante' },
   ];*/
   ISR() {
-    var exento = 172117.89,
-      quince = 262449.27,
-      veinte = 610347.16,
-      montodeducible = 40000.0,
-      x = this.truncator(this.salario * 12 - montodeducible),
-      w = 0,
-      y = 0,
-      z = 0;
+    console.log(this.salario);
+    var exento = 199039.47;
+    var quince = 303499.92;
+    var veinte = 705813.79;
+    //monto exento de pago anuales destinada al pago de servicios medicos
+    var montodeducible = 40000.0;
+    var x = this.truncator(this.salario * 12 - montodeducible);
+    console.log('X', x);
+    var w = 0;
+    var y = 0;
+    var z = 0;
     if (x <= exento) {
       this.automaticForm.get('isr').setValue(0);
     } else if (x > exento && x <= quince) {
@@ -1146,25 +1151,28 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     { label: 'IHSS empleados <= 10 ', value: 'EM = 9849.7 a 2.5% | IVM = 10268.86 a 1.60%' },
   ];*/
   IHSS() {
-    var techoem = 9849.7,
-      pctem = 0.025,
-      techoemmicro = 9849.7,
-      pctemmicro = 0.025,
-      techoivm = 10282.37,
-      pctivm = 0.025,
-      techoivmmicro = 10268.86,
-      pctivmmicro = 0.016,
-      em = 0,
-      ivm = 0;
-    if (this.empleadosactivos <= 10) {
-      em = techoemmicro * pctemmicro;
-      ivm = techoivmmicro * pctivmmicro;
-      this.automaticForm.get('ihss').setValue(this.truncator(em + ivm));
-    } else if (this.empleadosactivos > 10) {
-      em = techoem * pctem;
-      ivm = techoivm * pctivm;
-      this.automaticForm.get('ihss').setValue(this.truncator(em + ivm));
-    }
+    var techoem = 10342.19;
+    var pctem = 0.025;
+    // var techoemmicro = 9849.7;
+    // var pctemmicro = 0.025;
+    var techoivm = 10796.49;
+    var pctivm = 0.025;
+    // var techoivmmicro = 10268.86;
+    // var pctivmmicro = 0.016;
+    var em = 0;
+    var ivm = 0;
+    // if (this.empleadosactivos <= 10) {
+    //   em = techoemmicro * pctemmicro;
+    //   ivm = techoivmmicro * pctivmmicro;
+    //   this.automaticForm.get('ihss').setValue(this.truncator(em + ivm));
+    // } else if (this.empleadosactivos > 10) {
+    //   em = techoem * pctem;
+    //   ivm = techoivm * pctivm;
+    //   this.automaticForm.get('ihss').setValue(this.truncator(em + ivm));
+    // }
+    em = techoem * pctem;
+    ivm = techoivm * pctivm;
+    this.automaticForm.get('ihss').setValue(this.truncator(em + ivm));
   }
   //calculo del afpc
   /*AFPC segun su respectiva ley
@@ -1173,22 +1181,24 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     { label: 'AFPC empleados <= 10 ', value: 'AFPC = Salario Mensual - 10268.86 x 0.60% },
   ];*/
   AFPC() {
-    var x = this.salario;
-    var techorap = 10282.37;
+    console.log(this.salario);
+    var salario = this.salario;
+    var techorap = 10796.49;
     var pctrap = 0.015;
-    var techorapmmicro = 10268.86;
-    var pctrapmicro = 0.006;
-    if (x <= techorap || x <= techorapmmicro) {
-      this.automaticForm.get('afpc').setValue(0);
-    } else {
-      if (this.empleadosactivos <= 10) {
-        var rap = this.round2Decimal((x - techorapmmicro) * pctrapmicro);
-        this.automaticForm.get('afpc').setValue(rap);
-      } else if (this.empleadosactivos > 10) {
-        var rap = this.round2Decimal((x - techorap) * pctrap);
-        this.automaticForm.get('afpc').setValue(rap);
-      }
-    }
+    var rap = 0;
+    // var techorapmmicro = 10268.86;
+    // var pctrapmicro = 0.006;
+    // if (salario <= techorap || salario <= techorapmmicro) {
+    //   this.automaticForm.get('afpc').setValue(0);
+    // } else {
+    // if (this.empleadosactivos <= 10) {
+    //   var rap = this.round2Decimal((salario - techorapmmicro) * pctrapmicro);
+    //   this.automaticForm.get('afpc').setValue(rap);
+    // } else if (this.empleadosactivos > 10) {
+    rap = this.round2Decimal((salario - techorap) * pctrap);
+    this.automaticForm.get('afpc').setValue(rap);
+    //   }
+    // }
   }
   // modal segundo paso > 7
   ingresoCompleto(id: number): void {
@@ -1884,6 +1894,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     nombre: string,
     apellido: string
   ): void {
+    this.idEmpleado = id;
+    this.nombreCompleto = nombre + ' ' + apellido;
+    this.salario = salario;
     if (this.totalAguinaldo > 0) {
       this.isVisibleAguinaldoDeduccion = true;
     } else {
@@ -1891,10 +1904,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.ISR();
       this.IHSS();
       this.AFPC();
+      console.log('CORRIO TODOS');
     }
-    this.idEmpleado = id;
-    this.nombreCompleto = nombre + ' ' + apellido;
-    this.salario = salario;
     for (let i = 0; i < this.listNomina.length; i++) {
       if (this.listNomina[i].id === this.idEmpleado) {
         if (this.listNomina[i].ingresos === 0) {
@@ -1907,6 +1918,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
     }
     this.btnDeduccionEnable();
+  }
+  modificarDeducibles() {
+    this.isVisibleDeducible = true;
+  }
+  handleCancelDeducibles() {
+    this.isVisibleDeducible = false;
   }
   handleEmpleadoClear(id: number) {
     console.log(id);
@@ -5612,6 +5629,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           nombres: data.nombres,
           apellidos: data.apellidos,
           genero: data.genero,
+          permanente: data.permanente,
           email: data.email,
           fechaNac: data.fechaNac,
           fechaCreacion: this.today,
