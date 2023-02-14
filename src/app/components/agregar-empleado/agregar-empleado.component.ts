@@ -40,7 +40,9 @@ export class AgregarEmpleadoComponent implements OnInit {
   isVisibleExistente = false;
   dateI = null;
   radioValue: string;
-  DEBUG = false;
+  switchValue = false;
+  isDisabled = false;
+  DEBUG = true;
 
   constructor(
     private fb: FormBuilder,
@@ -62,6 +64,7 @@ export class AgregarEmpleadoComponent implements OnInit {
       fechanac: ['', Validators.required],
       genero: ['', Validators.required],
       depto: ['', Validators.required],
+      permanencia: [false, Validators.required],
       salariobase: ['', Validators.required],
       tplanilla: ['', Validators.required],
     });
@@ -136,6 +139,7 @@ export class AgregarEmpleadoComponent implements OnInit {
         genero: this.empleadosForm.get('genero').value,
         // email: this.empleadosForm.get('email').value,
         email: 'email@xyz.com',
+        permanente: this.switchValue,
         fechaCreacion: this.today,
         fechaNac: this.empleadosForm.get('fechanac').value,
         direccion: this.empleadosForm.get('direccion').value.trim(),
@@ -175,6 +179,7 @@ export class AgregarEmpleadoComponent implements OnInit {
         genero: this.empleadosForm.get('genero').value,
         // email: this.empleadosForm.get('email').value,
         email: 'email@xyz.com',
+        permanente: this.switchValue,
         fechaCreacion: this.today,
         fechaNac: this.empleadosForm.get('fechanac').value,
         apellidos: this.empleadosForm.get('apellido').value,
@@ -214,6 +219,7 @@ export class AgregarEmpleadoComponent implements OnInit {
           this.empleado = data;
           this.idDepto = data.departamentoID;
           this.idTP = data.planillaID;
+          this.switchValue = data.permanente;
           this.empleadosForm.patchValue({
             nombre: data.nombres,
             apellido: data.apellidos,
@@ -227,6 +233,7 @@ export class AgregarEmpleadoComponent implements OnInit {
             tplanilla: data.planillaID,
             genero: data.genero,
           });
+
           this.departamentosService
             .cargarDeptos(this.idDepto)
             .subscribe((data) => {
@@ -235,7 +242,7 @@ export class AgregarEmpleadoComponent implements OnInit {
             });
           this.TipoplanillaService.cargarTipoPlanilla(this.idTP).subscribe(
             (data) => {
-              this.selectedValuePlanilla = data.descripcion + ' - ' + data.tipo;
+              this.selectedValuePlanilla = data.descripcion + ' ⇄ ' + data.tipo;
               console.log(this.selectedValuePlanilla);
             }
           );
