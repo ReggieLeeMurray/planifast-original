@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoPlanilla } from 'src/app/models/tipoplanilla';
+import { Info } from 'src/app/models/info';
 import { Historial } from 'src/app/models/historial';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadosService } from 'src/app/services/empleados.service';
 import { HistorialService } from 'src/app/services/historial.service';
 import { TipoplanillaService } from 'src/app/services/tipoplanilla.service';
+import { InfoService } from 'src/app/services/info.service';
 import moment from 'moment';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { PageEvent } from '@angular/material/paginator';
@@ -75,6 +77,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   automaticForm: FormGroup;
   aguinaldoForm: FormGroup;
   horasForm: FormGroup;
+  infoForm: FormGroup;
   descriForm: FormGroup;
   extraForm: FormGroup;
   extraFormSecundario: FormGroup;
@@ -92,6 +95,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   listTP: TipoPlanilla[];
   listNomina = null;
   listNominaFinal = null;
+  listInfo: Info[];
   listTemporal = null;
   listFinal = null;
   notFound = './assets/empty.svg';
@@ -177,6 +181,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   switchValueAFPC = false;
   switchValuePP = false;
   switchValueAguinaldo = false;
+  switchValueTechoEM_IHSS = false;
+  switchValueTechoIVM_IHSS = false;
+  switchValuePorcentajeEM_IHSS = false;
+  switchValuePorcentajeIVM_IHSS = false;
+  switchValueTechoExento_ISR = false;
+  switchValueTecho15_ISR = false;
+  switchValueTecho20_ISR = false;
+  switchValueMontoServicioMedico_ISR = false;
+  switchValueTechoIVM_RAP = false;
+  switchValuePorcentajeIVM_RAP = false;
   limpiarTotalAguinaldo = true;
   isDisabledIHSS = false;
   isDisabledISR = false;
@@ -328,6 +342,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     private EmpleadosService: EmpleadosService,
     private TipoplanillaService: TipoplanillaService,
     private HistorialService: HistorialService,
+    private InfoService: InfoService,
     // private AzureBlobStorageService: AzureBlobStorageService,
     private NzMessageService: NzMessageService
   ) {
@@ -355,6 +370,25 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       viernesSelect: ['', Validators.required],
       sabadoSelect: ['', Validators.required],
       domingoSelect: ['', Validators.required],
+    });
+    this.infoForm = this.fb.group({
+      razon: ['', Validators.required],
+      fecha: ['', Validators.required],
+      sitio: ['', Validators.required],
+      dir: ['', Validators.required],
+      email: [null, [Validators.email, Validators.required]],
+      codigop: ['', Validators.required],
+      bio: ['', Validators.required],
+      techoEM_IHSS: ['', Validators.required],
+      techoIVM_IHSS: ['', Validators.required],
+      porcentajeContribucionTrabajadorEM_IHSS: ['', Validators.required],
+      porcentajeContribucionTrabajadorIVM_IHSS: ['', Validators.required],
+      techoIVM_RAP: ['', Validators.required],
+      porcentajeContribucionTrabajador_RAP: ['', Validators.required],
+      techoExento_ISR: ['', Validators.required],
+      techo15_ISR: ['', Validators.required],
+      techo20_ISR: ['', Validators.required],
+      montoServicioMedico_ISR: ['', Validators.required],
     });
     this.extraForm = this.fb.group({
       incpub: [{ value: '', disabled: true }, Validators.required],
@@ -434,6 +468,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.cargarTP();
     this.cargarCountEmpleadosActivos();
     this.cargarFecha();
+    this.cargarInfo();
   }
   //recomienda rangos por semana y quincena en el calendario
   cargarFecha() {
@@ -460,6 +495,33 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.loading = false;
       this.listTP = data;
       this.idTP = this.inicialForm.get('tplanilla').value;
+    });
+  }
+  //obtiene lista de planillas disponibles
+  cargarInfo() {
+    this.loading = true;
+    this.InfoService.getInfo().subscribe((data) => {
+      this.loading = false;
+      this.listInfo = data;
+      this.infoForm.disable();
+      this.infoForm.get('techoEM_IHSS').setValue(data[0].techoEM_IHSS);
+      this.infoForm.get('techoIVM_IHSS').setValue(data[0].techoIVM_IHSS);
+      this.infoForm
+        .get('porcentajeContribucionTrabajadorEM_IHSS')
+        .setValue(data[0].porcentajeContribucionTrabajadorEM_IHSS);
+      this.infoForm
+        .get('porcentajeContribucionTrabajadorIVM_IHSS')
+        .setValue(data[0].porcentajeContribucionTrabajadorIVM_IHSS);
+      this.infoForm.get('techoIVM_RAP').setValue(data[0].techoIVM_RAP);
+      this.infoForm
+        .get('porcentajeContribucionTrabajador_RAP')
+        .setValue(data[0].porcentajeContribucionTrabajador_RAP);
+      this.infoForm.get('techoExento_ISR').setValue(data[0].techoExento_ISR);
+      this.infoForm.get('techo15_ISR').setValue(data[0].techo15_ISR);
+      this.infoForm.get('techo20_ISR').setValue(data[0].techo20_ISR);
+      this.infoForm
+        .get('montoServicioMedico_ISR')
+        .setValue(data[0].montoServicioMedico_ISR);
     });
   }
   //obtener cantidad de empleados activos
@@ -616,6 +678,17 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       .getElementById('btncontinuar')
       .setAttribute('disabled', 'disabled');
   }
+  empty(): void {
+    this.modal.error({
+      nzTitle: 'Informacion Faltante',
+      nzContent:
+        '<b style="color: red;">ADVERTENCIA: Asegúrate de llenar los valores y techos del IHSS, ISR y AFPC utilizando el boton Deducibles.</b>',
+      nzClosable: false,
+      nzOkDanger: true,
+      nzStyle: { left: '5%' },
+      nzOnOk: () => this.retry(),
+    });
+  }
   //modal primer paso
   warning(): void {
     this.isVisibleInicial = true;
@@ -624,10 +697,25 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzContent:
         '<b style="color: red;">¿Está seguro que la fecha y la planilla seleccionada son correctas?.</b>',
       nzOkText: 'Si',
+      nzStyle: { left: '5%' },
       nzOkType: 'primary',
       nzClosable: false,
       nzOkDanger: true,
       nzOnOk: () => {
+        // if (
+        //   this.listInfo[0].montoServicioMedico_ISR === 0 ||
+        //   this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS === 0 ||
+        //   this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS === 0 ||
+        //   this.listInfo[0].porcentajeContribucionTrabajador_RAP === 0 ||
+        //   this.listInfo[0].techo15_ISR === 0 ||
+        //   this.listInfo[0].techo20_ISR === 0 ||
+        //   this.listInfo[0].techoEM_IHSS === 0 ||
+        //   this.listInfo[0].techoExento_ISR === 0 ||
+        //   this.listInfo[0].techoIVM_IHSS === 0 ||
+        //   this.listInfo[0].techoIVM_RAP === 0
+        // ) {
+        //   this.empty();
+        // } else {
         let arreglo = [];
         let iguales: number = 0;
         let faltante: number = 0;
@@ -836,6 +924,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.listNominaFinal,
           this.jDatos
         );
+        // }
       },
       nzCancelText: 'No',
       nzOnCancel: () => {
@@ -1924,6 +2013,63 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   handleCancelDeducibles() {
     this.isVisibleDeducible = false;
+    this.infoForm.reset();
+    this.cargarInfo();
+    this.switchValueTechoEM_IHSS = false;
+    this.switchValueTechoIVM_IHSS = false;
+    this.switchValuePorcentajeEM_IHSS = false;
+    this.switchValuePorcentajeIVM_IHSS = false;
+    this.switchValueTechoIVM_RAP = false;
+    this.switchValuePorcentajeIVM_RAP = false;
+    this.switchValueTechoExento_ISR = false;
+    this.switchValueTecho15_ISR = false;
+    this.switchValueTecho20_ISR = false;
+    this.switchValueMontoServicioMedico_ISR = false;
+  }
+  handleOkDeducibles() {
+    this.isVisibleDeducible = false;
+    const info: Info = {
+      id: 1,
+      razonSocial: this.listInfo[0].razonSocial,
+      sitioWeb: this.listInfo[0].sitioWeb,
+      fechaFundacion: this.listInfo[0].fechaFundacion,
+      direccionPrincipal: this.listInfo[0].direccionPrincipal,
+      email: this.listInfo[0].email,
+      codigoPostal: this.listInfo[0].codigoPostal,
+      bio: this.listInfo[0].bio,
+      techoEM_IHSS: this.infoForm.get('techoEM_IHSS').value,
+      techoIVM_IHSS: this.infoForm.get('techoIVM_IHSS').value,
+      porcentajeContribucionTrabajadorEM_IHSS: this.infoForm.get(
+        'porcentajeContribucionTrabajadorEM_IHSS'
+      ).value,
+      porcentajeContribucionTrabajadorIVM_IHSS: this.infoForm.get(
+        'porcentajeContribucionTrabajadorIVM_IHSS'
+      ).value,
+      techoIVM_RAP: this.infoForm.get('techoIVM_RAP').value,
+      porcentajeContribucionTrabajador_RAP: this.infoForm.get(
+        'porcentajeContribucionTrabajador_RAP'
+      ).value,
+      techoExento_ISR: this.infoForm.get('techoExento_ISR').value,
+      techo15_ISR: this.infoForm.get('techo15_ISR').value,
+      techo20_ISR: this.infoForm.get('techo20_ISR').value,
+      montoServicioMedico_ISR: this.infoForm.get('montoServicioMedico_ISR')
+        .value,
+    };
+    console.log(this.listInfo, info);
+    this.InfoService.actualizarInfo(1, info).subscribe((data) => {
+      this.infoForm.reset();
+      this.cargarInfo();
+    });
+    this.switchValueTechoEM_IHSS = false;
+    this.switchValueTechoIVM_IHSS = false;
+    this.switchValuePorcentajeEM_IHSS = false;
+    this.switchValuePorcentajeIVM_IHSS = false;
+    this.switchValueTechoIVM_RAP = false;
+    this.switchValuePorcentajeIVM_RAP = false;
+    this.switchValueTechoExento_ISR = false;
+    this.switchValueTecho15_ISR = false;
+    this.switchValueTecho20_ISR = false;
+    this.switchValueMontoServicioMedico_ISR = false;
   }
   handleEmpleadoClear(id: number) {
     console.log(id);
@@ -2820,13 +2966,133 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
     console.log(this.resumenForm.get('aguinaldo').value);
   }
+  enableTechoEM_IHSS() {
+    if (this.switchValueTechoEM_IHSS === false) {
+      this.infoForm.get('techoEM_IHSS').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm.get('techoEM_IHSS').setValue(data[0].techoEM_IHSS);
+      });
+    } else if (this.switchValueTechoEM_IHSS === true) {
+      this.infoForm.get('techoEM_IHSS').enable();
+      this.infoForm.get('techoEM_IHSS').setValue('');
+    }
+  }
+  enableTechoIVM_IHSS() {
+    if (this.switchValueTechoIVM_IHSS === false) {
+      this.infoForm.get('techoIVM_IHSS').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm.get('techoIVM_IHSS').setValue(data[0].techoIVM_IHSS);
+      });
+    } else if (this.switchValueTechoIVM_IHSS === true) {
+      this.infoForm.get('techoIVM_IHSS').enable();
+      this.infoForm.get('techoIVM_IHSS').setValue('');
+    }
+  }
+  enablePorcentajeEM_IHSS() {
+    if (this.switchValuePorcentajeEM_IHSS === false) {
+      this.infoForm.get('porcentajeContribucionTrabajadorEM_IHSS').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm
+          .get('porcentajeContribucionTrabajadorEM_IHSS')
+          .setValue(data[0].porcentajeContribucionTrabajadorEM_IHSS);
+      });
+    } else if (this.switchValuePorcentajeEM_IHSS === true) {
+      this.infoForm.get('porcentajeContribucionTrabajadorEM_IHSS').enable();
+      this.infoForm.get('porcentajeContribucionTrabajadorEM_IHSS').setValue('');
+    }
+  }
+  enablePorcentajeIVM_IHSS() {
+    if (this.switchValuePorcentajeIVM_IHSS === false) {
+      this.infoForm.get('porcentajeContribucionTrabajadorIVM_IHSS').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm
+          .get('porcentajeContribucionTrabajadorIVM_IHSS')
+          .setValue(data[0].porcentajeContribucionTrabajadorIVM_IHSS);
+      });
+    } else if (this.switchValuePorcentajeIVM_IHSS === true) {
+      this.infoForm.get('porcentajeContribucionTrabajadorIVM_IHSS').enable();
+      this.infoForm
+        .get('porcentajeContribucionTrabajadorIVM_IHSS')
+        .setValue('');
+    }
+  }
+  enableTechoExento_ISR() {
+    if (this.switchValueTechoExento_ISR === false) {
+      this.infoForm.get('techoExento_ISR').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm.get('techoExento_ISR').setValue(data[0].techoExento_ISR);
+      });
+    } else if (this.switchValueTechoExento_ISR === true) {
+      this.infoForm.get('techoExento_ISR').enable();
+      this.infoForm.get('techoExento_ISR').setValue('');
+    }
+  }
+  enableTecho15_ISR() {
+    if (this.switchValueTecho15_ISR === false) {
+      this.infoForm.get('techo15_ISR').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm.get('techo15_ISR').setValue(data[0].techo15_ISR);
+      });
+    } else if (this.switchValueTecho15_ISR === true) {
+      this.infoForm.get('techo15_ISR').enable();
+      this.infoForm.get('techo15_ISR').setValue('');
+    }
+  }
+  enableTecho20_ISR() {
+    if (this.switchValueTecho20_ISR === false) {
+      this.infoForm.get('techo20_ISR').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm.get('techo20_ISR').setValue(data[0].techo20_ISR);
+      });
+    } else if (this.switchValueTecho20_ISR === true) {
+      this.infoForm.get('techo20_ISR').enable();
+      this.infoForm.get('techo20_ISR').setValue('');
+    }
+  }
+  enableMontoServicioMedico_ISR() {
+    if (this.switchValueMontoServicioMedico_ISR === false) {
+      this.infoForm.get('montoServicioMedico_ISR').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm
+          .get('montoServicioMedico_ISR')
+          .setValue(data[0].montoServicioMedico_ISR);
+      });
+    } else if (this.switchValueMontoServicioMedico_ISR === true) {
+      this.infoForm.get('montoServicioMedico_ISR').enable();
+      this.infoForm.get('montoServicioMedico_ISR').setValue('');
+    }
+  }
+  enableTechoIVM_RAP() {
+    if (this.switchValueTechoIVM_RAP === false) {
+      this.infoForm.get('techoIVM_RAP').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm.get('techoIVM_RAP').setValue(data[0].techoIVM_RAP);
+      });
+    } else if (this.switchValueTechoIVM_RAP === true) {
+      this.infoForm.get('techoIVM_RAP').enable();
+      this.infoForm.get('techoIVM_RAP').setValue('');
+    }
+  }
+  enablePorcentajeIVM_RAP() {
+    if (this.switchValuePorcentajeIVM_RAP === false) {
+      this.infoForm.get('porcentajeContribucionTrabajador_RAP').disable();
+      this.InfoService.getInfo().subscribe((data) => {
+        this.infoForm
+          .get('porcentajeContribucionTrabajador_RAP')
+          .setValue(data[0].porcentajeContribucionTrabajador_RAP);
+      });
+    } else if (this.switchValuePorcentajeIVM_RAP === true) {
+      this.infoForm.get('porcentajeContribucionTrabajador_RAP').enable();
+      this.infoForm.get('porcentajeContribucionTrabajador_RAP').setValue('');
+    }
+  }
   enableAFPC() {
     if (this.switchValueAFPC === false) {
       this.automaticForm.get('afpc').disable();
       this.AFPC();
     } else if (this.switchValueAFPC === true) {
       this.automaticForm.get('afpc').enable();
-      this.automaticForm.get('afpc').setValue(0);
+      this.automaticForm.get('afpc').setValue('');
     }
   }
   horasSemana(entrada: moment.Moment, salida: moment.Moment) {

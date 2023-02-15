@@ -174,148 +174,332 @@
     [(nzVisible)]="isVisibleDeducible"
     nzTitle="Establecer Deducibles"
     nzClosable="false"
-    [nzStyle]="{ top: '20px' }"
+    [nzStyle]="{ left: '5%' }"
     nzCentered
+    nzWidth="40%"
+    nzCancelText="Cancelar"
+    nzOkText="Guardar"
+    (nzOnOk)="handleOkDeducibles()"
     (nzOnCancel)="handleCancelDeducibles()"
   >
     <ng-container *nzModalContent>
-      <form nz-form [formGroup]="automaticForm">
-        <p></p>
-        <tr>
-          <td>
-            <div nz-row>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="cboxIHSS"
-                  [(ngModel)]="isCheckedIHSS"
-                  (ngModelChange)="logIHSS($event)"
+      <nz-collapse nzAccordion>
+        <nz-collapse-panel nzHeader="IHSS" nzExpandedIcon="double-right" nzActive>
+          <form nz-form [formGroup]="infoForm">
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired
+                >Techo EM (Enfermedad y Maternidad)</nz-form-label
+              >
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese cantidad en lps"
+                  type="number"
+                  nzSize="default"
+                  formControlName="techoEM_IHSS"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValueTechoEM_IHSS"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enableTechoEM_IHSS()"
                   [ngModelOptions]="{ standalone: true }"
-                ></label>
-              </div>
-            </div>
-          </td>
-          <td>
-            <nz-form-label [nzSm]="24" [nzXs]="24">IHSS</nz-form-label>
-          </td>
-          <td>
-            <input
-              formControlName="ihss"
-              nz-input
-              placeholder="0"
-              type="number"
-              min="0"
-              nzSize="default"
-            />
-          </td>
-          <td style="padding-left: 0px">
-            <nz-switch
-              [(ngModel)]="switchValueIHSS"
-              [nzCheckedChildren]="checkedTemplate"
-              [nzUnCheckedChildren]="unCheckedTemplate"
-              (ngModelChange)="enableIHSS()"
-              [nzDisabled]="isDisabledIHSS"
-              [ngModelOptions]="{ standalone: true }"
-            ></nz-switch>
-            <ng-template #checkedTemplate
-              ><i nz-icon nzType="edit" nzTheme="outline"></i
-            ></ng-template>
-            <ng-template #unCheckedTemplate
-              ><i nz-icon nzType="check"></i
-            ></ng-template>
-          </td>
-        </tr>
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
 
-        <tr>
-          <td>
-            <div nz-row>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="cboxISR"
-                  [(ngModel)]="isCheckedISR"
-                  (ngModelChange)="logISR($event)"
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired
+                >% de Contribución EM</nz-form-label
+              >
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese valor"
+                  type="number"
+                  nzSize="default"
+                  formControlName="porcentajeContribucionTrabajadorEM_IHSS"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValuePorcentajeEM_IHSS"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enablePorcentajeEM_IHSS()"
                   [ngModelOptions]="{ standalone: true }"
-                ></label>
-              </div>
-            </div>
-          </td>
-          <td>
-            <nz-form-label [nzSm]="24" [nzXs]="24">ISR</nz-form-label>
-          </td>
-          <td>
-            <input
-              formControlName="isr"
-              nz-input
-              placeholder="0"
-              type="number"
-              min="0"
-              nzSize="default"
-            />
-          </td>
-          <td style="padding-left: 0px">
-            <nz-switch
-              [(ngModel)]="switchValueISR"
-              [nzCheckedChildren]="checkedTemplate"
-              [nzUnCheckedChildren]="unCheckedTemplate"
-              (ngModelChange)="enableISR()"
-              [nzDisabled]="isDisabledISR"
-              [ngModelOptions]="{ standalone: true }"
-            ></nz-switch>
-            <ng-template #checkedTemplate
-              ><i nz-icon nzType="edit" nzTheme="outline"></i
-            ></ng-template>
-            <ng-template #unCheckedTemplate
-              ><i nz-icon nzType="check"></i
-            ></ng-template>
-          </td>
-        </tr>
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
 
-        <tr>
-          <td>
-            <div nz-row>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="cboxAFPC"
-                  [(ngModel)]="isCheckedAFPC"
-                  (ngModelChange)="logAFPC($event)"
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired
+                >Techo IVM (Invalidez, Vejez y Muerte)</nz-form-label
+              >
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese cantidad en lps"
+                  type="number"
+                  nzSize="default"
+                  formControlName="techoIVM_IHSS"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValueTechoIVM_IHSS"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enableTechoIVM_IHSS()"
                   [ngModelOptions]="{ standalone: true }"
-                ></label>
-              </div>
-            </div>
-          </td>
-          <td>
-            <nz-form-label [nzSm]="24" [nzXs]="24">AFPC</nz-form-label>
-          </td>
-          <td>
-            <input
-              formControlName="afpc"
-              nz-input
-              placeholder="0"
-              type="number"
-              min="0"
-              nzSize="default"
-            />
-          </td>
-          <td style="padding-left: 0px">
-            <nz-switch
-              [(ngModel)]="switchValueAFPC"
-              [nzCheckedChildren]="checkedTemplate"
-              [nzUnCheckedChildren]="unCheckedTemplate"
-              (ngModelChange)="enableAFPC()"
-              [nzDisabled]="isDisableAFPC"
-              [ngModelOptions]="{ standalone: true }"
-            ></nz-switch>
-            <ng-template #checkedTemplate
-              ><i nz-icon nzType="edit" nzTheme="outline"></i
-            ></ng-template>
-            <ng-template #unCheckedTemplate
-              ><i nz-icon nzType="check"></i
-            ></ng-template>
-          </td>
-        </tr>
-      </form>
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired
+                >% de Contribución IVM</nz-form-label
+              >
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese valor"
+                  type="number"
+                  nzSize="default"
+                  formControlName="porcentajeContribucionTrabajadorIVM_IHSS"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValuePorcentajeIVM_IHSS"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enablePorcentajeIVM_IHSS()"
+                  [ngModelOptions]="{ standalone: true }"
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
+          </form>
+        </nz-collapse-panel>
+
+        <nz-collapse-panel nzHeader="ISR" nzExpandedIcon="double-right">
+          <form nz-form [formGroup]="infoForm">
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired>Techo Exento</nz-form-label>
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese cantidad en lps"
+                  type="number"
+                  nzSize="default"
+                  formControlName="techoExento_ISR"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValueTechoExento_ISR"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enableTechoExento_ISR()"
+                  [ngModelOptions]="{ standalone: true }"
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired>Techo 15%</nz-form-label>
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese cantidad en lps"
+                  type="number"
+                  nzSize="default"
+                  formControlName="techo15_ISR"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValueTecho15_ISR"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enableTecho15_ISR()"
+                  [ngModelOptions]="{ standalone: true }"
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired>Techo 20%</nz-form-label>
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese cantidad en lps"
+                  type="number"
+                  nzSize="default"
+                  formControlName="techo20_ISR"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValueTecho20_ISR"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enableTecho20_ISR()"
+                  [ngModelOptions]="{ standalone: true }"
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired
+                >Monto Servicios Médicos</nz-form-label
+              >
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese cantidad en lps"
+                  type="number"
+                  nzSize="default"
+                  formControlName="montoServicioMedico_ISR"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValueMontoServicioMedico_ISR"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enableMontoServicioMedico_ISR()"
+                  [ngModelOptions]="{ standalone: true }"
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
+          </form>
+        </nz-collapse-panel>
+
+        <nz-collapse-panel nzHeader="AFPC" nzExpandedIcon="double-right">
+          <form nz-form [formGroup]="infoForm">
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired
+                >Valor correspondiente</nz-form-label
+              >
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese cantidad en lps"
+                  type="number"
+                  nzSize="default"
+                  formControlName="techoIVM_RAP"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValueTechoIVM_RAP"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enableTechoIVM_RAP()"
+                  [ngModelOptions]="{ standalone: true }"
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="10" nzRequired
+                >% de Contribución</nz-form-label
+              >
+              <nz-form-control [nzSm]="10">
+                <input
+                  nz-input
+                  placeholder="Ingrese valor"
+                  type="number"
+                  nzSize="default"
+                  formControlName="porcentajeContribucionTrabajador_RAP"
+                  min="0"
+                />
+              </nz-form-control>
+              <td>
+                <nz-switch
+                  [(ngModel)]="switchValuePorcentajeIVM_RAP"
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  (ngModelChange)="enablePorcentajeIVM_RAP()"
+                  [ngModelOptions]="{ standalone: true }"
+                ></nz-switch>
+                <ng-template #checkedTemplate
+                  ><i nz-icon nzType="edit" nzTheme="outline"></i
+                ></ng-template>
+                <ng-template #unCheckedTemplate
+                  ><i nz-icon nzType="check"></i
+                ></ng-template>
+              </td>
+            </nz-form-item>
+          </form>
+        </nz-collapse-panel>
+      </nz-collapse>
     </ng-container>
   </nz-modal>
   <div [(ngModel)]="diferencia" ngDefaultControl *ngIf="diferencia >= 15">
