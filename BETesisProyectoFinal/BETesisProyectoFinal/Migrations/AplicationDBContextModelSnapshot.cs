@@ -179,9 +179,6 @@ namespace BEProyectoFinal.Migrations
                     b.Property<decimal>("Techo20_ISR")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("Techo25_ISR")
-                        .HasColumnType("decimal(65,30)");
-
                     b.Property<decimal>("TechoEM_IHSS")
                         .HasColumnType("decimal(65,30)");
 

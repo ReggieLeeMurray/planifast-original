@@ -42,9 +42,6 @@ namespace BEProyectoFinal.Models
     public decimal Techo20_ISR { get; set; }
 
     [Required]
-    public decimal Techo25_ISR { get; set; }
-
-    [Required]
     public decimal MontoServicioMedico_ISR { get; set; }
 
     [Required]

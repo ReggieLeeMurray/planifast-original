@@ -37,7 +37,6 @@ namespace BEProyectoFinal.Migrations
                     TechoExento_ISR = table.Column<decimal>(nullable: false),
                     Techo15_ISR = table.Column<decimal>(nullable: false),
                     Techo20_ISR = table.Column<decimal>(nullable: false),
-                    Techo25_ISR = table.Column<decimal>(nullable: false),
                     MontoServicioMedico_ISR = table.Column<decimal>(nullable: false),
                     TechoEM_IHSS = table.Column<decimal>(nullable: false),
                     TechoIVM_IHSS = table.Column<decimal>(nullable: false),

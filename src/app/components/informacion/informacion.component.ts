@@ -34,6 +34,16 @@ export class InformacionComponent implements OnInit {
       email: [null, [Validators.email, Validators.required]],
       codigop: ['', Validators.required],
       bio: ['', Validators.required],
+      techoEM_IHSS: [''],
+      techoIVM_IHSS: [''],
+      porcentajeContribucionTrabajadorEM_IHSS: [''],
+      porcentajeContribucionTrabajadorIVM_IHSS: [''],
+      techoIVM_RAP: [''],
+      porcentajeContribucionTrabajador_RAP: [''],
+      techoExento_ISR: [''],
+      techo15_ISR: [''],
+      techo20_ISR: [''],
+      montoServicioMedico_ISR: [''],
     });
   }
   ngOnInit(): void {
@@ -49,6 +59,7 @@ export class InformacionComponent implements OnInit {
       this.loading = false;
       this.listInfo = data;
       this.idInfo = this.listInfo[0].id;
+      console.log(this.listInfo);
     });
   }
   resetForm(e: MouseEvent): void {
@@ -88,6 +99,19 @@ export class InformacionComponent implements OnInit {
         email: this.InfoForm.get('email').value,
         codigoPostal: this.InfoForm.get('codigop').value,
         bio: this.InfoForm.get('bio').value,
+        techoEM_IHSS: this.listInfo[0].techoEM_IHSS,
+        techoIVM_IHSS: this.listInfo[0].techoIVM_IHSS,
+        porcentajeContribucionTrabajadorEM_IHSS:
+          this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS,
+        porcentajeContribucionTrabajadorIVM_IHSS:
+          this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS,
+        techoIVM_RAP: this.listInfo[0].techoIVM_RAP,
+        porcentajeContribucionTrabajador_RAP:
+          this.listInfo[0].porcentajeContribucionTrabajador_RAP,
+        techoExento_ISR: this.listInfo[0].techoExento_ISR,
+        techo15_ISR: this.listInfo[0].techo15_ISR,
+        techo20_ISR: this.listInfo[0].techo20_ISR,
+        montoServicioMedico_ISR: this.listInfo[0].montoServicioMedico_ISR,
       };
       this.InfoService.guardarInfo(info).subscribe((data) => {
         this.router.navigate(['/info']);
@@ -104,6 +128,19 @@ export class InformacionComponent implements OnInit {
         email: this.InfoForm.get('email').value,
         codigoPostal: this.InfoForm.get('codigop').value,
         bio: this.InfoForm.get('bio').value,
+        techoEM_IHSS: this.listInfo[0].techoEM_IHSS,
+        techoIVM_IHSS: this.listInfo[0].techoIVM_IHSS,
+        porcentajeContribucionTrabajadorEM_IHSS:
+          this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS,
+        porcentajeContribucionTrabajadorIVM_IHSS:
+          this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS,
+        techoIVM_RAP: this.listInfo[0].techoIVM_RAP,
+        porcentajeContribucionTrabajador_RAP:
+          this.listInfo[0].porcentajeContribucionTrabajador_RAP,
+        techoExento_ISR: this.listInfo[0].techoExento_ISR,
+        techo15_ISR: this.listInfo[0].techo15_ISR,
+        techo20_ISR: this.listInfo[0].techo20_ISR,
+        montoServicioMedico_ISR: this.listInfo[0].montoServicioMedico_ISR,
       };
       this.InfoService.actualizarInfo(this.idInfo, info).subscribe((data) => {
         this.router.navigate(['/info']);

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BEProyectoFinal.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20230213183333_MyFirstMigration")]
+    [Migration("20230215201519_MyFirstMigration")]
     partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,9 +179,6 @@ namespace BEProyectoFinal.Migrations
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal>("Techo20_ISR")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("Techo25_ISR")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal>("TechoEM_IHSS")
