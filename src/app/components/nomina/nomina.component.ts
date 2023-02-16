@@ -212,6 +212,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   indeterminate = false;
   btnEnable = true;
   continue = false;
+  archivoGenerado = false;
   //horas trabajadas x dia de la semana
   hours: number = 0;
   hoursLunes: number = 0;
@@ -264,7 +265,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   sueldoAlDeducirString = '0.00';
   salario: number;
   salarioString: string;
-  totalAPagar = 0;
+  totalAPagar: number = 0;
   empleadosactivos;
   deduccion: number = 0;
   deduccionString = '0.00';
@@ -724,7 +725,6 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         let contador: number = 0;
         let invalido: number = 0;
         let reduccion: number = 0;
-
         for (let x = 0; x < this.jDatos.length; x++) {
           if (!this.jDatos[x].id) {
             this.jDatos[x].id = 0;
@@ -1329,7 +1329,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             this.listNomina[i].ingresos - this.listNomina[i].deducciones
           );
         } else {
-          this.listNomina[i].deducciones === 0;
+          this.listNomina[i].deducciones = 0;
         }
         this.totalAPagar = this.round2Decimal(
           this.totalAPagar + this.listNomina[i].totalPagar
@@ -1837,7 +1837,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   exportExcel(): void {
     console.log(this.totalAguinaldo);
     /* post historial */
-    this.guardarHistorial();
+    if (this.archivoGenerado === false) {
+      this.guardarHistorial();
+      this.archivoGenerado = true;
+    }
     /* table id is passed over here */
     var planilla = document.getElementById('nominaFinal');
     var comprobantes = document.getElementById('final');
@@ -2100,8 +2103,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         }
         this.listNomina[i].ingresos = 0;
         this.listNomina[i].deducciones = 0;
-        this.totalAPagar = this.totalAPagar - this.listNomina[i].totalPagar;
-        this.listNomina[i].totalPagar = 0;
+        if (this.listNomina[i].totalPagar !== undefined) {
+          this.totalAPagar = this.totalAPagar - this.listNomina[i].totalPagar;
+          this.listNomina[i].totalPagar = 0;
+        }
         //ingresos listnominafinal
         this.totalAguinaldo =
           this.round2Decimal(this.totalAguinaldo) -
@@ -2253,7 +2258,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   deduccionTotal() {
-    if (this.diferencia >= 15) {
+    if (this.diferencia >= 8) {
       this.valorIHSS = this.round2Decimal(this.automaticForm.get('ihss').value);
       this.valorISR = this.round2Decimal(this.automaticForm.get('isr').value);
       this.valorAFPC = this.round2Decimal(this.automaticForm.get('afpc').value);
@@ -2335,7 +2340,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.isDisabledIHSS = true;
     this.isDisableAFPC = true;
     this.isDisabledISR = true;
-    if (this.diferencia >= 15) {
+    if (this.diferencia >= 8) {
       this.deduccion =
         this.valorIHSS +
         this.valorISR +
@@ -2429,7 +2434,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           console.log(this.totalAPagar);
           this.listNominaFinal[i].ihss = this.valorIHSS;
           this.listNominaFinal[i].isr = this.valorISR;
-          if (this.diferencia >= 15) {
+          if (this.diferencia >= 8) {
             this.listNominaFinal[i].afpc = this.valorAFPC;
             this.listNominaFinal[i].anticipo = this.valorAnticipo;
             this.listNominaFinal[i].prestamorap = this.valorPrestamoRap;
@@ -5156,7 +5161,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   incapacidadPub() {
-    if (this.diferencia >= 15) {
+    if (this.diferencia >= 8) {
       this.valorIncapacidadPub = this.round2Decimal(
         this.extraForm.get('incpub').value
       );
