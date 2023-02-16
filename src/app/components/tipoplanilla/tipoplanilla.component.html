@@ -130,7 +130,7 @@
     </tr>
     <tr *ngFor="let data of basicTable.data" style="text-align: center">
       <td>{{ data.id }}</td>
-      <td>{{ data.descripcion }}</td>
+      <td>{{ data.descripcion | uppercase }}</td>
       <td>{{ data.tipo }}</td>
       <td>
         <button class="btn btn-primary btn-sm" (click)="esEditar(data.id)">
