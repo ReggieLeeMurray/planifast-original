@@ -1205,13 +1205,27 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     { label: '20%', value: 'L. 262,449.28 - L. 610,347.16' },
     { label: '25%', value: 'L. 610,347.17 - en adelante' },
   ];*/
+  revisarPorcentajes(valor: number) {
+    var result: number;
+    switch (valor >= 0) {
+      case valor > 1:
+        result = valor / 100;
+        break;
+      case valor === 0:
+        result = 0.025;
+        break;
+      case valor > 0 && valor < 1:
+        result = valor;
+        break;
+    }
+    return result;
+  }
   ISR() {
-    console.log(this.salario);
-    var exento = 199039.47;
-    var quince = 303499.92;
-    var veinte = 705813.79;
+    var exento = this.listInfo[0].techoExento_ISR;
+    var quince = this.listInfo[0].techo15_ISR;
+    var veinte = this.listInfo[0].techo20_ISR;
     //monto exento de pago anuales destinada al pago de servicios medicos
-    var montodeducible = 40000.0;
+    var montodeducible = this.listInfo[0].montoServicioMedico_ISR;
     var x = this.truncator(this.salario * 12 - montodeducible);
     console.log('X', x);
     var w = 0;
@@ -1240,12 +1254,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     { label: 'IHSS empleados <= 10 ', value: 'EM = 9849.7 a 2.5% | IVM = 10268.86 a 1.60%' },
   ];*/
   IHSS() {
-    var techoem = 10342.19;
-    var pctem = 0.025;
+    var techoem = this.listInfo[0].techoEM_IHSS;
+    let temporalEM_IHSS =
+      this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS;
+    var pctem = this.revisarPorcentajes(temporalEM_IHSS);
     // var techoemmicro = 9849.7;
     // var pctemmicro = 0.025;
-    var techoivm = 10796.49;
-    var pctivm = 0.025;
+    var techoivm = this.listInfo[0].techoIVM_IHSS;
+    let temporalIVM_IHSS =
+      this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS;
+    var pctivm = this.revisarPorcentajes(temporalIVM_IHSS);
     // var techoivmmicro = 10268.86;
     // var pctivmmicro = 0.016;
     var em = 0;
@@ -1270,10 +1288,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     { label: 'AFPC empleados <= 10 ', value: 'AFPC = Salario Mensual - 10268.86 x 0.60% },
   ];*/
   AFPC() {
-    console.log(this.salario);
     var salario = this.salario;
-    var techorap = 10796.49;
-    var pctrap = 0.015;
+    var techorap = this.listInfo[0].techoIVM_RAP;
+    let temporalIVM_RAP = this.listInfo[0].porcentajeContribucionTrabajador_RAP;
+    var pctrap = this.revisarPorcentajes(temporalIVM_RAP);
     var rap = 0;
     // var techorapmmicro = 10268.86;
     // var pctrapmicro = 0.006;

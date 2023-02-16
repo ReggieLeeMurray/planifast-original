@@ -184,7 +184,11 @@
   >
     <ng-container *nzModalContent>
       <nz-collapse nzAccordion>
-        <nz-collapse-panel nzHeader="IHSS" nzExpandedIcon="double-right" nzActive>
+        <nz-collapse-panel
+          nzHeader="IHSS"
+          nzExpandedIcon="double-right"
+          nzActive
+        >
           <form nz-form [formGroup]="infoForm">
             <nz-form-item>
               <nz-form-label [nzSm]="10" nzRequired
@@ -502,7 +506,7 @@
       </nz-collapse>
     </ng-container>
   </nz-modal>
-  <div [(ngModel)]="diferencia" ngDefaultControl *ngIf="diferencia >= 15">
+  <div [(ngModel)]="diferencia" ngDefaultControl *ngIf="diferencia > 8">
     <!-- AQUI ESTOY -->
     <nz-modal
       [nzStyle]="{ top: '20px' }"
@@ -4957,7 +4961,7 @@
           <th
             nzWidth="10%"
             style="text-align: center; vertical-align: middle"
-            *ngIf="diferencia >= 15"
+            *ngIf="diferencia > 8"
           >
             Salario Diario
           </th>
@@ -5046,7 +5050,7 @@
               </form>
             </a>
           </td>
-          <td *ngIf="diferencia >= 15">
+          <td *ngIf="diferencia > 8">
             {{
               this.truncator(data.salarioBase / 30).toFixed(2)
                 | currency : "LPS "
@@ -5077,7 +5081,7 @@
           </td>
           <td width="15%">
             <button
-              *ngIf="this.totalAguinaldo === 0 && diferencia >= 15"
+              *ngIf="this.totalAguinaldo === 0 && diferencia > 8"
               class="btn btn-info btn-sm"
               (click)="ingresoCompleto(data.id)"
               title="Jornada Completa"
@@ -5087,7 +5091,7 @@
             <button
               *ngIf="
                 (this.totalAguinaldo === 0 && diferencia <= 7) ||
-                (this.totalAguinaldo === 0 && diferencia >= 15)
+                (this.totalAguinaldo === 0 && diferencia > 8)
               "
               class="btn btn-primary btn-sm"
               (click)="

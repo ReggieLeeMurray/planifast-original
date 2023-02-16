@@ -274,7 +274,9 @@
                   type="number"
                   *ngFor="let tp of listTP"
                   nzValue="{{ tp.id }}"
-                  nzLabel="{{ tp.descripcion }} ⇄ {{ tp.tipo }}"
+                  nzLabel="{{ tp.descripcion | uppercase }} ⇄ {{
+                    tp.tipo | uppercase
+                  }}"
                 ></nz-option>
               </nz-select> </nz-form-control
           ></nz-form-item>

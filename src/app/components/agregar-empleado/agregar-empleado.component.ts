@@ -242,7 +242,11 @@ export class AgregarEmpleadoComponent implements OnInit {
             });
           this.TipoplanillaService.cargarTipoPlanilla(this.idTP).subscribe(
             (data) => {
-              this.selectedValuePlanilla = data.descripcion + ' ⇄ ' + data.tipo;
+              this.selectedValuePlanilla = (
+                data.descripcion +
+                ' ⇄ ' +
+                data.tipo
+              ).toUpperCase();
               console.log(this.selectedValuePlanilla);
             }
           );
