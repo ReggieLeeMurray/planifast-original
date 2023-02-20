@@ -1197,22 +1197,17 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.page_size = e.pageSize;
     this.page_number = e.pageIndex + 1;
   }
-  //calculo del isr
-  /*ISR segun SAR (monto deducible = L. 40,000.00)
-  optionList = [
-    { label: 'Exento', value: 'L. 0.01 - L. 172,117.89' },
-    { label: '15%', value: 'L. 172,117.9 - L. 262,449.27' },
-    { label: '20%', value: 'L. 262,449.28 - L. 610,347.16' },
-    { label: '25%', value: 'L. 610,347.17 - en adelante' },
-  ];*/
-  revisarPorcentajes(valor: number) {
-    var result: number;
+  revisarPorcentajes(valor: number, tipo: string) {
+    let result: number = 0;
     switch (valor >= 0) {
       case valor > 1:
         result = valor / 100;
         break;
-      case valor === 0:
+      case valor === 0 && tipo === 'IHSS':
         result = 0.025;
+        break;
+      case valor === 0 && tipo === 'RAP':
+        result = 0.015;
         break;
       case valor > 0 && valor < 1:
         result = valor;
@@ -1220,6 +1215,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
     return result;
   }
+  //calculo del isr segun su respectiva ley
   ISR() {
     var exento = this.listInfo[0].techoExento_ISR;
     var quince = this.listInfo[0].techo15_ISR;
@@ -1247,65 +1243,38 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.automaticForm.get('isr').setValue(this.truncator(y + z + w));
     }
   }
-  //calculo del ihss
-  /*IHSS segun su respectiva ley
-  optionList = [
-    { label: 'IHSS empleados > 10 ', value: 'EM = 9849.7 a 2.5% | IVM = 10282.37 a 2.5%' },
-    { label: 'IHSS empleados <= 10 ', value: 'EM = 9849.7 a 2.5% | IVM = 10268.86 a 1.60%' },
-  ];*/
+  //calculo del ihss segun su respectiva ley
+  //IHSS = EM = 9,849.7(techo) x 2.5% + IVM = 10,282.37(techo) x 2.5%
   IHSS() {
     var techoem = this.listInfo[0].techoEM_IHSS;
-    let temporalEM_IHSS =
-      this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS;
-    var pctem = this.revisarPorcentajes(temporalEM_IHSS);
-    // var techoemmicro = 9849.7;
-    // var pctemmicro = 0.025;
+    var pctem = this.revisarPorcentajes(
+      this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS,
+      'IHSS'
+    );
     var techoivm = this.listInfo[0].techoIVM_IHSS;
-    let temporalIVM_IHSS =
-      this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS;
-    var pctivm = this.revisarPorcentajes(temporalIVM_IHSS);
-    // var techoivmmicro = 10268.86;
-    // var pctivmmicro = 0.016;
+    var pctivm = this.revisarPorcentajes(
+      this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS,
+      'IHSS'
+    );
     var em = 0;
     var ivm = 0;
-    // if (this.empleadosactivos <= 10) {
-    //   em = techoemmicro * pctemmicro;
-    //   ivm = techoivmmicro * pctivmmicro;
-    //   this.automaticForm.get('ihss').setValue(this.truncator(em + ivm));
-    // } else if (this.empleadosactivos > 10) {
-    //   em = techoem * pctem;
-    //   ivm = techoivm * pctivm;
-    //   this.automaticForm.get('ihss').setValue(this.truncator(em + ivm));
-    // }
     em = techoem * pctem;
     ivm = techoivm * pctivm;
     this.automaticForm.get('ihss').setValue(this.truncator(em + ivm));
   }
-  //calculo del afpc
-  /*AFPC segun su respectiva ley
-  optionList = [
-    { label: 'AFPC empleados > 10 ', value: 'AFPC = Salario Mensual - 10282.37 x 1.5% },
-    { label: 'AFPC empleados <= 10 ', value: 'AFPC = Salario Mensual - 10268.86 x 0.60% },
-  ];*/
+  //calculo del afpc segun su respectiva ley
+  //AFPC = Salario Mensual - 10,282.37(techo) x 1.5%
   AFPC() {
-    var salario = this.salario;
-    var techorap = this.listInfo[0].techoIVM_RAP;
-    let temporalIVM_RAP = this.listInfo[0].porcentajeContribucionTrabajador_RAP;
-    var pctrap = this.revisarPorcentajes(temporalIVM_RAP);
+    var salario: number = this.salario;
+    var techorap: number = this.round2Decimal(this.listInfo[0].techoIVM_RAP);
+    var subtotal = salario - techorap;
+    var pctrap = this.revisarPorcentajes(
+      this.listInfo[0].porcentajeContribucionTrabajador_RAP,
+      'RAP'
+    );
     var rap = 0;
-    // var techorapmmicro = 10268.86;
-    // var pctrapmicro = 0.006;
-    // if (salario <= techorap || salario <= techorapmmicro) {
-    //   this.automaticForm.get('afpc').setValue(0);
-    // } else {
-    // if (this.empleadosactivos <= 10) {
-    //   var rap = this.round2Decimal((salario - techorapmmicro) * pctrapmicro);
-    //   this.automaticForm.get('afpc').setValue(rap);
-    // } else if (this.empleadosactivos > 10) {
-    rap = this.round2Decimal((salario - techorap) * pctrap);
-    this.automaticForm.get('afpc').setValue(rap);
-    //   }
-    // }
+    rap = subtotal * pctrap;
+    this.automaticForm.get('afpc').setValue(this.truncator(rap));
   }
   // modal segundo paso > 7
   ingresoCompleto(id: number): void {
