@@ -4902,8 +4902,19 @@
     <h1>
       <strong>{{ this.planidescrip | uppercase }}</strong>
     </h1>
-    <h3> 
-      <strong>{{ this.planitipo + " — FECHA: " + this.fecha | uppercase }}</strong>
+    <h3 *ngIf="this.totalAguinaldo <= 0">
+      <strong>{{
+        this.planitipo + " — FECHA: " + this.fecha | uppercase
+      }}</strong>
+    </h3>
+    <h3 *ngIf="this.totalAguinaldo > 0">
+      <strong>{{
+        this.planitipo +
+          " — " +
+          this.mesAguinaldo +
+          " MES AÑO " +
+          this.yearAguinaldo | uppercase
+      }}</strong>
     </h3>
     <nz-table
       #basicTable
