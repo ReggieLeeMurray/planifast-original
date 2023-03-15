@@ -1891,7 +1891,14 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.recargo = this.truncator(this.salarioMinimoPerHour);
     this.idEmpleado = id;
     this.nombreCompleto = nombre + ' ' + apellido;
-
+    this.EmpleadosService.cargarEmpleados(id).subscribe((data) => {
+      if (data.permanente === true) {
+        this.switchValuePP = false;
+      } else {
+        this.switchValuePP = true;
+      }
+    });
+    console.log(this.switchValuePP)
     if (this.fileUploaded === true) {
       var luIControl: string = '';
       var luOControl: string = '';

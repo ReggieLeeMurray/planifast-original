@@ -4899,6 +4899,12 @@
       <strong>{{ total }} </strong> colaboradores en la nómina |
       <strong>{{ totalCalculados }} </strong> colaboradores remunerados
     </ng-template>
+    <h1>
+      <strong>{{ this.planidescrip | uppercase }}</strong>
+    </h1>
+    <h3> 
+      <strong>{{ this.planitipo + " — FECHA: " + this.fecha | uppercase }}</strong>
+    </h3>
     <nz-table
       #basicTable
       [nzData]="listNomina"
@@ -4907,7 +4913,6 @@
       nzBordered
       nzTemplateMode
       id="nominaNormal"
-      [nzTitle]="nombre"
       class="table table-md table-hover"
       (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
     >
