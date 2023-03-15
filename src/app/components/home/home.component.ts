@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/_models';
 import { AccountService } from 'src/app/_services';
 import { EmpleadosService } from 'src/app/services/empleados.service';
-import { EventosService } from 'src/app/services/eventos.service';
 import { HistorialService } from 'src/app/services/historial.service';
 import { TipoplanillaService } from 'src/app/services/tipoplanilla.service';
-import { EmpleadoinactivoService } from 'src/app/services/empleadoinactivo.service';
 import moment from 'moment';
 import Chart from 'chart.js/auto';
 import { first } from 'rxjs/operators';
@@ -54,8 +52,6 @@ export class HomeComponent implements OnInit {
     private EmpleadosService: EmpleadosService,
     private HistorialService: HistorialService,
     private TipoplanillaService: TipoplanillaService,
-    private EventosService: EventosService,
-    private EmpleadoinactivoService: EmpleadoinactivoService,
     private accountService: AccountService
   ) {
     this.user = this.accountService.userValue;
@@ -359,7 +355,14 @@ export class HomeComponent implements OnInit {
   cargarEmpleadoByDepto() {
     this.loading = true;
     this.EmpleadosService.getEmpleadoByDepto().subscribe((data) => {
-      this.listEmpleadosByDepto = data;
+      let listTemporal: any = data;
+      let i: number = 0;
+      for (let w = 0; w < listTemporal.length; w++) {
+        if (listTemporal[w].cantidad > 5) {
+          this.listEmpleadosByDepto[i] = listTemporal[w];
+          i++;
+        }
+      }
       var cantidademp = this.listEmpleadosByDepto.map((data) => data.cantidad);
       var departamento = this.listEmpleadosByDepto.map(
         (data) => data.descripcion
