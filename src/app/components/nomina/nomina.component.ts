@@ -1898,7 +1898,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.switchValuePP = true;
       }
     });
-    console.log(this.switchValuePP)
+    console.log(this.switchValuePP);
     if (this.fileUploaded === true) {
       var luIControl: string = '';
       var luOControl: string = '';
