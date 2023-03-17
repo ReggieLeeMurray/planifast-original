@@ -175,6 +175,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   isVisibleGenerar = false;
   isVisibleInicial = false;
   isVisibleAguinaldo = false;
+  isVisibleAguinaldoAdvertencia = false;
+  isAdvertenciaIgnored = false;
   isVisibleDeducible = false;
   switchValueIHSS = false;
   switchValueISR = false;
@@ -208,6 +210,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   isCheckedAjuste = true;
   isCheckedVarios = true;
   isCheckedAguinaldo = false;
+  aguinaldoCalculado = false;
   allChecked = true;
   indeterminate = false;
   btnEnable = true;
@@ -1321,44 +1324,82 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.cantOI = 0;
   }
   handleAguinaldoSemanal(id: number): void {
-    var salario: number = 0;
-    var ingresos: number = 0;
-    this.handleEmpleadoClear(id);
-    this.isValidAguinaldo = false;
-    this.isVisibleAguinaldo = true;
-    this.isDisabledAguinaldo = false;
     this.idEmpleado = id;
-    for (let i = 0; i < this.listNomina.length; i++) {
-      if (this.listNomina[i].id === id) {
-        salario = this.listNomina[i].salarioBase;
-        ingresos = this.listNomina[i].ingresos;
-        console.log(
-          'AGUINALDO: ',
-          salario,
-          ingresos,
-          this.totalAPagar,
-          this.totalAguinaldo
-        );
+    console.log(
+      this.totalCalculados,
+      this.isVisibleAguinaldoAdvertencia,
+      this.isAdvertenciaIgnored
+    );
+    if (this.totalCalculados > 0 && this.isAdvertenciaIgnored === false) {
+      this.aguinaldoAdvertencia();
+    } else {
+      var salario: number = 0;
+      var ingresos: number = 0;
+      this.handleEmpleadoClear(id);
+      this.isValidAguinaldo = false;
+      this.isVisibleAguinaldo = true;
+      this.isDisabledAguinaldo = false;
+      for (let i = 0; i < this.listNomina.length; i++) {
+        if (this.listNomina[i].id === id) {
+          salario = this.listNomina[i].salarioBase;
+          ingresos = this.listNomina[i].ingresos;
+          console.log(
+            'AGUINALDO: ',
+            salario,
+            ingresos,
+            this.totalAPagar,
+            this.totalAguinaldo
+          );
+        }
       }
+      this.resumenForm.disable();
+      this.resumenForm.get('aguinaldo').setValue(salario);
+      this.salarioMinimoPerDia = salario / 30;
     }
-    this.resumenForm.disable();
-    this.resumenForm.get('aguinaldo').setValue(salario);
-    this.salarioMinimoPerDia = salario / 30;
+  }
+  aguinaldoAdvertencia(): void {
+    this.isVisibleAguinaldoAdvertencia = true;
+    this.modal.error({
+      nzCentered: true,
+      nzTitle: 'ERROR',
+      nzContent:
+        '<b style="color: red;">ADVERTENCIA: EL CALCULO ACTUAL CONTIENE DATOS AJENOS AL AGUINALDO, SI PROCEDE PERDERA DICHO TRABAJO.</b>',
+      nzOkType: 'primary',
+      nzOkText: 'Continuar de todas formas',
+      nzCancelText: 'Salir',
+      nzClosable: false,
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.isVisibleAguinaldoAdvertencia = false;
+        this.isAdvertenciaIgnored = true;
+        this.handleAguinaldoSemanal(this.idEmpleado);
+      },
+      nzOnCancel: () => {
+        this.isVisibleAguinaldoAdvertencia = false;
+      },
+    });
   }
   aguinaldoSemanal(): void {
     var temp: number = this.idEmpleado;
+    console.log(this.totalAPagar, this.totalAguinaldo);
     if (this.totalAPagar > 0 && this.totalAguinaldo === 0) {
       for (let i = 0; i < this.listNomina.length; i++) {
         this.handleEmpleadoClear(this.listNomina[i].id);
       }
       this.idEmpleado = temp;
+      this.switchValueAguinaldo = true;
     }
     console.log(
       'ENTRADA',
+      'a ',
       this.switchValueAguinaldo,
+      'b ',
       this.idEmpleado,
+      'c ',
       temp,
+      'd ',
       this.totalAPagar,
+      'e ',
       this.totalAguinaldo
     );
     if (this.current === 1) {
@@ -1418,6 +1459,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.resumenForm.get('aguinaldo').disable();
     this.switchValueAguinaldo = false;
     this.isVisibleAguinaldo = false;
+    this.isVisibleAguinaldoAdvertencia = true;
+    this.isAdvertenciaIgnored = true;
     console.log(
       'SALIDA',
       this.switchValueAguinaldo,
@@ -1427,10 +1470,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     );
   }
   handleCancelAguinaldoSem() {
-    console.log(this.idEmpleado, this.limpiarTotalAguinaldo);
-    if (this.limpiarTotalAguinaldo === true) {
-      this.handleEmpleadoClear(this.idEmpleado);
-    }
+    // console.log(this.idEmpleado, this.limpiarTotalAguinaldo);
+    // if (this.limpiarTotalAguinaldo === true) {
+    //   this.handleEmpleadoClear(this.idEmpleado);
+    // }
     this.valorAguinaldo = 0;
     this.resumenForm.reset();
     this.resumenForm.get('aguinaldo').disable();
@@ -1438,6 +1481,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.switchValueAguinaldo = false;
     this.valorVacacion = 0;
     this.isVisibleAguinaldo = false;
+    this.isVisibleAguinaldoAdvertencia = false;
+    this.isAdvertenciaIgnored = false;
     console.log(this.listNominaFinal);
   }
   ingresosTotal(): void {
@@ -1673,10 +1718,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     });
   }
   limpiar(): void {
-    console.log(this.idEmpleado, this.limpiarTotalAguinaldo);
-    if (this.limpiarTotalAguinaldo === true) {
-      this.handleEmpleadoClear(this.idEmpleado);
-    }
+    // console.log(this.idEmpleado, this.limpiarTotalAguinaldo);
+    // if (this.limpiarTotalAguinaldo === true) {
+    //   this.handleEmpleadoClear(this.idEmpleado);
+    // }
     this.valorAguinaldo = 0;
     this.sueldoString = '0.00';
     this.resumenForm.reset();
@@ -1701,10 +1746,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.isVisibleDivPrimario = false;
   }
   handleCancel(): void {
-    this.limpiarTotalAguinaldo = false;
+    // this.limpiarTotalAguinaldo = false;
     this.isMainVisible = false;
     this.limpiar();
-    this.limpiarTotalAguinaldo = true;
+    // this.limpiarTotalAguinaldo = true;
   }
   resetNominaFinal() {
     for (let i = 0; i < this.listNominaFinal.length; i++) {
@@ -2194,9 +2239,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (this.current === 1) {
       this.onItemChecked(id, false);
     }
+    console.log('REVISAR ESTADO: ' + this.current, this.totalCalculados);
     if (this.current === 1 && this.totalCalculados === 0) {
       document.getElementById('btnnext').setAttribute('disabled', 'disabled');
       this.switchValueAguinaldo = false;
+      this.isVisibleAguinaldoAdvertencia = false;
+      this.isAdvertenciaIgnored = false;
     }
   }
   handleMainDeduccionCancel(): void {
@@ -2939,8 +2987,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.automaticForm.get('isr').setValue('');
     }
   }
-  validAguinaldo(value): void {
-    console.log(value);
+  validAguinaldo(value: number): void {
+    console.log(value, this.switchValueAguinaldo);
     if (value !== null && value !== 0) {
       this.isValidAguinaldo = false;
     } else {
@@ -2963,7 +3011,6 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.resumenForm.get('aguinaldo').setValue('');
       this.isValidAguinaldo = true;
     }
-    console.log(this.resumenForm.get('aguinaldo').value);
   }
   enableTechoEM_IHSS() {
     if (this.switchValueTechoEM_IHSS === false) {
