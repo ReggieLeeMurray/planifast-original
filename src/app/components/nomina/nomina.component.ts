@@ -2941,7 +2941,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.AFPC();
   }
   limpiarMain() {
-    this.switchValuePP = false;
+    this.EmpleadosService.cargarEmpleados(this.idEmpleado).subscribe((data) => {
+      this.switchValuePP = !data.permanente;
+    });
     this.horasForm.reset();
     this.descriForm.reset();
     this.isDisabledPP = false;
@@ -5288,7 +5290,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     return (Math.round(m) / 100) * Math.sign(num);
   }
   ingresosTotalMain() {
-    var roundRecargoDiurna, roundRecargoMixta, roundRecargoNocturna;
+    var roundRecargoDiurna: number;
+    var roundRecargoMixta: number;
+    var roundRecargoNocturna: number;
+    var permanente: boolean;
+    var idTemporal: number = this.idEmpleado;
     //calcula valor hora normal
     this.valorNormal = this.round2Decimal(
       this.totalTrabNormales * this.salarioMinimoPerHour
@@ -5439,12 +5445,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.listNominaFinal[i].totalObs =
           this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
         if (this.switchValuePP === true) {
+          permanente = false;
           this.setOfCheckedId.delete(this.idEmpleado);
           this.idEmpleado = 0;
           this.refreshCheckedStatus();
         } else if (this.switchValuePP === false && this.current === 1) {
+          permanente = true;
           this.onItemChecked(this.idEmpleado, true);
         }
+        this.permanente(idTemporal, permanente);
+        this.idEmpleado = idTemporal
         console.log(
           this.listNominaFinal[i].totalObs,
           this.idEmpleado,
@@ -5454,6 +5464,30 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
     }
     document.getElementById('btnnext').removeAttribute('disabled');
+  }
+  permanente(id: number, value: boolean) {
+    this.EmpleadosService.cargarEmpleados(id).subscribe((data) => {
+      const empleado: Empleado = {
+        id: data.id,
+        fechaIngreso: data.fechaIngreso,
+        nombres: data.nombres,
+        apellidos: data.apellidos,
+        genero: data.genero,
+        permanente: value,
+        email: data.email,
+        fechaNac: data.fechaNac,
+        fechaCreacion: data.fechaCreacion,
+        direccion: data.direccion,
+        n_Cedula: data.n_Cedula,
+        salarioBase: data.salarioBase,
+        departamentoID: data.departamentoID,
+        planillaID: data.planillaID,
+      };
+      console.log(empleado);
+      this.EmpleadosService.actualizarEmpleado(id, empleado).subscribe(
+        (data) => {}
+      );
+    });
   }
   numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
