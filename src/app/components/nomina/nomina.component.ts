@@ -306,7 +306,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   diaDiurno = 0;
   diaMixto = 0;
   diaNocturno = 0;
-  DEBUG = true;
+  DEBUG = false;
   //tarjetas
   jornada: string = '';
   jornadaL: number = 0;

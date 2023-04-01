@@ -42,7 +42,7 @@ export class AgregarEmpleadoComponent implements OnInit {
   radioValue: string;
   switchValue = false;
   isDisabled = false;
-  DEBUG = true;
+  DEBUG = false;
 
   constructor(
     private fb: FormBuilder,
