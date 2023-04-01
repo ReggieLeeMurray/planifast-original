@@ -24,8 +24,9 @@ namespace BEProyectoFinal.Models
     [Required]
     public string Archivo { get; set; }
 
-    //[Required]
-    //public string Link { get; set; }
+    [MaxLength]
+    public byte[] DataFiles { get; set; }
+
     [Required]
     public DateTime FechaCreacion { get; set; }
 

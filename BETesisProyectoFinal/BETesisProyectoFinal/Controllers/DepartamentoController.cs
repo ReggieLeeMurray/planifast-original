@@ -16,14 +16,11 @@ namespace BEProyectoFinal.Controllers
   [ApiController]
   public class DepartamentoController : Controller
   {
-
     private readonly AplicationDBContext _context;
-
     public DepartamentoController(AplicationDBContext depto_context)
     {
       _context = depto_context;
     }
-
 
     // GET: api/<DepartamentoController>
     [HttpGet]
@@ -58,7 +55,6 @@ namespace BEProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
-
 
     // POST api/<DepartamentoController>
     [HttpPost]
@@ -118,8 +114,5 @@ namespace BEProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
-
-   
-
   }
 }

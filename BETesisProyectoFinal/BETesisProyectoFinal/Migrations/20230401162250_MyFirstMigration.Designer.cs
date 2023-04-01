@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BEProyectoFinal.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20230215201519_MyFirstMigration")]
+    [Migration("20230401162250_MyFirstMigration")]
     partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,9 @@ namespace BEProyectoFinal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<byte[]>("DataFiles")
+                        .HasColumnType("longblob");
+
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime(6)");
 
@@ -198,21 +201,6 @@ namespace BEProyectoFinal.Migrations
                     b.ToTable("Info");
                 });
 
-            modelBuilder.Entity("BEProyectoFinal.Models.Roles", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("BEProyectoFinal.Models.TipoPlanillas", b =>
                 {
                     b.Property<int>("Id")
@@ -230,34 +218,6 @@ namespace BEProyectoFinal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TipoPlanillas");
-                });
-
-            modelBuilder.Entity("BEProyectoFinal.Models.Usuarios", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("NombreUsuario")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("RolID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RolID");
-
-                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("BETesisProyectoFinal.Models.Empleados", b =>
@@ -378,15 +338,6 @@ namespace BEProyectoFinal.Migrations
                     b.HasOne("BEProyectoFinal.Models.TipoPlanillas", "TipoPlanillas")
                         .WithMany()
                         .HasForeignKey("PlanillaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BEProyectoFinal.Models.Usuarios", b =>
-                {
-                    b.HasOne("BEProyectoFinal.Models.Roles", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RolID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

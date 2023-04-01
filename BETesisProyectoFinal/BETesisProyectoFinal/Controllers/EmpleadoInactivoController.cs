@@ -15,10 +15,7 @@ namespace BETesisProyectoFinal.Controllers
   [ApiController]
   public class EmpleadoInactivoController : Controller
   {
-
     private readonly AplicationDBContext _context;
-
-
     public EmpleadoInactivoController(AplicationDBContext context)
     {
       _context = context;
@@ -99,6 +96,7 @@ namespace BETesisProyectoFinal.Controllers
         return Ok(query.ToList());
       }
     }
+
     [Route("[action]")]
     public IActionResult InActivos()
     {
@@ -160,6 +158,7 @@ namespace BETesisProyectoFinal.Controllers
       }
       return Ok();
     }
+
     // PUT api/<EmpleadoInactivoController>/5
     [HttpPut("{id}")]
     public ActionResult Put(int id, [FromBody] EmpleadosInactivos empleados)

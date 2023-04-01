@@ -16,10 +16,7 @@ namespace BEProyectoFinal.Controllers
   [ApiController]
   public class InfoController : Controller
   {
-
     private readonly AplicationDBContext _context;
-
-
     public InfoController(AplicationDBContext context)
     {
       _context = context;
@@ -39,6 +36,7 @@ namespace BEProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
+
     // GET api/<InfoController>/5
     [HttpGet("{id}")]
     public ActionResult<Info> Get(int id)
@@ -57,7 +55,6 @@ namespace BEProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
-
 
     // POST api/<InfoController>
     [HttpPost]

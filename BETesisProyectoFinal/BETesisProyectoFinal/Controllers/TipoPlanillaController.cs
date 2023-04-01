@@ -18,14 +18,11 @@ namespace BEProyectoFinal.Controllers
   [ApiController]
   public class TipoPlanillaController : Controller
   {
-
     private readonly AplicationDBContext _context;
-
     public TipoPlanillaController(AplicationDBContext tp_context)
     {
       _context = tp_context;
     }
-
 
     // GET: api/<TipoPlanillaController>
     [HttpGet]
@@ -60,7 +57,6 @@ namespace BEProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
-
 
     // POST api/<TipoPlanillaController>
     [HttpPost]

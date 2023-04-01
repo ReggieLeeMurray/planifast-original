@@ -19,10 +19,7 @@ namespace BETesisProyectoFinal.Controllers
   [ApiController]
   public class EmpleadoController : Controller
   {
-
     private readonly AplicationDBContext _context;
-
-
     public EmpleadoController(AplicationDBContext context)
     {
       _context = context;

@@ -9,6 +9,9 @@ using BEProyectoFinal;
 using BETesisProyectoFinal.Models;
 using BEProyectoFinal.Controllers;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BEProyectoFinal.Controllers
@@ -16,13 +19,14 @@ namespace BEProyectoFinal.Controllers
   //[EnableCors("CorsPolicy")]
   [Route("api/[controller]")]
   [ApiController]
-  public class HistorialController : ControllerBase
+  public class HistorialController : Controller
   {
     private readonly AplicationDBContext _context;
     public HistorialController(AplicationDBContext context)
     {
       _context = context;
     }
+
     // GET: api/<HistorialController>
     [HttpGet]
     public ActionResult<List<Historial>> Get()
@@ -37,7 +41,6 @@ namespace BEProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
-
 
     // GET api/<HistorialController>/5
     [HttpGet("{id}")]
@@ -57,6 +60,7 @@ namespace BEProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
+
     [Route("[action]")]
     public IActionResult Lista()
     {
@@ -75,7 +79,7 @@ namespace BEProyectoFinal.Controllers
                     join y in db.TipoPlanillas on x.PlanillaID equals y.Id
                     select new
                     {
-                      Id=x.Id,
+                      Id = x.Id,
                       FechaInicio = x.FechaInicio,
                       FechaFinal = x.FechaFinal,
                       FechaCreacion = x.FechaCreacion,
@@ -88,8 +92,9 @@ namespace BEProyectoFinal.Controllers
         return Ok(query.ToList());
       }
     }
+
     [Route("[action]")]
-    public IActionResult SumTotalxFechaxPlanilla(DateTime inicial, DateTime final, int id )
+    public IActionResult SumTotalxFechaxPlanilla(DateTime inicial, DateTime final, int id)
     {
       using (AplicationDBContext db = new AplicationDBContext())
       {
@@ -107,27 +112,61 @@ namespace BEProyectoFinal.Controllers
                       TotalPlanilla = x.TotalPlanilla
                     };
         var query2 = from x in db.Historial
-                    where x.FechaInicio >= inicial
-                    where x.FechaFinal <= final
-                    where x.PlanillaID == id
-                    select new
-                    {
-                      Id = x.PlanillaID,
-                      TotalPlanilla = query.Select(x => x.TotalPlanilla).Sum()
-                    };
+                     where x.FechaInicio >= inicial
+                     where x.FechaFinal <= final
+                     where x.PlanillaID == id
+                     select new
+                     {
+                       Id = x.PlanillaID,
+                       TotalPlanilla = query.Select(x => x.TotalPlanilla).Sum()
+                     };
 
         return Ok(query2.ToList());
       }
     }
+
     // POST api/<HistorialController>
     [HttpPost]
-    public ActionResult Post([FromBody] Historial history)
+    public ActionResult Post(IFormFile files, [FromForm] Historial history)
     {
       try
       {
-        _context.Add(history);
-        _context.SaveChanges();
-        return Ok();
+          using (var target = new MemoryStream())
+          {
+            files.CopyTo(target);
+            history.DataFiles = target.ToArray();
+          }
+          _context.Add(history);
+          _context.SaveChanges();
+          return Ok();
+      }
+      catch (Exception ex)
+      {
+        return BadRequest(ex.Message);
+      }
+    }
+
+    // POST api/<HistorialController>
+    [HttpGet("[action]/{id}")]
+    public ActionResult Download(int id)
+    {
+      try
+      {
+        var historial = _context.Historial.Find(id);
+        if (historial == null)
+        {
+          return NotFound();
+        }
+        else {
+          byte[] bytes;
+          string fileName, contentType;
+
+          fileName = historial.Archivo;
+          contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+          bytes = historial.DataFiles;
+
+          return File(bytes, contentType, fileName);
+        }
       }
       catch (Exception ex)
       {
@@ -156,6 +195,7 @@ namespace BEProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
+
     // DELETE api/<HistorialController>/5
     [HttpDelete("{id}")]
     public ActionResult Delete(int id)

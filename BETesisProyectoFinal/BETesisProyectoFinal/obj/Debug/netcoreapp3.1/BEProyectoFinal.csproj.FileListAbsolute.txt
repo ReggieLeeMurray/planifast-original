@@ -378,3 +378,4 @@ C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debu
 C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.dll
 C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.pdb
 C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.genruntimeconfig.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.Views.dll

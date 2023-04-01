@@ -51,19 +51,6 @@ namespace BEProyectoFinal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Descripcion = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TipoPlanillas",
                 columns: table => new
                 {
@@ -95,28 +82,6 @@ namespace BEProyectoFinal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Usuarios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NombreUsuario = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    RolID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Usuarios_Roles_RolID",
-                        column: x => x.RolID,
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,6 +131,7 @@ namespace BEProyectoFinal.Migrations
                     FechaFinal = table.Column<DateTime>(nullable: false),
                     TotalPlanilla = table.Column<decimal>(nullable: false),
                     Archivo = table.Column<string>(nullable: false),
+                    DataFiles = table.Column<byte[]>(nullable: true),
                     FechaCreacion = table.Column<DateTime>(nullable: false),
                     PlanillaID = table.Column<int>(nullable: false)
                 },
@@ -252,11 +218,6 @@ namespace BEProyectoFinal.Migrations
                 name: "IX_Historial_PlanillaID",
                 table: "Historial",
                 column: "PlanillaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_RolID",
-                table: "Usuarios",
-                column: "RolID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -277,13 +238,7 @@ namespace BEProyectoFinal.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
-
-            migrationBuilder.DropTable(
                 name: "Empleados");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Departamentos");

@@ -20,10 +20,7 @@ namespace BETesisProyectoFinal.Controllers
   [ApiController]
   public class EventoController : Controller
   {
-
     private readonly AplicationDBContext _context;
-
-
     public EventoController(AplicationDBContext context)
     {
       _context = context;
@@ -100,6 +97,7 @@ namespace BETesisProyectoFinal.Controllers
         return BadRequest(ex.Message);
       }
     }
+
     [Route("[action]")]
     public IActionResult Eventos()
     {
@@ -137,6 +135,7 @@ namespace BETesisProyectoFinal.Controllers
         return Ok(query.ToList());
       }
     }
+
     [Route("[action]")]
     public IActionResult CountEventosByTipo(int id)
     {
