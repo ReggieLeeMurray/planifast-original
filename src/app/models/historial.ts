@@ -5,5 +5,6 @@ export class Historial {
   fechaCreacion: Date;
   totalPlanilla: number;
   archivo: string;
+  files: Blob;
   planillaID: number;
 }

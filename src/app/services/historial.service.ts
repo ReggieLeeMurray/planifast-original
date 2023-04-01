@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Historial } from '../models/historial';
 import { environment } from 'src/environments/environment';
-import { Moment } from 'moment';
+import { map } from 'rxjs/operators';
 
+const EXCEL_TYPE =
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +17,7 @@ export class HistorialService {
   myCustomApiUrl2 = 'SumTotalxFechaxPlanilla?id=';
   myCustomApiUrl3 = '&&inicial=';
   myCustomApiUrl4 = '&&final=';
-
+  myCustomApiUrl5 = 'Download/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -37,12 +39,8 @@ export class HistorialService {
     return this.http.delete<Historial>(this.myAppUrl + this.myApiUrl + id);
   }
   //post
-  guardarHistory(history: Historial): Observable<Historial> {
-    return this.http.post<Historial>(
-      this.myAppUrl + this.myApiUrl,
-      history,
-      this.httpOptions
-    );
+  guardarHistory(history): Observable<Historial> {
+    return this.http.post<Historial>(this.myAppUrl + this.myApiUrl, history);
   }
   //post totalPlanilla x fecha x planilla
   SumTotalxFechaxPlanilla(
@@ -64,6 +62,19 @@ export class HistorialService {
   //get id
   cargarHistory(id: number): Observable<Historial> {
     return this.http.get<Historial>(this.myAppUrl + this.myApiUrl + id);
+  }
+  //get id (download from dba)
+  downloadFile(id: number): Observable<Blob> {
+    return this.http
+      .get(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl5 + id, {
+        responseType: 'blob',
+      })
+      .pipe(
+        map((res: any) => {
+          const blob = new Blob([res], { type: EXCEL_TYPE });
+          return blob;
+        })
+      );
   }
   //put
   actualizarHistory(id: number, history: Historial): Observable<Historial> {

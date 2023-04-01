@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
       ),
       endOfMonth(new Date(this.today.getFullYear(), this.today.getMonth(), 0)),
     ],
+    'Mes Actual': [
+      startOfMonth(new Date(this.today.getFullYear(), this.today.getMonth())),
+      endOfMonth(new Date(this.today.getFullYear(), this.today.getMonth())),
+    ],
   };
   user: User;
   userFromApi: User;
@@ -86,21 +90,17 @@ export class HomeComponent implements OnInit {
     if (result.length === 0) {
       this.inicioMes = moment().startOf('month').format('YYYY-MM-DD');
       this.finalMes = moment().endOf('month').format('YYYY-MM-DD');
-      this.chart5.destroy();
-      this.valor.length = 0;
-      this.descripcion.length = 0;
-      this.cargarTotalxFechaxPlanilla();
     } else {
       var start = moment(result[0]).format('YYYY-MM-DD');
       var end = moment(result[1]).format('YYYY-MM-DD');
       this.inicioMes = start;
       this.finalMes = end;
-      console.log('DATE: ', result, 'START', start, 'END', end);
-      this.chart5.destroy();
-      this.valor.length = 0;
-      this.descripcion.length = 0;
-      this.cargarTotalxFechaxPlanilla();
     }
+    this.chart5.destroy();
+    this.valor.length = 0;
+    this.descripcion.length = 0;
+    this.cargarTotalxFechaxPlanilla();
+    console.log('DATE: ', result, 'START', start, 'END', end);
   }
   selectedYear(result: any) {
     if (result === null) {

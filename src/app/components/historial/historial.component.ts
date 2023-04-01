@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HistorialService } from 'src/app/services/historial.service';
 import moment, { Moment } from 'moment';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { startOfMonth, endOfMonth } from 'date-fns';
 // import { AzureBlobStorageService } from 'src/app/services/azure-blob-storage.service';
 
@@ -31,9 +32,14 @@ export class HistorialComponent implements OnInit {
       ),
       endOfMonth(new Date(this.today.getFullYear(), this.today.getMonth(), 0)),
     ],
+    'Mes Actual': [
+      startOfMonth(new Date(this.today.getFullYear(), this.today.getMonth())),
+      endOfMonth(new Date(this.today.getFullYear(), this.today.getMonth())),
+    ],
   };
 
   constructor(
+    private NzMessageService: NzMessageService,
     private HistorialService: HistorialService // private AzureBlobStorageService: AzureBlobStorageService
   ) {}
   ngOnInit(): void {
@@ -50,7 +56,7 @@ export class HistorialComponent implements OnInit {
   //     }
   //   });
   // }
-  // downloadPlanilla(name: string) {
+  // downloadPlanillaAzure(name: string) {
   //   this.AzureBlobStorageService.downloadBlob(name, (blob) => {
   //     let url = window.URL.createObjectURL(blob);
   //     window.open(url);
@@ -65,6 +71,19 @@ export class HistorialComponent implements OnInit {
   // upload(archivo: any, name: string) {
   //   console.log(archivo, name);
   // }
+  downloadPlanilla(id: number) {
+    this.HistorialService.downloadFile(id).subscribe((data) => {
+      console.log(data);
+      //no generar archivo si esta vacio
+      if (data.size === 1) {
+        this.NzMessageService.error('¡Archivo no disponible!');
+      } else {
+        this.NzMessageService.success('¡Archivo generado exitosamente!');
+        let url = window.URL.createObjectURL(data);
+        window.open(url);
+      }
+    });
+  }
   cargarHistorial() {
     this.loading = true;
     this.HistorialService.getListHistoryWPlanilla().subscribe((data) => {

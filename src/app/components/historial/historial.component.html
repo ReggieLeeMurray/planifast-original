@@ -55,7 +55,9 @@
         [(ngModel)]="date"
         (ngModelChange)="onChange($event)"
       ></nz-range-picker>
-      <h5 class="font-weight-bold mb-0">Mes actual por defecto</h5>
+      <h5 class="font-weight-bold mb-0">
+        Al borrar las fechas, mostrará TODOS los calculos
+      </h5>
     </td>
   </tr>
 </table>
@@ -79,9 +81,9 @@
   >
     <thead>
       <tr>
-        <th scope="col" style="text-align: center">Planilla</th>
-        <th scope="col" style="text-align: center">Fecha de Calculo</th>
         <th scope="col" style="text-align: center">ID</th>
+        <th scope="col" style="text-align: center">Fecha de Calculo</th>
+        <th scope="col" style="text-align: center">Planilla</th>
         <th scope="col" style="text-align: center">Fecha Inicial</th>
         <th scope="col" style="text-align: center">Fecha Final</th>
         <th scope="col" style="text-align: center">Total Pagado</th>
@@ -105,22 +107,21 @@
         </td>
       </tr>
       <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.descripcion }} - {{ data.tipo }}</td>
-        <td>{{ data.fechaCreacion | date : "dd/MM/yyyy" }}</td>
         <td>{{ data.id }}</td>
+        <td>{{ data.fechaCreacion | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.descripcion }} - {{ data.tipo }}</td>
         <td>{{ data.fechaInicio | date : "dd/MM/yyyy" }}</td>
         <td>{{ data.fechaFinal | date : "dd/MM/yyyy" }}</td>
         <td>{{ data.totalPlanilla | currency : "LPS " }}</td>
         <td>
-          PROXIMAMENTE!
-          <!-- <button
-              class="btn btn-lg btn btn-info"
-              (click)="downloadPlanilla(data.archivo)"
-              data-placement="bottom"
-              title="Descargar planilla en formato Excel"
-            >
-              <i nz-icon nzType="cloud-download"></i>
-            </button> -->
+          <button
+            class="btn btn-lg btn btn-info"
+            (click)="downloadPlanilla(data.id)"
+            data-placement="bottom"
+            title="Descargar planilla en formato Excel"
+          >
+            <i nz-icon class="centerNube" nzType="cloud-download"></i>
+          </button>
         </td>
       </tr>
     </tbody>

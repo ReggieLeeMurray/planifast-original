@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoPlanilla } from 'src/app/models/tipoplanilla';
 import { Info } from 'src/app/models/info';
-import { Historial } from 'src/app/models/historial';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadosService } from 'src/app/services/empleados.service';
 import { HistorialService } from 'src/app/services/historial.service';
@@ -48,6 +47,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   dateFormat = 'dd/MM/yyyy';
   today = new Date();
   ranges: any;
+  fileGenerado: Blob;
   diferencia: number;
   start: Date;
   end: Date;
@@ -567,18 +567,28 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.cargarDescri(this.idTP);
     });
   }
-  //guardar tabla historial informacion general del archivo generado
+  //guardar historial de archivos generados
   guardarHistorial() {
-    const history: Historial = {
-      fechaInicio: this.start,
-      fechaFinal: this.end,
-      fechaCreacion: this.fechaCreacionPlanilla,
-      totalPlanilla: this.round2Decimal(this.totalAPagar),
-      archivo: this.nombre + '.xlsx',
-      planillaID: this.idTP,
-    };
+    var fechaInicio = moment(this.start).format('L').toString();
+    var fechaFinal = moment(this.end).format('L').toString();
+    var fechaCreacion = moment(this.fechaCreacionPlanilla)
+      .format('L')
+      .toString();
+    const history = new FormData();
+    history.append('fechaInicio', fechaInicio);
+    history.append('fechaFinal', fechaFinal);
+    history.append('fechaCreacion', fechaCreacion);
+    history.append(
+      'totalPlanilla',
+      this.round2Decimal(this.totalAPagar).toString()
+    );
+    history.append('archivo', this.nombre.toString() + '.xlsx');
+    history.append('files', this.fileGenerado);
+    history.append('planillaID', this.idTP.toString());
     console.log(history);
-    this.HistorialService.guardarHistory(history).subscribe((data) => {});
+    this.HistorialService.guardarHistory(history).subscribe((data) => {
+      console.log(data);
+    });
   }
   isNumber(value) {
     return Number.isNaN(value);
@@ -1850,11 +1860,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   //SheetJS
   exportExcel(): void {
     console.log(this.totalAguinaldo);
-    /* post historial */
-    if (this.archivoGenerado === false) {
-      this.guardarHistorial();
-      this.archivoGenerado = true;
-    }
+
     /* table id is passed over here */
     var planilla = document.getElementById('nominaFinal');
     var comprobantes = document.getElementById('final');
@@ -1897,6 +1903,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     });
     const data: Blob = new Blob([excelBuffer], { type: EXCEL_TYPE });
     console.log(data);
+    this.fileGenerado = data;
+    /* post historial */
+    if (this.archivoGenerado === false) {
+      this.guardarHistorial();
+      this.archivoGenerado = true;
+    }
     /* upload file */
     // this.uploadFile(data);
   }
@@ -5454,7 +5466,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.onItemChecked(this.idEmpleado, true);
         }
         this.permanente(idTemporal, permanente);
-        this.idEmpleado = idTemporal
+        this.idEmpleado = idTemporal;
         console.log(
           this.listNominaFinal[i].totalObs,
           this.idEmpleado,
