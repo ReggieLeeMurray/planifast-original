@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BEProyectoFinal.Migrations
 {
-    public partial class MyFirstMigration : Migration
+    public partial class myFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -193,6 +193,63 @@ namespace BEProyectoFinal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Resultados",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NombreCompleto = table.Column<string>(nullable: false),
+                    Permanente = table.Column<bool>(nullable: false),
+                    SalarioBase = table.Column<double>(nullable: false),
+                    Ingresos = table.Column<double>(nullable: false),
+                    Deducciones = table.Column<double>(nullable: false),
+                    Recargo = table.Column<double>(nullable: false),
+                    HorasNormales = table.Column<double>(nullable: false),
+                    LpsNormales = table.Column<double>(nullable: false),
+                    HorasDiurnas = table.Column<double>(nullable: false),
+                    LpsDiurnas = table.Column<double>(nullable: false),
+                    HorasMixtas = table.Column<double>(nullable: false),
+                    LpsMixtas = table.Column<double>(nullable: false),
+                    HorasNocturnas = table.Column<double>(nullable: false),
+                    LpsNocturnas = table.Column<double>(nullable: false),
+                    Feriado = table.Column<double>(nullable: false),
+                    Incapacidad = table.Column<double>(nullable: false),
+                    Septimo = table.Column<double>(nullable: false),
+                    Vacacion = table.Column<double>(nullable: false),
+                    AjusteP = table.Column<double>(nullable: false),
+                    Aguinaldo = table.Column<double>(nullable: false),
+                    Ihss = table.Column<double>(nullable: false),
+                    Isr = table.Column<double>(nullable: false),
+                    Afpc = table.Column<double>(nullable: false),
+                    Impvecinal = table.Column<double>(nullable: false),
+                    Anticipo = table.Column<double>(nullable: false),
+                    Prestamorap = table.Column<double>(nullable: false),
+                    Cta = table.Column<double>(nullable: false),
+                    Viaticos = table.Column<double>(nullable: false),
+                    Ajuste = table.Column<double>(nullable: false),
+                    Otros = table.Column<double>(nullable: false),
+                    TotalPagar = table.Column<double>(nullable: false),
+                    EmpleadoID = table.Column<int>(nullable: false),
+                    HistorialID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Resultados", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Resultados_Empleados_EmpleadoID",
+                        column: x => x.EmpleadoID,
+                        principalTable: "Empleados",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Resultados_Historial_HistorialID",
+                        column: x => x.HistorialID,
+                        principalTable: "Historial",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Empleados_DepartamentoID",
                 table: "Empleados",
@@ -218,6 +275,16 @@ namespace BEProyectoFinal.Migrations
                 name: "IX_Historial_PlanillaID",
                 table: "Historial",
                 column: "PlanillaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resultados_EmpleadoID",
+                table: "Resultados",
+                column: "EmpleadoID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resultados_HistorialID",
+                table: "Resultados",
+                column: "HistorialID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -229,16 +296,19 @@ namespace BEProyectoFinal.Migrations
                 name: "Eventos");
 
             migrationBuilder.DropTable(
-                name: "Historial");
+                name: "Info");
 
             migrationBuilder.DropTable(
-                name: "Info");
+                name: "Resultados");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Empleados");
+
+            migrationBuilder.DropTable(
+                name: "Historial");
 
             migrationBuilder.DropTable(
                 name: "Departamentos");

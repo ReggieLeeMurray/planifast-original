@@ -1,0 +1,36 @@
+export class Resultado {
+  id?: number;
+  nombreCompleto: string;
+  permanente: boolean;
+  salarioBase: number;
+  ingresos: number;
+  deducciones: number;
+  recargo: number;
+  horasNormales: number;
+  lpsNormales: number;
+  horasDiurnas: number;
+  lpsDiurnas: number;
+  horasMixtas: number;
+  lpsMixtas: number;
+  horasNocturnas: number;
+  lpsNocturnas: number;
+  feriado: number;
+  incapacidad: number;
+  septimo: number;
+  vacacion: number;
+  ajusteP: number;
+  aguinaldo: number;
+  ihss: number;
+  isr: number;
+  afpc: number;
+  impvecinal: number;
+  anticipo: number;
+  prestamorap: number;
+  cta: number;
+  viaticos: number;
+  ajuste: number;
+  otros: number;
+  totalPagar: number;
+  EmpleadoID: number;
+  HistorialID: number;
+}

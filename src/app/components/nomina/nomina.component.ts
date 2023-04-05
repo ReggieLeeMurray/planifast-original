@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoPlanilla } from 'src/app/models/tipoplanilla';
 import { Info } from 'src/app/models/info';
 import { Empleado } from 'src/app/models/empleado';
+import { Resultado } from 'src/app/models/resultado';
 import { EmpleadosService } from 'src/app/services/empleados.service';
+import { ResultadosService } from 'src/app/services/resultados.service';
 import { HistorialService } from 'src/app/services/historial.service';
 import { TipoplanillaService } from 'src/app/services/tipoplanilla.service';
 import { InfoService } from 'src/app/services/info.service';
@@ -91,6 +93,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   page_number: number = 1;
   //id y listas
   idEmpleado = 0;
+  idHistorial;
   idTP = 0;
   listTP: TipoPlanilla[];
   listNomina = null;
@@ -340,12 +343,14 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   indeterminados = false;
   listOfCurrentPageData = null;
   setOfCheckedId = new Set<number>();
+  setOfCalculados = new Set<number>();
   constructor(
     private fb: FormBuilder,
     private modal: NzModalService,
     private EmpleadosService: EmpleadosService,
     private TipoplanillaService: TipoplanillaService,
     private HistorialService: HistorialService,
+    private ResultadosService: ResultadosService,
     private InfoService: InfoService,
     // private AzureBlobStorageService: AzureBlobStorageService,
     private NzMessageService: NzMessageService
@@ -569,12 +574,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   //guardar historial de archivos generados
   guardarHistorial() {
+    const history = new FormData();
+    const resultado: Resultado[] = [];
+    const array = Array.from(this.setOfCalculados);
+    const listResultados = [];
+
     var fechaInicio = moment(this.start).format('L').toString();
     var fechaFinal = moment(this.end).format('L').toString();
     var fechaCreacion = moment(this.fechaCreacionPlanilla)
       .format('L')
       .toString();
-    const history = new FormData();
     history.append('fechaInicio', fechaInicio);
     history.append('fechaFinal', fechaFinal);
     history.append('fechaCreacion', fechaCreacion);
@@ -586,8 +595,94 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     history.append('files', this.fileGenerado);
     history.append('planillaID', this.idTP.toString());
     console.log(history);
+
     this.HistorialService.guardarHistory(history).subscribe((data) => {
       console.log(data);
+    });
+    this.HistorialService.getListHistory().subscribe((data) => {
+      const temp = data.length - 1;
+      this.idHistorial = data[temp].id;
+      console.log(
+        data,
+        this.idHistorial,
+        temp,
+        this.setOfCalculados,
+        this.listNominaFinal
+      );
+      for (let j = 0; j < array.length; j++) {
+        for (let i = 0; i < this.listNominaFinal.length; i++) {
+          if (array[j] === this.listNominaFinal[i].id) {
+            listResultados[j] = this.listNominaFinal[i];
+            console.log(
+              'IGUALES',
+              'I: ',
+              i,
+              'J: ',
+              j,
+              'SET: ',
+              array[j],
+              'ListNominaId: ',
+              this.listNominaFinal[i].id
+            );
+          } else {
+            console.log(
+              'DIFERENTES',
+              'I: ',
+              i,
+              'J: ',
+              j,
+              'SET: ',
+              array[j],
+              'ListNominaId: ',
+              this.listNominaFinal[i].id
+            );
+          }
+        }
+      }
+      for (let i = 0; i < listResultados.length; i++) {
+        resultado[i] = {
+          nombreCompleto:
+            listResultados[i].nombres + ' ' + listResultados[i].apellidos,
+          permanente: listResultados[i].permanente,
+          salarioBase: parseFloat(listResultados[i].salarioBase),
+          ingresos: parseFloat(listResultados[i].ingresos),
+          deducciones: parseFloat(listResultados[i].deducciones),
+          recargo: parseFloat(listResultados[i].recargo),
+          horasNormales: parseFloat(listResultados[i].horasNormales),
+          lpsNormales: parseFloat(listResultados[i].lpsNormales),
+          horasDiurnas: parseFloat(listResultados[i].horasDiurnas),
+          lpsDiurnas: parseFloat(listResultados[i].lpsDiurnas),
+          horasMixtas: parseFloat(listResultados[i].horasMixtas),
+          lpsMixtas: parseFloat(listResultados[i].lpsMixtas),
+          horasNocturnas: parseFloat(listResultados[i].horasNocturnas),
+          lpsNocturnas: parseFloat(listResultados[i].lpsNocturnas),
+          feriado: parseFloat(listResultados[i].feriado),
+          incapacidad: parseFloat(listResultados[i].incapacidad),
+          septimo: parseFloat(listResultados[i].septimo),
+          vacacion: parseFloat(listResultados[i].vacacion),
+          ajusteP: parseFloat(listResultados[i].ajusteP),
+          aguinaldo: parseFloat(listResultados[i].aguinaldo),
+          ihss: parseFloat(listResultados[i].ihss),
+          isr: parseFloat(listResultados[i].isr),
+          afpc: parseFloat(listResultados[i].afpc),
+          impvecinal: parseFloat(listResultados[i].impvecinal),
+          anticipo: parseFloat(listResultados[i].anticipo),
+          prestamorap: parseFloat(listResultados[i].prestamorap),
+          cta: parseFloat(listResultados[i].cta),
+          viaticos: parseFloat(listResultados[i].viaticos),
+          ajuste: parseFloat(listResultados[i].ajuste),
+          otros: parseFloat(listResultados[i].otros),
+          totalPagar: parseFloat(listResultados[i].totalPagar),
+          EmpleadoID: parseInt(listResultados[i].id),
+          HistorialID: parseInt(this.idHistorial + 1),
+        };
+      }
+      console.log('RESULTADO ', resultado);
+      this.ResultadosService.guardarContenidoCompleto(resultado).subscribe(
+        (data) => {
+          console.log(data);
+        }
+      );
     });
   }
   isNumber(value) {
@@ -1371,9 +1466,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.isVisibleAguinaldoAdvertencia = true;
     this.modal.error({
       nzCentered: true,
-      nzTitle: 'ERROR',
+      nzTitle: 'ADVERTENCIA',
       nzContent:
-        '<b style="color: red;">ADVERTENCIA: EL CALCULO ACTUAL CONTIENE DATOS AJENOS AL AGUINALDO, SI PROCEDE PERDERA DICHO TRABAJO.</b>',
+        '<b style="color: red;">TIENES CALCULOS AJENOS AL AGUINALDO, SI PROCEDE PERDERA DICHO TRABAJO.</b>',
       nzOkType: 'primary',
       nzOkText: 'Continuar de todas formas',
       nzCancelText: 'Salir',
@@ -1414,6 +1509,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     );
     if (this.current === 1) {
       this.onItemChecked(this.idEmpleado, true);
+      this.setOfCalculados.add(this.idEmpleado);
     }
     if (this.switchValueAguinaldo === true) {
       this.valorAguinaldo = this.round2Decimal(
@@ -1812,6 +1908,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       document.getElementById('btnnext').setAttribute('disabled', 'disabled');
     }
     if (this.current === 1 && this.totalCalculados > 0) {
+      this.listComprobantes.length = 0;
       let comprobantesTemp = [];
       comprobantesTemp.push(...this.listNominaFinal);
       const array = Array.from(this.setOfCheckedId);
@@ -1850,6 +1947,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         'list: ',
         comprobantesTemp,
         array,
+        this.setOfCalculados,
         this.listComprobantes,
         this.listNomina,
         this.listNominaFinal
@@ -2126,6 +2224,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.switchValueMontoServicioMedico_ISR = false;
   }
   handleEmpleadoClear(id: number) {
+    this.setOfCalculados.delete(id);
     console.log(id);
     this.idEmpleado = id;
     this.valorAguinaldo = 0;
@@ -5302,6 +5401,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     return (Math.round(m) / 100) * Math.sign(num);
   }
   ingresosTotalMain() {
+    this.setOfCalculados.add(this.idEmpleado);
     var roundRecargoDiurna: number;
     var roundRecargoMixta: number;
     var roundRecargoNocturna: number;

@@ -15,6 +15,7 @@ namespace BEProyectoFinal
     public DbSet<EmpleadosInactivos> EmpleadosInactivos { get; set; }
     public DbSet<Info> Info { get; set; }
     public DbSet<Historial> Historial { get; set; }
+    public DbSet<Resultados> Resultados { get; set; }
     public AplicationDBContext() { }
     public AplicationDBContext(DbContextOptions<AplicationDBContext> options) : base(options) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BEProyectoFinal.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20230401162250_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20230405165639_myFirstMigration")]
+    partial class myFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -201,6 +201,121 @@ namespace BEProyectoFinal.Migrations
                     b.ToTable("Info");
                 });
 
+            modelBuilder.Entity("BEProyectoFinal.Models.Resultados", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("Afpc")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Aguinaldo")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Ajuste")
+                        .HasColumnType("double");
+
+                    b.Property<double>("AjusteP")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Anticipo")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Cta")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Deducciones")
+                        .HasColumnType("double");
+
+                    b.Property<int>("EmpleadoID")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Feriado")
+                        .HasColumnType("double");
+
+                    b.Property<int>("HistorialID")
+                        .HasColumnType("int");
+
+                    b.Property<double>("HorasDiurnas")
+                        .HasColumnType("double");
+
+                    b.Property<double>("HorasMixtas")
+                        .HasColumnType("double");
+
+                    b.Property<double>("HorasNocturnas")
+                        .HasColumnType("double");
+
+                    b.Property<double>("HorasNormales")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Ihss")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Impvecinal")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Incapacidad")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Ingresos")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Isr")
+                        .HasColumnType("double");
+
+                    b.Property<double>("LpsDiurnas")
+                        .HasColumnType("double");
+
+                    b.Property<double>("LpsMixtas")
+                        .HasColumnType("double");
+
+                    b.Property<double>("LpsNocturnas")
+                        .HasColumnType("double");
+
+                    b.Property<double>("LpsNormales")
+                        .HasColumnType("double");
+
+                    b.Property<string>("NombreCompleto")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("Otros")
+                        .HasColumnType("double");
+
+                    b.Property<bool>("Permanente")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<double>("Prestamorap")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Recargo")
+                        .HasColumnType("double");
+
+                    b.Property<double>("SalarioBase")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Septimo")
+                        .HasColumnType("double");
+
+                    b.Property<double>("TotalPagar")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Vacacion")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Viaticos")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpleadoID");
+
+                    b.HasIndex("HistorialID");
+
+                    b.ToTable("Resultados");
+                });
+
             modelBuilder.Entity("BEProyectoFinal.Models.TipoPlanillas", b =>
                 {
                     b.Property<int>("Id")
@@ -338,6 +453,21 @@ namespace BEProyectoFinal.Migrations
                     b.HasOne("BEProyectoFinal.Models.TipoPlanillas", "TipoPlanillas")
                         .WithMany()
                         .HasForeignKey("PlanillaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BEProyectoFinal.Models.Resultados", b =>
+                {
+                    b.HasOne("BETesisProyectoFinal.Models.Empleados", "Empleados")
+                        .WithMany()
+                        .HasForeignKey("EmpleadoID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BEProyectoFinal.Models.Historial", "Historial")
+                        .WithMany()
+                        .HasForeignKey("HistorialID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
