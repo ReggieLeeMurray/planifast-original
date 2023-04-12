@@ -16,6 +16,213 @@
     ></nz-step>
   </nz-steps>
   <nz-modal
+    [(nzVisible)]="isVisibleAguinaldo"
+    nzTitle="Definir Aguinaldo"
+    nzClosable="false"
+    [nzOkDisabled]="isValidAguinaldo"
+    (nzOnOk)="aguinaldoSemanal()"
+    (nzOnCancel)="handleCancelAguinaldoSem()"
+    nzCentered
+  >
+    <ng-container *nzModalContent>
+      <form nz-form [formGroup]="resumenForm">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24">Aguinaldo</nz-form-label>
+          <nz-form-control [nzSm]="8" [nzXs]="24">
+            <input
+              nz-input
+              formControlName="aguinaldo"
+              (ngModelChange)="validAguinaldo($event)"
+              placeholder="0"
+              type="number"
+              min="0"
+              nzSize="default"
+            />
+            <div class="form-text">(Opcional)</div>
+          </nz-form-control>
+          <td>
+            <nz-switch
+              [(ngModel)]="switchValueAguinaldo"
+              [nzDisabled]="isDisabledAguinaldo"
+              [nzCheckedChildren]="checkedTemplate"
+              [nzUnCheckedChildren]="unCheckedTemplate"
+              (ngModelChange)="enableAguinaldo()"
+              [ngModelOptions]="{ standalone: true }"
+            ></nz-switch>
+            <ng-template #checkedTemplate
+              ><i nz-icon nzType="edit" nzTheme="outline"></i
+            ></ng-template>
+            <ng-template #unCheckedTemplate
+              ><i nz-icon nzType="check"></i
+            ></ng-template>
+          </td>
+        </nz-form-item>
+      </form>
+    </ng-container>
+  </nz-modal>
+  <nz-modal
+    [(nzVisible)]="isVisibleAguinaldoDeduccion"
+    nzTitle="Calculando Deducciones | {{
+      this.nombreCompleto
+    }} — Salario Bruto: Lps. {{ this.sueldoAlDeducirString }}"
+    (nzOnCancel)="handleMainDeduccionCancel()"
+    [nzFooter]="null"
+    nzClosable="false"
+    nzWidth="25%"
+  >
+    <ng-container *nzModalContent>
+      <div id="main_content" class="inner-content" style="overflow: hidden">
+        <td>
+          <div class="card">
+            <div class="card-body">
+              <div>
+                <h1 style="text-align: center">Información Requerida</h1>
+                <div style="border-bottom: 1px solid rgb(233, 233, 233)">
+                  <tr>
+                    <td>
+                      <div nz-row>
+                        <div nz-col>
+                          <label
+                            nz-checkbox
+                            [nzDisabled]="cboxAll"
+                            [(ngModel)]="allChecked"
+                            (ngModelChange)="onAllChecked($event)"
+                            [nzIndeterminate]="indeterminate"
+                          ></label>
+                        </div>
+                      </div>
+                    </td>
+                    <nz-form-label [nzNoColon]="true" [nzSm]="24" [nzXs]="24"
+                      >Marcar Todos</nz-form-label
+                    >
+                  </tr>
+                </div>
+                <form nz-form [formGroup]="aguinaldoForm">
+                  <p></p>
+                  <tr>
+                    <td>
+                      <div nz-row>
+                        <div nz-col>
+                          <label
+                            nz-checkbox
+                            [nzDisabled]="cboxAjuste"
+                            [(ngModel)]="isCheckedAjuste"
+                            (ngModelChange)="logAjuste($event)"
+                            [ngModelOptions]="{ standalone: true }"
+                          ></label>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <nz-form-label [nzSm]="24" [nzXs]="24"
+                        >Anticipo</nz-form-label
+                      >
+                    </td>
+                    <td>
+                      <input
+                        formControlName="ajuste"
+                        nz-input
+                        placeholder="0"
+                        type="number"
+                        min="0"
+                        nzSize="default"
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div nz-row>
+                        <div nz-col>
+                          <label
+                            nz-checkbox
+                            [nzDisabled]="cboxOtros"
+                            [(ngModel)]="isCheckedVarios"
+                            (ngModelChange)="logVarios($event)"
+                            [ngModelOptions]="{ standalone: true }"
+                          ></label>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <nz-form-label
+                        [nzSm]="24"
+                        [nzXs]="24"
+                        nzTooltipTitle="Valor a deducir en concepto de herramientas, vestimenta, examenes medicos etc."
+                        >Otros
+                      </nz-form-label>
+                    </td>
+                    <td>
+                      <input
+                        formControlName="varios"
+                        nz-input
+                        placeholder="0"
+                        type="number"
+                        min="0"
+                        nzSize="default"
+                      />
+                    </td>
+                  </tr>
+                </form>
+
+                <p></p>
+
+                <table style="margin: 0 auto">
+                  <tr>
+                    <td>
+                      <button
+                        nz-button
+                        nzType="primary"
+                        nzSize="large"
+                        id="btnCalcularDeduccion"
+                        [disabled]="!aguinaldoForm.valid"
+                        (click)="deduccionTotal()"
+                        data-placement="bottom"
+                        title="Calcular Deducciones"
+                      >
+                        <i
+                          nz-icon
+                          class="center"
+                          nzType="calculator"
+                          nzTheme="fill"
+                        ></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-info"
+                        (click)="limpiarMainDeduccion()"
+                        data-placement="bottom"
+                        title="Limpiar"
+                      >
+                        <i class="bi bi-stars"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="handleMainDeduccionCancel()"
+                        data-placement="bottom"
+                        title="Cancelar"
+                      >
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <h2 style="text-align: center" class="h2">
+              Total Deducciones: Lps. {{ this.deduccionString }}
+            </h2>
+          </div>
+        </td>
+      </div>
+    </ng-container>
+  </nz-modal>
+  <nz-modal
     [nzStyle]="{ top: '20px' }"
     [(nzVisible)]="isVisibleArchivo"
     nzTitle="Control de Asistencia"
@@ -526,6 +733,7 @@
               <div>
                 <h1 style="text-align: center">Control de Asistencia</h1>
                 <form nz-form [formGroup]="resumenForm">
+                  <legend>Distribución</legend>
                   <nz-form-item>
                     <nz-form-label [nzSm]="8" [nzXs]="24">Ajuste</nz-form-label>
                     <nz-form-control [nzSm]="10" [nzXs]="24">
@@ -539,57 +747,9 @@
                         min="0"
                         oninput="javascript: if (this.value.length > this.maxLength) this.value = '';"
                       />
-                      <div class="form-text">(Opcional)</div>
                     </nz-form-control>
                   </nz-form-item>
 
-                  <nz-form-item>
-                    <td>
-                      <div nz-row>
-                        <div nz-col>
-                          <label
-                            nz-checkbox
-                            [nzDisabled]="cboxAguinaldo"
-                            [(ngModel)]="isCheckedAguinaldo"
-                            (ngModelChange)="logAguinaldo($event)"
-                            [ngModelOptions]="{ standalone: true }"
-                          ></label>
-                        </div>
-                      </div>
-                    </td>
-                    <nz-form-label [nzSm]="6" [nzXs]="24"
-                      >Aguinaldo</nz-form-label
-                    >
-                    <nz-form-control [nzSm]="8" [nzXs]="24">
-                      <input
-                        nz-input
-                        formControlName="aguinaldo"
-                        placeholder="0"
-                        type="number"
-                        min="0"
-                        nzSize="default"
-                      />
-                      <div class="form-text">(Opcional)</div>
-                    </nz-form-control>
-                    <td>
-                      <nz-switch
-                        [(ngModel)]="switchValueAguinaldo"
-                        [nzDisabled]="isDisabledAguinaldo"
-                        [nzCheckedChildren]="checkedTemplate"
-                        [nzUnCheckedChildren]="unCheckedTemplate"
-                        (ngModelChange)="enableAguinaldo()"
-                        [ngModelOptions]="{ standalone: true }"
-                      ></nz-switch>
-                      <ng-template #checkedTemplate
-                        ><i nz-icon nzType="edit" nzTheme="outline"></i
-                      ></ng-template>
-                      <ng-template #unCheckedTemplate
-                        ><i nz-icon nzType="check"></i
-                      ></ng-template>
-                    </td>
-                  </nz-form-item>
-
-                  <legend>Distribución</legend>
                   <nz-form-item>
                     <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true"
                       >Autorizado : {{ this.conpermiso }}
@@ -1357,11 +1517,10 @@
           <nz-table
             nzSize="small"
             nzBordered
-            style="display: none"
             nzTemplateMode
             *ngFor="let data of listComprobantes; let i = index"
           >
-            <thead *ngIf="i % 2 === 0">
+            <thead *ngIf="i % 2 === 1">
               <tr>
                 <th>:</th>
                 <th>:</th>
@@ -1442,7 +1601,7 @@
                 <th>:</th>
               </tr>
             </thead>
-            <tbody *ngIf="i % 2 === 0">
+            <tbody *ngIf="i % 2 === 1">
               <tr *ngIf="this.totalAguinaldo <= 0">
                 <td>:</td>
                 <td>:</td>
@@ -1587,7 +1746,8 @@
                 <td>:</td>
                 <td>:</td>
                 <td>:</td>
-                <td colspan="2">(-) AJUSTE</td>
+                <td colspan="2" *ngIf="totalAguinaldo === 0">(-) AJUSTE</td>
+                <td colspan="2" *ngIf="totalAguinaldo > 0">(-) ANTICIPO</td>
                 <td colspan="2"></td>
                 <td colspan="2">{{ data.ajuste | currency : "LPS " }}</td>
                 <td colspan="2"></td>
@@ -1602,6 +1762,41 @@
                 <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0 && data.ajuste <= 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0 && data.otros <= 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+                <td>:</td>
+                <td>:</td>
+                <th colspan="8"></th>
+                <th>:</th>
               </tr>
               <tr>
                 <th>:</th>
@@ -1743,7 +1938,7 @@
             nzTemplateMode
             *ngFor="let data of listComprobantes; let i = index"
           >
-            <thead *ngIf="i % 2 === 1">
+            <thead *ngIf="i % 2 === 0">
               <tr>
                 <th>:</th>
                 <th colspan="8">
@@ -1797,7 +1992,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody *ngIf="i % 2 === 1">
+            <tbody *ngIf="i % 2 === 0">
               <tr *ngIf="this.totalAguinaldo <= 0">
                 <td>:</td>
                 <td colspan="2">SALARIO NORMAL</td>
@@ -1898,7 +2093,8 @@
               </tr>
               <tr *ngIf="data.ajuste > 0">
                 <td>:</td>
-                <td colspan="2">(-) AJUSTE</td>
+                <td colspan="2" *ngIf="totalAguinaldo === 0">(-) AJUSTE</td>
+                <td colspan="2" *ngIf="totalAguinaldo > 0">(-) ANTICIPO</td>
                 <td colspan="2"></td>
                 <td colspan="2">{{ data.ajuste | currency : "LPS " }}</td>
                 <td colspan="2"></td>
@@ -1909,6 +2105,22 @@
                 <td colspan="2"></td>
                 <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
                 <td colspan="2"></td>
+              </tr>
+
+              <tr *ngIf="totalAguinaldo > 0 && data.ajuste <= 0">
+                <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0 && data.otros <= 0">
+                <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
+              </tr>
+              <tr *ngIf="totalAguinaldo > 0">
+                <td>:</td>
               </tr>
               <tr>
                 <th>:</th>
@@ -3502,213 +3714,6 @@
         </div>
       </ng-container>
     </nz-modal>
-    <nz-modal
-      [(nzVisible)]="isVisibleAguinaldo"
-      nzTitle="Definir Aguinaldo"
-      nzClosable="false"
-      [nzOkDisabled]="isValidAguinaldo"
-      (nzOnOk)="aguinaldoSemanal()"
-      (nzOnCancel)="handleCancelAguinaldoSem()"
-      nzCentered
-    >
-      <ng-container *nzModalContent>
-        <form nz-form [formGroup]="resumenForm">
-          <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="24">Aguinaldo</nz-form-label>
-            <nz-form-control [nzSm]="8" [nzXs]="24">
-              <input
-                nz-input
-                formControlName="aguinaldo"
-                (ngModelChange)="validAguinaldo($event)"
-                placeholder="0"
-                type="number"
-                min="0"
-                nzSize="default"
-              />
-              <div class="form-text">(Opcional)</div>
-            </nz-form-control>
-            <td>
-              <nz-switch
-                [(ngModel)]="switchValueAguinaldo"
-                [nzDisabled]="isDisabledAguinaldo"
-                [nzCheckedChildren]="checkedTemplate"
-                [nzUnCheckedChildren]="unCheckedTemplate"
-                (ngModelChange)="enableAguinaldo()"
-                [ngModelOptions]="{ standalone: true }"
-              ></nz-switch>
-              <ng-template #checkedTemplate
-                ><i nz-icon nzType="edit" nzTheme="outline"></i
-              ></ng-template>
-              <ng-template #unCheckedTemplate
-                ><i nz-icon nzType="check"></i
-              ></ng-template>
-            </td>
-          </nz-form-item>
-        </form>
-      </ng-container>
-    </nz-modal>
-    <nz-modal
-      [(nzVisible)]="isVisibleAguinaldoDeduccion"
-      nzTitle="Calculando Deducciones | {{
-        this.nombreCompleto
-      }} — Salario Bruto: Lps. {{ this.sueldoAlDeducirString }}"
-      (nzOnCancel)="handleMainDeduccionCancel()"
-      [nzFooter]="null"
-      nzClosable="false"
-      nzWidth="25%"
-    >
-      <ng-container *nzModalContent>
-        <div id="main_content" class="inner-content" style="overflow: hidden">
-          <td>
-            <div class="card">
-              <div class="card-body">
-                <div>
-                  <h1 style="text-align: center">Información Requerida</h1>
-                  <div style="border-bottom: 1px solid rgb(233, 233, 233)">
-                    <tr>
-                      <td>
-                        <div nz-row>
-                          <div nz-col>
-                            <label
-                              nz-checkbox
-                              [nzDisabled]="cboxAll"
-                              [(ngModel)]="allChecked"
-                              (ngModelChange)="onAllChecked($event)"
-                              [nzIndeterminate]="indeterminate"
-                            ></label>
-                          </div>
-                        </div>
-                      </td>
-                      <nz-form-label [nzNoColon]="true" [nzSm]="24" [nzXs]="24"
-                        >Marcar Todos</nz-form-label
-                      >
-                    </tr>
-                  </div>
-                  <form nz-form [formGroup]="aguinaldoForm">
-                    <p></p>
-                    <tr>
-                      <td>
-                        <div nz-row>
-                          <div nz-col>
-                            <label
-                              nz-checkbox
-                              [nzDisabled]="cboxAjuste"
-                              [(ngModel)]="isCheckedAjuste"
-                              (ngModelChange)="logAjuste($event)"
-                              [ngModelOptions]="{ standalone: true }"
-                            ></label>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Anticipo</nz-form-label
-                        >
-                      </td>
-                      <td>
-                        <input
-                          formControlName="ajuste"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div nz-row>
-                          <div nz-col>
-                            <label
-                              nz-checkbox
-                              [nzDisabled]="cboxOtros"
-                              [(ngModel)]="isCheckedVarios"
-                              (ngModelChange)="logVarios($event)"
-                              [ngModelOptions]="{ standalone: true }"
-                            ></label>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          nzTooltipTitle="Valor a deducir en concepto de herramientas, vestimenta, examenes medicos etc."
-                          >Otros
-                        </nz-form-label>
-                      </td>
-                      <td>
-                        <input
-                          formControlName="varios"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
-                      </td>
-                    </tr>
-                  </form>
-
-                  <p></p>
-
-                  <table style="margin: 0 auto">
-                    <tr>
-                      <td>
-                        <button
-                          nz-button
-                          nzType="primary"
-                          nzSize="large"
-                          id="btnCalcularDeduccion"
-                          [disabled]="!aguinaldoForm.valid"
-                          (click)="deduccionTotal()"
-                          data-placement="bottom"
-                          title="Calcular Deducciones"
-                        >
-                          <i
-                            nz-icon
-                            class="center"
-                            nzType="calculator"
-                            nzTheme="fill"
-                          ></i>
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-info"
-                          (click)="limpiarMainDeduccion()"
-                          data-placement="bottom"
-                          title="Limpiar"
-                        >
-                          <i class="bi bi-stars"></i>
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger"
-                          (click)="handleMainDeduccionCancel()"
-                          data-placement="bottom"
-                          title="Cancelar"
-                        >
-                          <i class="bi bi-x-lg"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-              <h2 style="text-align: center" class="h2">
-                Total Deducciones: Lps. {{ this.deduccionString }}
-              </h2>
-            </div>
-          </td>
-        </div>
-      </ng-container>
-    </nz-modal>
     <!-- TABLAS -->
     <nz-table nzTemplateMode id="nominaFinal" hidden>
       <thead>
@@ -4064,7 +4069,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td>:</td>
-                <td colspan="2">ISR</td>
+                <td colspan="2">RETENCION ISRENTA {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
                 <td colspan="2">{{ data.isr | currency : "LPS " }}</td>
                 <td colspan="2"></td>
@@ -4074,7 +4079,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td>:</td>
-                <td colspan="2">IMP. VECINAL</td>
+                <td colspan="2">IMP. PER MUNI {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
                 <td colspan="2">{{ data.impvecinal | currency : "LPS " }}</td>
                 <td colspan="2"></td>
@@ -4420,14 +4425,14 @@
               </tr>
               <tr *ngIf="data.isr > 0">
                 <td>:</td>
-                <td colspan="2">ISR</td>
+                <td colspan="2">RETENCION ISRENTA {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
                 <td colspan="2">{{ data.isr | currency : "LPS " }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.impvecinal > 0">
                 <td>:</td>
-                <td colspan="2">IMP. VECINAL</td>
+                <td colspan="2">IMP. PER MUNI {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
                 <td colspan="2">{{ data.impvecinal | currency : "LPS " }}</td>
                 <td colspan="2"></td>
@@ -4994,11 +4999,7 @@
           <th nzWidth="10%" style="text-align: center; vertical-align: middle">
             Total a Pagar
           </th>
-          <th
-            nzWidth="10%"
-            style="text-align: center; vertical-align: middle"
-            *ngIf="diferencia <= 7"
-          >
+          <th nzWidth="10%" style="text-align: center; vertical-align: middle">
             Aguinaldo
           </th>
           <th nzWidth="10%" style="text-align: center; vertical-align: middle">
@@ -5078,7 +5079,7 @@
           <td>{{ data.ingresos | currency : "LPS " }}</td>
           <td>{{ data.deducciones | currency : "LPS " }}</td>
           <td>{{ data.totalPagar | currency : "LPS " }}</td>
-          <td *ngIf="diferencia <= 7">
+          <td>
             <button
               class="btn btn-success btn-sm"
               (click)="handleAguinaldoSemanal(data.id)"

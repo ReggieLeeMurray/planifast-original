@@ -584,6 +584,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     var fechaCreacion = moment(this.fechaCreacionPlanilla)
       .format('L')
       .toString();
+
     history.append('fechaInicio', fechaInicio);
     history.append('fechaFinal', fechaFinal);
     history.append('fechaCreacion', fechaCreacion);
@@ -645,8 +646,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             listResultados[i].nombres + ' ' + listResultados[i].apellidos,
           permanente: listResultados[i].permanente,
           salarioBase: parseFloat(listResultados[i].salarioBase),
-          ingresos: parseFloat(listResultados[i].ingresos),
-          deducciones: parseFloat(listResultados[i].deducciones),
+          totalIngresos: parseFloat(listResultados[i].ingresos),
+          totalDeducciones: parseFloat(listResultados[i].deducciones),
+          ingresoBruto: parseFloat(listResultados[i].ingresoBruto),
           recargo: parseFloat(listResultados[i].recargo),
           horasNormales: parseFloat(listResultados[i].horasNormales),
           lpsNormales: parseFloat(listResultados[i].lpsNormales),
@@ -662,6 +664,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           vacacion: parseFloat(listResultados[i].vacacion),
           ajusteP: parseFloat(listResultados[i].ajusteP),
           aguinaldo: parseFloat(listResultados[i].aguinaldo),
+          diasFeriado: parseFloat(listResultados[i].diasferiado),
+          diasIncapacidad: parseFloat(listResultados[i].diasincapacidad),
+          diasVacacion: parseFloat(listResultados[i].diasvacacion),
+          diasNoAutorizados: parseFloat(listResultados[i].diasnoautorizados),
+          diasSuspension: parseFloat(listResultados[i].diassuspension),
+          diasAutorizados: parseFloat(listResultados[i].diasautorizados),
           ihss: parseFloat(listResultados[i].ihss),
           isr: parseFloat(listResultados[i].isr),
           afpc: parseFloat(listResultados[i].afpc),
@@ -1386,6 +1394,15 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   // modal segundo paso > 7
   ingresoCompleto(id: number): void {
+    if (this.setOfCalculados.size === 0) {
+      this.setOfCalculados.add(id);
+    } else {
+      for (let i = 0; i < this.setOfCalculados.size; i++) {
+        if (this.setOfCalculados[i] !== this.idEmpleado) {
+          this.setOfCalculados.add(id);
+        }
+      }
+    }
     this.cantOI = 1;
     this.idEmpleado = id;
     console.log('CANTIDADIO ' + this.cantOI);
@@ -1468,7 +1485,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       nzCentered: true,
       nzTitle: 'ADVERTENCIA',
       nzContent:
-        '<b style="color: red;">TIENES CALCULOS AJENOS AL AGUINALDO, SI PROCEDE PERDERA DICHO TRABAJO.</b>',
+        '<b style="color: red;">TIENES CALCULOS AJENOS AL AGUINALDO. SI PROCEDE, PERDERÁ DICHO TRABAJO.</b>',
       nzOkType: 'primary',
       nzOkText: 'Continuar de todas formas',
       nzCancelText: 'Salir',
@@ -1588,11 +1605,19 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.valorVacacion = 0;
     this.isVisibleAguinaldo = false;
     this.isVisibleAguinaldoAdvertencia = false;
-    this.isAdvertenciaIgnored = false;
+    this.isAdvertenciaIgnored = true;
     console.log(this.listNominaFinal);
   }
   ingresosTotal(): void {
-    this.handleEmpleadoClear(this.idEmpleado);
+    if (this.setOfCalculados.size === 0) {
+      this.setOfCalculados.add(this.idEmpleado);
+    } else {
+      for (let i = 0; i < this.setOfCalculados.size; i++) {
+        if (this.setOfCalculados[i] !== this.idEmpleado) {
+          this.setOfCalculados.add(this.idEmpleado);
+        }
+      }
+    }
     //calcula valor incapacidad publica
     this.incapacidadpub = this.round2Decimal(
       this.resumenForm.get('incapacidadpub').value
@@ -1607,6 +1632,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.isVisibleDivPrimario = true;
       this.extraForm.get('incpub').enable();
     }
+    console.log('CONTINUA PARA FINAL');
     //calcula valor incapacidad privada
     this.incapacidadpriv = this.round2Decimal(
       this.resumenForm.get('incapacidadpriv').value
@@ -1713,8 +1739,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.sueldo = this.valorAguinaldo;
         this.sueldoNormal = this.valorAguinaldo;
       } else {
+        var salario = this.salarioMinimoPerDia * 15;
         this.sueldo = this.round2Decimal(
-          this.salarioMinimoPerDia * 15 -
+          salario -
             this.valorFalta -
             this.valorFeriado -
             this.valorIncapacidadPub -
@@ -1722,11 +1749,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             this.valorVacacion
         );
         this.sueldoNormal = this.round2Decimal(
-          this.salarioMinimoPerDia * 15 -
-            this.valorFalta -
-            this.valorIncapacidadPub -
-            this.valorSuspension +
-            this.valorAjuste
+          salario - this.valorFalta - this.valorSuspension + this.valorAjuste
         );
         this.valorAguinaldo = 0;
       }
@@ -2040,6 +2063,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(id, salario, nombre + ' ' + apellido);
     console.log(this.jDatos, this.listFinal);
     this.isMainVisible = true;
+    this.isAdvertenciaIgnored = false;
     this.salarioString = this.numberWithCommas(salario);
     this.salarioMinimoPerDia = salario / 30;
     this.salarioMinimoPerHour = this.truncator(salario / 30) / 8;
@@ -2394,30 +2418,51 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   deduccionTotal() {
     if (this.diferencia >= 8) {
-      this.valorIHSS = this.round2Decimal(this.automaticForm.get('ihss').value);
-      this.valorISR = this.round2Decimal(this.automaticForm.get('isr').value);
-      this.valorAFPC = this.round2Decimal(this.automaticForm.get('afpc').value);
-      this.valorAnticipo = this.round2Decimal(
-        this.deduccionFormQuincenal.get('anticipo').value
-      );
-      this.valorPrestamoRap = this.round2Decimal(
-        this.deduccionFormQuincenal.get('prestamorap').value
-      );
-      this.valorImpVecinal = this.round2Decimal(
-        this.deduccionFormQuincenal.get('impvecinal').value
-      );
-      this.valorCTAEmpresa = this.round2Decimal(
-        this.deduccionFormQuincenal.get('ctaempresa').value
-      );
-      this.valorTransporte = this.round2Decimal(
-        this.deduccionFormQuincenal.get('transporte').value
-      );
-      this.valorAjuste = this.round2Decimal(
-        this.deduccionFormQuincenal.get('ajuste').value
-      );
-      this.valorVarios = this.round2Decimal(
-        this.deduccionFormQuincenal.get('varios').value
-      );
+      if (this.totalAguinaldo > 0) {
+        this.valorIHSS = 0;
+        this.valorISR = 0;
+        this.valorAFPC = 0;
+        this.valorImpVecinal = 0;
+        this.valorPrestamoRap = 0;
+        this.valorAjuste = 0;
+        this.valorCTAEmpresa = 0;
+        this.valorTransporte = 0;
+        this.valorAnticipo = this.round2Decimal(
+          this.aguinaldoForm.get('ajuste').value
+        );
+        this.valorVarios = this.round2Decimal(
+          this.aguinaldoForm.get('varios').value
+        );
+      } else {
+        this.valorIHSS = this.round2Decimal(
+          this.automaticForm.get('ihss').value
+        );
+        this.valorISR = this.round2Decimal(this.automaticForm.get('isr').value);
+        this.valorAFPC = this.round2Decimal(
+          this.automaticForm.get('afpc').value
+        );
+        this.valorAnticipo = this.round2Decimal(
+          this.deduccionFormQuincenal.get('anticipo').value
+        );
+        this.valorPrestamoRap = this.round2Decimal(
+          this.deduccionFormQuincenal.get('prestamorap').value
+        );
+        this.valorImpVecinal = this.round2Decimal(
+          this.deduccionFormQuincenal.get('impvecinal').value
+        );
+        this.valorCTAEmpresa = this.round2Decimal(
+          this.deduccionFormQuincenal.get('ctaempresa').value
+        );
+        this.valorTransporte = this.round2Decimal(
+          this.deduccionFormQuincenal.get('transporte').value
+        );
+        this.valorAjuste = this.round2Decimal(
+          this.deduccionFormQuincenal.get('ajuste').value
+        );
+        this.valorVarios = this.round2Decimal(
+          this.deduccionFormQuincenal.get('varios').value
+        );
+      }
     } else {
       if (this.totalAguinaldo > 0) {
         this.valorIHSS = 0;
@@ -2425,7 +2470,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.valorImpVecinal = 0;
         this.valorCTAEmpresa = 0;
         this.valorTransporte = 0;
-        this.valorAjuste = this.round2Decimal(
+        this.valorAjuste = 0;
+        this.valorAnticipo = this.round2Decimal(
           this.aguinaldoForm.get('ajuste').value
         );
         this.valorVarios = this.round2Decimal(
@@ -2495,6 +2541,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.valorCTAEmpresa +
         this.valorTransporte +
         this.valorAjuste +
+        this.valorAnticipo +
         this.valorVarios;
     }
     console.log(
@@ -2574,6 +2621,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             this.listNominaFinal[i].anticipo = this.valorAnticipo;
             this.listNominaFinal[i].prestamorap = this.valorPrestamoRap;
           }
+          if (this.totalAguinaldo > 0) {
+            this.listNominaFinal[i].anticipo = this.valorAnticipo;
+          } else {
+            this.listNominaFinal[i].ajuste = this.valorAjuste;
+          }
           this.listNominaFinal[i].cantOD = this.cantOD;
           console.log(
             this.listNominaFinal[i].cantOI,
@@ -2585,7 +2637,6 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.listNominaFinal[i].impvecinal = this.valorImpVecinal;
           this.listNominaFinal[i].cta = this.valorCTAEmpresa;
           this.listNominaFinal[i].viaticos = this.valorTransporte;
-          this.listNominaFinal[i].ajuste = this.valorAjuste;
           this.listNominaFinal[i].otros = this.valorVarios;
           this.listNominaFinal[i].deducciones = this.deduccion;
           this.listNominaFinal[i].totalPagar = this.round2Decimal(
@@ -5301,17 +5352,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.valorIncapacidadPub = this.round2Decimal(
         this.extraForm.get('incpub').value
       );
-      var valorDeducir = this.incapacidadpub * this.salarioMinimoPerDia;
       for (let i = 0; i < this.listNomina.length; i++) {
         if (this.listNomina[i].id === this.idEmpleado) {
           this.listNominaFinal[i].ingresoBruto = this.round2Decimal(
-            this.listNominaFinal[i].ingresoBruto - valorDeducir
+            this.listNominaFinal[i].ingresoBruto - this.valorIncapacidadPub
           );
           this.listNominaFinal[i].incapacidad = this.valorIncapacidadPub;
           this.totalAPagar = this.totalAPagar - this.listNomina[i].totalPagar;
-          this.listNomina[i].ingresos = this.round2Decimal(
-            this.listNomina[i].ingresos - valorDeducir
-          );
           this.listNominaFinal[i].totalPagar = this.round2Decimal(
             this.listNominaFinal[i].ingresos -
               this.listNominaFinal[i].deducciones
