@@ -26,10 +26,13 @@ namespace BEProyectoFinal.Models
     public double SalarioBase { get; set; }
 
     [Required]
-    public double Ingresos { get; set; }
+    public double TotalIngresos { get; set; }
 
     [Required]
-    public double Deducciones { get; set; }
+    public double TotalDeducciones { get; set; }
+
+    [Required]
+    public double IngresoBruto { get; set; }
 
     [Required]
     public double Recargo { get; set; }
@@ -75,6 +78,24 @@ namespace BEProyectoFinal.Models
 
     [Required]
     public double Aguinaldo { get; set; }
+
+    [Required]
+    public int DiasFeriado { get; set; }
+
+    [Required]
+    public int DiasIncapacidad { get; set; }
+
+    [Required]
+    public int DiasVacacion { get; set; }
+
+    [Required]
+    public int DiasNoAutorizados { get; set; }
+
+    [Required]
+    public int DiasAutorizados { get; set; }
+
+    [Required]
+    public int DiasSuspension { get; set; }
 
     [Required]
     public double Ihss { get; set; }

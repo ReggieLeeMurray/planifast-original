@@ -3,8 +3,9 @@ export class Resultado {
   nombreCompleto: string;
   permanente: boolean;
   salarioBase: number;
-  ingresos: number;
-  deducciones: number;
+  totalIngresos: number;
+  totalDeducciones: number;
+  ingresoBruto: number;
   recargo: number;
   horasNormales: number;
   lpsNormales: number;
@@ -20,6 +21,12 @@ export class Resultado {
   vacacion: number;
   ajusteP: number;
   aguinaldo: number;
+  diasFeriado: number;
+  diasIncapacidad: number;
+  diasVacacion: number;
+  diasNoAutorizados: number;
+  diasSuspension: number;
+  diasAutorizados: number;
   ihss: number;
   isr: number;
   afpc: number;

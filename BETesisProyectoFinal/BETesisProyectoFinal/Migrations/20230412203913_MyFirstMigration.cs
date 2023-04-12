@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BEProyectoFinal.Migrations
 {
-    public partial class myFirstMigration : Migration
+    public partial class MyFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -202,8 +202,9 @@ namespace BEProyectoFinal.Migrations
                     NombreCompleto = table.Column<string>(nullable: false),
                     Permanente = table.Column<bool>(nullable: false),
                     SalarioBase = table.Column<double>(nullable: false),
-                    Ingresos = table.Column<double>(nullable: false),
-                    Deducciones = table.Column<double>(nullable: false),
+                    TotalIngresos = table.Column<double>(nullable: false),
+                    TotalDeducciones = table.Column<double>(nullable: false),
+                    IngresoBruto = table.Column<double>(nullable: false),
                     Recargo = table.Column<double>(nullable: false),
                     HorasNormales = table.Column<double>(nullable: false),
                     LpsNormales = table.Column<double>(nullable: false),
@@ -219,6 +220,12 @@ namespace BEProyectoFinal.Migrations
                     Vacacion = table.Column<double>(nullable: false),
                     AjusteP = table.Column<double>(nullable: false),
                     Aguinaldo = table.Column<double>(nullable: false),
+                    DiasFeriado = table.Column<int>(nullable: false),
+                    DiasIncapacidad = table.Column<int>(nullable: false),
+                    DiasVacacion = table.Column<int>(nullable: false),
+                    DiasNoAutorizados = table.Column<int>(nullable: false),
+                    DiasAutorizados = table.Column<int>(nullable: false),
+                    DiasSuspension = table.Column<int>(nullable: false),
                     Ihss = table.Column<double>(nullable: false),
                     Isr = table.Column<double>(nullable: false),
                     Afpc = table.Column<double>(nullable: false),

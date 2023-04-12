@@ -223,8 +223,23 @@ namespace BEProyectoFinal.Migrations
                     b.Property<double>("Cta")
                         .HasColumnType("double");
 
-                    b.Property<double>("Deducciones")
-                        .HasColumnType("double");
+                    b.Property<int>("DiasAutorizados")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiasFeriado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiasIncapacidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiasNoAutorizados")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiasSuspension")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiasVacacion")
+                        .HasColumnType("int");
 
                     b.Property<int>("EmpleadoID")
                         .HasColumnType("int");
@@ -256,7 +271,7 @@ namespace BEProyectoFinal.Migrations
                     b.Property<double>("Incapacidad")
                         .HasColumnType("double");
 
-                    b.Property<double>("Ingresos")
+                    b.Property<double>("IngresoBruto")
                         .HasColumnType("double");
 
                     b.Property<double>("Isr")
@@ -294,6 +309,12 @@ namespace BEProyectoFinal.Migrations
                         .HasColumnType("double");
 
                     b.Property<double>("Septimo")
+                        .HasColumnType("double");
+
+                    b.Property<double>("TotalDeducciones")
+                        .HasColumnType("double");
+
+                    b.Property<double>("TotalIngresos")
                         .HasColumnType("double");
 
                     b.Property<double>("TotalPagar")
