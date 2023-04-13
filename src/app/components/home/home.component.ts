@@ -4,7 +4,7 @@ import { AccountService } from 'src/app/_services';
 import { EmpleadosService } from 'src/app/services/empleados.service';
 import { HistorialService } from 'src/app/services/historial.service';
 import { TipoplanillaService } from 'src/app/services/tipoplanilla.service';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import Chart from 'chart.js/auto';
 import { first } from 'rxjs/operators';
 import { toNumber } from 'ng-zorro-antd/core/util';
@@ -22,13 +22,19 @@ export class HomeComponent implements OnInit {
   chart4: any;
   chart5: any;
   chart6: any;
+  dateFormat = 'dd/MM/yyyy';
   date = [startOfMonth(new Date()), endOfMonth(new Date())];
-  inicioMes: string = moment().startOf('month').format('YYYY-MM-DD');
-  finalMes: string = moment().endOf('month').format('YYYY-MM-DD');
+  // inicioMes: string = moment().startOf('month').format('YYYY-MM-DD');
+  // finalMes: string = moment().endOf('month').format('YYYY-MM-DD');
+  inicioMes: Moment = moment().startOf('month');
+  finalMes: Moment = moment().endOf('month');
   selectedValue = moment().year();
   valor = [];
   listOfOption = [];
   descripcion = [];
+  listHistory = null;
+  listadoTemp = [];
+  fechasValidas = true;
   listPersonalContratadosByFecha = [];
   listEmpleadosByDepto = [];
   listEmpleadosByPlanilla = [];
@@ -50,7 +56,7 @@ export class HomeComponent implements OnInit {
   };
   user: User;
   userFromApi: User;
-  DEBUG = false;
+  DEBUG = true;
 
   constructor(
     private EmpleadosService: EmpleadosService,
@@ -66,6 +72,7 @@ export class HomeComponent implements OnInit {
     if (!this.DEBUG) {
       console.log = function () {};
     }
+    this.cargarHistorial();
     this.cargarAcceso();
     this.cargarEmpleadoByDepto();
     this.cargarEmpleadobyPlanilla();
@@ -85,22 +92,107 @@ export class HomeComponent implements OnInit {
         this.userFromApi = user;
       });
   }
+  cargarHistorial() {
+    this.loading = true;
+    this.HistorialService.getListHistoryWPlanilla().subscribe((data) => {
+      this.loading = false;
+      this.listadoTemp = data;
+      console.log(data, this.listadoTemp);
+      for (let w = 0; w < data.length; w++) {
+        this.listadoTemp[w].fechaInicio = moment(data[w].fechaInicio);
+        this.listadoTemp[w].fechaFinal = moment(data[w].fechaFinal);
+      }
+      this.listadoTemp.sort((a, b) => a.id - b.id);
+      this.listHistory = [];
+      console.log(data, this.listadoTemp, this.listHistory);
+      var x: number = 0;
+      if (this.fechasValidas === true) {
+        var inicioMesAnterior = moment(this.inicioMes).subtract(1, 'month');
+        var inicioMesActual = moment(this.inicioMes).startOf('month');
+        for (let i = 0; i < this.listadoTemp.length; i++) {
+          if (
+            (this.listadoTemp[i].fechaInicio >= inicioMesAnterior &&
+              this.listadoTemp[i].fechaInicio < inicioMesActual &&
+              this.listadoTemp[i].fechaFinal >= this.inicioMes &&
+              this.listadoTemp[i].fechaFinal < this.finalMes) ||
+            (this.listadoTemp[i].fechaInicio >= this.inicioMes &&
+              this.listadoTemp[i].fechaInicio < this.finalMes &&
+              this.listadoTemp[i].fechaFinal <= this.finalMes &&
+              this.listadoTemp[i].fechaFinal > this.inicioMes)
+          ) {
+            console.log(
+              'TRUE ',
+              i,
+              x,
+              'FECHA INICIAL: ',
+              this.listadoTemp[i].fechaInicio,
+              this.inicioMes,
+              'FECHA FINAL: ',
+              this.listadoTemp[i].fechaFinal,
+              this.finalMes
+            );
+            this.listHistory[x] = this.listadoTemp[i];
+            x++;
+          }
+        }
+      } else {
+        console.log('FALSE');
+        this.listHistory = this.listadoTemp;
+      }
+      console.log(
+        this.fechasValidas,
+        this.listHistory,
+        this.inicioMes,
+        this.finalMes
+      );
+      // this.reloadArchivosList();
+    });
+  }
+  // onChange(result: Date[]): void {
+  //   console.log(result[0], result[1]);
+  //   if (result.length === 0) {
+  //     this.inicioMes = moment().startOf('month').format('YYYY-MM-DD');
+  //     this.finalMes = moment().endOf('month').format('YYYY-MM-DD');
+  //   } else {
+  //     var start = moment(result[0]).format('YYYY-MM-DD');
+  //     var end = moment(result[1]).format('YYYY-MM-DD');
+  //     this.inicioMes = start;
+  //     this.finalMes = end;
+  //   }
+  //   this.chart5.destroy();
+  //   this.valor.length = 0;
+  //   this.descripcion.length = 0;
+  //   this.cargarTotalxFechaxPlanilla();
+  //   console.log('DATE: ', result, 'START', start, 'END', end);
+  // }
   onChange(result: Date[]): void {
     console.log(result[0], result[1]);
-    if (result.length === 0) {
-      this.inicioMes = moment().startOf('month').format('YYYY-MM-DD');
-      this.finalMes = moment().endOf('month').format('YYYY-MM-DD');
+    if (result[0] === undefined && result[1] === undefined) {
+      this.fechasValidas = false;
     } else {
-      var start = moment(result[0]).format('YYYY-MM-DD');
-      var end = moment(result[1]).format('YYYY-MM-DD');
-      this.inicioMes = start;
-      this.finalMes = end;
+      if (result.length === 0) {
+        this.inicioMes = moment().startOf('month');
+        this.finalMes = moment().endOf('month');
+      } else {
+        this.inicioMes = moment(result[0]);
+        this.finalMes = moment(result[1]);
+      }
+      this.fechasValidas = true;
     }
     this.chart5.destroy();
     this.valor.length = 0;
     this.descripcion.length = 0;
+    this.cargarHistorial();
     this.cargarTotalxFechaxPlanilla();
-    console.log('DATE: ', result, 'START', start, 'END', end);
+    console.log(
+      'DATE: ',
+      result,
+      'START',
+      this.inicioMes,
+      'END',
+      this.finalMes
+    );
+    console.log('DATE: ', result);
   }
   selectedYear(result: any) {
     if (result === null) {
@@ -274,8 +366,8 @@ export class HomeComponent implements OnInit {
       for (let i = 0; i < this.listPlanillas.length; i++) {
         this.HistorialService.SumTotalxFechaxPlanilla(
           this.listPlanillas[i].id,
-          this.inicioMes,
-          this.finalMes
+          moment(this.listHistory[0].fechaInicio).format('YYYY-MM-DD'),
+          this.finalMes.format('YYYY-MM-DD')
         ).subscribe((data) => {
           if (data[0] != undefined) {
             this.listPlanillas[i].totalesPlanillas = data[0].totalPlanilla;

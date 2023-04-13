@@ -84,6 +84,7 @@
             >
             <nz-range-picker
               [(ngModel)]="date"
+              [nzFormat]="this.dateFormat"
               [nzRanges]="ranges"
               (ngModelChange)="onChange($event)"
             ></nz-range-picker>
