@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   myAppUrl: 'https://localhost:44301/',
   myAppUrlAccount: 'http://localhost:53852',
+  appVersion: require('package.json').version + '-dev',
   // myAppUrl: 'http://192.168.0.111/',
   // myAppUrlAccount: 'http://192.168.0.111',
 };

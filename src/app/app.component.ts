@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AccountService } from './_services';
 import { User, Role } from 'src/app/_models';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +10,7 @@ import { User, Role } from 'src/app/_models';
 })
 export class AppComponent {
   title = 'PlaniFast';
+  currentApplicationVersion = environment.appVersion;
   isCollapsed = false;
   isInlineCollapsed = false;
   isInformacionOpen = true;
