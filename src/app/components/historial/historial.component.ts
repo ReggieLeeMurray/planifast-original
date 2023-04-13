@@ -19,6 +19,7 @@ export class HistorialComponent implements OnInit {
   listTemporal = null;
   file: any;
   fileName: string = '';
+  dateFormat = 'dd/MM/yyyy';
   notFound = './assets/empty.svg';
   date = [startOfMonth(new Date()), endOfMonth(new Date())];
   inicioMes: Moment = moment().startOf('month');
@@ -99,23 +100,18 @@ export class HistorialComponent implements OnInit {
       console.log(data, this.listadoTemp, this.listHistory);
       var x: number = 0;
       if (this.fechasValidas === true) {
-        var tempFechaInicio = moment(this.listadoTemp[0].fechaInicio).format(
-          'DD MM YYYY'
-        );
-        var tempfechaFinal = moment(this.listadoTemp[0].fechaFinal).format(
-          'DD MM YYYY'
-        );
-        var tempInicioMes = moment(this.inicioMes).format('DD MM YYYY');
-        var tempfinalMes = moment(this.finalMes).format('DD MM YYYY');
-
+        var inicioMesAnterior = moment(this.inicioMes).subtract(1, 'month');
+        var inicioMesActual = moment(this.inicioMes).startOf('month');
         for (let i = 0; i < this.listadoTemp.length; i++) {
           if (
-            (this.listadoTemp[i].fechaInicio > this.inicioMes ||
-              tempFechaInicio === tempInicioMes) &&
-            this.listadoTemp[i].fechaInicio < this.finalMes &&
-            (this.listadoTemp[i].fechaFinal < this.finalMes ||
-              tempfechaFinal === tempfinalMes) &&
-            this.listadoTemp[i].fechaFinal > this.inicioMes
+            (this.listadoTemp[i].fechaInicio >= inicioMesAnterior &&
+              this.listadoTemp[i].fechaInicio < inicioMesActual &&
+              this.listadoTemp[i].fechaFinal >= this.inicioMes &&
+              this.listadoTemp[i].fechaFinal < this.finalMes) ||
+            (this.listadoTemp[i].fechaInicio >= this.inicioMes &&
+              this.listadoTemp[i].fechaInicio < this.finalMes &&
+              this.listadoTemp[i].fechaFinal <= this.finalMes &&
+              this.listadoTemp[i].fechaFinal > this.inicioMes)
           ) {
             console.log(
               'TRUE ',

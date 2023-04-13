@@ -52,11 +52,12 @@
     <td>
       <nz-range-picker
         [nzRanges]="ranges"
+        [nzFormat]="this.dateFormat"
         [(ngModel)]="date"
         (ngModelChange)="onChange($event)"
       ></nz-range-picker>
       <h5 class="font-weight-bold mb-0">
-        Al borrar las fechas, mostrará TODOS los calculos
+        Al borrar las fechas, mostrarán TODOS los calculos
       </h5>
     </td>
   </tr>
