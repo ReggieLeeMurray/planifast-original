@@ -1,6 +1,7 @@
 export class Resultado {
   id?: number;
   nombreCompleto: string;
+  incompleto: boolean;
   permanente: boolean;
   salarioBase: number;
   totalIngresos: number;

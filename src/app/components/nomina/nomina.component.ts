@@ -645,6 +645,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           nombreCompleto:
             listResultados[i].nombres + ' ' + listResultados[i].apellidos,
           permanente: listResultados[i].permanente,
+          incompleto: false,
           salarioBase: parseFloat(listResultados[i].salarioBase),
           totalIngresos: parseFloat(listResultados[i].ingresos),
           totalDeducciones: parseFloat(listResultados[i].deducciones),

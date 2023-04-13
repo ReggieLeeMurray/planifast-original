@@ -23,6 +23,9 @@ namespace BEProyectoFinal.Models
     public bool Permanente { get; set; }
 
     [Required]
+    public bool Incompleto { get; set; }
+
+    [Required]
     public double SalarioBase { get; set; }
 
     [Required]
