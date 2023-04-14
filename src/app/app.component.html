@@ -156,9 +156,11 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer
-      >PlaniFast © 2021 - 2023 | Reggie Murray - Version:
-      {{ currentApplicationVersion }}</nz-footer
-    >
+    <nz-footer class="font-weight-bold mb-0"
+      >PlaniFast © 2021 - 2023 | Reggie Murray
+      <div class="form-text">
+        Build: {{ currentApplicationVersion }}-release
+      </div>
+    </nz-footer>
   </nz-layout>
 </nz-layout>
