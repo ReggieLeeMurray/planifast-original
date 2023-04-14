@@ -11,7 +11,7 @@ export const environment = {
   // myAppUrlAccount: 'http://192.168.0.111',
 };
 /********** MODIFICAR IMPORTANTE: Hide console.logs with DEBUG = FALSE **********/
-/* Nombrar la Version antes del build con: npm version (major.minor.patch)
+/* Nombrar la Version antes del build con: npm version (major.minor.patch) || npm run prebuild (patch no github tag)
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
