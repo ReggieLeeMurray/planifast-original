@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng serve",
     "prebuild": "npm --no-git-tag-version version patch",
     "build": "ng build",
     "test": "ng test",
