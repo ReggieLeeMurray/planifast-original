@@ -972,7 +972,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (iguales > 0) {
           this.hideDetectados = false;
           this.msgDetectados =
-            'Detectados: ' + iguales + ' / ' + this.listNominaFinal.length;
+            'Registros detectados: ' + iguales + ' / ' + this.listNominaFinal.length;
           faltante = this.listNominaFinal.length - iguales;
         } else {
           faltante = this.listNominaFinal.length;
@@ -984,7 +984,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (arreglo.length > 0) {
           this.hideErroneos = false;
           this.msgErroneos =
-            'Cantidad de registros inválidos: ' +
+            'Registros inválidos: ' +
             arreglo.length +
             ' ⇄ ' +
             "Lista Id's: " +
