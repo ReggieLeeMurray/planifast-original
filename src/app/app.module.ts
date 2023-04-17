@@ -72,6 +72,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
+import { SalariosComponent } from './components/salarios/salarios.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -100,6 +101,7 @@ registerLocaleData(es);
     InformacionComponent,
     HistorialComponent,
     AlertComponent,
+    SalariosComponent,
   ],
   imports: [
     BrowserModule,

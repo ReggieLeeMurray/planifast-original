@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AgregarEmpleadoComponent } from './components/agregar-empleado/agregar-empleado.component';
-import { AgregarRolesComponent } from './components/agregar-roles/agregar-roles.component';
+import { SalariosComponent } from './components/salarios/salarios.component';
 import { ListaEmpleadosComponent } from './components/lista-empleados/lista-empleados.component';
 import { DepartamentoComponent } from './components/departamento/departamento.component';
 import { TipoplanillaComponent } from './components/tipoplanilla/tipoplanilla.component';
@@ -35,6 +35,13 @@ const routes: Routes = [
     path: 'account',
     loadChildren: accountModule,
     data: { roles: [Role.Admin] },
+  },
+  {
+    path: 'salarios',
+    component: SalariosComponent,
+    canDeactivate: [CanDeactivateGuard],
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin, Role.User] },
   },
   {
     path: 'calculo',
