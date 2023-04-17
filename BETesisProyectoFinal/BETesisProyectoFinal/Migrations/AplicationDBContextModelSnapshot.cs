@@ -271,6 +271,9 @@ namespace BEProyectoFinal.Migrations
                     b.Property<double>("Incapacidad")
                         .HasColumnType("double");
 
+                    b.Property<bool>("Incompleto")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<double>("IngresoBruto")
                         .HasColumnType("double");
 

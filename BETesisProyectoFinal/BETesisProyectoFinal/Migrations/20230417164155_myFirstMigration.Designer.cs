@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BEProyectoFinal.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20230412223116_myFirstMigration")]
+    [Migration("20230417164155_myFirstMigration")]
     partial class myFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -272,6 +272,9 @@ namespace BEProyectoFinal.Migrations
 
                     b.Property<double>("Incapacidad")
                         .HasColumnType("double");
+
+                    b.Property<bool>("Incompleto")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<double>("IngresoBruto")
                         .HasColumnType("double");

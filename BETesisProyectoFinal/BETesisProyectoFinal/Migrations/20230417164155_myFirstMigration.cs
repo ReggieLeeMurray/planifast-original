@@ -201,6 +201,7 @@ namespace BEProyectoFinal.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     NombreCompleto = table.Column<string>(nullable: false),
                     Permanente = table.Column<bool>(nullable: false),
+                    Incompleto = table.Column<bool>(nullable: false),
                     SalarioBase = table.Column<double>(nullable: false),
                     TotalIngresos = table.Column<double>(nullable: false),
                     TotalDeducciones = table.Column<double>(nullable: false),
