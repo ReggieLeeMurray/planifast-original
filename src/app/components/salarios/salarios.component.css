@@ -11,3 +11,13 @@
     text-align: center;
     vertical-align: middle;
   }
+  .centerSmall {
+    vertical-align: middle;
+    text-align: center;
+    margin-bottom: 2px;
+  }
+  .centerNube {
+    vertical-align: middle;
+    text-align: center;
+    margin-bottom: 2px;
+  }

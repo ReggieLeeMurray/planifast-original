@@ -10,19 +10,30 @@
     <p>Salarios acreditados pueden detallarse por Mes y Año</p>
   </div>
 </ng-template>
-<div>
-  <nz-input-group [nzPrefix]="prefixTemplateUser">
-    <input
-      type="text"
-      (ngModelChange)="Search($event)"
-      [(ngModel)]="empleados"
-      nz-input
-      placeholder="Buscar registros por nombre o tipo de contrato"
-    />
-  </nz-input-group>
-</div>
+
+<nz-table>
+  <tr>
+    <td>
+      <button nz-button nzType="primary" *ngIf="porcentaje === 100">
+        <i nz-icon nzType="cloud-download" class="centerSmall" nzTheme="outline"></i>
+        Generar Archivo
+      </button>
+    </td>
+    <td style="width: 100%; padding-left: 10px">
+      <nz-input-group [nzPrefix]="prefixTemplateUser">
+        <input
+          type="text"
+          (ngModelChange)="Search($event)"
+          [(ngModel)]="empleados"
+          nz-input
+          placeholder="Buscar registros por nombre o tipo de contrato"
+        />
+      </nz-input-group>
+      <ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
+    </td>
+  </tr>
+</nz-table>
 <br />
-<ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
 <nz-table>
   <body>
     <tr>
@@ -69,7 +80,7 @@
       <th>Total Pagado</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody [style]="porcentaje > 0 && porcentaje < 100 ? 'filter: blur(3px)' : 'filter: blur(0px)'">
     <tr>
       <td colspan="9" *ngIf="listCompleta?.length <= 0">
         <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>

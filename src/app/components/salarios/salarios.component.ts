@@ -154,6 +154,7 @@ export class SalariosComponent implements OnInit {
     var listFinal = [];
     var array: Array<number> = [];
     this.porcentaje = 30;
+    this.empleados = '';
     this.ResultadosService.getResultados().subscribe(async (result) => {
       this.listEmpleados = [...result.sort((a, b) => a.empleadoID - b.empleadoID)];
       await this.cargarFechas();
