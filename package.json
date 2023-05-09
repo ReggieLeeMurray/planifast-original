@@ -1,6 +1,6 @@
 {
   "name": "tesis-proyecto-final",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng serve",
