@@ -23,10 +23,6 @@ export class ResultadosService {
   }
   //post all
   guardarContenidoCompleto(resultado: Resultado[]): Observable<Resultado[]> {
-    return this.http.post<Resultado[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl,
-      resultado,
-      this.httpOptions
-    );
+    return this.http.post<Resultado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl, resultado, this.httpOptions);
   }
 }

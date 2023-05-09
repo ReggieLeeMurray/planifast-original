@@ -12,9 +12,6 @@ export class BlobsService {
   constructor(private http: HttpClient) {}
 
   upload(archivo: Blob) {
-    return this.http.post<{ path: string }>(
-      this.myAppUrl + this.myApiUrl,
-      archivo
-    );
+    return this.http.post<{ path: string }>(this.myAppUrl + this.myApiUrl, archivo);
   }
 }

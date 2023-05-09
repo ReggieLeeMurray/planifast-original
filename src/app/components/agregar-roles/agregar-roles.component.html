@@ -2,36 +2,16 @@
   <h1>Administración de Roles</h1>
 </div>
 
-<nz-modal
-  [(nzVisible)]="isVisible"
-  nzTitle="Crear Roles"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="guardarRol()"
-  nzClosable="false"
->
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Crear Roles" (nzOnCancel)="handleCancel()" (nzOnOk)="guardarRol()" nzClosable="false">
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="RolForm">
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="descripcion"
-          >Descripción</nz-form-label
-        >
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="descripcion">Descripción</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input
-            nz-input
-            type="text"
-            formControlName="descripcion"
-            style="width: 90%"
-            placeholder="ej. Administrador , Gerente"
-          />
+          <input nz-input type="text" formControlName="descripcion" style="width: 90%" placeholder="ej. Administrador , Gerente" />
         </nz-form-control>
       </nz-form-item>
-      <span
-        class="text-danger ml-3"
-        *ngIf="
-          RolForm.get('descripcion').hasError('required') &&
-          RolForm.get('descripcion').touched
-        "
-      >
+      <span class="text-danger ml-3" *ngIf="RolForm.get('descripcion').hasError('required') && RolForm.get('descripcion').touched">
         El nombre del rol es requerido</span
       >
     </form>
@@ -48,16 +28,9 @@
               <td>
                 <label
                   ><strong>Dashboard </strong>
-                  <nz-switch
-                    [ngModel]="switchValue"
-                    [nzCheckedChildren]="checkedTemplate"
-                    [nzUnCheckedChildren]="unCheckedTemplate"
-                  ></nz-switch>
-                  <ng-template #checkedTemplate
-                    ><i nz-icon nzType="check"></i
-                  ></ng-template>
-                  <ng-template #unCheckedTemplate
-                    ><i nz-icon nzType="close"></i></ng-template
+                  <nz-switch [ngModel]="switchValue" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                  <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+                  <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template
                 ></label>
               </td>
             </tr>
@@ -85,16 +58,9 @@
               <td>
                 <label
                   ><strong>Informacion </strong>
-                  <nz-switch
-                    [ngModel]="true"
-                    [nzCheckedChildren]="checkedTemplate"
-                    [nzUnCheckedChildren]="unCheckedTemplate"
-                  ></nz-switch>
-                  <ng-template #checkedTemplate
-                    ><i nz-icon nzType="check"></i
-                  ></ng-template>
-                  <ng-template #unCheckedTemplate
-                    ><i nz-icon nzType="close"></i></ng-template
+                  <nz-switch [ngModel]="true" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                  <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+                  <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template
                 ></label>
               </td>
             </tr>
@@ -122,16 +88,9 @@
               <td>
                 <label
                   ><strong>Nóminas </strong>
-                  <nz-switch
-                    [ngModel]="true"
-                    [nzCheckedChildren]="checkedTemplate"
-                    [nzUnCheckedChildren]="unCheckedTemplate"
-                  ></nz-switch>
-                  <ng-template #checkedTemplate
-                    ><i nz-icon nzType="check"></i
-                  ></ng-template>
-                  <ng-template #unCheckedTemplate
-                    ><i nz-icon nzType="close"></i></ng-template
+                  <nz-switch [ngModel]="true" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                  <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+                  <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template
                 ></label>
               </td>
             </tr>
@@ -159,16 +118,9 @@
               <td>
                 <label
                   ><strong>Colaboradores </strong>
-                  <nz-switch
-                    [ngModel]="true"
-                    [nzCheckedChildren]="checkedTemplate"
-                    [nzUnCheckedChildren]="unCheckedTemplate"
-                  ></nz-switch>
-                  <ng-template #checkedTemplate
-                    ><i nz-icon nzType="check"></i
-                  ></ng-template>
-                  <ng-template #unCheckedTemplate
-                    ><i nz-icon nzType="close"></i></ng-template
+                  <nz-switch [ngModel]="true" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                  <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+                  <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template
                 ></label>
               </td>
             </tr>
@@ -209,16 +161,9 @@
               <td>
                 <label
                   ><strong>Eventos </strong>
-                  <nz-switch
-                    [ngModel]="true"
-                    [nzCheckedChildren]="checkedTemplate"
-                    [nzUnCheckedChildren]="unCheckedTemplate"
-                  ></nz-switch>
-                  <ng-template #checkedTemplate
-                    ><i nz-icon nzType="check"></i
-                  ></ng-template>
-                  <ng-template #unCheckedTemplate
-                    ><i nz-icon nzType="close"></i></ng-template
+                  <nz-switch [ngModel]="true" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                  <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+                  <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template
                 ></label>
               </td>
             </tr>
@@ -232,16 +177,9 @@
               <td>
                 <label
                   ><strong>Seguridad </strong>
-                  <nz-switch
-                    [ngModel]="true"
-                    [nzCheckedChildren]="checkedTemplate"
-                    [nzUnCheckedChildren]="unCheckedTemplate"
-                  ></nz-switch>
-                  <ng-template #checkedTemplate
-                    ><i nz-icon nzType="check"></i
-                  ></ng-template>
-                  <ng-template #unCheckedTemplate
-                    ><i nz-icon nzType="close"></i></ng-template
+                  <nz-switch [ngModel]="true" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                  <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+                  <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template
                 ></label>
               </td>
             </tr>
@@ -270,28 +208,12 @@
   <tr>
     <td>
       <nz-input-group [nzPrefix]="prefixTemplateUser">
-        <input
-          type="text"
-          (input)="Search()"
-          [(ngModel)]="Roles"
-          nz-input
-          placeholder="Buscar Rol"
-        />
+        <input type="text" (input)="Search()" [(ngModel)]="Roles" nz-input placeholder="Buscar Rol" />
       </nz-input-group>
-      <ng-template #prefixTemplateUser
-        ><i nz-icon nzType="user"></i
-      ></ng-template>
+      <ng-template #prefixTemplateUser><i nz-icon nzType="user"></i></ng-template>
     </td>
     <td>
-      <button
-        nz-button
-        style="margin: 10px"
-        nzSize="default"
-        nzType="primary"
-        (click)="showModal()"
-      >
-        Nuevo
-      </button>
+      <button nz-button style="margin: 10px" nzSize="default" nzType="primary" (click)="showModal()">Nuevo</button>
     </td>
   </tr>
 </div>
@@ -300,20 +222,13 @@
   <tr>
     <td>
       <nz-spin nzTip="Cargando..." *ngIf="loading">
-        <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="En Breve">
-        </nz-alert>
+        <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="En Breve"> </nz-alert>
       </nz-spin>
     </td>
   </tr>
   <tr>
     <td>
-      <mat-paginator
-        [length]="listRol?.length"
-        [pageIndex]="0"
-        [pageSize]="page_size"
-        (page)="handlePage($event)"
-      >
-      </mat-paginator>
+      <mat-paginator [length]="listRol?.length" [pageIndex]="0" [pageSize]="page_size" (page)="handlePage($event)"> </mat-paginator>
       <nz-table class="table table-md table-hover" id="myTable" nzTemplateMode>
         <thead>
           <tr>
@@ -323,16 +238,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let roles of listRol | paginate : page_size : page_number"
-          >
+          <tr *ngFor="let roles of listRol | paginate : page_size : page_number">
             <td>{{ roles.id }}</td>
             <td>{{ roles.descripcion }}</td>
             <td>
-              <button
-                class="btn btn-danger btn-sm"
-                (click)="showDeleteConfirm(roles.id)"
-              >
+              <button class="btn btn-danger btn-sm" (click)="showDeleteConfirm(roles.id)">
                 <i nz-icon nzType="delete" nzTheme="outline"></i>
               </button>
             </td>

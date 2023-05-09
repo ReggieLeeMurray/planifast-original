@@ -2,7 +2,6 @@ export class Resultado {
   id?: number;
   nombreCompleto: string;
   incompleto: boolean;
-  permanente: boolean;
   salarioBase: number;
   totalIngresos: number;
   totalDeducciones: number;
@@ -39,6 +38,6 @@ export class Resultado {
   ajuste: number;
   otros: number;
   totalPagar: number;
-  EmpleadoID: number;
-  HistorialID: number;
+  empleadoID: number;
+  historialID: number;
 }

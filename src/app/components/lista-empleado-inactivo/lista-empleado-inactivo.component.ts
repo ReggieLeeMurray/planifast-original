@@ -17,10 +17,7 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
   notFound = './assets/empty.svg';
   DEBUG = false;
 
-  constructor(
-    private EmpleadoinactivoService: EmpleadoinactivoService,
-    private modal: NzModalService
-  ) {}
+  constructor(private EmpleadoinactivoService: EmpleadoinactivoService, private modal: NzModalService) {}
 
   ngOnInit(): void {
     // ENABLE/DISABLE Console Logs
@@ -31,23 +28,19 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
   }
   cargarEmpleado() {
     this.loading = true;
-    this.EmpleadoinactivoService.getListEmpleadosNoActivos().subscribe(
-      (data) => {
-        this.loading = false;
-        this.listEmpleadoInactivo = data;
-        console.log(data);
-        this.listEmpleadoInactivo.sort((a, b) => a.empleadoID - b.empleadoID);
-      }
-    );
+    this.EmpleadoinactivoService.getListEmpleadosNoActivos().subscribe((data) => {
+      this.loading = false;
+      this.listEmpleadoInactivo = data;
+      console.log(data);
+      this.listEmpleadoInactivo.sort((a, b) => a.empleadoID - b.empleadoID);
+    });
   }
   delete(id: number) {
     this.loading = true;
-    this.EmpleadoinactivoService.deleteEmpleadosInactivos(id).subscribe(
-      (data) => {
-        this.cargarEmpleado();
-        this.loading = false;
-      }
-    );
+    this.EmpleadoinactivoService.deleteEmpleadosInactivos(id).subscribe((data) => {
+      this.cargarEmpleado();
+      this.loading = false;
+    });
   }
   Search(value: string) {
     if (this.listTemporal == null) {
@@ -70,8 +63,7 @@ export class ListaEmpleadoInactivoComponent implements OnInit {
   showDeleteConfirm(id): void {
     this.modal.confirm({
       nzTitle: '¿Está seguro que desea eliminar esta baja?',
-      nzContent:
-        '<b style="color: red;">El colaborador pasará a estado "Activo" y estará disponible para calculos.</b>',
+      nzContent: '<b style="color: red;">El colaborador pasará a estado "Activo" y estará disponible para calculos.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,

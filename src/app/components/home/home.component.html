@@ -1,11 +1,9 @@
-<div class="row" style="padding-top: 10px">
-  <div class="col-lg-6">
-    <h1>Bienvenido {{ user.firstName }} {{ user.lastName }}! 😎</h1>
-    <p>
-      Su nivel de acceso es de: <strong>{{ user.rol }}</strong
-      >.
-    </p>
-  </div>
+<div style="padding-top: 10px">
+  <h1>Bienvenido {{ user.firstName }} {{ user.lastName }}! 😎</h1>
+  <p>
+    Su nivel de acceso es de: <strong>{{ user.rol }}</strong
+    >.
+  </p>
 </div>
 <br />
 <div>
@@ -16,20 +14,14 @@
           <h1 class="text-uppercase small mb-2">
             <strong>COLABORADORES</strong>
           </h1>
-          <h5 class="font-weight-bold mb-0">
-            Por Departamento (Con mas de 5 empleados activos)
-          </h5>
-          <canvas style="height: 300px" class="card-body" id="canvas">{{
-            chart
-          }}</canvas>
+          <h5 class="font-weight-bold mb-0">Por Departamento (Con mas de 5 empleados activos)</h5>
+          <canvas style="height: 300px" class="card-body" id="canvas">{{ chart }}</canvas>
         </td>
         <td>
           <h1 class="text-uppercase small mb-2">
             <strong>COLABORADORES RECLUTADOS Y DESPEDIDOS</strong>
           </h1>
-          <h5 class="font-weight-bold mb-0">
-            Por Mes al Año (Año actual por defecto)
-          </h5>
+          <h5 class="font-weight-bold mb-0">Por Mes al Año (Año actual por defecto)</h5>
           <nz-form-label [nzSm]="8" [nzXs]="24">Seleccionar Año</nz-form-label>
           <nz-select
             [(ngModel)]="selectedValue"
@@ -40,9 +32,7 @@
             nzPlaceHolder="Elija"
           >
           </nz-select>
-          <canvas class="card-body" width="900" id="canvas6">{{
-            chart6
-          }}</canvas>
+          <canvas class="card-body" width="900" id="canvas6">{{ chart6 }}</canvas>
         </td>
       </table>
     </div>
@@ -76,21 +66,10 @@
             <h1 class="text-uppercase small mb-2">
               <strong>TOTAL ABONADO</strong>
             </h1>
-            <h5 class="font-weight-bold mb-0">
-              Por Planilla (Mes actual por defecto)
-            </h5>
-            <nz-form-label [nzSm]="8" [nzXs]="24"
-              >Seleccionar Fecha</nz-form-label
-            >
-            <nz-range-picker
-              [(ngModel)]="date"
-              [nzFormat]="this.dateFormat"
-              [nzRanges]="ranges"
-              (ngModelChange)="onChange($event)"
-            ></nz-range-picker>
-            <canvas class="card-body" style="width: 700px" id="canvas5">{{
-              chart5
-            }}</canvas>
+            <h5 class="font-weight-bold mb-0">Por Planilla (Mes actual por defecto)</h5>
+            <nz-form-label [nzSm]="8" [nzXs]="24">Seleccionar Fecha</nz-form-label>
+            <nz-range-picker [(ngModel)]="date" [nzFormat]="this.dateFormat" [nzRanges]="ranges" (ngModelChange)="onChange($event)"></nz-range-picker>
+            <canvas class="card-body" style="width: 700px" id="canvas5">{{ chart5 }}</canvas>
           </div>
         </td>
       </table>

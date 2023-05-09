@@ -1,18 +1,8 @@
-<div class="row" style="padding-top: 10px">
-  <div class="col-lg-6">
-    <h1>
-      Historial de Planillas
-      <i
-        nz-icon
-        nzType="info-circle"
-        nzTheme="twotone"
-        nz-popover
-        class="center"
-        [nzPopoverContent]="contentTemplate"
-        nzPopoverTrigger="hover"
-      ></i>
-    </h1>
-  </div>
+<div style="padding-top: 10px">
+  <h1>
+    Historial de Planillas
+    <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="center" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover"></i>
+  </h1>
 </div>
 <ng-template #contentTemplate>
   <div>
@@ -20,66 +10,38 @@
     <p>Puedes volver a descargar planillas que calculaste con anterioridad.</p>
   </div>
 </ng-template>
-<!-- <div class="top">
-  <div class="mb-3">
-    <form>
-      <input
-        class="form-control"
-        type="file"
-        (change)="onFileChange($event)"
-        multiple="false"
-        id="formFile"
-      />
-    </form>
-  </div>
-</div> -->
-<nz-input-group [nzPrefix]="prefixTemplateUser">
-  <input
-    type="text"
-    (ngModelChange)="Search($event)"
-    [(ngModel)]="historial"
-    nz-input
-    placeholder="Buscar historial por nombre o tipo de planilla"
-  />
-</nz-input-group>
+<div>
+  <nz-input-group [nzPrefix]="prefixTemplateUser">
+    <input
+      type="text"
+      (ngModelChange)="Search($event)"
+      [(ngModel)]="historial"
+      nz-input
+      placeholder="Buscar historial por nombre o tipo de planilla"
+    />
+  </nz-input-group>
+</div>
 <br />
+<nz-table>
+  <body>
+    <tr>
+      <td>
+        <nz-form-label>Seleccionar Fecha</nz-form-label>
+      </td>
+      <td>
+        <nz-range-picker [nzRanges]="ranges" [nzFormat]="this.dateFormat" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+        <h5 class="font-weight-bold mb-0">Al borrar las fechas, mostrarán TODOS los calculos</h5>
+      </td>
+    </tr>
+  </body>
+</nz-table>
 <br />
-<table>
-  <tr>
-    <td>
-      <nz-form-label>Seleccionar Fecha</nz-form-label>
-    </td>
-    <td>
-      <nz-range-picker
-        [nzRanges]="ranges"
-        [nzFormat]="this.dateFormat"
-        [(ngModel)]="date"
-        (ngModelChange)="onChange($event)"
-      ></nz-range-picker>
-      <h5 class="font-weight-bold mb-0">
-        Al borrar las fechas, mostrarán TODOS los calculos
-      </h5>
-    </td>
-  </tr>
-</table>
 <ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
 <div>
   <nz-spin nzTip="Cargando..." *ngIf="loading">
-    <nz-alert
-      nzType="info"
-      nzMessage="ALERTA"
-      nzDescription="El historial se mostrará en breve."
-    >
-    </nz-alert>
+    <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="El historial se mostrará en breve."> </nz-alert>
   </nz-spin>
-  <nz-table
-    #basicTable
-    [nzData]="listHistory"
-    nzPaginationPosition="top"
-    nzBordered
-    nzTemplateMode
-    id="cssTable"
-  >
+  <nz-table #basicTable [nzData]="listHistory" nzBordered nzTemplateMode id="cssTable">
     <thead>
       <tr>
         <th scope="col" style="text-align: center">ID</th>
@@ -94,26 +56,19 @@
     <tbody>
       <tr>
         <td colspan="7" *ngIf="listHistory?.length <= 0">
-          <nz-empty
-            [nzNotFoundImage]="notFound"
-            [nzNotFoundContent]="contentTpl"
-          ></nz-empty>
+          <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
           <ng-template #contentTpl>
-            <span>
-              No hay datos.<a routerLink="/calculo">
-                Puede crear planillas aquí.</a
-              >
-            </span>
+            <span> No hay datos.<a routerLink="/calculo"> Puede crear planillas aquí.</a> </span>
           </ng-template>
         </td>
       </tr>
       <tr *ngFor="let data of basicTable.data">
         <td>{{ data.id }}</td>
-        <td>{{ data.fechaCreacion | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.fechaCreacion | date : 'dd/MM/yyyy' }}</td>
         <td>{{ data.descripcion }} - {{ data.tipo }}</td>
-        <td>{{ data.fechaInicio | date : "dd/MM/yyyy" }}</td>
-        <td>{{ data.fechaFinal | date : "dd/MM/yyyy" }}</td>
-        <td>{{ data.totalPlanilla | currency : "LPS " }}</td>
+        <td>{{ data.fechaInicio | date : 'dd/MM/yyyy' }}</td>
+        <td>{{ data.fechaFinal | date : 'dd/MM/yyyy' }}</td>
+        <td>{{ data.totalPlanilla | currency : 'LPS ' }}</td>
         <td>
           <button
             class="btn btn-lg btn btn-info"

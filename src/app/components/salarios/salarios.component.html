@@ -1,1 +1,142 @@
-<p>salarios works!</p>
+<div style="padding-top: 10px">
+  <h1>
+    Sueldos y Salarios
+    <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="center" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover"></i>
+  </h1>
+</div>
+<ng-template #contentTemplate>
+  <div>
+    <p>Puedes buscar planillas por su nombre, tipo de contrato y estado dentro de la empresa.</p>
+    <p>Salarios acreditados pueden detallarse por Mes y Año</p>
+  </div>
+</ng-template>
+<div>
+  <nz-input-group [nzPrefix]="prefixTemplateUser">
+    <input
+      type="text"
+      (ngModelChange)="Search($event)"
+      [(ngModel)]="empleados"
+      nz-input
+      placeholder="Buscar registros por nombre o tipo de contrato"
+    />
+  </nz-input-group>
+</div>
+<br />
+<ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
+<nz-table>
+  <body>
+    <tr>
+      <td>
+        <nz-form-label>Seleccionar Año</nz-form-label>
+      </td>
+      <td>
+        <nz-select
+          [(ngModel)]="selectedYear"
+          style="width: 150px"
+          [nzOptions]="listOfYears"
+          (ngModelChange)="onChangeYear($event)"
+          nzAllowClear
+          [nzPlaceHolder]="selectedYear.toString()"
+        >
+        </nz-select>
+      </td>
+      <td style="padding-left: 10px">
+        <nz-progress
+          *ngIf="porcentaje > 0"
+          nzType="circle"
+          [nzPercent]="porcentaje"
+          [nzWidth]="30"
+          [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
+        ></nz-progress>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <h5 class="font-weight-bold mb-0">(Año pasado por defecto)</h5>
+      </td>
+    </tr>
+  </body>
+</nz-table>
+<br />
+<nz-table nzBordered #basicTable nzTemplateMode [nzData]="this.listCompleta" id="cssTable">
+  <thead>
+    <tr>
+      <th nzWidth="60px"></th>
+      <th>Nombre Completo</th>
+      <th>Empleado ID</th>
+      <th>Contrato</th>
+      <th>Total Pagado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="9" *ngIf="listCompleta?.length <= 0">
+        <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
+        <ng-template #contentTpl>
+          <span> No hay datos.</span>
+        </ng-template>
+      </td>
+    </tr>
+    <ng-container *ngFor="let data of basicTable.data">
+      <tr>
+        <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+        <td>{{ data.nombreCompleto }}</td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.permanente }}</td>
+        <td>{{ data.totalPagar | currency : 'LPS ' }}</td>
+      </tr>
+      <tr [nzExpand]="expandSet.has(data.id)">
+        <td>
+          <nz-form-label>Seleccionar Mes</nz-form-label>
+        </td>
+        <td>
+          <nz-select
+            [(ngModel)]="selectedMonth"
+            style="width: 150px"
+            [nzOptions]="listOfMonths"
+            (ngModelChange)="onChangeMonth($event)"
+            nzAllowClear
+            [nzPlaceHolder]="listOfMonths[0].label"
+          >
+          </nz-select>
+        </td>
+        <td style="padding-left: 10px">{{ 'Total Pagado: ' }} {{ totalMensual | currency : 'LPS ' }}</td>
+        <nz-table nzBordered nzTemplateMode>
+          <thead>
+            <tr>
+              <th>Historial ID</th>
+              <th>Fecha Inicio</th>
+              <th>Fecha Final</th>
+              <th>Valor Pagado</th>
+              <th>Nº Registro</th>
+              <th>Inconcluso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="9" *ngIf="this.final?.length <= 0">
+                <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl1"></nz-empty>
+                <ng-template #contentTpl1>
+                  <span> No hay datos.</span>
+                </ng-template>
+              </td>
+            </tr>
+            <ng-container *ngFor="let info of this.final">
+              <ng-container *ngFor="let planilla of info.planillas">
+                <tr>
+                  <td>{{ planilla.historialID }}</td>
+                  <td>{{ planilla.fechaInicio | date : 'dd/MM/yyyy' }}</td>
+                  <td>{{ planilla.fechaFinal | date : 'dd/MM/yyyy' }}</td>
+                  <td>{{ planilla.valor | currency : 'LPS ' }}</td>
+                  <td>{{ planilla.registro }}</td>
+                  <td>{{ planilla.incompleto }}</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </tr>
+    </ng-container>
+  </tbody>
+</nz-table>

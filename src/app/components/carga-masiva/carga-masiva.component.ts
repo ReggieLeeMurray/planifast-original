@@ -9,8 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { HttpClient } from '@angular/common/http';
 
-const EXCEL_TYPE =
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 interface Ingresos {
   apellidos: string;
   departamentoID: string;
@@ -95,8 +94,7 @@ export class CargaMasivaComponent implements OnInit {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'Archivo Inconsistente',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Contiene colaboradores ya existentes en el sistema.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Contiene colaboradores ya existentes en el sistema.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -110,8 +108,7 @@ export class CargaMasivaComponent implements OnInit {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'Archivo Inconsistente',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Número de cédula inadmisible. Debe tener 13 números sin guiones y estar formato texto.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Número de cédula inadmisible. Debe tener 13 números sin guiones y estar formato texto.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -140,8 +137,7 @@ export class CargaMasivaComponent implements OnInit {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'Archivo Inconsistente',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Registros duplicados en el archivo. TIP: Nombre ó número de cedula duplicado.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Registros duplicados en el archivo. TIP: Nombre ó número de cedula duplicado.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -168,8 +164,7 @@ export class CargaMasivaComponent implements OnInit {
     this.modal.warning({
       nzCentered: true,
       nzTitle: 'Archivo Vacío',
-      nzContent:
-        '<b style="color: yellow;">ADVERTENCIA: No se actualizarán los colaboradores. TIP: Asegúrate de elejir el archivo correcto.</b>',
+      nzContent: '<b style="color: yellow;">ADVERTENCIA: No se actualizarán los colaboradores. TIP: Asegúrate de elejir el archivo correcto.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -181,8 +176,7 @@ export class CargaMasivaComponent implements OnInit {
     this.modal.warning({
       nzCentered: true,
       nzTitle: 'Multiples Archivos',
-      nzContent:
-        '<b style="color: yellow;">ADVERTENCIA: Solo se permite un archivo en formato Excel.</b>',
+      nzContent: '<b style="color: yellow;">ADVERTENCIA: Solo se permite un archivo en formato Excel.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -240,39 +234,26 @@ export class CargaMasivaComponent implements OnInit {
           this.jDatos[i].email = 'email@xyz.com';
           this.jDatos[i].fechaCreacion = this.today;
           console.log(this.jDatos, dato);
-          if (
-            this.jDatos[i].fechaNac != undefined ||
-            this.jDatos[i].fechaIngreso != undefined
-          ) {
-            this.jDatos[i].fechaNac = new Date(
-              (this.jDatos[i].fechaNac - (25567 + 1)) * 86400 * 1000
-            );
-            this.jDatos[i].fechaIngreso = new Date(
-              (this.jDatos[i].fechaIngreso - (25567 + 1)) * 86400 * 1000
-            );
+          if (this.jDatos[i].fechaNac != undefined || this.jDatos[i].fechaIngreso != undefined) {
+            this.jDatos[i].fechaNac = new Date((this.jDatos[i].fechaNac - (25567 + 1)) * 86400 * 1000);
+            this.jDatos[i].fechaIngreso = new Date((this.jDatos[i].fechaIngreso - (25567 + 1)) * 86400 * 1000);
           } else {
             i = datos.length - 1;
             this.error();
           }
           for (let k = 0; k < this.listInicialEmpleadoActivo.length; k++) {
             if (
-              (this.jDatos[i].n_Cedula ===
-                this.listInicialEmpleadoActivo[k].n_Cedula ||
+              (this.jDatos[i].n_Cedula === this.listInicialEmpleadoActivo[k].n_Cedula ||
                 // this.jDatos[i].email ===
                 //   this.listInicialEmpleadoActivo[k].email ||
                 this.jDatos[i].nombres + ' ' + this.jDatos[i].apellidos ===
-                  this.listInicialEmpleadoActivo[k].nombres +
-                    ' ' +
-                    this.listInicialEmpleadoActivo[k].apellidos) &&
+                  this.listInicialEmpleadoActivo[k].nombres + ' ' + this.listInicialEmpleadoActivo[k].apellidos) &&
               this.isVisibleExistente === false
             ) {
               this.existente();
             }
           }
-          if (
-            this.jDatos[i].n_Cedula.length < 13 &&
-            this.isVisibleCedula === false
-          ) {
+          if (this.jDatos[i].n_Cedula.length < 13 && this.isVisibleCedula === false) {
             this.cedulaInconsistente();
           }
           if (
@@ -302,12 +283,7 @@ export class CargaMasivaComponent implements OnInit {
         if (this.jDatos.length === 0) {
           this.archivoVacio();
         } else {
-          console.log(
-            this.jDatos,
-            this.listInicialEmpleadoActivo,
-            this.listDeptos,
-            this.listTP
-          );
+          console.log(this.jDatos, this.listInicialEmpleadoActivo, this.listDeptos, this.listTP);
           this.inicializar(this.jDatos.length);
           for (let i = 0; i < this.jDatos.length; i++) {
             this.listEmpleadoActivo[i].nombres = this.jDatos[i].nombres;
@@ -319,38 +295,23 @@ export class CargaMasivaComponent implements OnInit {
             this.listEmpleadoActivo[i].salarioBase = this.jDatos[i].salarioBase;
             this.listEmpleadoActivo[i].fechaNac = this.jDatos[i].fechaNac;
             this.listEmpleadoActivo[i].fechaCreacion = this.today;
-            this.listEmpleadoActivo[i].fechaIngreso =
-              this.jDatos[i].fechaIngreso;
+            this.listEmpleadoActivo[i].fechaIngreso = this.jDatos[i].fechaIngreso;
           }
           for (let i = 0; i < this.jDatos.length; i++) {
             for (let k = 0; k < this.listDeptos.length; k++) {
-              if (
-                this.jDatos[i].departamentoID === this.listDeptos[k].id &&
-                this.isVisibleId === false
-              ) {
-                this.listEmpleadoActivo[i].departamentoID =
-                  this.listDeptos[k].descripcion;
+              if (this.jDatos[i].departamentoID === this.listDeptos[k].id && this.isVisibleId === false) {
+                this.listEmpleadoActivo[i].departamentoID = this.listDeptos[k].descripcion;
                 k = this.listDeptos.length - 1;
-              } else if (
-                k === this.listDeptos.length - 1 &&
-                this.isVisibleId === false
-              ) {
+              } else if (k === this.listDeptos.length - 1 && this.isVisibleId === false) {
                 this.malFormato();
               }
             }
             for (let j = 0; j < this.listTP.length; j++) {
-              if (
-                this.jDatos[i].planillaID === this.listTP[j].id &&
-                this.isVisibleId === false
-              ) {
-                this.listEmpleadoActivo[i].planillaID =
-                  this.listTP[j].descripcion;
+              if (this.jDatos[i].planillaID === this.listTP[j].id && this.isVisibleId === false) {
+                this.listEmpleadoActivo[i].planillaID = this.listTP[j].descripcion;
                 this.listEmpleadoActivo[i].tipo = this.listTP[j].tipo;
                 j = this.listTP.length - 1;
-              } else if (
-                j === this.listTP.length - 1 &&
-                this.isVisibleId === false
-              ) {
+              } else if (j === this.listTP.length - 1 && this.isVisibleId === false) {
                 this.malFormato();
               }
             }
@@ -363,8 +324,7 @@ export class CargaMasivaComponent implements OnInit {
             if (
               x < this.listFinal.length &&
               this.isVisibleRepetidos === false &&
-              (this.listFinal[i].nombres + ' ' + this.listFinal[i].apellidos ===
-                this.listFinal[x].nombres + ' ' + this.listFinal[x].apellidos ||
+              (this.listFinal[i].nombres + ' ' + this.listFinal[i].apellidos === this.listFinal[x].nombres + ' ' + this.listFinal[x].apellidos ||
                 this.listFinal[i].n_Cedula === this.listFinal[x].n_Cedula)
             ) {
               this.repetidos();
@@ -378,37 +338,33 @@ export class CargaMasivaComponent implements OnInit {
   }
   exportExcel(): void {
     let filepath = './assets/cargaMasiva.xlsx';
-    this.httpClient
-      .get(filepath, { responseType: 'arraybuffer' })
-      .subscribe((res: any) => {
-        console.log(res);
-        const temporal: XLSX.WorkBook = XLSX.read(res, {
-          type: 'buffer',
-        });
-        var nombreHoja = temporal.SheetNames;
-        const wsColaboradores: XLSX.WorkSheet = temporal.Sheets[nombreHoja[0]];
-        /* table id is passed over here */
-        let departamentos = document.getElementById('deptos');
-        let planillas = document.getElementById('planillas');
-        /*html tables*/
-        const wsDeptos: XLSX.WorkSheet =
-          XLSX.utils.table_to_sheet(departamentos);
-        const wsPlanillas: XLSX.WorkSheet =
-          XLSX.utils.table_to_sheet(planillas);
-        /* generate workbook and add the worksheet */
-        const wb: XLSX.WorkBook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, wsColaboradores, 'Colaboradores');
-        XLSX.utils.book_append_sheet(wb, wsDeptos, 'Departamentos ID');
-        XLSX.utils.book_append_sheet(wb, wsPlanillas, 'Planillas ID');
-        /* save to excel-file which will be downloaded */
-        XLSX.writeFile(wb, 'Carga Masiva del ' + this.now + '.xlsx');
-        /* write and save file */
-        const excelBuffer: any = XLSX.write(wb, {
-          bookType: 'xlsx',
-          type: 'array',
-        });
-        const archivo: Blob = new Blob([excelBuffer], { type: EXCEL_TYPE });
+    this.httpClient.get(filepath, { responseType: 'arraybuffer' }).subscribe((res: any) => {
+      console.log(res);
+      const temporal: XLSX.WorkBook = XLSX.read(res, {
+        type: 'buffer',
       });
+      var nombreHoja = temporal.SheetNames;
+      const wsColaboradores: XLSX.WorkSheet = temporal.Sheets[nombreHoja[0]];
+      /* table id is passed over here */
+      let departamentos = document.getElementById('deptos');
+      let planillas = document.getElementById('planillas');
+      /*html tables*/
+      const wsDeptos: XLSX.WorkSheet = XLSX.utils.table_to_sheet(departamentos);
+      const wsPlanillas: XLSX.WorkSheet = XLSX.utils.table_to_sheet(planillas);
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, wsColaboradores, 'Colaboradores');
+      XLSX.utils.book_append_sheet(wb, wsDeptos, 'Departamentos ID');
+      XLSX.utils.book_append_sheet(wb, wsPlanillas, 'Planillas ID');
+      /* save to excel-file which will be downloaded */
+      XLSX.writeFile(wb, 'Carga Masiva del ' + this.now + '.xlsx');
+      /* write and save file */
+      const excelBuffer: any = XLSX.write(wb, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      const archivo: Blob = new Blob([excelBuffer], { type: EXCEL_TYPE });
+    });
   }
   upload() {
     this.porcentaje = 60;

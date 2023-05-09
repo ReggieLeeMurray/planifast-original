@@ -28,9 +28,7 @@ export class HistorialComponent implements OnInit {
   today = new Date();
   ranges = {
     'Mes Anterior': [
-      startOfMonth(
-        new Date(this.today.getFullYear(), this.today.getMonth() - 1)
-      ),
+      startOfMonth(new Date(this.today.getFullYear(), this.today.getMonth() - 1)),
       endOfMonth(new Date(this.today.getFullYear(), this.today.getMonth(), 0)),
     ],
     'Mes Actual': [
@@ -63,15 +61,6 @@ export class HistorialComponent implements OnInit {
   //     window.open(url);
   //   });
   // }
-  // onFileChange(event: any) {
-  //   console.log(event);
-  //   this.file = event.target.files[0];
-  //   this.fileName = event.target.files[0].name;
-  //   this.upload(this.file, this.fileName);
-  // }
-  // upload(archivo: any, name: string) {
-  //   console.log(archivo, name);
-  // }
   downloadPlanilla(id: number) {
     this.HistorialService.downloadFile(id).subscribe((data) => {
       console.log(data);
@@ -101,11 +90,10 @@ export class HistorialComponent implements OnInit {
       var x: number = 0;
       if (this.fechasValidas === true) {
         var inicioMesAnterior = moment(this.inicioMes).subtract(1, 'month');
-        var inicioMesActual = moment(this.inicioMes).startOf('month');
         for (let i = 0; i < this.listadoTemp.length; i++) {
           if (
             (this.listadoTemp[i].fechaInicio >= inicioMesAnterior &&
-              this.listadoTemp[i].fechaInicio < inicioMesActual &&
+              this.listadoTemp[i].fechaInicio < this.inicioMes &&
               this.listadoTemp[i].fechaFinal >= this.inicioMes &&
               this.listadoTemp[i].fechaFinal < this.finalMes) ||
             (this.listadoTemp[i].fechaInicio >= this.inicioMes &&
@@ -132,12 +120,7 @@ export class HistorialComponent implements OnInit {
         console.log('FALSE');
         this.listHistory = this.listadoTemp;
       }
-      console.log(
-        this.fechasValidas,
-        this.listHistory,
-        this.inicioMes,
-        this.finalMes
-      );
+      console.log(this.fechasValidas, this.listHistory, this.inicioMes, this.finalMes);
       // this.reloadArchivosList();
     });
   }
@@ -164,12 +147,7 @@ export class HistorialComponent implements OnInit {
     }
     if (value != '' && value != undefined && value != null) {
       this.listHistory = this.listTemporal.filter((res) => {
-        return (
-          res.descripcion
-            .toLocaleLowerCase()
-            .match(value.toLocaleLowerCase()) ||
-          res.tipo.toLocaleLowerCase().match(value.toLocaleLowerCase())
-        );
+        return res.descripcion.toLocaleLowerCase().match(value.toLocaleLowerCase()) || res.tipo.toLocaleLowerCase().match(value.toLocaleLowerCase());
       });
     } else {
       this.listHistory = this.listTemporal;

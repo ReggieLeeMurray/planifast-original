@@ -19,10 +19,8 @@ import { Role } from 'src/app/_models/role';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { CargaMasivaComponent } from './components/carga-masiva/carga-masiva.component';
 
-const accountModule = () =>
-  import('./account/account.module').then((x) => x.AccountModule);
-const usersModule = () =>
-  import('./users/users.module').then((x) => x.UsersModule);
+const accountModule = () => import('./account/account.module').then((x) => x.AccountModule);
+const usersModule = () => import('./users/users.module').then((x) => x.UsersModule);
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {

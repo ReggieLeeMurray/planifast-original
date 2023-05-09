@@ -4,12 +4,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { PageEvent } from '@angular/material/paginator';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Rol } from 'src/app/models/rol';
 import { RolesService } from 'src/app/services/roles.service';
@@ -45,9 +40,7 @@ export class ListaUsuariosComponent implements OnInit {
   }
   updateConfirmValidator(): void {
     /** wait for refresh value */
-    Promise.resolve().then(() =>
-      this.validateForm.controls.checkPassword.updateValueAndValidity()
-    );
+    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
@@ -104,19 +97,11 @@ export class ListaUsuariosComponent implements OnInit {
     });
   }
   Search() {
-    if (
-      this.nombres != '' &&
-      this.nombres != undefined &&
-      this.nombres != null
-    ) {
+    if (this.nombres != '' && this.nombres != undefined && this.nombres != null) {
       this.listUsuarios = this.listUsuarios.filter((res) => {
         return (
-          res.nombreUsuario
-            .toLocaleLowerCase()
-            .match(this.nombres.toLocaleLowerCase()) ||
-          res.descripcion
-            .toLocaleLowerCase()
-            .match(this.nombres.toLocaleLowerCase())
+          res.nombreUsuario.toLocaleLowerCase().match(this.nombres.toLocaleLowerCase()) ||
+          res.descripcion.toLocaleLowerCase().match(this.nombres.toLocaleLowerCase())
         );
       });
     } else {

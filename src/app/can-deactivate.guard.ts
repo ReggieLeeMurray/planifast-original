@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  CanDeactivate,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanDeactivate } from '@angular/router';
 import { Observable } from 'rxjs';
 
 export interface PuedeDesactivar {
@@ -15,8 +10,6 @@ export interface PuedeDesactivar {
 })
 export class CanDeactivateGuard implements CanDeactivate<PuedeDesactivar> {
   canDeactivate(component: PuedeDesactivar) {
-    return component.permitirSalidaDeRuta
-      ? component.permitirSalidaDeRuta()
-      : true;
+    return component.permitirSalidaDeRuta ? component.permitirSalidaDeRuta() : true;
   }
 }

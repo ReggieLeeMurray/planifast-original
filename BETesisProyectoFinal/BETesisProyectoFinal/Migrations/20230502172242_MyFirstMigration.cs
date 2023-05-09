@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BEProyectoFinal.Migrations
 {
-    public partial class myFirstMigration : Migration
+    public partial class MyFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -200,7 +200,6 @@ namespace BEProyectoFinal.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     NombreCompleto = table.Column<string>(nullable: false),
-                    Permanente = table.Column<bool>(nullable: false),
                     Incompleto = table.Column<bool>(nullable: false),
                     SalarioBase = table.Column<double>(nullable: false),
                     TotalIngresos = table.Column<double>(nullable: false),

@@ -27,45 +27,26 @@ export class EmpleadoinactivoService {
 
   //get query activos
   getListEmpleadosActivos(): Observable<EmpleadoInactivo[]> {
-    return this.http.get<EmpleadoInactivo[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl
-    );
+    return this.http.get<EmpleadoInactivo[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl);
   }
   //get query inactivos
   getListEmpleadosNoActivos(): Observable<EmpleadoInactivo[]> {
-    return this.http.get<EmpleadoInactivo[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl2
-    );
+    return this.http.get<EmpleadoInactivo[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl2);
   }
   //delete
   deleteEmpleadosInactivos(id: number): Observable<EmpleadoInactivo> {
-    return this.http.delete<EmpleadoInactivo>(
-      this.myAppUrl + this.myApiUrl + id
-    );
+    return this.http.delete<EmpleadoInactivo>(this.myAppUrl + this.myApiUrl + id);
   }
   //post
-  guardarEmpleadosInactivos(
-    empleado: EmpleadoInactivo
-  ): Observable<EmpleadoInactivo> {
-    return this.http.post<EmpleadoInactivo>(
-      this.myAppUrl + this.myApiUrl,
-      empleado,
-      this.httpOptions
-    );
+  guardarEmpleadosInactivos(empleado: EmpleadoInactivo): Observable<EmpleadoInactivo> {
+    return this.http.post<EmpleadoInactivo>(this.myAppUrl + this.myApiUrl, empleado, this.httpOptions);
   }
   //get id
   cargarEmpleadosInactivos(id: number): Observable<EmpleadoInactivo> {
     return this.http.get<EmpleadoInactivo>(this.myAppUrl + this.myApiUrl + id);
   }
   //put
-  actualizarEmpleadosInactivos(
-    id: number,
-    empleado: EmpleadoInactivo
-  ): Observable<EmpleadoInactivo> {
-    return this.http.put<EmpleadoInactivo>(
-      this.myAppUrl + this.myApiUrl + id,
-      empleado,
-      this.httpOptions
-    );
+  actualizarEmpleadosInactivos(id: number, empleado: EmpleadoInactivo): Observable<EmpleadoInactivo> {
+    return this.http.put<EmpleadoInactivo>(this.myAppUrl + this.myApiUrl + id, empleado, this.httpOptions);
   }
 }

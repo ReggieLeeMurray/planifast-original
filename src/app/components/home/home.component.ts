@@ -44,9 +44,7 @@ export class HomeComponent implements OnInit {
   today = new Date();
   ranges = {
     'Mes Anterior': [
-      startOfMonth(
-        new Date(this.today.getFullYear(), this.today.getMonth() - 1)
-      ),
+      startOfMonth(new Date(this.today.getFullYear(), this.today.getMonth() - 1)),
       endOfMonth(new Date(this.today.getFullYear(), this.today.getMonth(), 0)),
     ],
     'Mes Actual': [
@@ -56,7 +54,7 @@ export class HomeComponent implements OnInit {
   };
   user: User;
   userFromApi: User;
-  DEBUG = true;
+  DEBUG = false;
 
   constructor(
     private EmpleadosService: EmpleadosService,
@@ -139,12 +137,7 @@ export class HomeComponent implements OnInit {
         console.log('FALSE');
         this.listHistory = this.listadoTemp;
       }
-      console.log(
-        this.fechasValidas,
-        this.listHistory,
-        this.inicioMes,
-        this.finalMes
-      );
+      console.log(this.fechasValidas, this.listHistory, this.inicioMes, this.finalMes);
       // this.reloadArchivosList();
     });
   }
@@ -184,14 +177,7 @@ export class HomeComponent implements OnInit {
     this.descripcion.length = 0;
     this.cargarHistorial();
     this.cargarTotalxFechaxPlanilla();
-    console.log(
-      'DATE: ',
-      result,
-      'START',
-      this.inicioMes,
-      'END',
-      this.finalMes
-    );
+    console.log('DATE: ', result, 'START', this.inicioMes, 'END', this.finalMes);
     console.log('DATE: ', result);
   }
   selectedYear(result: any) {
@@ -223,9 +209,7 @@ export class HomeComponent implements OnInit {
     ];
     var datasetContratacionMensual = [];
     var datasetAbandonoMensual = [];
-    fechas = Array.from(Array(new Date().getFullYear() - 1992), (_, i) =>
-      (i + 1993).toString()
-    );
+    fechas = Array.from(Array(new Date().getFullYear() - 1992), (_, i) => (i + 1993).toString());
     fechas.sort(function (a, b) {
       return b - a;
     });
@@ -234,129 +218,107 @@ export class HomeComponent implements OnInit {
       this.listOfOption[z] = { label: fechas[z], value: fechas[z] };
     }
     console.log(this.listOfOption);
-    this.EmpleadosService.getCountPersonalByFechaIngreso().subscribe(
-      (datos) => {
-        empleados = datos;
-        empleados.sort((a, b) => a.month - b.month);
-        this.EmpleadosService.getCountPersonalByFechaSalida().subscribe(
-          (datos) => {
-            empleadosDespedidos = datos;
-            empleadosDespedidos.sort((a, b) => a.month - b.month);
-            console.log(empleados, empleadosDespedidos);
+    this.EmpleadosService.getCountPersonalByFechaIngreso().subscribe((datos) => {
+      empleados = datos;
+      empleados.sort((a, b) => a.month - b.month);
+      this.EmpleadosService.getCountPersonalByFechaSalida().subscribe((datos) => {
+        empleadosDespedidos = datos;
+        empleadosDespedidos.sort((a, b) => a.month - b.month);
+        console.log(empleados, empleadosDespedidos);
 
-            for (let w = 0; w < mesesArray.length; w++) {
-              for (let y = 0; y < empleados.length; y++) {
-                if (mesesArray[w].mes === undefined) {
-                  w = empleados.length;
+        for (let w = 0; w < mesesArray.length; w++) {
+          for (let y = 0; y < empleados.length; y++) {
+            if (mesesArray[w].mes === undefined) {
+              w = empleados.length;
+            } else {
+              console.log(
+                'AQUI MIRA DESPEDIDOS',
+                empleados[y].fecha.year,
+                this.selectedValue,
+                mesesArray[w].mes,
+                empleados[y].fecha.month,
+                empleados[y].cantidad
+              );
+              if (empleados[y].fecha.year === this.selectedValue) {
+                if (mesesArray[w].mes === empleados[y].fecha.month) {
+                  datasetContratacionMensual[index] = empleados[y].cantidad;
+                  index++;
+                  y = empleados.length;
                 } else {
-                  console.log(
-                    'AQUI MIRA DESPEDIDOS',
-                    empleados[y].fecha.year,
-                    this.selectedValue,
-                    mesesArray[w].mes,
-                    empleados[y].fecha.month,
-                    empleados[y].cantidad
-                  );
-                  if (empleados[y].fecha.year === this.selectedValue) {
-                    if (mesesArray[w].mes === empleados[y].fecha.month) {
-                      datasetContratacionMensual[index] = empleados[y].cantidad;
-                      index++;
-                      y = empleados.length;
-                    } else {
-                      if (y === empleados.length - 1) {
-                        datasetContratacionMensual[index] = 0;
-                        index++;
-                        y = empleados.length;
-                      }
-                    }
+                  if (y === empleados.length - 1) {
+                    datasetContratacionMensual[index] = 0;
+                    index++;
+                    y = empleados.length;
                   }
                 }
               }
             }
-            index = 0;
-            for (let w = 0; w < mesesArray.length; w++) {
-              for (let y = 0; y < empleadosDespedidos.length; y++) {
-                if (mesesArray[w].mes === undefined) {
-                  w = empleadosDespedidos.length;
-                } else {
-                  console.log(
-                    'AQUI MIRA DESPEDIDOS',
-                    empleadosDespedidos[y].fecha.year,
-                    this.selectedValue,
-                    mesesArray[w].mes,
-                    empleadosDespedidos[y].fecha.month,
-                    empleadosDespedidos[y].cantidad
-                  );
-                  if (
-                    empleadosDespedidos[y].fecha.year === this.selectedValue
-                  ) {
-                    if (
-                      mesesArray[w].mes === empleadosDespedidos[y].fecha.month
-                    ) {
-                      datasetAbandonoMensual[index] =
-                        empleadosDespedidos[y].cantidad;
-                      index++;
-                      y = empleadosDespedidos.length;
-                    } else {
-                      if (y === empleadosDespedidos.length - 1) {
-                        datasetAbandonoMensual[index] = 0;
-                        index++;
-                        y = empleadosDespedidos.length;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            index = 0;
-            this.chart6 = new Chart('canvas6', {
-              type: 'bar',
-              data: {
-                labels: [
-                  'Enero',
-                  'Febrero',
-                  'Marzo',
-                  'Abril',
-                  'Mayo',
-                  'Junio',
-                  'Julio',
-                  'Agosto',
-                  'Septiembre',
-                  'Octubre',
-                  'Noviembre',
-                  'Diciembre',
-                ],
-                datasets: [
-                  {
-                    label: 'Reclutados',
-                    data: datasetContratacionMensual,
-                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-                    borderColor: ['rgb(54, 162, 235)'],
-                    borderWidth: 3,
-                  },
-                  {
-                    label: 'Despedidos',
-                    data: datasetAbandonoMensual,
-                    backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-                    borderColor: ['rgb(255, 99, 132)'],
-                    borderWidth: 3,
-                  },
-                ],
-              },
-              options: {
-                plugins: {
-                  legend: {
-                    display: true,
-                  },
-                },
-                responsive: true,
-                maintainAspectRatio: true,
-              },
-            });
           }
-        );
-      }
-    );
+        }
+        index = 0;
+        for (let w = 0; w < mesesArray.length; w++) {
+          for (let y = 0; y < empleadosDespedidos.length; y++) {
+            if (mesesArray[w].mes === undefined) {
+              w = empleadosDespedidos.length;
+            } else {
+              console.log(
+                'AQUI MIRA DESPEDIDOS',
+                empleadosDespedidos[y].fecha.year,
+                this.selectedValue,
+                mesesArray[w].mes,
+                empleadosDespedidos[y].fecha.month,
+                empleadosDespedidos[y].cantidad
+              );
+              if (empleadosDespedidos[y].fecha.year === this.selectedValue) {
+                if (mesesArray[w].mes === empleadosDespedidos[y].fecha.month) {
+                  datasetAbandonoMensual[index] = empleadosDespedidos[y].cantidad;
+                  index++;
+                  y = empleadosDespedidos.length;
+                } else {
+                  if (y === empleadosDespedidos.length - 1) {
+                    datasetAbandonoMensual[index] = 0;
+                    index++;
+                    y = empleadosDespedidos.length;
+                  }
+                }
+              }
+            }
+          }
+        }
+        index = 0;
+        this.chart6 = new Chart('canvas6', {
+          type: 'bar',
+          data: {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            datasets: [
+              {
+                label: 'Reclutados',
+                data: datasetContratacionMensual,
+                backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                borderColor: ['rgb(54, 162, 235)'],
+                borderWidth: 3,
+              },
+              {
+                label: 'Despedidos',
+                data: datasetAbandonoMensual,
+                backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+                borderColor: ['rgb(255, 99, 132)'],
+                borderWidth: 3,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                display: true,
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+          },
+        });
+      });
+    });
   }
   cargarTotalxFechaxPlanilla() {
     this.loading = true;
@@ -376,9 +338,7 @@ export class HomeComponent implements OnInit {
             this.listPlanillas[i].totalesPlanillas = 0;
             console.log('false');
           }
-          var cantidad = this.listPlanillas.map(
-            (data) => data.totalesPlanillas
-          );
+          var cantidad = this.listPlanillas.map((data) => data.totalesPlanillas);
           var tipo = this.listPlanillas.map((data) => data.tipo);
           var planilla = this.listPlanillas.map((data) => data.descripcion);
           var labels = [];
@@ -456,9 +416,7 @@ export class HomeComponent implements OnInit {
         }
       }
       var cantidademp = this.listEmpleadosByDepto.map((data) => data.cantidad);
-      var departamento = this.listEmpleadosByDepto.map(
-        (data) => data.descripcion
-      );
+      var departamento = this.listEmpleadosByDepto.map((data) => data.descripcion);
       console.log(cantidademp, departamento);
       this.chart = new Chart('canvas', {
         type: 'polarArea',
@@ -504,12 +462,8 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.EmpleadosService.getEmpleadoByPlanilla().subscribe((data) => {
       this.listEmpleadosByPlanilla = data;
-      var cantidademp = this.listEmpleadosByPlanilla.map(
-        (data) => data.cantidad
-      );
-      var planilla = this.listEmpleadosByPlanilla.map(
-        (data) => data.descripcion
-      );
+      var cantidademp = this.listEmpleadosByPlanilla.map((data) => data.cantidad);
+      var planilla = this.listEmpleadosByPlanilla.map((data) => data.descripcion);
       var planillaRefformated = [];
       for (let w = 0; w < planilla.length; w++) {
         planillaRefformated[w] = planilla[w].split(' ')[0].toUpperCase();
@@ -564,16 +518,8 @@ export class HomeComponent implements OnInit {
             datasets: [
               {
                 data: [a, b],
-                backgroundColor: [
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                  'rgb(75, 192, 192)',
-                  'rgb(54, 162, 235)',
-                  'rgb(153, 102, 255)',
-                ],
+                backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                borderColor: ['rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
                 borderWidth: 3,
                 hoverOffset: 4,
               },

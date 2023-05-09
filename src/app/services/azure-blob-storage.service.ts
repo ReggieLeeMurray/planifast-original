@@ -34,12 +34,7 @@ export class AzureBlobStorageService {
       });
     });
   }
-  public uploadBlob(
-    sas: string,
-    content: Blob,
-    name: string,
-    handler: () => void
-  ) {
+  public uploadBlob(sas: string, content: Blob, name: string, handler: () => void) {
     const blockBlobClient = this.containerClient(sas).getBlockBlobClient(name);
     blockBlobClient
       .uploadData(content, {
@@ -47,11 +42,7 @@ export class AzureBlobStorageService {
       })
       .then(() => handler());
   }
-  public deleteBlob(
-    name: string,
-    client: ContainerClient,
-    handler: () => void
-  ) {
+  public deleteBlob(name: string, client: ContainerClient, handler: () => void) {
     client.deleteBlob(name).then(() => {
       handler();
     });
@@ -61,8 +52,6 @@ export class AzureBlobStorageService {
     if (sas) {
       token = sas;
     }
-    return new BlobServiceClient(
-      `https://${this.planillasAccount}.blob.core.windows.net?${token}`
-    ).getContainerClient(this.planillasContainer);
+    return new BlobServiceClient(`https://${this.planillasAccount}.blob.core.windows.net?${token}`).getContainerClient(this.planillasContainer);
   }
 }

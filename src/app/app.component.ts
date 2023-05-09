@@ -33,22 +33,14 @@ export class AppComponent {
     return this.user && this.user.rol === Role.Admin;
   }
   get isAdminDigitador() {
-    return (
-      (this.user && this.user.rol === Role.Admin) ||
-      (this.user && this.user.rol === Role.Digitador)
-    );
+    return (this.user && this.user.rol === Role.Admin) || (this.user && this.user.rol === Role.Digitador);
   }
   get isAdminUser() {
-    return (
-      (this.user && this.user.rol === Role.Admin) ||
-      (this.user && this.user.rol === Role.User)
-    );
+    return (this.user && this.user.rol === Role.Admin) || (this.user && this.user.rol === Role.User);
   }
   get isAdminUserDigitador() {
     return (
-      (this.user && this.user.rol === Role.Admin) ||
-      (this.user && this.user.rol === Role.User) ||
-      (this.user && this.user.rol === Role.Digitador)
+      (this.user && this.user.rol === Role.Admin) || (this.user && this.user.rol === Role.User) || (this.user && this.user.rol === Role.Digitador)
     );
   }
   logout() {

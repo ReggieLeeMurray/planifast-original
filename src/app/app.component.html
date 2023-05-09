@@ -1,23 +1,10 @@
 <nz-layout class="layout">
-  <nz-sider
-    *ngIf="user"
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
+  <nz-sider *ngIf="user" class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="sidebar-logo">
       <img src="assets\2891524.png" />
       <h1>PLANIFAST</h1>
     </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isInlineCollapsed"
-    >
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isInlineCollapsed">
       <!-- <li
         nz-menu
         routerLink="/welcome"
@@ -25,13 +12,7 @@
         *ngIf="isAdminUserDigitador"
         nzIcon="home"
       ></li> -->
-      <li
-        nz-submenu
-        nzOpen
-        nzTitle="DASHBOARD"
-        *ngIf="isAdmin"
-        nzIcon="line-chart"
-      >
+      <li nz-submenu nzOpen nzTitle="DASHBOARD" *ngIf="isAdmin" nzIcon="line-chart">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/home">Reportes</a>
@@ -41,13 +22,7 @@
           </li>
         </ul>
       </li>
-      <li
-        nz-submenu
-        nzOpen
-        nzTitle="INFORMACION"
-        *ngIf="isAdminDigitador"
-        nzIcon="database"
-      >
+      <li nz-submenu nzOpen nzTitle="INFORMACION" *ngIf="isAdminDigitador" nzIcon="database">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/tplanilla">Planillas</a>
@@ -57,13 +32,7 @@
           </li>
         </ul>
       </li>
-      <li
-        nz-submenu
-        nzOpen
-        nzTitle="EVENTOS"
-        *ngIf="isAdminUser"
-        nzIcon="calendar"
-      >
+      <li nz-submenu nzOpen nzTitle="EVENTOS" *ngIf="isAdminUser" nzIcon="calendar">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/eventos">Calendario</a>
@@ -71,13 +40,7 @@
         </ul>
       </li>
 
-      <li
-        nz-submenu
-        nzOpen
-        nzTitle="NOMINAS"
-        *ngIf="isAdminUser"
-        nzIcon="folder-open"
-      >
+      <li nz-submenu nzOpen nzTitle="NOMINAS" *ngIf="isAdminUser" nzIcon="folder-open">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/calculo">Nuevo Cálculo</a>
@@ -94,13 +57,7 @@
         </ul>
       </li>
 
-      <li
-        nz-submenu
-        nzOpen
-        nzTitle="COLABORADORES"
-        *ngIf="isAdminDigitador"
-        nzIcon="team"
-      >
+      <li nz-submenu nzOpen nzTitle="COLABORADORES" *ngIf="isAdminDigitador" nzIcon="team">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/listado">Lista</a>
@@ -132,26 +89,13 @@
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          >
-          </i>
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"> </i>
         </span>
       </div>
     </nz-header>
     <nz-content>
       <div class="inner-content">
-        <button
-          nz-button
-          nzType="primary"
-          nzDanger
-          nzSize="large"
-          style="float: right"
-          *ngIf="user"
-          (click)="logout()"
-        >
+        <button nz-button nzType="primary" nzDanger nzSize="large" style="float: right" *ngIf="user" (click)="logout()">
           <i nz-icon class="center" nzType="poweroff"></i>
           Cerrar Sesión
         </button>

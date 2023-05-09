@@ -22,9 +22,7 @@ export class EventosService {
 
   //get
   getEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl
-    );
+    return this.http.get<Evento[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl);
   }
   //delete
   deleteEventos(id: number): Observable<Evento> {
@@ -32,11 +30,7 @@ export class EventosService {
   }
   //post
   guardarEventos(evento: Evento): Observable<Evento> {
-    return this.http.post<Evento>(
-      this.myAppUrl + this.myApiUrl,
-      evento,
-      this.httpOptions
-    );
+    return this.http.post<Evento>(this.myAppUrl + this.myApiUrl, evento, this.httpOptions);
   }
   //get id
   cargarEventos(id: number): Observable<Evento> {
@@ -48,16 +42,10 @@ export class EventosService {
   }
   //get eventos by tipo
   getEventosByTipo(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl2
-    );
+    return this.http.get<Evento[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl2);
   }
   //put
   actualizarEventos(id: number, eventos: Evento): Observable<Evento> {
-    return this.http.put<Evento>(
-      this.myAppUrl + this.myApiUrl + id,
-      eventos,
-      this.httpOptions
-    );
+    return this.http.put<Evento>(this.myAppUrl + this.myApiUrl + id, eventos, this.httpOptions);
   }
 }

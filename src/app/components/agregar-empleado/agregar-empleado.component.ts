@@ -111,8 +111,7 @@ export class AgregarEmpleadoComponent implements OnInit {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'Datos Inconsistentes',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Colaborador ya existentente en el sistema. Revise el nombre o número de cédula</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Colaborador ya existentente en el sistema. Revise el nombre o número de cédula</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -129,9 +128,7 @@ export class AgregarEmpleadoComponent implements OnInit {
   guardarEmpleados() {
     console.log(this.accion);
     if (this.accion === 'Agregar') {
-      var valor = (
-        Math.round(this.empleadosForm.get('salariobase').value * 100) / 100
-      ).toFixed(2);
+      var valor = (Math.round(this.empleadosForm.get('salariobase').value * 100) / 100).toFixed(2);
       const empleado: Empleado = {
         fechaIngreso: this.empleadosForm.get('fechaingreso').value,
         nombres: this.empleadosForm.get('nombre').value.trim(),
@@ -152,10 +149,7 @@ export class AgregarEmpleadoComponent implements OnInit {
       for (let k = 0; k < this.listEmpleadoActivo.length; k++) {
         if (
           (empleado.n_Cedula === this.listEmpleadoActivo[k].n_Cedula ||
-            empleado.nombres + ' ' + empleado.apellidos ===
-              this.listEmpleadoActivo[k].nombres +
-                ' ' +
-                this.listEmpleadoActivo[k].apellidos) &&
+            empleado.nombres + ' ' + empleado.apellidos === this.listEmpleadoActivo[k].nombres + ' ' + this.listEmpleadoActivo[k].apellidos) &&
           this.isVisibleExistente === false
         ) {
           this.existente();
@@ -169,9 +163,7 @@ export class AgregarEmpleadoComponent implements OnInit {
         });
       }
     } else if (this.accion === 'Editar') {
-      var valor = (
-        Math.round(this.empleadosForm.get('salariobase').value * 100) / 100
-      ).toFixed(2);
+      var valor = (Math.round(this.empleadosForm.get('salariobase').value * 100) / 100).toFixed(2);
       const empleado: Empleado = {
         id: this.empleado.id,
         fechaIngreso: this.empleadosForm.get('fechaingreso').value,
@@ -191,10 +183,7 @@ export class AgregarEmpleadoComponent implements OnInit {
       };
       console.log(empleado);
       if (this.duplicado != true) {
-        this.EmpleadosService.actualizarEmpleado(
-          this.idEmpleado,
-          empleado
-        ).subscribe((data) => {
+        this.EmpleadosService.actualizarEmpleado(this.idEmpleado, empleado).subscribe((data) => {
           this.router.navigate(['/listado']);
         });
       }
@@ -214,44 +203,34 @@ export class AgregarEmpleadoComponent implements OnInit {
     if (this.idEmpleado > 0) {
       this.accion = 'Editar';
       this.isHidden = true;
-      this.EmpleadosService.cargarEmpleados(this.idEmpleado).subscribe(
-        (data) => {
-          this.empleado = data;
-          this.idDepto = data.departamentoID;
-          this.idTP = data.planillaID;
-          this.switchValue = data.permanente;
-          this.empleadosForm.patchValue({
-            nombre: data.nombres,
-            apellido: data.apellidos,
-            n_cedula: data.n_Cedula,
-            fechaingreso: data.fechaIngreso,
-            direccion: data.direccion,
-            salariobase: data.salarioBase,
-            email: data.email,
-            fechanac: data.fechaNac,
-            depto: data.departamentoID,
-            tplanilla: data.planillaID,
-            genero: data.genero,
-          });
+      this.EmpleadosService.cargarEmpleados(this.idEmpleado).subscribe((data) => {
+        this.empleado = data;
+        this.idDepto = data.departamentoID;
+        this.idTP = data.planillaID;
+        this.switchValue = data.permanente;
+        this.empleadosForm.patchValue({
+          nombre: data.nombres,
+          apellido: data.apellidos,
+          n_cedula: data.n_Cedula,
+          fechaingreso: data.fechaIngreso,
+          direccion: data.direccion,
+          salariobase: data.salarioBase,
+          email: data.email,
+          fechanac: data.fechaNac,
+          depto: data.departamentoID,
+          tplanilla: data.planillaID,
+          genero: data.genero,
+        });
 
-          this.departamentosService
-            .cargarDeptos(this.idDepto)
-            .subscribe((data) => {
-              this.selectedValueDepto = data.descripcion;
-              console.log(this.selectedValueDepto);
-            });
-          this.TipoplanillaService.cargarTipoPlanilla(this.idTP).subscribe(
-            (data) => {
-              this.selectedValuePlanilla = (
-                data.descripcion +
-                ' ⇄ ' +
-                data.tipo
-              ).toUpperCase();
-              console.log(this.selectedValuePlanilla);
-            }
-          );
-        }
-      );
+        this.departamentosService.cargarDeptos(this.idDepto).subscribe((data) => {
+          this.selectedValueDepto = data.descripcion;
+          console.log(this.selectedValueDepto);
+        });
+        this.TipoplanillaService.cargarTipoPlanilla(this.idTP).subscribe((data) => {
+          this.selectedValuePlanilla = (data.descripcion + ' ⇄ ' + data.tipo).toUpperCase();
+          console.log(this.selectedValuePlanilla);
+        });
+      });
     }
   }
   onChange(result: Date): void {

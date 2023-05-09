@@ -5,13 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { getISOWeek } from 'date-fns';
 import { EmpleadoinactivoService } from 'src/app/services/empleadoinactivo.service';
-import {
-  EventClickArg,
-  DateSelectArg,
-  EventApi,
-  CalendarApi,
-  Calendar,
-} from '@fullcalendar/angular';
+import { EventClickArg, DateSelectArg, EventApi, CalendarApi, Calendar } from '@fullcalendar/angular';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({

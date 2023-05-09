@@ -57,8 +57,7 @@ export class DepartamentoComponent implements OnInit {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'Departamento Duplicado',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Ya existe un departamento similar.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Ya existe un departamento similar.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -80,12 +79,10 @@ export class DepartamentoComponent implements OnInit {
         }
       }
       if (y == 0) {
-        this.DepartamentosService.guardarDeptos(departamento).subscribe(
-          (data) => {
-            this.handleCancel();
-            this.cargarDepto();
-          }
-        );
+        this.DepartamentosService.guardarDeptos(departamento).subscribe((data) => {
+          this.handleCancel();
+          this.cargarDepto();
+        });
       }
     } else {
       const departamento: Departamento = {
@@ -100,10 +97,7 @@ export class DepartamentoComponent implements OnInit {
         }
       }
       if (y == 0) {
-        this.DepartamentosService.actualizarDepto(
-          this.idDepto,
-          departamento
-        ).subscribe((data) => {
+        this.DepartamentosService.actualizarDepto(this.idDepto, departamento).subscribe((data) => {
           this.handleCancel();
           this.cargarDepto();
         });
@@ -130,9 +124,7 @@ export class DepartamentoComponent implements OnInit {
     }
     if (value != '' && value != undefined && value != null) {
       this.listDeptos = this.listTemporal.filter((res) => {
-        return res.descripcion
-          .toLocaleLowerCase()
-          .match(value.toLocaleLowerCase());
+        return res.descripcion.toLocaleLowerCase().match(value.toLocaleLowerCase());
       });
     } else {
       this.listDeptos = this.listTemporal;
@@ -156,8 +148,7 @@ export class DepartamentoComponent implements OnInit {
   showDeleteConfirm(id): void {
     this.modal.confirm({
       nzTitle: '¿Está seguro que desea eliminar este departamento?',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se eliminarán todos los colaboradores dentro del mismo.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se eliminarán todos los colaboradores dentro del mismo.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,

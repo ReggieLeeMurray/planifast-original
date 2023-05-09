@@ -1,39 +1,17 @@
 <nz-back-top></nz-back-top>
-<div class="row" style="padding-top: 10px">
-  <div class="col-lg-6">
-    <h1>
-      Listado de Eventos
-      <i
-        nz-icon
-        nzType="info-circle"
-        nzTheme="twotone"
-        class="center"
-        nz-popover
-        [nzPopoverContent]="contentTemplate"
-        nzPopoverTrigger="hover"
-      ></i>
-    </h1>
-  </div>
+<div style="padding-top: 10px">
+  <h1>
+    Listado de Eventos
+    <i nz-icon nzType="info-circle" nzTheme="twotone" class="center" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover"></i>
+  </h1>
 </div>
 <ng-template #contentTemplate>
   <div>
-    <p>
-      Agrega eventos solamente con seleccionar el rango de fechas en el
-      calendario.
-    </p>
-    <p>
-      Puedes eliminar un evento al hacer click en la papelera roja de la lista
-      de eventos o al hacer click sobre el evento en el calendario.
-    </p>
+    <p>Agrega eventos solamente con seleccionar el rango de fechas en el calendario.</p>
+    <p>Puedes eliminar un evento al hacer click en la papelera roja de la lista de eventos o al hacer click sobre el evento en el calendario.</p>
     <p>Si eliminas un evento tendrás que volverlo a crear.</p>
-    <p>
-      Puedes buscar eventos por su tipo o por el nombre del colaborador al que
-      pertenece.
-    </p>
-    <p>
-      Al hacer uso del buscador, los eventos seleccionados se actualizarán en el
-      calendario automáticamente.
-    </p>
+    <p>Puedes buscar eventos por su tipo o por el nombre del colaborador al que pertenece.</p>
+    <p>Al hacer uso del buscador, los eventos seleccionados se actualizarán en el calendario automáticamente.</p>
   </div>
 </ng-template>
 
@@ -51,16 +29,10 @@
         <ng-container *nzModalContent>
           <form nz-form [formGroup]="EventoForm">
             <nz-form-item>
-              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired
-                >Colaborador</nz-form-label
-              >
+              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Colaborador</nz-form-label>
 
               <nz-form-control [nzSm]="14" [nzXs]="24">
-                <nz-select
-                  nzShowSearch
-                  nzPlaceHolder="Seleccione"
-                  formControlName="colaborador"
-                >
+                <nz-select nzShowSearch nzPlaceHolder="Seleccione" formControlName="colaborador">
                   <nz-option
                     type="number"
                     *ngFor="let empleado of listEmpleados"
@@ -70,111 +42,45 @@
                 </nz-select> </nz-form-control
             ></nz-form-item>
             <nz-form-item>
-              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired
-                >Tipo de Evento</nz-form-label
-              >
-              <nz-form-control
-                [nzSm]="14"
-                [nzXs]="24"
-                nzErrorTip="Seleccione un evento válido"
-              >
-                <nz-select
-                  nzShowSearch
-                  nzAllowClear
-                  formControlName="tipo"
-                  nzPlaceHolder="Seleccione"
-                  [(ngModel)]="selectedColor"
-                >
-                  <nz-option
-                    nzCustomContent
-                    nzLabel="Vacacion"
-                    nzValue="Vacacion"
-                    ><i
-                      nz-icon
-                      [nzType]="'check-circle'"
-                      [nzTheme]="'twotone'"
-                      [nzTwotoneColor]="'#52c41a'"
-                    ></i>
-                    Vacacion</nz-option
+              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Tipo de Evento</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Seleccione un evento válido">
+                <nz-select nzShowSearch nzAllowClear formControlName="tipo" nzPlaceHolder="Seleccione" [(ngModel)]="selectedColor">
+                  <nz-option nzCustomContent nzLabel="Vacacion" nzValue="Vacacion"
+                    ><i nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i> Vacacion</nz-option
                   >
-                  <nz-option
-                    nzCustomContent
-                    nzLabel="Incapacidad"
-                    nzValue="Incapacidad"
-                    ><i
-                      nz-icon
-                      [nzType]="'check-circle'"
-                      [nzTheme]="'twotone'"
-                      [nzTwotoneColor]="'#FFF100'"
-                    ></i>
-                    Incapacidad</nz-option
+                  <nz-option nzCustomContent nzLabel="Incapacidad" nzValue="Incapacidad"
+                    ><i nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#FFF100'"></i> Incapacidad</nz-option
                   >
                   <nz-option nzCustomContent nzLabel="Falta" nzValue="Falta"
-                    ><i
-                      nz-icon
-                      [nzType]="'check-circle'"
-                      [nzTheme]="'twotone'"
-                      [nzTwotoneColor]="'#EE1224'"
-                    ></i>
+                    ><i nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#EE1224'"></i>
                     Falta
                   </nz-option>
                 </nz-select></nz-form-control
               >
             </nz-form-item>
             <nz-form-item>
-              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired
-                >Comentario</nz-form-label
-              >
-              <nz-form-control
-                [nzSm]="14"
-                [nzXs]="24"
-                nzErrorTip="Escriba un comentario"
-              >
-                <input
-                  nz-input
-                  type="text"
-                  formControlName="comentario"
-                  placeholder="Describe el evento"
-                />
+              <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Comentario</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Escriba un comentario">
+                <input nz-input type="text" formControlName="comentario" placeholder="Describe el evento" />
               </nz-form-control>
             </nz-form-item>
 
             <tr>
               <td>
                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                  <button
-                    nz-button
-                    nzType="primary"
-                    style="margin: 10px"
-                    [disabled]="EventoForm.invalid"
-                    (click)="guardar()"
-                  >
+                  <button nz-button nzType="primary" style="margin: 10px" [disabled]="EventoForm.invalid" (click)="guardar()">
                     Registrar Evento
                   </button>
                 </nz-form-control>
               </td>
               <td>
                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                  <button
-                    nz-button
-                    nzType="default"
-                    style="margin: 10px"
-                    (click)="clear()"
-                  >
-                    Limpiar
-                  </button>
+                  <button nz-button nzType="default" style="margin: 10px" (click)="clear()">Limpiar</button>
                 </nz-form-control>
               </td>
               <td>
                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                  <button
-                    nz-button
-                    nzType="primary"
-                    (click)="handleCancel()"
-                    nzDanger
-                  >
-                    Cancelar
-                  </button>
+                  <button nz-button nzType="primary" (click)="handleCancel()" nzDanger>Cancelar</button>
                 </nz-form-control>
               </td>
             </tr>
@@ -201,34 +107,15 @@
 <br />
 
 <nz-input-group [nzPrefix]="prefixTemplateUser">
-  <input
-    type="text"
-    (ngModelChange)="Search($event)"
-    [(ngModel)]="eventos"
-    nz-input
-    placeholder="Buscar eventos por tipo o por beneficiado"
-  />
+  <input type="text" (ngModelChange)="Search($event)" [(ngModel)]="eventos" nz-input placeholder="Buscar eventos por tipo o por beneficiado" />
 </nz-input-group>
 <ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
 
 <div>
   <nz-spin nzTip="Cargando..." *ngIf="loading">
-    <nz-alert
-      nzType="info"
-      nzMessage="ALERTA"
-      nzDescription="Los eventos se mostrarán en breve."
-    >
-    </nz-alert>
+    <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="Los eventos se mostrarán en breve."> </nz-alert>
   </nz-spin>
-  <nz-table
-    #basicTable
-    [nzData]="listEventos"
-    nzPaginationPosition="top"
-    nzBordered
-    nzTemplateMode
-    id="cssTable"
-    [nzPageSize]="pageSize"
-  >
+  <nz-table #basicTable [nzData]="listEventos" nzPaginationPosition="top" nzBordered nzTemplateMode id="cssTable" [nzPageSize]="pageSize">
     <thead>
       <tr>
         <th scope="col" style="text-align: center">Tipo de Evento</th>
@@ -243,10 +130,7 @@
     <tbody>
       <tr>
         <td colspan="7" *ngIf="listEventos?.length <= 0">
-          <nz-empty
-            [nzNotFoundImage]="notFound"
-            [nzNotFoundContent]="contentTpl"
-          ></nz-empty>
+          <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
           <ng-template #contentTpl>
             <span>No hay eventos creados.</span>
           </ng-template>
@@ -257,8 +141,8 @@
         <td>{{ data.id }}</td>
         <td>{{ data.nombres }} {{ data.apellidos }}</td>
         <td>{{ data.comentario }}</td>
-        <td>{{ data.fechaInicio | date : "dd/MM/yyyy HH:mm" }}</td>
-        <td>{{ data.fechaFinal | date : "dd/MM/yyyy HH:mm" }}</td>
+        <td>{{ data.fechaInicio | date : 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ data.fechaFinal | date : 'dd/MM/yyyy HH:mm' }}</td>
 
         <td>
           <button class="btn btn-danger" (click)="showDeleteConfirm(data.id)">

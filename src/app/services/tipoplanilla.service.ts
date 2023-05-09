@@ -28,25 +28,14 @@ export class TipoplanillaService {
   }
   //post
   guardarTipoPlanilla(tp: TipoPlanilla): Observable<TipoPlanilla> {
-    return this.http.post<TipoPlanilla>(
-      this.myAppUrl + this.myApiUrl,
-      tp,
-      this.httpOptions
-    );
+    return this.http.post<TipoPlanilla>(this.myAppUrl + this.myApiUrl, tp, this.httpOptions);
   }
   //get id
   cargarTipoPlanilla(id: number): Observable<TipoPlanilla> {
     return this.http.get<TipoPlanilla>(this.myAppUrl + this.myApiUrl + id);
   }
   //put
-  actualizarTipoPlanilla(
-    id: number,
-    tp: TipoPlanilla
-  ): Observable<TipoPlanilla> {
-    return this.http.put<TipoPlanilla>(
-      this.myAppUrl + this.myApiUrl + id,
-      tp,
-      this.httpOptions
-    );
+  actualizarTipoPlanilla(id: number, tp: TipoPlanilla): Observable<TipoPlanilla> {
+    return this.http.put<TipoPlanilla>(this.myAppUrl + this.myApiUrl + id, tp, this.httpOptions);
   }
 }

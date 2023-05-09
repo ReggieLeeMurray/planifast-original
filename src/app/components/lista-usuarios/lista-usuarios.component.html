@@ -2,108 +2,50 @@
   <div class="col-lg-6">
     <h1>
       Lista de Usuarios
-      <i
-        nz-icon
-        nzType="info-circle"
-        nzTheme="twotone"
-        nz-popover
-        [nzPopoverContent]="contentTemplate"
-        nzPopoverTrigger="hover"
-      ></i>
+      <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover"></i>
     </h1>
   </div>
 </div>
 <br />
 <ng-template #contentTemplate>
   <div>
-    <p>
-      Si eliminas un usuario al hacer click en la papelera roja tendras que
-      volver a ingresarlo al sistema.
-    </p>
+    <p>Si eliminas un usuario al hacer click en la papelera roja tendras que volver a ingresarlo al sistema.</p>
     <p>Puedes buscar usuarios por su nombre o rol al que pertenece.</p>
-    <p>
-      Deberá tener ROLES registrados en el sistema antes de poder agregar un
-      USUARIO.
-    </p>
+    <p>Deberá tener ROLES registrados en el sistema antes de poder agregar un USUARIO.</p>
     <p>No debe dejar ningún campo vacio para crear un nuevo del usuario.</p>
   </div>
 </ng-template>
 
-<nz-modal
-  [(nzVisible)]="isVisible"
-  nzTitle="Crear Usuario"
-  (nzOnCancel)="handleCancel()"
-  [nzFooter]="null"
-  nzClosable="false"
->
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Crear Usuario" (nzOnCancel)="handleCancel()" [nzFooter]="null" nzClosable="false">
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateForm" (ngSubmit)="guardarUsuario()">
       <nz-form-item>
-        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="email"
-          >E-mail</nz-form-label
-        >
-        <nz-form-control
-          [nzSm]="14"
-          [nzXs]="24"
-          nzErrorTip="¡No ingreso un E-mail válido!"
-        >
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="¡No ingreso un E-mail válido!">
           <input nz-input formControlName="email" id="email" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="password" nzRequired
-          >Contraseña</nz-form-label
-        >
-        <nz-form-control
-          [nzSm]="14"
-          [nzXs]="24"
-          nzErrorTip="¡Favor ingresar su contraseña!"
-        >
-          <input
-            nz-input
-            type="password"
-            id="password"
-            formControlName="password"
-            (ngModelChange)="updateConfirmValidator()"
-          />
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="password" nzRequired>Contraseña</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="¡Favor ingresar su contraseña!">
+          <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="checkPassword" nzRequired
-          >Confirmar Contraseña
-        </nz-form-label>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirmar Contraseña </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-          <input
-            nz-input
-            type="password"
-            formControlName="checkPassword"
-            id="checkPassword"
-          />
+          <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
           <ng-template #errorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">
-              ¡Favor confirmar su contraseña!
-            </ng-container>
-            <ng-container *ngIf="control.hasError('confirm')">
-              ¡Contraseñas inconsistentes!
-            </ng-container>
+            <ng-container *ngIf="control.hasError('required')"> ¡Favor confirmar su contraseña! </ng-container>
+            <ng-container *ngIf="control.hasError('confirm')"> ¡Contraseñas inconsistentes! </ng-container>
           </ng-template>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label
-          [nzSm]="8"
-          [nzXs]="24"
-          nzFor="nickname"
-          nzRequired
-          nzTooltipTitle="Como te quieres llamar"
-        >
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired nzTooltipTitle="Como te quieres llamar">
           <span>Usuario</span>
         </nz-form-label>
-        <nz-form-control
-          [nzSm]="14"
-          [nzXs]="24"
-          nzErrorTip="Ingrese nombre de Usuario"
-        >
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Ingrese nombre de Usuario">
           <input nz-input id="nickname" formControlName="nickname" />
         </nz-form-control>
       </nz-form-item>
@@ -121,11 +63,7 @@
 
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <nz-select formControlName="rol">
-            <nz-option
-              *ngFor="let tp of listRol"
-              nzValue="{{ tp.id }}"
-              nzLabel="{{ tp.descripcion }}"
-            ></nz-option>
+            <nz-option *ngFor="let tp of listRol" nzValue="{{ tp.id }}" nzLabel="{{ tp.descripcion }}"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -133,40 +71,17 @@
       <tr>
         <td>
           <nz-form-control [nzSpan]="14" [nzOffset]="6">
-            <button
-              nz-button
-              nzType="primary"
-              style="margin: 10px"
-              [disabled]="validateForm.invalid"
-              (click)="handleOk()"
-            >
-              Registrar
-            </button>
+            <button nz-button nzType="primary" style="margin: 10px" [disabled]="validateForm.invalid" (click)="handleOk()">Registrar</button>
           </nz-form-control>
         </td>
         <td>
           <nz-form-control [nzSpan]="14" [nzOffset]="6">
-            <button
-              nz-button
-              nzType="default"
-              style="margin: 10px"
-              (click)="clear()"
-            >
-              Limpiar
-            </button>
+            <button nz-button nzType="default" style="margin: 10px" (click)="clear()">Limpiar</button>
           </nz-form-control>
         </td>
         <td>
           <nz-form-control [nzSpan]="14" [nzOffset]="6">
-            <button
-              nz-button
-              style="margin: 10px"
-              nzType="primary"
-              (click)="handleCancel()"
-              nzDanger
-            >
-              Cancelar
-            </button>
+            <button nz-button style="margin: 10px" nzType="primary" (click)="handleCancel()" nzDanger>Cancelar</button>
           </nz-form-control>
         </td>
       </tr>
@@ -175,53 +90,23 @@
 </nz-modal>
 
 <nz-input-group [nzPrefix]="prefixTemplateUser">
-  <input
-    type="text"
-    (input)="Search()"
-    [(ngModel)]="nombres"
-    nz-input
-    placeholder="Buscar por nombre de usuario o por rol"
-  />
+  <input type="text" (input)="Search()" [(ngModel)]="nombres" nz-input placeholder="Buscar por nombre de usuario o por rol" />
 </nz-input-group>
 <ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
 <nz-spin nzTip="Cargando..." *ngIf="loading">
-  <nz-alert
-    nzType="info"
-    nzMessage="ALERTA"
-    nzDescription="Los usuarios se mostrarán en breve."
-  >
-  </nz-alert>
+  <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="Los usuarios se mostrarán en breve."> </nz-alert>
 </nz-spin>
 <div style="float: right">
   <tr>
     <td>
-      <button
-        nz-button
-        style="margin: 10px"
-        nzSize="default"
-        nzType="primary"
-        (click)="showModal()"
-      >
-        Agregar Usuario
-      </button>
+      <button nz-button style="margin: 10px" nzSize="default" nzType="primary" (click)="showModal()">Agregar Usuario</button>
     </td>
     <td>
-      <mat-paginator
-        [length]="listUsuarios?.length"
-        [pageIndex]="0"
-        [pageSize]="page_size"
-        (page)="handlePage($event)"
-      >
-      </mat-paginator>
+      <mat-paginator [length]="listUsuarios?.length" [pageIndex]="0" [pageSize]="page_size" (page)="handlePage($event)"> </mat-paginator>
     </td>
   </tr>
 </div>
-<nz-table
-  class="table table-md table-hover"
-  id="cssTable"
-  nzBordered
-  nzTemplateMode
->
+<nz-table class="table table-md table-hover" id="cssTable" nzBordered nzTemplateMode>
   <thead>
     <tr>
       <th scope="col" style="text-align: center">Usuario</th>
@@ -233,9 +118,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr
-      *ngFor="let usuario of listUsuarios | paginate : page_size : page_number"
-    >
+    <tr *ngFor="let usuario of listUsuarios | paginate : page_size : page_number">
       <td>{{ usuario.nombreUsuario }}</td>
       <td>{{ usuario.id }}</td>
       <td>{{ usuario.password }}</td>

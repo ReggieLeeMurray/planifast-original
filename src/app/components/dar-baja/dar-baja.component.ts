@@ -62,9 +62,7 @@ export class DarBajaComponent implements OnInit {
   }
   guardarEmpleados() {
     if (this.accion == 'Agregar') {
-      var valor = (
-        Math.round(this.empleadosForm.get('valor').value * 100) / 100
-      ).toFixed(2);
+      var valor = (Math.round(this.empleadosForm.get('valor').value * 100) / 100).toFixed(2);
       const empleadoinactivo: EmpleadoInactivo = {
         nota: this.empleadosForm.get('motivo').value,
         motivo: this.empleadosForm.get('motivo').value,
@@ -72,15 +70,11 @@ export class DarBajaComponent implements OnInit {
         empleadoID: parseInt(this.empleadosForm.get('nombre').value),
         fechaSalida: this.empleadosForm.get('fechasalida').value,
       };
-      this.EmpleadoinactivoService.guardarEmpleadosInactivos(
-        empleadoinactivo
-      ).subscribe((data) => {
+      this.EmpleadoinactivoService.guardarEmpleadosInactivos(empleadoinactivo).subscribe((data) => {
         this.router.navigate(['/inactivos']);
       });
     } else {
-      var valor = (
-        Math.round(this.empleadosForm.get('valor').value * 100) / 100
-      ).toFixed(2);
+      var valor = (Math.round(this.empleadosForm.get('valor').value * 100) / 100).toFixed(2);
       const empleadoinactivo: EmpleadoInactivo = {
         id: this.empleadoinactivo.id,
         fechaSalida: this.empleadosForm.get('fechasalida').value,
@@ -89,10 +83,7 @@ export class DarBajaComponent implements OnInit {
         nota: this.empleadosForm.get('motivo').value,
         empleadoID: this.idEmp,
       };
-      this.EmpleadoinactivoService.actualizarEmpleadosInactivos(
-        this.idEmpleado,
-        empleadoinactivo
-      ).subscribe((data) => {
+      this.EmpleadoinactivoService.actualizarEmpleadosInactivos(this.idEmpleado, empleadoinactivo).subscribe((data) => {
         this.router.navigate(['/inactivos']);
       });
     }
@@ -101,9 +92,7 @@ export class DarBajaComponent implements OnInit {
   esEditar() {
     if (this.idEmpleado > 0) {
       this.accion = 'Editar';
-      this.EmpleadoinactivoService.cargarEmpleadosInactivos(
-        this.idEmpleado
-      ).subscribe((data) => {
+      this.EmpleadoinactivoService.cargarEmpleadosInactivos(this.idEmpleado).subscribe((data) => {
         this.empleadoinactivo = data;
         this.empleadosForm.patchValue({
           valor: data.valor,

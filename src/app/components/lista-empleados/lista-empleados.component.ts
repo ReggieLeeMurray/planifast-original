@@ -10,8 +10,7 @@ import { startOfWeek, endOfWeek } from 'date-fns';
 import moment from 'moment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-const EXCEL_TYPE =
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 interface Empleados {
   id?: number;
   apellidos: string;
@@ -98,46 +97,18 @@ export class ListaEmpleadosComponent implements OnInit {
     var monthFinal = moment(finalPrimeraSemana).format('MMM');
     var yearInicio = moment(inicioPrimeraSemana).format('YYYY');
     var yearFinal = moment(finalPrimeraSemana).format('YYYY');
-    console.log(
-      dayInicio,
-      dayFinal,
-      monthInicio,
-      monthFinal,
-      yearInicio,
-      yearFinal
-    );
+    console.log(dayInicio, dayFinal, monthInicio, monthFinal, yearInicio, yearFinal);
     // determinar nombre de la planilla
     if (yearInicio === yearFinal) {
       if (monthInicio === monthFinal) {
-        this.fecha =
-          dayInicio + ' al ' + dayFinal + '  ' + monthFinal + '  ' + yearFinal;
+        this.fecha = dayInicio + ' al ' + dayFinal + '  ' + monthFinal + '  ' + yearFinal;
         console.log(this.fecha);
       } else {
-        this.fecha =
-          dayInicio +
-          ' ' +
-          monthInicio +
-          ' al ' +
-          dayFinal +
-          ' ' +
-          monthFinal +
-          ' ' +
-          yearFinal;
+        this.fecha = dayInicio + ' ' + monthInicio + ' al ' + dayFinal + ' ' + monthFinal + ' ' + yearFinal;
         console.log(this.fecha);
       }
     } else {
-      this.fecha =
-        dayInicio +
-        ' ' +
-        monthInicio +
-        ' ' +
-        yearInicio +
-        ' al ' +
-        dayFinal +
-        ' ' +
-        monthFinal +
-        ' ' +
-        yearFinal;
+      this.fecha = dayInicio + ' ' + monthInicio + ' ' + yearInicio + ' al ' + dayFinal + ' ' + monthFinal + ' ' + yearFinal;
       console.log(this.fecha);
     }
   }
@@ -228,18 +199,10 @@ export class ListaEmpleadosComponent implements OnInit {
         console.log('entro 3', lista[i].nombres + lista[i].apellidos);
       }
     }
-    console.log(
-      this.listEmpleadoFirst,
-      this.listEmpleadoSecond,
-      this.listEmpleadoThird
-    );
+    console.log(this.listEmpleadoFirst, this.listEmpleadoSecond, this.listEmpleadoThird);
     this.porcentaje = 100;
-    document
-      .getElementById('btnTarjetasSemanales')
-      .setAttribute('disabled', 'true');
-    document
-      .getElementById('btnTarjetasQuincenales')
-      .setAttribute('disabled', 'true');
+    document.getElementById('btnTarjetasSemanales').setAttribute('disabled', 'true');
+    document.getElementById('btnTarjetasQuincenales').setAttribute('disabled', 'true');
     this.fechaForm.get('fechaplanilla').disable();
   }
   cargarDepto() {
@@ -270,18 +233,10 @@ export class ListaEmpleadosComponent implements OnInit {
         return (
           res.nombres.toLocaleLowerCase().match(value.toLocaleLowerCase()) ||
           res.apellidos.toLocaleLowerCase().match(value.toLocaleLowerCase()) ||
-          res.descriDepto
-            .toLocaleLowerCase()
-            .match(value.toLocaleLowerCase()) ||
-          res.descriPlanilla
-            .toLocaleLowerCase()
-            .match(value.toLocaleLowerCase()) ||
-          res.descriPlanilla
-            .toLocaleLowerCase()
-            .match(value.toLocaleLowerCase()) +
-            res.tipoPlanilla
-              .toLocaleLowerCase()
-              .match(value.toLocaleLowerCase())
+          res.descriDepto.toLocaleLowerCase().match(value.toLocaleLowerCase()) ||
+          res.descriPlanilla.toLocaleLowerCase().match(value.toLocaleLowerCase()) ||
+          res.descriPlanilla.toLocaleLowerCase().match(value.toLocaleLowerCase()) +
+            res.tipoPlanilla.toLocaleLowerCase().match(value.toLocaleLowerCase())
         );
       });
     } else {
@@ -313,10 +268,8 @@ export class ListaEmpleadosComponent implements OnInit {
     let tarjeta_impar = document.getElementById('tarjeta_impar');
     let tarjeta_v3 = document.getElementById('tarjeta_v3');
     /* worksheets */
-    const wsTarjeta_par: XLSX.WorkSheet =
-      XLSX.utils.table_to_sheet(tarjeta_par);
-    const wsTarjeta_impar: XLSX.WorkSheet =
-      XLSX.utils.table_to_sheet(tarjeta_impar);
+    const wsTarjeta_par: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tarjeta_par);
+    const wsTarjeta_impar: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tarjeta_impar);
     const wsTarjeta_v3: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tarjeta_v3);
     /*width col*/
     var wscols = [{ wch: 10.7 }, { wch: 10.7 }, { wch: 10.7 }, { wpx: 6 }];
@@ -381,16 +334,7 @@ export class ListaEmpleadosComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, wsTarjeta_impar, 'Tarjetas pt.2');
     XLSX.utils.book_append_sheet(wb, wsTarjeta_v3, 'Tarjetas pt.3');
     /* save to excel-file which will be downloaded */
-    XLSX.writeFile(
-      wb,
-      'Tarjetas ' +
-        'de planillas ' +
-        this.tipoSemana +
-        ' del ' +
-        this.fecha +
-        ' ' +
-        '.xlsx'
-    );
+    XLSX.writeFile(wb, 'Tarjetas ' + 'de planillas ' + this.tipoSemana + ' del ' + this.fecha + ' ' + '.xlsx');
     /* write and save file */
     const excelBuffer: any = XLSX.write(wb, {
       bookType: 'xlsx',
@@ -398,9 +342,7 @@ export class ListaEmpleadosComponent implements OnInit {
     });
     const data: Blob = new Blob([excelBuffer], { type: EXCEL_TYPE });
     document.getElementById('btnTarjetasSemanales').removeAttribute('disabled');
-    document
-      .getElementById('btnTarjetasQuincenales')
-      .removeAttribute('disabled');
+    document.getElementById('btnTarjetasQuincenales').removeAttribute('disabled');
     this.handleCancel();
   }
   descargarMacro() {

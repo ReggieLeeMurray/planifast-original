@@ -1,33 +1,17 @@
-<div class="row" style="padding-top: 10px">
+<div style="padding-top: 10px">
   <h1>
     {{ accion }} Baja de Colaborador
-    <i
-      nz-icon
-      nzType="info-circle"
-      nzTheme="twotone"
-      class="center"
-      nz-popover
-      [nzPopoverContent]="contentTemplate"
-      nzPopoverTrigger="hover"
-    ></i>
+    <i nz-icon nzType="info-circle" nzTheme="twotone" class="center" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover"></i>
   </h1>
 </div>
 <ng-template #contentTemplate>
   <div>
     <p>Deberá tener COLABORADORES ACTIVOS para poder dar de baja.</p>
-    <p>
-      Al editar una baja no tiene permitido especificar el nombre del
-      colaborador, pero si al agregar.
-    </p>
+    <p>Al editar una baja no tiene permitido especificar el nombre del colaborador, pero si al agregar.</p>
   </div>
 </ng-template>
 <nz-spin nzTip="Reconectando..." *ngIf="loading">
-  <nz-alert
-    nzType="info"
-    nzMessage="ALERTA"
-    nzDescription="Ha perdido su conexión Internet o a la base de datos."
-  >
-  </nz-alert>
+  <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="Ha perdido su conexión Internet o a la base de datos."> </nz-alert>
 </nz-spin>
 <br />
 <form nz-form [formGroup]="empleadosForm" (ngSubmit)="guardarEmpleados()">
@@ -35,11 +19,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Colaborador</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-select
-        nzShowSearch
-        formControlName="nombre"
-        nzPlaceHolder="Seleccionar"
-      >
+      <nz-select nzShowSearch formControlName="nombre" nzPlaceHolder="Seleccionar">
         <nz-option
           type="number"
           *ngFor="let empleado of listEmpleados"
@@ -50,12 +30,7 @@
   ></nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Valor Pagado</nz-form-label
-    ><nz-form-control
-      [nzSm]="14"
-      [nzXs]="24"
-      nzHasFeedback
-      [nzErrorTip]="valorErrorTpl"
-    >
+    ><nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="valorErrorTpl">
       <input
         nz-input
         type="number"
@@ -66,34 +41,21 @@
         formControlName="valor"
       />
       <ng-template #valorErrorTpl let-control>
-        <ng-container *ngIf="empleadosForm.get('valor').hasError('required')">
-          Ups! No dejes este campo en blanco
-        </ng-container>
+        <ng-container *ngIf="empleadosForm.get('valor').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
       </ng-template></nz-form-control
     >
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired
-      >Motivo de Salida</nz-form-label
-    >
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Motivo de Salida</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="motivo" nzPlaceHolder="Seleccionar">
         <nz-option-group nzLabel="Contratos">
-          <nz-option
-            nzValue="Finalización de Contrato"
-            nzLabel="Finalización de Contrato"
-          ></nz-option>
-          <nz-option
-            nzValue="Terminación de Contrato de Mutuo Acuerdo"
-            nzLabel="Terminación de Contrato de Mutuo Acuerdo"
-          ></nz-option>
+          <nz-option nzValue="Finalización de Contrato" nzLabel="Finalización de Contrato"></nz-option>
+          <nz-option nzValue="Terminación de Contrato de Mutuo Acuerdo" nzLabel="Terminación de Contrato de Mutuo Acuerdo"></nz-option>
         </nz-option-group>
         <nz-option-group nzLabel="Albedrío">
           <nz-option nzValue="Renuncia" nzLabel="Renuncia"></nz-option>
-          <nz-option
-            nzValue="Abandono del Empleo"
-            nzLabel="Abandono del Empleo"
-          ></nz-option>
+          <nz-option nzValue="Abandono del Empleo" nzLabel="Abandono del Empleo"></nz-option>
           <nz-option nzValue="Ausentismo" nzLabel="Ausentismo"></nz-option>
         </nz-option-group>
         <nz-option-group nzLabel="Potestad">
@@ -102,18 +64,9 @@
           <nz-option nzValue="Defunción" nzLabel="Defunción"></nz-option>
         </nz-option-group>
         <nz-option-group nzLabel="Empresa">
-          <nz-option
-            nzValue="Clausura de Sede"
-            nzLabel="Clausura de Sede"
-          ></nz-option>
-          <nz-option
-            nzValue="Comportamiento Indebido"
-            nzLabel="Comportamiento Indebido"
-          ></nz-option>
-          <nz-option
-            nzValue="Destrucción de Propiedad"
-            nzLabel="Destrucción de Propiedad"
-          ></nz-option>
+          <nz-option nzValue="Clausura de Sede" nzLabel="Clausura de Sede"></nz-option>
+          <nz-option nzValue="Comportamiento Indebido" nzLabel="Comportamiento Indebido"></nz-option>
+          <nz-option nzValue="Destrucción de Propiedad" nzLabel="Destrucción de Propiedad"></nz-option>
         </nz-option-group>
       </nz-select>
     </nz-form-control>
@@ -142,39 +95,21 @@
   </nz-form-item> -->
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Fecha Salida</nz-form-label
-    ><nz-form-control
-      [nzSm]="14"
-      [nzXs]="24"
-      nzHasFeedback
-      [nzErrorTip]="fechaErrorTpl"
-    >
-      <nz-date-picker
-        [(ngModel)]="date"
-        (ngModelChange)="onChange($event)"
-        formControlName="fechasalida"
-        nzPlaceHolder="Elija Fecha"
-      >
+    ><nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="fechaErrorTpl">
+      <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" formControlName="fechasalida" nzPlaceHolder="Elija Fecha">
       </nz-date-picker
       ><ng-template #fechaErrorTpl let-control>
-        <ng-container
-          *ngIf="empleadosForm.get('fechasalida').hasError('required')"
-        >
-          Ups! No dejes este campo en blanco
-        </ng-container>
+        <ng-container *ngIf="empleadosForm.get('fechasalida').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
       </ng-template></nz-form-control
     >
   </nz-form-item>
   <nz-form-control [nzSpan]="14" [nzOffset]="6">
-    <button nz-button nzType="primary" [disabled]="empleadosForm.invalid">
-      {{ accion }} Baja a Colaborador
-    </button>
+    <button nz-button nzType="primary" [disabled]="empleadosForm.invalid">{{ accion }} Baja a Colaborador</button>
   </nz-form-control>
   <nz-form-control [nzSpan]="14" [nzOffset]="6">
     <button nz-button nzType="default" (click)="clear()">Limpiar</button>
   </nz-form-control>
   <nz-form-control [nzSpan]="14" [nzOffset]="6">
-    <button nz-button nzType="primary" nzDanger [routerLink]="['/inactivos']">
-      Cancelar
-    </button>
+    <button nz-button nzType="primary" nzDanger [routerLink]="['/inactivos']">Cancelar</button>
   </nz-form-control>
 </form>

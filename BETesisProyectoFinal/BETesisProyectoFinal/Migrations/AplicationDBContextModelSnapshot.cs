@@ -299,9 +299,6 @@ namespace BEProyectoFinal.Migrations
                     b.Property<double>("Otros")
                         .HasColumnType("double");
 
-                    b.Property<bool>("Permanente")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<double>("Prestamorap")
                         .HasColumnType("double");
 

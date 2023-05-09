@@ -59,8 +59,7 @@ export class TipoplanillaComponent implements OnInit {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'Planilla Duplicada',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Ya existe una planilla similar.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Ya existe una planilla similar.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -76,10 +75,7 @@ export class TipoplanillaComponent implements OnInit {
         tipo: this.TPForm.get('tipo').value,
       };
       for (let i = 0; i < this.listTP.length; i++) {
-        if (
-          this.listTP[i].descripcion == TP.descripcion &&
-          this.listTP[i].tipo == TP.tipo
-        ) {
+        if (this.listTP[i].descripcion == TP.descripcion && this.listTP[i].tipo == TP.tipo) {
           i = this.listTP.length - 1;
           y++;
           this.error();
@@ -98,10 +94,7 @@ export class TipoplanillaComponent implements OnInit {
         tipo: this.TPForm.get('tipo').value,
       };
       for (let i = 0; i < this.listTP.length; i++) {
-        if (
-          this.listTP[i].descripcion == TP.descripcion &&
-          this.listTP[i].tipo == TP.tipo
-        ) {
+        if (this.listTP[i].descripcion == TP.descripcion && this.listTP[i].tipo == TP.tipo) {
           i = this.listTP.length - 1;
           y++;
           this.error();
@@ -109,10 +102,7 @@ export class TipoplanillaComponent implements OnInit {
       }
       if (y == 0) {
         console.log('entro');
-        this.TipoplanillaService.actualizarTipoPlanilla(
-          this.idTP,
-          TP
-        ).subscribe((data) => {
+        this.TipoplanillaService.actualizarTipoPlanilla(this.idTP, TP).subscribe((data) => {
           this.handleCancel();
           this.cargarTP();
         });
@@ -141,12 +131,7 @@ export class TipoplanillaComponent implements OnInit {
     }
     if (value != '' && value != undefined && value != null) {
       this.listTP = this.listTemporal.filter((res) => {
-        return (
-          res.descripcion
-            .toLocaleLowerCase()
-            .match(value.toLocaleLowerCase()) ||
-          res.tipo.toLocaleLowerCase().match(value.toLocaleLowerCase())
-        );
+        return res.descripcion.toLocaleLowerCase().match(value.toLocaleLowerCase()) || res.tipo.toLocaleLowerCase().match(value.toLocaleLowerCase());
       });
     } else {
       this.listTP = this.listTemporal;
@@ -171,8 +156,7 @@ export class TipoplanillaComponent implements OnInit {
   showDeleteConfirm(id): void {
     this.modal.confirm({
       nzTitle: 'Está seguro que desea eliminar esta planilla?',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se eliminarán todos los colaboradores dentro de la misma.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se eliminarán todos los colaboradores dentro de la misma.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,

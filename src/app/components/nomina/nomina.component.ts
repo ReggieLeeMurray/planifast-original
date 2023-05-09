@@ -21,8 +21,7 @@ import { Time } from '@angular/common';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 moment.locale('es');
-const EXCEL_TYPE =
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 @Component({
   selector: 'app-nomina',
   templateUrl: './nomina.component.html',
@@ -34,9 +33,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (this.current === 2) {
       return true;
     } else {
-      const confirmacion = window.confirm(
-        '¿Desea salir del módulo y perder los cambios realizados?'
-      );
+      const confirmacion = window.confirm('¿Desea salir del módulo y perder los cambios realizados?');
       return confirmacion;
     }
   }
@@ -309,7 +306,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   diaDiurno = 0;
   diaMixto = 0;
   diaNocturno = 0;
-  DEBUG = false;
+  DEBUG = true;
   //tarjetas
   jornada: string = '';
   jornadaL: number = 0;
@@ -515,22 +512,14 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.infoForm.disable();
       this.infoForm.get('techoEM_IHSS').setValue(data[0].techoEM_IHSS);
       this.infoForm.get('techoIVM_IHSS').setValue(data[0].techoIVM_IHSS);
-      this.infoForm
-        .get('porcentajeContribucionTrabajadorEM_IHSS')
-        .setValue(data[0].porcentajeContribucionTrabajadorEM_IHSS);
-      this.infoForm
-        .get('porcentajeContribucionTrabajadorIVM_IHSS')
-        .setValue(data[0].porcentajeContribucionTrabajadorIVM_IHSS);
+      this.infoForm.get('porcentajeContribucionTrabajadorEM_IHSS').setValue(data[0].porcentajeContribucionTrabajadorEM_IHSS);
+      this.infoForm.get('porcentajeContribucionTrabajadorIVM_IHSS').setValue(data[0].porcentajeContribucionTrabajadorIVM_IHSS);
       this.infoForm.get('techoIVM_RAP').setValue(data[0].techoIVM_RAP);
-      this.infoForm
-        .get('porcentajeContribucionTrabajador_RAP')
-        .setValue(data[0].porcentajeContribucionTrabajador_RAP);
+      this.infoForm.get('porcentajeContribucionTrabajador_RAP').setValue(data[0].porcentajeContribucionTrabajador_RAP);
       this.infoForm.get('techoExento_ISR').setValue(data[0].techoExento_ISR);
       this.infoForm.get('techo15_ISR').setValue(data[0].techo15_ISR);
       this.infoForm.get('techo20_ISR').setValue(data[0].techo20_ISR);
-      this.infoForm
-        .get('montoServicioMedico_ISR')
-        .setValue(data[0].montoServicioMedico_ISR);
+      this.infoForm.get('montoServicioMedico_ISR').setValue(data[0].montoServicioMedico_ISR);
     });
   }
   //obtener cantidad de empleados activos
@@ -578,73 +567,36 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     const resultado: Resultado[] = [];
     const array = Array.from(this.setOfCalculados);
     const listResultados = [];
-
     var fechaInicio = moment(this.start).format('L').toString();
     var fechaFinal = moment(this.end).format('L').toString();
-    var fechaCreacion = moment(this.fechaCreacionPlanilla)
-      .format('L')
-      .toString();
+    var fechaCreacion = moment(this.fechaCreacionPlanilla).format('L').toString();
 
     history.append('fechaInicio', fechaInicio);
     history.append('fechaFinal', fechaFinal);
     history.append('fechaCreacion', fechaCreacion);
-    history.append(
-      'totalPlanilla',
-      this.round2Decimal(this.totalAPagar).toString()
-    );
+    history.append('totalPlanilla', this.round2Decimal(this.totalAPagar).toString());
     history.append('archivo', this.nombre.toString() + '.xlsx');
     history.append('files', this.fileGenerado);
     history.append('planillaID', this.idTP.toString());
     console.log(history);
 
-    this.HistorialService.guardarHistory(history).subscribe((data) => {
-      console.log(data);
-    });
+    this.HistorialService.guardarHistory(history).subscribe(() => {});
     this.HistorialService.getListHistory().subscribe((data) => {
-      const temp = data.length - 1;
-      this.idHistorial = data[temp].id;
-      console.log(
-        data,
-        this.idHistorial,
-        temp,
-        this.setOfCalculados,
-        this.listNominaFinal
-      );
+      this.idHistorial = data[data.length - 1].id + 1;
+      console.log(data, this.idHistorial, this.setOfCalculados, this.listNominaFinal);
       for (let j = 0; j < array.length; j++) {
         for (let i = 0; i < this.listNominaFinal.length; i++) {
           if (array[j] === this.listNominaFinal[i].id) {
             listResultados[j] = this.listNominaFinal[i];
-            console.log(
-              'IGUALES',
-              'I: ',
-              i,
-              'J: ',
-              j,
-              'SET: ',
-              array[j],
-              'ListNominaId: ',
-              this.listNominaFinal[i].id
-            );
+            console.log('IGUALES', 'I: ', i, 'J: ', j, 'SET: ', array[j], 'ListNominaId: ', this.listNominaFinal[i].id);
           } else {
-            console.log(
-              'DIFERENTES',
-              'I: ',
-              i,
-              'J: ',
-              j,
-              'SET: ',
-              array[j],
-              'ListNominaId: ',
-              this.listNominaFinal[i].id
-            );
+            console.log('DIFERENTES', 'I: ', i, 'J: ', j, 'SET: ', array[j], 'ListNominaId: ', this.listNominaFinal[i].id);
           }
         }
       }
       for (let i = 0; i < listResultados.length; i++) {
         resultado[i] = {
-          nombreCompleto:
-            listResultados[i].nombres + ' ' + listResultados[i].apellidos,
-          permanente: listResultados[i].permanente,
+          nombreCompleto: listResultados[i].nombres + ' ' + listResultados[i].apellidos,
           incompleto: false,
           salarioBase: parseFloat(listResultados[i].salarioBase),
           totalIngresos: parseFloat(listResultados[i].ingresos),
@@ -682,16 +634,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           ajuste: parseFloat(listResultados[i].ajuste),
           otros: parseFloat(listResultados[i].otros),
           totalPagar: parseFloat(listResultados[i].totalPagar),
-          EmpleadoID: parseInt(listResultados[i].id),
-          HistorialID: parseInt(this.idHistorial + 1),
+          empleadoID: parseInt(listResultados[i].id),
+          historialID: parseInt(this.idHistorial),
         };
       }
       console.log('RESULTADO ', resultado);
-      this.ResultadosService.guardarContenidoCompleto(resultado).subscribe(
-        (data) => {
-          console.log(data);
-        }
-      );
+      this.ResultadosService.guardarContenidoCompleto(resultado).subscribe(() => {});
     });
   }
   isNumber(value) {
@@ -713,14 +661,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       var monthFinal = moment(result[1]).format('MMMM');
       var yearInicio = moment(result[0]).format('YYYY');
       var yearFinal = moment(result[1]).format('YYYY');
-      console.log(
-        dayInicio,
-        dayFinal,
-        monthInicio,
-        monthFinal,
-        yearInicio,
-        yearFinal
-      );
+      console.log(dayInicio, dayFinal, monthInicio, monthFinal, yearInicio, yearFinal);
       // determinar nombre de la planilla
       this.yearAguinaldo = yearInicio;
       if (monthInicio === 'diciembre') {
@@ -730,41 +671,14 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
       if (yearInicio === yearFinal) {
         if (monthInicio === monthFinal) {
-          this.fecha =
-            dayInicio +
-            ' al ' +
-            dayFinal +
-            '  ' +
-            monthFinal +
-            '  ' +
-            yearFinal;
+          this.fecha = dayInicio + ' al ' + dayFinal + '  ' + monthFinal + '  ' + yearFinal;
           console.log(this.fecha);
         } else {
-          this.fecha =
-            dayInicio +
-            ' ' +
-            monthInicio +
-            ' al ' +
-            dayFinal +
-            ' ' +
-            monthFinal +
-            ' ' +
-            yearFinal;
+          this.fecha = dayInicio + ' ' + monthInicio + ' al ' + dayFinal + ' ' + monthFinal + ' ' + yearFinal;
           console.log(this.fecha);
         }
       } else {
-        this.fecha =
-          dayInicio +
-          ' ' +
-          monthInicio +
-          ' ' +
-          yearInicio +
-          ' al ' +
-          dayFinal +
-          ' ' +
-          monthFinal +
-          ' ' +
-          yearFinal;
+        this.fecha = dayInicio + ' ' + monthInicio + ' ' + yearInicio + ' al ' + dayFinal + ' ' + monthFinal + ' ' + yearFinal;
         console.log(this.fecha);
       }
       //determinar nombre de la planilla
@@ -783,18 +697,14 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.inicialForm.get('fecha').disable();
     this.inicialForm.get('archivo').disable();
     document.getElementById('btnnext').removeAttribute('disabled');
-    document
-      .getElementById('btncontinuar')
-      .setAttribute('disabled', 'disabled');
+    document.getElementById('btncontinuar').setAttribute('disabled', 'disabled');
   }
   enable() {
     this.inicialForm.get('tplanilla').enable();
     this.inicialForm.get('fecha').enable();
     this.inicialForm.get('archivo').enable();
     document.getElementById('btnnext').setAttribute('disabled', 'disabled');
-    document
-      .getElementById('btncontinuar')
-      .setAttribute('disabled', 'disabled');
+    document.getElementById('btncontinuar').setAttribute('disabled', 'disabled');
   }
   empty(): void {
     this.modal.error({
@@ -812,8 +722,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.isVisibleInicial = true;
     this.modal.confirm({
       nzTitle: 'CONFIRMACIÓN',
-      nzContent:
-        '<b style="color: red;">¿Está seguro que la fecha y la planilla seleccionada son correctas?.</b>',
+      nzContent: '<b style="color: red;">¿Está seguro que la fecha y la planilla seleccionada son correctas?.</b>',
       nzOkText: 'Si',
       nzStyle: { left: '5%' },
       nzOkType: 'primary',
@@ -853,23 +762,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.jDatos.sort((a, b) => a.id - b.id);
           console.log(this.jDatos);
           for (let x = 0; x < this.jDatos.length; x++) {
-            console.log(
-              'X:',
-              x,
-              'DUP: ',
-              duplicados,
-              'LENGTH: ',
-              this.jDatos.length,
-              'ID: ',
-              this.jDatos[x].id
-            );
+            console.log('X:', x, 'DUP: ', duplicados, 'LENGTH: ', this.jDatos.length, 'ID: ', this.jDatos[x].id);
             if (x + 1 === this.jDatos.length) {
               console.log('UNDEFINED');
-            } else if (
-              this.jDatos[x].id === this.jDatos[x + 1].id &&
-              this.jDatos[x].id !== undefined &&
-              this.jDatos[x + 1].id !== undefined
-            ) {
+            } else if (this.jDatos[x].id === this.jDatos[x + 1].id && this.jDatos[x].id !== undefined && this.jDatos[x + 1].id !== undefined) {
               duplicados++;
             }
           }
@@ -879,17 +775,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             contador = 0;
             for (let i = 0; i < this.listNominaFinal.length; i++) {
               if (this.jDatos[j].id === this.listNominaFinal[i].id) {
-                console.log(
-                  'IGUALES',
-                  'I: ',
-                  i,
-                  'J: ',
-                  j,
-                  'JDatosId: ',
-                  this.jDatos[j].id,
-                  'ListNominaId: ',
-                  this.listNominaFinal[i].id
-                );
+                console.log('IGUALES', 'I: ', i, 'J: ', j, 'JDatosId: ', this.jDatos[j].id, 'ListNominaId: ', this.listNominaFinal[i].id);
                 iguales++;
                 if (j + 1 === this.jDatos.length) {
                   console.log('UNDEFINED');
@@ -898,17 +784,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
                   iguales = iguales - 1;
                 }
               } else {
-                console.log(
-                  'DESIGUALES',
-                  'I: ',
-                  i,
-                  'J: ',
-                  j,
-                  'JDatosId: ',
-                  this.jDatos[j].id,
-                  'ListNominaId: ',
-                  this.listNominaFinal[i].id
-                );
+                console.log('DESIGUALES', 'I: ', i, 'J: ', j, 'JDatosId: ', this.jDatos[j].id, 'ListNominaId: ', this.listNominaFinal[i].id);
                 contador++;
                 if (contador === this.listNominaFinal.length) {
                   if (this.jDatos[j].id === 0) {
@@ -948,10 +824,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             ' colaboradores en la planilla seleccionada';
         } else {
           this.msgInfo =
-            this.jDatos.length +
-            ' registros en el archivo / ' +
-            this.listNominaFinal.length +
-            ' colaboradores en la planilla seleccionada';
+            this.jDatos.length + ' registros en el archivo / ' + this.listNominaFinal.length + ' colaboradores en la planilla seleccionada';
         }
         if (arreglo.length >= 0) {
           let tempArreglo = [];
@@ -971,8 +844,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         }
         if (iguales > 0) {
           this.hideDetectados = false;
-          this.msgDetectados =
-            'Registros detectados: ' + iguales + ' / ' + this.listNominaFinal.length;
+          this.msgDetectados = 'Registros detectados: ' + iguales + ' / ' + this.listNominaFinal.length;
           faltante = this.listNominaFinal.length - iguales;
         } else {
           faltante = this.listNominaFinal.length;
@@ -983,42 +855,20 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         }
         if (arreglo.length > 0) {
           this.hideErroneos = false;
-          this.msgErroneos =
-            'Registros inválidos: ' +
-            arreglo.length +
-            ' ⇄ ' +
-            "Lista Id's: " +
-            arreglo;
+          this.msgErroneos = 'Registros inválidos: ' + arreglo.length + ' ⇄ ' + "Lista Id's: " + arreglo;
         }
         if (faltante > 0 || sobrante > 0 || invalido > 0) {
           this.hideFaltantesSobrantes = false;
-          console.log(
-            'FALTANTE: ',
-            faltante,
-            'SOBRANTE: ',
-            sobrante,
-            'INVALIDO: ',
-            invalido
-          );
+          console.log('FALTANTE: ', faltante, 'SOBRANTE: ', sobrante, 'INVALIDO: ', invalido);
           switch (faltante > 0 || sobrante > 0 || invalido > 0) {
             case faltante > 0 && invalido > 0:
-              this.msgFaltantesSobrantes =
-                'Registros faltantes: ' +
-                faltante +
-                ' ✦ ' +
-                "Id's vacios ó nulos: " +
-                invalido;
+              this.msgFaltantesSobrantes = 'Registros faltantes: ' + faltante + ' ✦ ' + "Id's vacios ó nulos: " + invalido;
               break;
             case faltante > 0:
               this.msgFaltantesSobrantes = 'Registros faltantes: ' + faltante;
               break;
             case sobrante > 0 && invalido > 0:
-              this.msgFaltantesSobrantes =
-                'Registros sobrantes: ' +
-                sobrante +
-                ' ✦ ' +
-                " Id's vacios ó nulos: " +
-                invalido;
+              this.msgFaltantesSobrantes = 'Registros sobrantes: ' + sobrante + ' ✦ ' + " Id's vacios ó nulos: " + invalido;
               break;
             case sobrante > 0:
               this.msgFaltantesSobrantes = 'Registros sobrantes: ' + sobrante;
@@ -1035,12 +885,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         }
         this.totalAguinaldo = 0;
         this.totalCalculados = 0;
-        console.log(
-          this.seleccionado,
-          this.listNomina,
-          this.listNominaFinal,
-          this.jDatos
-        );
+        console.log(this.seleccionado, this.listNomina, this.listNominaFinal, this.jDatos);
         // }
       },
       nzCancelText: 'No',
@@ -1064,9 +909,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.enable();
     this.inicialForm.reset();
     this.jDatos = [];
-    document
-      .getElementById('btnreintentar')
-      .setAttribute('disabled', 'disabled');
+    document.getElementById('btnreintentar').setAttribute('disabled', 'disabled');
   }
   handleChange(evt: any) {
     this.jDatos = [];
@@ -1114,55 +957,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           ...(dato as object),
         });
         console.log('Ciclo # ' + i);
-        this.reformatJDatos(
-          'lunes',
-          this.jDatos[i].lunesEntrada,
-          this.jDatos[i].lunesSalida,
-          this.jDatos[i].lunesEvento,
-          i
-        );
-        this.reformatJDatos(
-          'martes',
-          this.jDatos[i].martesEntrada,
-          this.jDatos[i].martesSalida,
-          this.jDatos[i].martesEvento,
-          i
-        );
-        this.reformatJDatos(
-          'miercoles',
-          this.jDatos[i].miercolesEntrada,
-          this.jDatos[i].miercolesSalida,
-          this.jDatos[i].miercolesEvento,
-          i
-        );
-        this.reformatJDatos(
-          'jueves',
-          this.jDatos[i].juevesEntrada,
-          this.jDatos[i].juevesSalida,
-          this.jDatos[i].juevesEvento,
-          i
-        );
-        this.reformatJDatos(
-          'viernes',
-          this.jDatos[i].viernesEntrada,
-          this.jDatos[i].viernesSalida,
-          this.jDatos[i].viernesEvento,
-          i
-        );
-        this.reformatJDatos(
-          'sabado',
-          this.jDatos[i].sabadoEntrada,
-          this.jDatos[i].sabadoSalida,
-          this.jDatos[i].sabadoEvento,
-          i
-        );
-        this.reformatJDatos(
-          'domingo',
-          this.jDatos[i].domingoEntrada,
-          this.jDatos[i].domingoSalida,
-          this.jDatos[i].domingoEvento,
-          i
-        );
+        this.reformatJDatos('lunes', this.jDatos[i].lunesEntrada, this.jDatos[i].lunesSalida, this.jDatos[i].lunesEvento, i);
+        this.reformatJDatos('martes', this.jDatos[i].martesEntrada, this.jDatos[i].martesSalida, this.jDatos[i].martesEvento, i);
+        this.reformatJDatos('miercoles', this.jDatos[i].miercolesEntrada, this.jDatos[i].miercolesSalida, this.jDatos[i].miercolesEvento, i);
+        this.reformatJDatos('jueves', this.jDatos[i].juevesEntrada, this.jDatos[i].juevesSalida, this.jDatos[i].juevesEvento, i);
+        this.reformatJDatos('viernes', this.jDatos[i].viernesEntrada, this.jDatos[i].viernesSalida, this.jDatos[i].viernesEvento, i);
+        this.reformatJDatos('sabado', this.jDatos[i].sabadoEntrada, this.jDatos[i].sabadoSalida, this.jDatos[i].sabadoEvento, i);
+        this.reformatJDatos('domingo', this.jDatos[i].domingoEntrada, this.jDatos[i].domingoSalida, this.jDatos[i].domingoEvento, i);
       }
       // this.error();
       this.isVisibleArchivo = true;
@@ -1176,8 +977,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'Archivo Inconsistente',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Asegúrate de elejir el archivo correcto. Revise si hay campos en blanco.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Asegúrate de elejir el archivo correcto. Revise si hay campos en blanco.</b>',
       nzOkText: 'Okay',
       nzOkType: 'primary',
       nzClosable: false,
@@ -1191,13 +991,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.jDatos = [];
     this.inicialForm.get('archivo').reset();
   }
-  reformatJDatos(
-    dia: string,
-    entrada: any,
-    salida: any,
-    evento: string,
-    posicion: number
-  ) {
+  reformatJDatos(dia: string, entrada: any, salida: any, evento: string, posicion: number) {
     //entrada
     let fromExcel = entrada;
     let basenumber = fromExcel * 24;
@@ -1364,15 +1158,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   //IHSS = EM = 9,849.7(techo) x 2.5% + IVM = 10,282.37(techo) x 2.5%
   IHSS() {
     var techoem = this.listInfo[0].techoEM_IHSS;
-    var pctem = this.revisarPorcentajes(
-      this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS,
-      'IHSS'
-    );
+    var pctem = this.revisarPorcentajes(this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS, 'IHSS');
     var techoivm = this.listInfo[0].techoIVM_IHSS;
-    var pctivm = this.revisarPorcentajes(
-      this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS,
-      'IHSS'
-    );
+    var pctivm = this.revisarPorcentajes(this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS, 'IHSS');
     var em = 0;
     var ivm = 0;
     em = techoem * pctem;
@@ -1385,10 +1173,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     var salario: number = this.salario;
     var techorap: number = this.round2Decimal(this.listInfo[0].techoIVM_RAP);
     var subtotal = salario - techorap;
-    var pctrap = this.revisarPorcentajes(
-      this.listInfo[0].porcentajeContribucionTrabajador_RAP,
-      'RAP'
-    );
+    var pctrap = this.revisarPorcentajes(this.listInfo[0].porcentajeContribucionTrabajador_RAP, 'RAP');
     var rap = 0;
     rap = subtotal * pctrap;
     this.automaticForm.get('afpc').setValue(this.truncator(rap));
@@ -1412,23 +1197,17 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.listNomina[i].totalPagar === 0) {
           this.totalCalculados = this.totalCalculados + 1;
         } else if (this.listNomina[i].totalPagar > 0) {
-          this.totalAPagar = this.round2Decimal(
-            this.totalAPagar - this.listNomina[i].totalPagar
-          );
+          this.totalAPagar = this.round2Decimal(this.totalAPagar - this.listNomina[i].totalPagar);
         }
         var salario = this.listNomina[i].salarioBase;
         this.listNomina[i].ingresos = salario / 2;
         this.listNomina[i].totalPagar = this.listNomina[i].ingresos;
         if (this.listNomina[i].deducciones > 0) {
-          this.listNomina[i].totalPagar = this.round2Decimal(
-            this.listNomina[i].ingresos - this.listNomina[i].deducciones
-          );
+          this.listNomina[i].totalPagar = this.round2Decimal(this.listNomina[i].ingresos - this.listNomina[i].deducciones);
         } else {
           this.listNomina[i].deducciones = 0;
         }
-        this.totalAPagar = this.round2Decimal(
-          this.totalAPagar + this.listNomina[i].totalPagar
-        );
+        this.totalAPagar = this.round2Decimal(this.totalAPagar + this.listNomina[i].totalPagar);
         console.log(this.totalAPagar, this.totalCalculados);
         this.listNominaFinal[i].ingresoBruto = salario / 2;
         this.listNominaFinal[i].feriado = 0;
@@ -1437,8 +1216,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.listNominaFinal[i].ajusteP = 0;
         this.listNominaFinal[i].aguinaldo = 0;
         this.listNominaFinal[i].cantOI = this.cantOI;
-        this.listNominaFinal[i].totalObs =
-          this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
+        this.listNominaFinal[i].totalObs = this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
         console.log(this.listNominaFinal[i].totalObs, this.cantOI);
       }
     }
@@ -1448,11 +1226,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   handleAguinaldoSemanal(id: number): void {
     this.idEmpleado = id;
-    console.log(
-      this.totalCalculados,
-      this.isVisibleAguinaldoAdvertencia,
-      this.isAdvertenciaIgnored
-    );
+    console.log(this.totalCalculados, this.isVisibleAguinaldoAdvertencia, this.isAdvertenciaIgnored);
     if (this.totalCalculados > 0 && this.isAdvertenciaIgnored === false) {
       this.aguinaldoAdvertencia();
     } else {
@@ -1466,13 +1240,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.listNomina[i].id === id) {
           salario = this.listNomina[i].salarioBase;
           ingresos = this.listNomina[i].ingresos;
-          console.log(
-            'AGUINALDO: ',
-            salario,
-            ingresos,
-            this.totalAPagar,
-            this.totalAguinaldo
-          );
+          console.log('AGUINALDO: ', salario, ingresos, this.totalAPagar, this.totalAguinaldo);
         }
       }
       this.resumenForm.disable();
@@ -1485,8 +1253,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'ADVERTENCIA',
-      nzContent:
-        '<b style="color: red;">TIENES CALCULOS AJENOS AL AGUINALDO. SI PROCEDE, PERDERÁ DICHO TRABAJO.</b>',
+      nzContent: '<b style="color: red;">TIENES CALCULOS AJENOS AL AGUINALDO. SI PROCEDE, PERDERÁ DICHO TRABAJO.</b>',
       nzOkType: 'primary',
       nzOkText: 'Continuar de todas formas',
       nzCancelText: 'Salir',
@@ -1512,71 +1279,33 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.idEmpleado = temp;
       this.switchValueAguinaldo = true;
     }
-    console.log(
-      'ENTRADA',
-      'a ',
-      this.switchValueAguinaldo,
-      'b ',
-      this.idEmpleado,
-      'c ',
-      temp,
-      'd ',
-      this.totalAPagar,
-      'e ',
-      this.totalAguinaldo
-    );
+    console.log('ENTRADA', 'a ', this.switchValueAguinaldo, 'b ', this.idEmpleado, 'c ', temp, 'd ', this.totalAPagar, 'e ', this.totalAguinaldo);
     if (this.current === 1) {
       this.onItemChecked(this.idEmpleado, true);
       this.setOfCalculados.add(this.idEmpleado);
     }
     if (this.switchValueAguinaldo === true) {
-      this.valorAguinaldo = this.round2Decimal(
-        this.resumenForm.get('aguinaldo').value
-      );
-      this.totalAguinaldo = this.round2Decimal(
-        this.totalAguinaldo + this.valorAguinaldo
-      );
+      this.valorAguinaldo = this.round2Decimal(this.resumenForm.get('aguinaldo').value);
+      this.totalAguinaldo = this.round2Decimal(this.totalAguinaldo + this.valorAguinaldo);
     } else {
       this.valorAguinaldo = this.salarioMinimoPerDia * 30;
-      this.totalAguinaldo = this.round2Decimal(
-        this.totalAguinaldo + this.valorAguinaldo
-      );
+      this.totalAguinaldo = this.round2Decimal(this.totalAguinaldo + this.valorAguinaldo);
     }
     this.sueldo = this.valorAguinaldo;
     this.sueldo = this.round2Decimal(this.sueldo);
-    console.log(
-      this.switchValueAguinaldo,
-      this.valorAguinaldo,
-      this.sueldo,
-      this.totalAguinaldo
-    );
+    console.log(this.switchValueAguinaldo, this.valorAguinaldo, this.sueldo, this.totalAguinaldo);
     for (let i = 0; i < this.listNomina.length; i++) {
       if (this.listNomina[i].id === this.idEmpleado) {
-        console.log(
-          '1: ',
-          this.listNomina[i].ingresos,
-          this.listNomina[i].totalPagar,
-          this.totalAguinaldo,
-          this.sueldo
-        );
+        console.log('1: ', this.listNomina[i].ingresos, this.listNomina[i].totalPagar, this.totalAguinaldo, this.sueldo);
         this.totalCalculados = this.totalCalculados + 1;
         this.listNomina[i].ingresos = this.round2Decimal(this.sueldo);
-        this.listNomina[i].totalPagar = this.round2Decimal(
-          this.listNomina[i].ingresos - this.listNomina[i].deducciones
-        );
+        this.listNomina[i].totalPagar = this.round2Decimal(this.listNomina[i].ingresos - this.listNomina[i].deducciones);
         this.totalAPagar = this.totalAPagar + this.listNomina[i].totalPagar;
         this.listNominaFinal[i].ingresos = this.sueldo;
         this.listNominaFinal[i].aguinaldo = this.valorAguinaldo;
         this.listNominaFinal[i].cantOI = 1;
-        this.listNominaFinal[i].totalObs =
-          this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
-        console.log(
-          '2: ',
-          this.totalAguinaldo,
-          this.totalAPagar,
-          this.sueldo,
-          this.listNominaFinal[i]
-        );
+        this.listNominaFinal[i].totalObs = this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
+        console.log('2: ', this.totalAguinaldo, this.totalAPagar, this.sueldo, this.listNominaFinal[i]);
       }
       document.getElementById('btnnext').removeAttribute('disabled');
     }
@@ -1585,13 +1314,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.isVisibleAguinaldo = false;
     this.isVisibleAguinaldoAdvertencia = true;
     this.isAdvertenciaIgnored = true;
-    console.log(
-      'SALIDA',
-      this.switchValueAguinaldo,
-      this.idEmpleado,
-      this.totalAPagar,
-      this.totalAguinaldo
-    );
+    console.log('SALIDA', this.switchValueAguinaldo, this.idEmpleado, this.totalAPagar, this.totalAguinaldo);
   }
   handleCancelAguinaldoSem() {
     // console.log(this.idEmpleado, this.limpiarTotalAguinaldo);
@@ -1620,13 +1343,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       }
     }
     //calcula valor incapacidad publica
-    this.incapacidadpub = this.round2Decimal(
-      this.resumenForm.get('incapacidadpub').value
-    );
+    this.incapacidadpub = this.round2Decimal(this.resumenForm.get('incapacidadpub').value);
     if (this.incapacidadpub <= 3) {
-      this.valorIncapacidadPub = this.round2Decimal(
-        this.incapacidadpub * this.salarioMinimoPerDia
-      );
+      this.valorIncapacidadPub = this.round2Decimal(this.incapacidadpub * this.salarioMinimoPerDia);
       this.resumenForm.get('incapacidadpub').setValue(this.valorIncapacidadPub);
       this.resumenForm.get('incapacidadpub').disable();
     } else if (this.incapacidadpub > 3) {
@@ -1635,12 +1354,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
     console.log('CONTINUA PARA FINAL');
     //calcula valor incapacidad privada
-    this.incapacidadpriv = this.round2Decimal(
-      this.resumenForm.get('incapacidadpriv').value
-    );
-    this.valorIncapacidadPriv = this.truncator(
-      this.incapacidadpriv * this.salarioMinimoPerDia
-    );
+    this.incapacidadpriv = this.round2Decimal(this.resumenForm.get('incapacidadpriv').value);
+    this.valorIncapacidadPriv = this.truncator(this.incapacidadpriv * this.salarioMinimoPerDia);
     this.resumenForm.get('incapacidadpriv').setValue(this.valorIncapacidadPriv);
     this.resumenForm.get('incapacidadpriv').disable();
     //valor ajuste
@@ -1652,9 +1367,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     //valor aguinaldo
     if (this.isCheckedAguinaldo === true) {
       if (this.switchValueAguinaldo === true) {
-        this.valorAguinaldo = this.round2Decimal(
-          this.resumenForm.get('aguinaldo').value
-        );
+        this.valorAguinaldo = this.round2Decimal(this.resumenForm.get('aguinaldo').value);
         this.totalAguinaldo = this.totalAguinaldo + this.valorAguinaldo;
       } else {
         this.valorAguinaldo = this.salarioMinimoPerDia * 30;
@@ -1667,21 +1380,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.resumenForm.get('faltas').setValue(this.valorFalta);
     this.resumenForm.get('faltas').disable();
     //calcula valor autorizados
-    this.conpermiso = this.round2Decimal(
-      this.resumenForm.get('conpermiso').value
-    );
-    this.valorAutorizado = this.truncator(
-      this.conpermiso * this.salarioMinimoPerDia
-    );
+    this.conpermiso = this.round2Decimal(this.resumenForm.get('conpermiso').value);
+    this.valorAutorizado = this.truncator(this.conpermiso * this.salarioMinimoPerDia);
     this.resumenForm.get('conpermiso').setValue(this.valorAutorizado);
     this.resumenForm.get('conpermiso').disable();
     //calcula valor suspension
-    this.suspension = this.round2Decimal(
-      this.resumenForm.get('suspensiones').value
-    );
-    this.valorSuspension = this.truncator(
-      this.suspension * this.salarioMinimoPerDia
-    );
+    this.suspension = this.round2Decimal(this.resumenForm.get('suspensiones').value);
+    this.valorSuspension = this.truncator(this.suspension * this.salarioMinimoPerDia);
     this.resumenForm.get('suspensiones').setValue(this.valorSuspension);
     this.resumenForm.get('suspensiones').disable();
     //calcula valor feriados
@@ -1690,22 +1395,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.resumenForm.get('feriados').setValue(this.valorFeriado);
     this.resumenForm.get('feriados').disable();
     //calcula valor de vacaciones
-    this.vacacion = this.round2Decimal(
-      this.resumenForm.get('vacaciones').value
-    );
-    this.valorVacacion = this.truncator(
-      this.vacacion * this.salarioMinimoPerDia
-    );
+    this.vacacion = this.round2Decimal(this.resumenForm.get('vacaciones').value);
+    this.valorVacacion = this.truncator(this.vacacion * this.salarioMinimoPerDia);
     this.resumenForm.get('vacaciones').setValue(this.valorVacacion);
     this.resumenForm.get('vacaciones').disable();
-    var obsv =
-      this.falta +
-      this.feriado +
-      this.incapacidadpub +
-      this.incapacidadpriv +
-      this.suspension +
-      this.vacacion +
-      this.conpermiso;
+    var obsv = this.falta + this.feriado + this.incapacidadpub + this.incapacidadpriv + this.suspension + this.vacacion + this.conpermiso;
     console.log(
       this.falta,
       this.feriado,
@@ -1742,16 +1436,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       } else {
         var salario = this.salarioMinimoPerDia * 15;
         this.sueldo = this.round2Decimal(
-          salario -
-            this.valorFalta -
-            this.valorFeriado -
-            this.valorIncapacidadPub -
-            this.valorSuspension -
-            this.valorVacacion
+          salario - this.valorFalta - this.valorFeriado - this.valorIncapacidadPub - this.valorSuspension - this.valorVacacion
         );
-        this.sueldoNormal = this.round2Decimal(
-          salario - this.valorFalta - this.valorSuspension + this.valorAjuste
-        );
+        this.sueldoNormal = this.round2Decimal(salario - this.valorFalta - this.valorSuspension + this.valorAjuste);
         this.valorAguinaldo = 0;
       }
       if (this.sueldo > 0) {
@@ -1778,9 +1465,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           }
           //listNomina
           this.listNomina[i].ingresos = this.sueldoNormal;
-          this.listNomina[i].totalPagar = this.round2Decimal(
-            this.listNomina[i].ingresos - this.listNomina[i].deducciones
-          );
+          this.listNomina[i].totalPagar = this.round2Decimal(this.listNomina[i].ingresos - this.listNomina[i].deducciones);
           this.totalAPagar = this.totalAPagar + this.listNomina[i].totalPagar;
           //listNominaFinal
           this.listNominaFinal[i].ingresoBruto = this.sueldo;
@@ -1798,11 +1483,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.listNominaFinal[i].diasvacacion = this.vacacion;
           this.listNominaFinal[i].diasnoautorizados = this.falta;
           this.listNominaFinal[i].diassuspension = this.suspension;
-          this.listNominaFinal[i].diasautorizados =
-            this.conpermiso + this.incapacidadpriv;
+          this.listNominaFinal[i].diasautorizados = this.conpermiso + this.incapacidadpriv;
           this.listNominaFinal[i].cantOI = this.cantOI;
-          this.listNominaFinal[i].totalObs =
-            this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
+          this.listNominaFinal[i].totalObs = this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
         }
       }
       this.onItemChecked(this.idEmpleado, true);
@@ -1819,8 +1502,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'ERROR',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Colaborador tiene mas observaciones que dias trabajados.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Colaborador tiene mas observaciones que dias trabajados.</b>',
       nzOkType: 'primary',
       nzClosable: false,
       nzOkDanger: true,
@@ -1937,21 +1619,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       comprobantesTemp.push(...this.listNominaFinal);
       const array = Array.from(this.setOfCheckedId);
       for (let k = 0; k < comprobantesTemp.length; k++) {
-        console.log(
-          'OBS: ',
-          comprobantesTemp[k].id,
-          comprobantesTemp[k].totalObs
-        );
+        console.log('OBS: ', comprobantesTemp[k].id, comprobantesTemp[k].totalObs);
       }
-      console.log(
-        '1er',
-        'list: ',
-        comprobantesTemp,
-        array,
-        this.listComprobantes,
-        this.listNomina,
-        this.listNominaFinal
-      );
+      console.log('1er', 'list: ', comprobantesTemp, array, this.listComprobantes, this.listNomina, this.listNominaFinal);
       for (let j = 0; j < array.length; j++) {
         for (let i = 0; i < comprobantesTemp.length; i++) {
           console.log('I: ', i, j, comprobantesTemp[i].id, array[j]);
@@ -1966,16 +1636,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       const sorted = comprobantesTemp.slice().sort();
       this.listComprobantes.length = 0;
       this.listComprobantes = sorted.sort((a, b) => b.totalObs - a.totalObs);
-      console.log(
-        '2nd',
-        'list: ',
-        comprobantesTemp,
-        array,
-        this.setOfCalculados,
-        this.listComprobantes,
-        this.listNomina,
-        this.listNominaFinal
-      );
+      console.log('2nd', 'list: ', comprobantesTemp, array, this.setOfCalculados, this.listComprobantes, this.listNomina, this.listNominaFinal);
       this.showConfirm();
     }
   }
@@ -1995,10 +1656,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
     /* worksheets */
     const wsPlanilla: XLSX.WorkSheet = XLSX.utils.table_to_sheet(planilla);
-    const wsComprobantes: XLSX.WorkSheet =
-      XLSX.utils.table_to_sheet(comprobantes);
-    const wsComprobantesV2: XLSX.WorkSheet =
-      XLSX.utils.table_to_sheet(comprobantesv2);
+    const wsComprobantes: XLSX.WorkSheet = XLSX.utils.table_to_sheet(comprobantes);
+    const wsComprobantesV2: XLSX.WorkSheet = XLSX.utils.table_to_sheet(comprobantesv2);
     if (this.diferencia <= 7) {
       if (this.totalAguinaldo <= 0) {
         var wsTarjetas: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tarjeta);
@@ -2055,12 +1714,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   //   );
   // }
   // modal segundo paso diferencia === 7
-  handleEmpleado(
-    id: number,
-    salario: number,
-    nombre: string,
-    apellido: string
-  ): void {
+  handleEmpleado(id: number, salario: number, nombre: string, apellido: string): void {
     console.log(id, salario, nombre + ' ' + apellido);
     console.log(this.jDatos, this.listFinal);
     this.isMainVisible = true;
@@ -2154,12 +1808,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.limpiarMain();
     this.isMainVisible = false;
   }
-  handleEmpleadoDeduccion(
-    id: number,
-    salario: number,
-    nombre: string,
-    apellido: string
-  ): void {
+  handleEmpleadoDeduccion(id: number, salario: number, nombre: string, apellido: string): void {
     this.idEmpleado = id;
     this.nombreCompleto = nombre + ' ' + apellido;
     this.salario = salario;
@@ -2177,9 +1826,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.listNomina[i].ingresos === 0) {
           this.sueldoAlDeducirString = '0.00';
         } else {
-          this.sueldoAlDeducirString = this.numberWithCommas(
-            this.listNomina[i].ingresos
-          );
+          this.sueldoAlDeducirString = this.numberWithCommas(this.listNomina[i].ingresos);
         }
       }
     }
@@ -2216,21 +1863,14 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       bio: this.listInfo[0].bio,
       techoEM_IHSS: this.infoForm.get('techoEM_IHSS').value,
       techoIVM_IHSS: this.infoForm.get('techoIVM_IHSS').value,
-      porcentajeContribucionTrabajadorEM_IHSS: this.infoForm.get(
-        'porcentajeContribucionTrabajadorEM_IHSS'
-      ).value,
-      porcentajeContribucionTrabajadorIVM_IHSS: this.infoForm.get(
-        'porcentajeContribucionTrabajadorIVM_IHSS'
-      ).value,
+      porcentajeContribucionTrabajadorEM_IHSS: this.infoForm.get('porcentajeContribucionTrabajadorEM_IHSS').value,
+      porcentajeContribucionTrabajadorIVM_IHSS: this.infoForm.get('porcentajeContribucionTrabajadorIVM_IHSS').value,
       techoIVM_RAP: this.infoForm.get('techoIVM_RAP').value,
-      porcentajeContribucionTrabajador_RAP: this.infoForm.get(
-        'porcentajeContribucionTrabajador_RAP'
-      ).value,
+      porcentajeContribucionTrabajador_RAP: this.infoForm.get('porcentajeContribucionTrabajador_RAP').value,
       techoExento_ISR: this.infoForm.get('techoExento_ISR').value,
       techo15_ISR: this.infoForm.get('techo15_ISR').value,
       techo20_ISR: this.infoForm.get('techo20_ISR').value,
-      montoServicioMedico_ISR: this.infoForm.get('montoServicioMedico_ISR')
-        .value,
+      montoServicioMedico_ISR: this.infoForm.get('montoServicioMedico_ISR').value,
     };
     console.log(this.listInfo, info);
     this.InfoService.actualizarInfo(1, info).subscribe((data) => {
@@ -2265,15 +1905,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.listNomina[i].totalPagar = 0;
         }
         //ingresos listnominafinal
-        this.totalAguinaldo =
-          this.round2Decimal(this.totalAguinaldo) -
-          this.round2Decimal(this.listNominaFinal[i].aguinaldo);
-        console.log(
-          'TOTAL AGUINALDO: ',
-          this.idEmpleado,
-          this.totalAguinaldo,
-          this.listNominaFinal[i].aguinaldo
-        );
+        this.totalAguinaldo = this.round2Decimal(this.totalAguinaldo) - this.round2Decimal(this.listNominaFinal[i].aguinaldo);
+        console.log('TOTAL AGUINALDO: ', this.idEmpleado, this.totalAguinaldo, this.listNominaFinal[i].aguinaldo);
         this.listNominaFinal[i].ingresoBruto = 0;
         this.listNominaFinal[i].recargo = 0;
         this.listNominaFinal[i].horasNormales = 0;
@@ -2394,15 +2027,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   btnDeduccionEnable() {
     if (this.totalAguinaldo > 0) {
       if (this.isCheckedAjuste === false && this.isCheckedVarios === false) {
-        document
-          .getElementById('btnCalcularDeduccion')
-          .removeAttribute('disabled');
+        document.getElementById('btnCalcularDeduccion').removeAttribute('disabled');
       }
     } else {
       if (
-        (this.isCheckedIHSS === true ||
-          this.isCheckedISR === true ||
-          this.isCheckedAFPC === true) &&
+        (this.isCheckedIHSS === true || this.isCheckedISR === true || this.isCheckedAFPC === true) &&
         this.isCheckedImpVecinal === false &&
         this.isCheckedPrestamoRap === false &&
         this.isCheckedAnticipo === false &&
@@ -2411,9 +2040,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.isCheckedAjuste === false &&
         this.isCheckedVarios === false
       ) {
-        document
-          .getElementById('btnCalcularDeduccion')
-          .removeAttribute('disabled');
+        document.getElementById('btnCalcularDeduccion').removeAttribute('disabled');
       }
     }
   }
@@ -2428,41 +2055,19 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.valorAjuste = 0;
         this.valorCTAEmpresa = 0;
         this.valorTransporte = 0;
-        this.valorAnticipo = this.round2Decimal(
-          this.aguinaldoForm.get('ajuste').value
-        );
-        this.valorVarios = this.round2Decimal(
-          this.aguinaldoForm.get('varios').value
-        );
+        this.valorAnticipo = this.round2Decimal(this.aguinaldoForm.get('ajuste').value);
+        this.valorVarios = this.round2Decimal(this.aguinaldoForm.get('varios').value);
       } else {
-        this.valorIHSS = this.round2Decimal(
-          this.automaticForm.get('ihss').value
-        );
+        this.valorIHSS = this.round2Decimal(this.automaticForm.get('ihss').value);
         this.valorISR = this.round2Decimal(this.automaticForm.get('isr').value);
-        this.valorAFPC = this.round2Decimal(
-          this.automaticForm.get('afpc').value
-        );
-        this.valorAnticipo = this.round2Decimal(
-          this.deduccionFormQuincenal.get('anticipo').value
-        );
-        this.valorPrestamoRap = this.round2Decimal(
-          this.deduccionFormQuincenal.get('prestamorap').value
-        );
-        this.valorImpVecinal = this.round2Decimal(
-          this.deduccionFormQuincenal.get('impvecinal').value
-        );
-        this.valorCTAEmpresa = this.round2Decimal(
-          this.deduccionFormQuincenal.get('ctaempresa').value
-        );
-        this.valorTransporte = this.round2Decimal(
-          this.deduccionFormQuincenal.get('transporte').value
-        );
-        this.valorAjuste = this.round2Decimal(
-          this.deduccionFormQuincenal.get('ajuste').value
-        );
-        this.valorVarios = this.round2Decimal(
-          this.deduccionFormQuincenal.get('varios').value
-        );
+        this.valorAFPC = this.round2Decimal(this.automaticForm.get('afpc').value);
+        this.valorAnticipo = this.round2Decimal(this.deduccionFormQuincenal.get('anticipo').value);
+        this.valorPrestamoRap = this.round2Decimal(this.deduccionFormQuincenal.get('prestamorap').value);
+        this.valorImpVecinal = this.round2Decimal(this.deduccionFormQuincenal.get('impvecinal').value);
+        this.valorCTAEmpresa = this.round2Decimal(this.deduccionFormQuincenal.get('ctaempresa').value);
+        this.valorTransporte = this.round2Decimal(this.deduccionFormQuincenal.get('transporte').value);
+        this.valorAjuste = this.round2Decimal(this.deduccionFormQuincenal.get('ajuste').value);
+        this.valorVarios = this.round2Decimal(this.deduccionFormQuincenal.get('varios').value);
       }
     } else {
       if (this.totalAguinaldo > 0) {
@@ -2472,33 +2077,17 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.valorCTAEmpresa = 0;
         this.valorTransporte = 0;
         this.valorAjuste = 0;
-        this.valorAnticipo = this.round2Decimal(
-          this.aguinaldoForm.get('ajuste').value
-        );
-        this.valorVarios = this.round2Decimal(
-          this.aguinaldoForm.get('varios').value
-        );
+        this.valorAnticipo = this.round2Decimal(this.aguinaldoForm.get('ajuste').value);
+        this.valorVarios = this.round2Decimal(this.aguinaldoForm.get('varios').value);
       } else {
-        this.valorIHSS = this.round2Decimal(
-          this.automaticForm.get('ihss').value
-        );
+        this.valorIHSS = this.round2Decimal(this.automaticForm.get('ihss').value);
         this.valorISR = this.round2Decimal(this.automaticForm.get('isr').value);
         console.log(this.valorIHSS, this.valorISR);
-        this.valorImpVecinal = this.round2Decimal(
-          this.deduccionForm.get('impvecinal').value
-        );
-        this.valorCTAEmpresa = this.round2Decimal(
-          this.deduccionForm.get('ctaempresa').value
-        );
-        this.valorTransporte = this.round2Decimal(
-          this.deduccionForm.get('transporte').value
-        );
-        this.valorAjuste = this.round2Decimal(
-          this.deduccionForm.get('ajuste').value
-        );
-        this.valorVarios = this.round2Decimal(
-          this.deduccionForm.get('varios').value
-        );
+        this.valorImpVecinal = this.round2Decimal(this.deduccionForm.get('impvecinal').value);
+        this.valorCTAEmpresa = this.round2Decimal(this.deduccionForm.get('ctaempresa').value);
+        this.valorTransporte = this.round2Decimal(this.deduccionForm.get('transporte').value);
+        this.valorAjuste = this.round2Decimal(this.deduccionForm.get('ajuste').value);
+        this.valorVarios = this.round2Decimal(this.deduccionForm.get('varios').value);
       }
     }
     this.cboxAll = true;
@@ -2595,9 +2184,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     } else {
       this.deduccionString = this.numberWithCommas(this.deduccion);
     }
-    document
-      .getElementById('btnCalcularDeduccion')
-      .setAttribute('disabled', 'true');
+    document.getElementById('btnCalcularDeduccion').setAttribute('disabled', 'true');
     for (let i = 0; i < this.listNomina.length; i++) {
       if (this.listNomina[i].id === this.idEmpleado) {
         var temp = this.listNomina[i].ingresos;
@@ -2610,9 +2197,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.listNomina[i].id === this.idEmpleado) {
           this.listNomina[i].deducciones = this.deduccion;
           console.log('AJUSTE POSITIVO ' + this.listNomina[i].ajusteP);
-          this.listNomina[i].totalPagar = this.round2Decimal(
-            this.listNomina[i].ingresos - this.listNomina[i].deducciones
-          );
+          this.listNomina[i].totalPagar = this.round2Decimal(this.listNomina[i].ingresos - this.listNomina[i].deducciones);
           this.totalAPagar = this.totalAPagar - this.listNomina[i].deducciones;
           console.log(this.totalAPagar);
           this.listNominaFinal[i].ihss = this.valorIHSS;
@@ -2628,22 +2213,15 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             this.listNominaFinal[i].ajuste = this.valorAjuste;
           }
           this.listNominaFinal[i].cantOD = this.cantOD;
-          console.log(
-            this.listNominaFinal[i].cantOI,
-            this.listNominaFinal[i].cantOD
-          );
-          this.listNominaFinal[i].totalObs =
-            this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
+          console.log(this.listNominaFinal[i].cantOI, this.listNominaFinal[i].cantOD);
+          this.listNominaFinal[i].totalObs = this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
           console.log(this.listNominaFinal[i].totalObs);
           this.listNominaFinal[i].impvecinal = this.valorImpVecinal;
           this.listNominaFinal[i].cta = this.valorCTAEmpresa;
           this.listNominaFinal[i].viaticos = this.valorTransporte;
           this.listNominaFinal[i].otros = this.valorVarios;
           this.listNominaFinal[i].deducciones = this.deduccion;
-          this.listNominaFinal[i].totalPagar = this.round2Decimal(
-            this.listNominaFinal[i].ingresos -
-              this.listNominaFinal[i].deducciones
-          );
+          this.listNominaFinal[i].totalPagar = this.round2Decimal(this.listNominaFinal[i].ingresos - this.listNominaFinal[i].deducciones);
         }
       }
     }
@@ -2653,8 +2231,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'ERROR',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Colaborador tiene mas deducciones que ingresos.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Colaborador tiene mas deducciones que ingresos.</b>',
       nzOkType: 'primary',
       nzClosable: false,
       nzOkDanger: true,
@@ -2663,8 +2240,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
   }
   jornadaIncapacidadPriv(jornada: string) {
     if (jornada === 'Diurna') {
-      this.requiredCompletarIncapacidadPrivada =
-        8 * this.incapacidadpriv - this.incapacidadReal * 4;
+      this.requiredCompletarIncapacidadPrivada = 8 * this.incapacidadpriv - this.incapacidadReal * 4;
     } else if (jornada === 'Mixta') {
       this.requiredCompletarIncapacidadPrivada = 7 * this.incapacidadpriv;
     } else if (jornada === 'Nocturna') {
@@ -2675,15 +2251,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (this.incapacidadpriv >= 1) {
       document.getElementById('btnCalcular').setAttribute('disabled', 'true');
       this.extraFormSecundario.get('jornadaSelect').enable();
-      this.cambioRevisarJornada =
-        this.extraFormSecundario.get('jornadaSelect').value;
+      this.cambioRevisarJornada = this.extraFormSecundario.get('jornadaSelect').value;
       this.jornadaIncapacidadPriv(this.cambioRevisarJornada);
-      console.log(
-        this.totalExtrasDiurnas,
-        this.totalExtrasMixtas,
-        this.totalExtrasNocturnas,
-        this.requiredCompletarIncapacidadPrivada
-      );
+      console.log(this.totalExtrasDiurnas, this.totalExtrasMixtas, this.totalExtrasNocturnas, this.requiredCompletarIncapacidadPrivada);
     }
   }
   onAllChecked(value: boolean): void {
@@ -2761,10 +2331,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
     if (value !== '' && value !== undefined && value !== null) {
       this.listNomina = listTemp.filter((res) => {
-        return (
-          res.nombres.toLocaleLowerCase().match(value.toLocaleLowerCase()) ||
-          res.apellidos.toLocaleLowerCase().match(value.toLocaleLowerCase())
-        );
+        return res.nombres.toLocaleLowerCase().match(value.toLocaleLowerCase()) || res.apellidos.toLocaleLowerCase().match(value.toLocaleLowerCase());
       });
     } else {
       this.listNomina = sorted;
@@ -2777,9 +2344,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       if (this.isCheckedAjuste === false && this.isCheckedVarios === false) {
         this.indeterminate = false;
         this.allChecked = false;
-        document
-          .getElementById('btnCalcularDeduccion')
-          .setAttribute('disabled', 'true');
+        document.getElementById('btnCalcularDeduccion').setAttribute('disabled', 'true');
       }
     } else {
       if (
@@ -2796,9 +2361,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       ) {
         this.indeterminate = false;
         this.allChecked = false;
-        document
-          .getElementById('btnCalcularDeduccion')
-          .setAttribute('disabled', 'true');
+        document.getElementById('btnCalcularDeduccion').setAttribute('disabled', 'true');
       }
     }
   }
@@ -3096,9 +2659,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.indeterminate = false;
     this.allChecked = true;
     this.cantOD = 0;
-    document
-      .getElementById('btnCalcularDeduccion')
-      .setAttribute('disabled', 'true');
+    document.getElementById('btnCalcularDeduccion').setAttribute('disabled', 'true');
     this.IHSS();
     this.ISR();
     this.AFPC();
@@ -3203,9 +2764,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (this.switchValuePorcentajeEM_IHSS === false) {
       this.infoForm.get('porcentajeContribucionTrabajadorEM_IHSS').disable();
       this.InfoService.getInfo().subscribe((data) => {
-        this.infoForm
-          .get('porcentajeContribucionTrabajadorEM_IHSS')
-          .setValue(data[0].porcentajeContribucionTrabajadorEM_IHSS);
+        this.infoForm.get('porcentajeContribucionTrabajadorEM_IHSS').setValue(data[0].porcentajeContribucionTrabajadorEM_IHSS);
       });
     } else if (this.switchValuePorcentajeEM_IHSS === true) {
       this.infoForm.get('porcentajeContribucionTrabajadorEM_IHSS').enable();
@@ -3216,15 +2775,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (this.switchValuePorcentajeIVM_IHSS === false) {
       this.infoForm.get('porcentajeContribucionTrabajadorIVM_IHSS').disable();
       this.InfoService.getInfo().subscribe((data) => {
-        this.infoForm
-          .get('porcentajeContribucionTrabajadorIVM_IHSS')
-          .setValue(data[0].porcentajeContribucionTrabajadorIVM_IHSS);
+        this.infoForm.get('porcentajeContribucionTrabajadorIVM_IHSS').setValue(data[0].porcentajeContribucionTrabajadorIVM_IHSS);
       });
     } else if (this.switchValuePorcentajeIVM_IHSS === true) {
       this.infoForm.get('porcentajeContribucionTrabajadorIVM_IHSS').enable();
-      this.infoForm
-        .get('porcentajeContribucionTrabajadorIVM_IHSS')
-        .setValue('');
+      this.infoForm.get('porcentajeContribucionTrabajadorIVM_IHSS').setValue('');
     }
   }
   enableTechoExento_ISR() {
@@ -3264,9 +2819,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (this.switchValueMontoServicioMedico_ISR === false) {
       this.infoForm.get('montoServicioMedico_ISR').disable();
       this.InfoService.getInfo().subscribe((data) => {
-        this.infoForm
-          .get('montoServicioMedico_ISR')
-          .setValue(data[0].montoServicioMedico_ISR);
+        this.infoForm.get('montoServicioMedico_ISR').setValue(data[0].montoServicioMedico_ISR);
       });
     } else if (this.switchValueMontoServicioMedico_ISR === true) {
       this.infoForm.get('montoServicioMedico_ISR').enable();
@@ -3288,9 +2841,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (this.switchValuePorcentajeIVM_RAP === false) {
       this.infoForm.get('porcentajeContribucionTrabajador_RAP').disable();
       this.InfoService.getInfo().subscribe((data) => {
-        this.infoForm
-          .get('porcentajeContribucionTrabajador_RAP')
-          .setValue(data[0].porcentajeContribucionTrabajador_RAP);
+        this.infoForm.get('porcentajeContribucionTrabajador_RAP').setValue(data[0].porcentajeContribucionTrabajador_RAP);
       });
     } else if (this.switchValuePorcentajeIVM_RAP === true) {
       this.infoForm.get('porcentajeContribucionTrabajador_RAP').enable();
@@ -3320,8 +2871,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'ERROR',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Dias inválidos. Reingrese.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Dias inválidos. Reingrese.</b>',
       nzOkType: 'primary',
       nzClosable: false,
       nzOkDanger: true,
@@ -3333,8 +2883,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'ERROR',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Horas inválidas. Reingrese.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Horas inválidas. Reingrese.</b>',
       nzOkType: 'primary',
       nzClosable: false,
       nzOkDanger: true,
@@ -3346,8 +2895,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'ERROR',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Horas iguales. Reingrese.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Horas iguales. Reingrese.</b>',
       nzOkType: 'primary',
       nzClosable: false,
       nzOkDanger: true,
@@ -3359,8 +2907,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.error({
       nzCentered: true,
       nzTitle: 'ERROR',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Solo puede tener un séptimo día a la semana.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Solo puede tener un séptimo día a la semana.</b>',
       nzOkType: 'primary',
       nzClosable: false,
       nzOkDanger: true,
@@ -3389,20 +2936,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       observacion = 'Feriado';
     } else if (observacion === 'notrabajaba') {
       observacion = 'No Laboraba';
-    } else if (
-      observacion === 'incapacidadpub' ||
-      observacion === 'incapacidadpubparcial' ||
-      observacion === 'incapacidadcancelada'
-    ) {
+    } else if (observacion === 'incapacidadpub' || observacion === 'incapacidadpubparcial' || observacion === 'incapacidadcancelada') {
       observacion = 'IHSS';
     } else if (observacion === 'incapacidadpriv') {
       observacion = 'IP';
     } else if (observacion === 'septimo') {
       observacion = 'Libre';
-    } else if (
-      observacion === 'vacacion' ||
-      observacion === 'vacacioncancelada'
-    ) {
+    } else if (observacion === 'vacacion' || observacion === 'vacacioncancelada') {
       observacion = 'Vacaciones';
     } else if (observacion === 'falta') {
       observacion = 'Sin Permiso';
@@ -3420,13 +2960,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       horas = 0;
     }
     const array = [];
-    console.log(
-      'HORAS EXTRAS / DIAS',
-      this.totalTrabNormales,
-      this.totalExtrasDiurnas,
-      this.totalExtrasMixtas,
-      this.totalExtrasNocturnas
-    );
+    console.log('HORAS EXTRAS / DIAS', this.totalTrabNormales, this.totalExtrasDiurnas, this.totalExtrasMixtas, this.totalExtrasNocturnas);
     array.push({
       primero: a,
       segundo: b,
@@ -3453,13 +2987,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       rObj['totalN'] = obj.noct;
       return rObj;
     });
-    console.log(
-      this.listTarjeta,
-      this.idEmpleado,
-      array,
-      reformattedArray,
-      observacion
-    );
+    console.log(this.listTarjeta, this.idEmpleado, array, reformattedArray, observacion);
     for (let i = 0; i < this.listTarjeta.length; i++) {
       if (this.listTarjeta[i].id === this.idEmpleado) {
         console.log('entro', this.listTarjeta[i].id);
@@ -3494,64 +3022,43 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     }
   }
   detectarJornada() {
-    if (
-      this.descriForm.get('lunesSelect').value === '' ||
-      this.descriForm.get('lunesSelect').value === undefined
-    ) {
+    if (this.descriForm.get('lunesSelect').value === '' || this.descriForm.get('lunesSelect').value === undefined) {
       this.revisarLunes(this.lunesDesde, this.lunesHasta);
       this.jornadaL = this.retornarJornadaOld(this.jornada, 'Lunes');
       console.log('LUNES JORNADA: ', this.jornadaL, this.jornada);
     } else this.jornadaL = 0;
 
-    if (
-      this.descriForm.get('martesSelect').value === '' ||
-      this.descriForm.get('martesSelect').value === undefined
-    ) {
+    if (this.descriForm.get('martesSelect').value === '' || this.descriForm.get('martesSelect').value === undefined) {
       this.revisarMartes(this.martesDesde, this.martesHasta);
       this.jornadaM = this.retornarJornadaOld(this.jornada, 'Martes');
       console.log('MARTES JORNADA: ', this.jornadaM, this.jornada);
     } else this.jornadaM = 0;
 
-    if (
-      this.descriForm.get('miercolesSelect').value === '' ||
-      this.descriForm.get('martesSelect').value === undefined
-    ) {
+    if (this.descriForm.get('miercolesSelect').value === '' || this.descriForm.get('martesSelect').value === undefined) {
       this.revisarMiercoles(this.miercolesDesde, this.miercolesHasta);
       this.jornadaMi = this.retornarJornadaOld(this.jornada, 'Miercoles');
       console.log('MIERCOLES JORNADA: ', this.jornadaMi, this.jornada);
     } else this.jornadaMi = 0;
 
-    if (
-      this.descriForm.get('juevesSelect').value === '' ||
-      this.descriForm.get('juevesSelect').value === undefined
-    ) {
+    if (this.descriForm.get('juevesSelect').value === '' || this.descriForm.get('juevesSelect').value === undefined) {
       this.revisarJueves(this.juevesDesde, this.juevesHasta);
       this.jornadaJ = this.retornarJornadaOld(this.jornada, 'Jueves');
       console.log('JUEVES JORNADA: ', this.jornadaJ, this.jornada);
     } else this.jornadaJ = 0;
 
-    if (
-      this.descriForm.get('viernesSelect').value === '' ||
-      this.descriForm.get('viernesSelect').value === undefined
-    ) {
+    if (this.descriForm.get('viernesSelect').value === '' || this.descriForm.get('viernesSelect').value === undefined) {
       this.revisarViernes(this.viernesDesde, this.viernesHasta);
       this.jornadaV = this.retornarJornadaOld(this.jornada, 'Viernes');
       console.log('VIERNES JORNADA: ', this.jornadaV, this.jornada);
     } else this.jornadaV = 0;
 
-    if (
-      this.descriForm.get('sabadoSelect').value === '' ||
-      this.descriForm.get('sabadoSelect').value === undefined
-    ) {
+    if (this.descriForm.get('sabadoSelect').value === '' || this.descriForm.get('sabadoSelect').value === undefined) {
       this.revisarSabado(this.sabadoDesde, this.sabadoHasta);
       this.jornadaS = this.retornarJornadaOld(this.jornada, 'Sabado');
       console.log('SABADO JORNADA: ', this.jornadaS, this.jornada);
     } else this.jornadaS = 0;
 
-    if (
-      this.descriForm.get('domingoSelect').value === '' ||
-      this.descriForm.get('domingoSelect').value === undefined
-    ) {
+    if (this.descriForm.get('domingoSelect').value === '' || this.descriForm.get('domingoSelect').value === undefined) {
       this.revisarDomingo(this.domingoDesde, this.domingoHasta);
       this.jornadaD = this.retornarJornadaOld(this.jornada, 'Domingo');
       console.log('DOMINGO JORNADA: ', this.jornadaD, this.jornada);
@@ -3564,14 +3071,12 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.requiredCompletarDiurna = this.requiredCompletarDiurna + jornada;
         this.ajusteDias = this.ajusteDias + 1;
       } else if (jornada === 4) {
-        this.requiredCompletarDiurna =
-          this.requiredCompletarDiurna + jornada - 8;
+        this.requiredCompletarDiurna = this.requiredCompletarDiurna + jornada - 8;
       } else if (jornada === 7) {
         this.requiredCompletarMixta = this.requiredCompletarMixta + jornada;
         this.ajusteDias = this.ajusteDias + 1;
       } else if (jornada === 6) {
-        this.requiredCompletarNocturna =
-          this.requiredCompletarNocturna + jornada;
+        this.requiredCompletarNocturna = this.requiredCompletarNocturna + jornada;
         this.ajusteDias = this.ajusteDias + 1;
       }
     }
@@ -3596,14 +3101,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     if (obs === 'incapacidadpub' && this.incapacidadpub > 3) {
       obs = 'incapacidadpubmax';
     }
-    if (
-      obs === '' ||
-      obs === undefined ||
-      obs === 'conpermiso' ||
-      obs === 'feriado' ||
-      obs === 'vacacion' ||
-      obs === 'incapacidadpub'
-    ) {
+    if (obs === '' || obs === undefined || obs === 'conpermiso' || obs === 'feriado' || obs === 'vacacion' || obs === 'incapacidadpub') {
       if (jornada === 'Diurna' && dia === 'Sabado') {
         jor = this.hrsJornadaDiurna - 4;
       } else if (jornada === 'Diurna' && dia !== 'Sabado') {
@@ -3681,9 +3179,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursLunes = this.jornadaD;
         } else this.hoursLunes = 0;
-      } else if (
-        this.descriForm.get('lunesSelect').value === 'incapacidadpub'
-      ) {
+      } else if (this.descriForm.get('lunesSelect').value === 'incapacidadpub') {
         if (this.jornadaM !== 0) {
           this.hoursLunes = this.jornadaM;
         } else if (this.jornadaMi !== 0) {
@@ -3700,19 +3196,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.incapacidadpub > 3) {
           this.hoursLunes = 0;
         }
-      } else if (
-        this.descriForm.get('lunesSelect').value === 'incapacidadpubparcial'
-      ) {
+      } else if (this.descriForm.get('lunesSelect').value === 'incapacidadpubparcial') {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursLunes = 0;
-      } else if (
-        this.descriForm.get('lunesSelect').value === 'incapacidadpriv'
-      ) {
+      } else if (this.descriForm.get('lunesSelect').value === 'incapacidadpriv') {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
-      } else if (
-        this.descriForm.get('lunesSelect').value === 'incapacidadcancelada'
-      ) {
+      } else if (this.descriForm.get('lunesSelect').value === 'incapacidadcancelada') {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursLunes = 0;
       } else if (this.descriForm.get('lunesSelect').value === 'septimo') {
@@ -3744,9 +3234,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursLunes = this.jornadaD;
         } else this.hoursLunes = 0;
-      } else if (
-        this.descriForm.get('lunesSelect').value === 'vacacioncancelada'
-      ) {
+      } else if (this.descriForm.get('lunesSelect').value === 'vacacioncancelada') {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursLunes = 0;
       } else if (this.descriForm.get('lunesSelect').value === 'falta') {
@@ -3784,11 +3272,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         'XDL',
         'XML',
         'XNL',
-        this.retornarJornada(
-          this.jornada,
-          'Lunes',
-          this.descriForm.get('lunesSelect').value
-        ),
+        this.retornarJornada(this.jornada, 'Lunes', this.descriForm.get('lunesSelect').value),
         'jornadaL',
         this.hoursLunes,
         this.descriForm.get('lunesSelect').value
@@ -3853,9 +3337,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursMartes = this.jornadaD;
         } else this.hoursMartes = 0;
-      } else if (
-        this.descriForm.get('martesSelect').value === 'incapacidadpub'
-      ) {
+      } else if (this.descriForm.get('martesSelect').value === 'incapacidadpub') {
         if (this.jornadaL !== 0) {
           this.hoursMartes = this.jornadaL;
         } else if (this.jornadaMi !== 0) {
@@ -3872,19 +3354,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.incapacidadpub > 3) {
           this.hoursMartes = 0;
         }
-      } else if (
-        this.descriForm.get('martesSelect').value === 'incapacidadpubparcial'
-      ) {
+      } else if (this.descriForm.get('martesSelect').value === 'incapacidadpubparcial') {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursMartes = 0;
-      } else if (
-        this.descriForm.get('martesSelect').value === 'incapacidadpriv'
-      ) {
+      } else if (this.descriForm.get('martesSelect').value === 'incapacidadpriv') {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
-      } else if (
-        this.descriForm.get('martesSelect').value === 'incapacidadcancelada'
-      ) {
+      } else if (this.descriForm.get('martesSelect').value === 'incapacidadcancelada') {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursMartes = 0;
       } else if (this.descriForm.get('martesSelect').value === 'septimo') {
@@ -3916,9 +3392,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursMartes = this.jornadaD;
         } else this.hoursMartes = 0;
-      } else if (
-        this.descriForm.get('martesSelect').value === 'vacacioncancelada'
-      ) {
+      } else if (this.descriForm.get('martesSelect').value === 'vacacioncancelada') {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursMartes = 0;
       } else if (this.descriForm.get('martesSelect').value === 'falta') {
@@ -3956,11 +3430,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         'XDM',
         'XMM',
         'XNM',
-        this.retornarJornada(
-          this.jornada,
-          'Martes',
-          this.descriForm.get('martesSelect').value
-        ),
+        this.retornarJornada(this.jornada, 'Martes', this.descriForm.get('martesSelect').value),
         'jornadaM',
         this.hoursMartes,
         this.descriForm.get('martesSelect').value
@@ -4025,9 +3495,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursMiercoles = this.jornadaD;
         } else this.hoursMiercoles = 0;
-      } else if (
-        this.descriForm.get('miercolesSelect').value === 'incapacidadpub'
-      ) {
+      } else if (this.descriForm.get('miercolesSelect').value === 'incapacidadpub') {
         if (this.jornadaM !== 0) {
           this.hoursMiercoles = this.jornadaM;
         } else if (this.jornadaL !== 0) {
@@ -4044,19 +3512,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.incapacidadpub > 3) {
           this.hoursMiercoles = 0;
         }
-      } else if (
-        this.descriForm.get('miercolesSelect').value === 'incapacidadpubparcial'
-      ) {
+      } else if (this.descriForm.get('miercolesSelect').value === 'incapacidadpubparcial') {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursMiercoles = 0;
-      } else if (
-        this.descriForm.get('miercolesSelect').value === 'incapacidadpriv'
-      ) {
+      } else if (this.descriForm.get('miercolesSelect').value === 'incapacidadpriv') {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
-      } else if (
-        this.descriForm.get('miercolesSelect').value === 'incapacidadcancelada'
-      ) {
+      } else if (this.descriForm.get('miercolesSelect').value === 'incapacidadcancelada') {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursMiercoles = 0;
       } else if (this.descriForm.get('miercolesSelect').value === 'septimo') {
@@ -4088,9 +3550,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursMiercoles = this.jornadaD;
         } else this.hoursMiercoles = 0;
-      } else if (
-        this.descriForm.get('miercolesSelect').value === 'vacacioncancelada'
-      ) {
+      } else if (this.descriForm.get('miercolesSelect').value === 'vacacioncancelada') {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursMiercoles = 0;
       } else if (this.descriForm.get('miercolesSelect').value === 'falta') {
@@ -4099,9 +3559,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.septimo = 0;
         }
         this.hoursMiercoles = 0;
-      } else if (
-        this.descriForm.get('miercolesSelect').value === 'suspension'
-      ) {
+      } else if (this.descriForm.get('miercolesSelect').value === 'suspension') {
         this.suspension = this.suspension + 1;
         if (this.suspension >= 1 && this.septimo >= 1) {
           this.septimo = 0;
@@ -4130,11 +3588,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         'XDMi',
         'XMMi',
         'XNMi',
-        this.retornarJornada(
-          this.jornada,
-          'Miercoles',
-          this.descriForm.get('miercolesSelect').value
-        ),
+        this.retornarJornada(this.jornada, 'Miercoles', this.descriForm.get('miercolesSelect').value),
         'jornadaMi',
         this.hoursMiercoles,
         this.descriForm.get('miercolesSelect').value
@@ -4199,9 +3653,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursJueves = this.jornadaD;
         } else this.hoursJueves = 0;
-      } else if (
-        this.descriForm.get('juevesSelect').value === 'incapacidadpub'
-      ) {
+      } else if (this.descriForm.get('juevesSelect').value === 'incapacidadpub') {
         if (this.jornadaMi !== 0) {
           this.hoursJueves = this.jornadaMi;
         } else if (this.jornadaM !== 0) {
@@ -4218,19 +3670,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.incapacidadpub > 3) {
           this.hoursJueves = 0;
         }
-      } else if (
-        this.descriForm.get('juevesSelect').value === 'incapacidadpubparcial'
-      ) {
+      } else if (this.descriForm.get('juevesSelect').value === 'incapacidadpubparcial') {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursJueves = 0;
-      } else if (
-        this.descriForm.get('juevesSelect').value === 'incapacidadpriv'
-      ) {
+      } else if (this.descriForm.get('juevesSelect').value === 'incapacidadpriv') {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
-      } else if (
-        this.descriForm.get('juevesSelect').value === 'incapacidadcancelada'
-      ) {
+      } else if (this.descriForm.get('juevesSelect').value === 'incapacidadcancelada') {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursJueves = 0;
       } else if (this.descriForm.get('juevesSelect').value === 'septimo') {
@@ -4262,9 +3708,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursJueves = this.jornadaD;
         } else this.hoursJueves = 0;
-      } else if (
-        this.descriForm.get('juevesSelect').value === 'vacacioncancelada'
-      ) {
+      } else if (this.descriForm.get('juevesSelect').value === 'vacacioncancelada') {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursJueves = 0;
       } else if (this.descriForm.get('juevesSelect').value === 'falta') {
@@ -4302,11 +3746,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         'XDJ',
         'XMJ',
         'XNJ',
-        this.retornarJornada(
-          this.jornada,
-          'Jueves',
-          this.descriForm.get('juevesSelect').value
-        ),
+        this.retornarJornada(this.jornada, 'Jueves', this.descriForm.get('juevesSelect').value),
         'jornadaJ',
         this.hoursJueves,
         this.descriForm.get('juevesSelect').value
@@ -4372,9 +3812,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursViernes = this.jornadaD;
         } else this.hoursViernes = 0;
-      } else if (
-        this.descriForm.get('viernesSelect').value === 'incapacidadpub'
-      ) {
+      } else if (this.descriForm.get('viernesSelect').value === 'incapacidadpub') {
         if (this.jornadaJ !== 0) {
           this.hoursViernes = this.jornadaJ;
         } else if (this.jornadaMi !== 0) {
@@ -4391,19 +3829,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.incapacidadpub > 3) {
           this.hoursViernes = 0;
         }
-      } else if (
-        this.descriForm.get('viernesSelect').value === 'incapacidadpubparcial'
-      ) {
+      } else if (this.descriForm.get('viernesSelect').value === 'incapacidadpubparcial') {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursViernes = 0;
-      } else if (
-        this.descriForm.get('viernesSelect').value === 'incapacidadpriv'
-      ) {
+      } else if (this.descriForm.get('viernesSelect').value === 'incapacidadpriv') {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
-      } else if (
-        this.descriForm.get('viernesSelect').value === 'incapacidadcancelada'
-      ) {
+      } else if (this.descriForm.get('viernesSelect').value === 'incapacidadcancelada') {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursViernes = 0;
       } else if (this.descriForm.get('viernesSelect').value === 'septimo') {
@@ -4435,9 +3867,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaD !== 0) {
           this.hoursViernes = this.jornadaD;
         } else this.hoursViernes = 0;
-      } else if (
-        this.descriForm.get('viernesSelect').value === 'vacacioncancelada'
-      ) {
+      } else if (this.descriForm.get('viernesSelect').value === 'vacacioncancelada') {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursViernes = 0;
       } else if (this.descriForm.get('viernesSelect').value === 'falta') {
@@ -4475,11 +3905,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         'XDV',
         'XMV',
         'XNV',
-        this.retornarJornada(
-          this.jornada,
-          'Viernes',
-          this.descriForm.get('viernesSelect').value
-        ),
+        this.retornarJornada(this.jornada, 'Viernes', this.descriForm.get('viernesSelect').value),
         'jornadaV',
         this.hoursViernes,
         this.descriForm.get('viernesSelect').value
@@ -4508,14 +3934,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.dia = 'Sabado';
         if (this.hoursSabado >= 4) {
           if (
-            (entrada >= this.diurnaI &&
-              entrada < this.diurnaO &&
-              salida <= this.diurnaO &&
-              salida > this.diurnaI &&
-              salida > entrada) ||
-            (entrada >= this.diurnaI &&
-              entrada < this.mixtaIa &&
-              (salida > this.nocturnaI || salida <= this.reset))
+            (entrada >= this.diurnaI && entrada < this.diurnaO && salida <= this.diurnaO && salida > this.diurnaI && salida > entrada) ||
+            (entrada >= this.diurnaI && entrada < this.mixtaIa && (salida > this.nocturnaI || salida <= this.reset))
           ) {
             this.extrasSabados = this.hoursSabado - 4;
             this.horas(entrada, salida, 4, this.dia);
@@ -4571,9 +3991,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.hoursSabado / 8 === 1) {
           this.hoursSabado = 4;
         }
-      } else if (
-        this.descriForm.get('sabadoSelect').value === 'incapacidadpub'
-      ) {
+      } else if (this.descriForm.get('sabadoSelect').value === 'incapacidadpub') {
         if (this.jornadaV !== 0) {
           this.hoursSabado = this.jornadaV;
         } else if (this.jornadaJ !== 0) {
@@ -4593,20 +4011,14 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.incapacidadpub > 3) {
           this.hoursSabado = 0;
         }
-      } else if (
-        this.descriForm.get('sabadoSelect').value === 'incapacidadpubparcial'
-      ) {
+      } else if (this.descriForm.get('sabadoSelect').value === 'incapacidadpubparcial') {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursSabado = 0;
-      } else if (
-        this.descriForm.get('sabadoSelect').value === 'incapacidadpriv'
-      ) {
+      } else if (this.descriForm.get('sabadoSelect').value === 'incapacidadpriv') {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incapacidadReal = 1;
         this.incPriv = true;
-      } else if (
-        this.descriForm.get('sabadoSelect').value === 'incapacidadcancelada'
-      ) {
+      } else if (this.descriForm.get('sabadoSelect').value === 'incapacidadcancelada') {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursSabado = 0;
       } else if (this.descriForm.get('sabadoSelect').value === 'septimo') {
@@ -4641,9 +4053,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.hoursSabado / 8 === 1) {
           this.hoursSabado = 4;
         }
-      } else if (
-        this.descriForm.get('sabadoSelect').value === 'vacacioncancelada'
-      ) {
+      } else if (this.descriForm.get('sabadoSelect').value === 'vacacioncancelada') {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursSabado = 0;
       } else if (this.descriForm.get('sabadoSelect').value === 'falta') {
@@ -4681,11 +4091,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         'XDS',
         'XMS',
         'XNS',
-        this.retornarJornada(
-          this.jornada,
-          'Sabado',
-          this.descriForm.get('sabadoSelect').value
-        ),
+        this.retornarJornada(this.jornada, 'Sabado', this.descriForm.get('sabadoSelect').value),
         'jornadaS',
         this.hoursSabado,
         this.descriForm.get('sabadoSelect').value
@@ -4750,9 +4156,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaL !== 0) {
           this.hoursDomingo = this.jornadaL;
         } else this.hoursDomingo = 0;
-      } else if (
-        this.descriForm.get('domingoSelect').value === 'incapacidadpub'
-      ) {
+      } else if (this.descriForm.get('domingoSelect').value === 'incapacidadpub') {
         if (this.jornadaS !== 0) {
           this.hoursDomingo = this.jornadaS;
         } else if (this.jornadaV !== 0) {
@@ -4769,19 +4173,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         if (this.incapacidadpub > 3) {
           this.hoursDomingo = 0;
         }
-      } else if (
-        this.descriForm.get('domingoSelect').value === 'incapacidadpubparcial'
-      ) {
+      } else if (this.descriForm.get('domingoSelect').value === 'incapacidadpubparcial') {
         this.incapacidadpubparcial = this.incapacidadpubparcial + 1;
         this.hoursDomingo = 0;
-      } else if (
-        this.descriForm.get('domingoSelect').value === 'incapacidadpriv'
-      ) {
+      } else if (this.descriForm.get('domingoSelect').value === 'incapacidadpriv') {
         this.incapacidadpriv = this.incapacidadpriv + 1;
         this.incPriv = true;
-      } else if (
-        this.descriForm.get('domingoSelect').value === 'incapacidadcancelada'
-      ) {
+      } else if (this.descriForm.get('domingoSelect').value === 'incapacidadcancelada') {
         this.incapacidadcanc = this.incapacidadcanc + 1;
         this.hoursDomingo = 0;
       } else if (this.descriForm.get('domingoSelect').value === 'septimo') {
@@ -4814,9 +4212,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         } else if (this.jornadaL !== 0) {
           this.hoursDomingo = this.jornadaL;
         } else this.hoursDomingo = 0;
-      } else if (
-        this.descriForm.get('domingoSelect').value === 'vacacioncancelada'
-      ) {
+      } else if (this.descriForm.get('domingoSelect').value === 'vacacioncancelada') {
         this.vacacioncanc = this.vacacioncanc + 1;
         this.hoursDomingo = 0;
       } else if (this.descriForm.get('domingoSelect').value === 'falta') {
@@ -4854,11 +4250,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         'XDD',
         'XMD',
         'XND',
-        this.retornarJornada(
-          this.jornada,
-          'Domingo',
-          this.descriForm.get('domingoSelect').value
-        ),
+        this.retornarJornada(this.jornada, 'Domingo', this.descriForm.get('domingoSelect').value),
         'jornadaD',
         this.hoursDomingo,
         this.descriForm.get('domingoSelect').value
@@ -4872,19 +4264,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.incPriv = false;
   }
   promedio() {
-    console.log(
-      this.totalTrabNormales,
-      this.totalTrabRealesCompletas,
-      this.sabadoHorasNormales,
-      this.totalTrabReales
-    );
-    console.log(
-      this.totalTrabNormales,
-      this.totalTrabReales,
-      this.totalExtrasDiurnas,
-      this.totalExtrasMixtas,
-      this.totalExtrasNocturnas
-    );
+    console.log(this.totalTrabNormales, this.totalTrabRealesCompletas, this.sabadoHorasNormales, this.totalTrabReales);
+    console.log(this.totalTrabNormales, this.totalTrabReales, this.totalExtrasDiurnas, this.totalExtrasMixtas, this.totalExtrasNocturnas);
     var normales: number = 0;
     if (this.diaDiurno >= this.diaMixto) {
       if (this.diaDiurno >= this.diaNocturno) normales = 44;
@@ -4948,35 +4329,16 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.revisarSabado(this.sabadoDesde, this.sabadoHasta);
     this.revisarDomingo(this.domingoDesde, this.domingoHasta);
 
-    console.log(
-      this.conpermiso,
-      this.totalExtrasDiurnas,
-      this.totalExtrasMixtas,
-      this.totalExtrasNocturnas
-    );
-    var sumExtras =
-      this.totalExtrasDiurnas +
-      this.totalExtrasMixtas +
-      this.totalExtrasNocturnas;
+    console.log(this.conpermiso, this.totalExtrasDiurnas, this.totalExtrasMixtas, this.totalExtrasNocturnas);
+    var sumExtras = this.totalExtrasDiurnas + this.totalExtrasMixtas + this.totalExtrasNocturnas;
     if (this.switchValuePP === true) {
       if (this.totalTrabNormales + sumExtras >= 48) {
         this.totalTrabNormales = 48;
         this.totalExtrasDiurnas = 4;
         this.totalExtrasMixtas = 0;
         this.totalExtrasNocturnas = 0;
-      } else if (
-        this.totalTrabNormales < 44 &&
-        sumExtras > 0 &&
-        this.totalTrabNormales + sumExtras < 44 &&
-        this.ajusteDias > 0
-      ) {
-        console.log(
-          this.ajusteDias,
-          this.totalTrabNormales,
-          this.totalExtrasDiurnas,
-          this.totalTrabReales,
-          sumExtras
-        );
+      } else if (this.totalTrabNormales < 44 && sumExtras > 0 && this.totalTrabNormales + sumExtras < 44 && this.ajusteDias > 0) {
+        console.log(this.ajusteDias, this.totalTrabNormales, this.totalExtrasDiurnas, this.totalTrabReales, sumExtras);
         this.septimo = 0;
         var temphoras = this.ajusteDias * 8;
         var temp = sumExtras - temphoras;
@@ -4990,13 +4352,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.totalExtrasNocturnas = 0;
         }
       } else {
-        console.log(
-          this.ajusteDias,
-          this.totalTrabNormales,
-          this.totalExtrasDiurnas,
-          this.totalTrabReales,
-          sumExtras
-        );
+        console.log(this.ajusteDias, this.totalTrabNormales, this.totalExtrasDiurnas, this.totalTrabReales, sumExtras);
         console.log('muy bajo');
         this.totalExtrasDiurnas = 4;
         this.totalExtrasMixtas = 0;
@@ -5009,27 +4365,17 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       } else if (
         (this.totalTrabNormales < 44 && sumExtras > 0) ||
         this.totalTrabNormales + sumExtras < 44 ||
-        (this.totalTrabNormales < 44 &&
-          sumExtras > 0 &&
-          (this.conpermiso > 0 || this.incapacidadpriv > 0)) ||
-        (this.totalTrabNormales < 44 &&
-          sumExtras > 0 &&
-          this.conpermiso > 0 &&
-          this.incapacidadpriv > 0)
+        (this.totalTrabNormales < 44 && sumExtras > 0 && (this.conpermiso > 0 || this.incapacidadpriv > 0)) ||
+        (this.totalTrabNormales < 44 && sumExtras > 0 && this.conpermiso > 0 && this.incapacidadpriv > 0)
       ) {
         if (this.incapacidadpriv > 0) {
-          document
-            .getElementById('btnCalcular')
-            .setAttribute('disabled', 'true');
+          document.getElementById('btnCalcular').setAttribute('disabled', 'true');
           this.isVisibleDivSecundario = true;
           this.extraFormSecundario.get('jornadaSelect').setValue('');
           this.extraFormSecundario.get('jornadaSelect').enable();
           this.btnEnable = false;
         } else {
-          console.log(
-            this.requiredCompletarIncapacidadPrivada,
-            this.incapacidadpriv
-          );
+          console.log(this.requiredCompletarIncapacidadPrivada, this.incapacidadpriv);
           this.completar();
           this.tarjetas(
             undefined,
@@ -5049,11 +4395,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         }
       }
     }
-    if (
-      this.isVisibleInvalidas === false &&
-      this.isVisibleValidasIguales === false &&
-      this.isVisibleLibres === false
-    ) {
+    if (this.isVisibleInvalidas === false && this.isVisibleValidasIguales === false && this.isVisibleLibres === false) {
       if (this.btnEnable === true) {
         document.getElementById('btnCalcular').removeAttribute('disabled');
       }
@@ -5063,15 +4405,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.horasForm.disable();
       this.descriForm.disable();
       this.isDisabledPP = true;
-      document
-        .getElementById('btnAutofillDiurna')
-        .setAttribute('disabled', 'true');
-      document
-        .getElementById('btnAutofillNocturna')
-        .setAttribute('disabled', 'true');
-      document
-        .getElementById('btnAutofillMixta')
-        .setAttribute('disabled', 'true');
+      document.getElementById('btnAutofillDiurna').setAttribute('disabled', 'true');
+      document.getElementById('btnAutofillNocturna').setAttribute('disabled', 'true');
+      document.getElementById('btnAutofillMixta').setAttribute('disabled', 'true');
     }
   }
   completar() {
@@ -5081,10 +4417,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       autorizado = this.requiredCompletarAutorizado,
       autorizadoReal = this.requiredCompletarAutorizadoReal,
       privada = this.requiredCompletarIncapacidadPrivada,
-      sumExtras =
-        this.totalExtrasDiurnas +
-        this.totalExtrasMixtas +
-        this.totalExtrasNocturnas,
+      sumExtras = this.totalExtrasDiurnas + this.totalExtrasMixtas + this.totalExtrasNocturnas,
       sumRequired =
         this.requiredCompletarDiurna +
         this.requiredCompletarMixta +
@@ -5101,12 +4434,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.requiredCompletarIncapacidadPrivada,
       this.requiredCompletarAutorizado
     );
-    console.log(
-      'extras',
-      this.totalExtrasDiurnas,
-      this.totalExtrasMixtas,
-      this.totalExtrasNocturnas
-    );
+    console.log('extras', this.totalExtrasDiurnas, this.totalExtrasMixtas, this.totalExtrasNocturnas);
     console.log(sumExtras, sumRequired);
     if (sumExtras >= sumRequired && sumExtras !== 0 && sumRequired !== 0) {
       if (this.requiredCompletarDiurna > this.totalExtrasDiurnas) {
@@ -5127,8 +4455,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.totalExtrasMixtas = this.totalExtrasMixtas - faltante;
         }
       } else {
-        this.totalExtrasDiurnas =
-          this.totalExtrasDiurnas - this.requiredCompletarDiurna;
+        this.totalExtrasDiurnas = this.totalExtrasDiurnas - this.requiredCompletarDiurna;
       }
       if (this.requiredCompletarMixta > this.totalExtrasMixtas) {
         faltante = this.requiredCompletarMixta - this.totalExtrasMixtas;
@@ -5148,8 +4475,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.totalExtrasDiurnas = this.totalExtrasDiurnas - faltante;
         }
       } else {
-        this.totalExtrasMixtas =
-          this.totalExtrasMixtas - this.requiredCompletarMixta;
+        this.totalExtrasMixtas = this.totalExtrasMixtas - this.requiredCompletarMixta;
       }
       if (this.requiredCompletarNocturna > this.totalExtrasNocturnas) {
         faltante = this.requiredCompletarNocturna - this.totalExtrasNocturnas;
@@ -5169,12 +4495,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.totalExtrasMixtas = this.totalExtrasMixtas - faltante;
         }
       } else {
-        this.totalExtrasNocturnas =
-          this.totalExtrasNocturnas - this.requiredCompletarNocturna;
+        this.totalExtrasNocturnas = this.totalExtrasNocturnas - this.requiredCompletarNocturna;
       }
       if (this.requiredCompletarIncapacidadPrivada > this.totalExtrasDiurnas) {
-        faltante =
-          this.requiredCompletarIncapacidadPrivada - this.totalExtrasDiurnas;
+        faltante = this.requiredCompletarIncapacidadPrivada - this.totalExtrasDiurnas;
         this.totalExtrasDiurnas = 0;
         this.requiredCompletarIncapacidadPrivada = 0;
         if (faltante > this.totalExtrasMixtas) {
@@ -5192,8 +4516,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.totalExtrasMixtas = this.totalExtrasMixtas - faltante;
         }
       } else {
-        this.totalExtrasDiurnas =
-          this.totalExtrasDiurnas - this.requiredCompletarIncapacidadPrivada;
+        this.totalExtrasDiurnas = this.totalExtrasDiurnas - this.requiredCompletarIncapacidadPrivada;
         this.requiredCompletarIncapacidadPrivada = 0;
       }
       if (this.requiredCompletarAutorizado > this.totalExtrasDiurnas) {
@@ -5216,8 +4539,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           this.totalExtrasMixtas = this.totalExtrasMixtas - faltante;
         }
       } else {
-        this.totalExtrasDiurnas =
-          this.totalExtrasDiurnas - this.requiredCompletarAutorizado;
+        this.totalExtrasDiurnas = this.totalExtrasDiurnas - this.requiredCompletarAutorizado;
         this.requiredCompletarAutorizado = 0;
         this.requiredCompletarAutorizadoReal = 0;
       }
@@ -5232,34 +4554,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         autorizadoReal,
         privada
       );
-      console.log(
-        'extras',
-        this.totalExtrasDiurnas,
-        this.totalExtrasMixtas,
-        this.totalExtrasNocturnas
-      );
-      if (
-        this.requiredCompletarAutorizado === 0 &&
-        this.requiredCompletarAutorizadoReal === 0 &&
-        this.requiredCompletarIncapacidadPrivada === 0
-      ) {
+      console.log('extras', this.totalExtrasDiurnas, this.totalExtrasMixtas, this.totalExtrasNocturnas);
+      if (this.requiredCompletarAutorizado === 0 && this.requiredCompletarAutorizadoReal === 0 && this.requiredCompletarIncapacidadPrivada === 0) {
         var ajuste = this.ajusteDias * 8;
-        console.log(
-          this.ajusteDias,
-          ajuste,
-          autorizado,
-          privada,
-          autorizadoReal,
-          this.totalTrabNormales,
-          this.incapacidadReal,
-          this.incapacidadpriv
-        );
-        this.totalTrabNormales =
-          this.totalTrabNormales +
-          ajuste +
-          autorizado +
-          autorizadoReal +
-          this.incapacidadpriv * 8;
+        console.log(this.ajusteDias, ajuste, autorizado, privada, autorizadoReal, this.totalTrabNormales, this.incapacidadReal, this.incapacidadpriv);
+        this.totalTrabNormales = this.totalTrabNormales + ajuste + autorizado + autorizadoReal + this.incapacidadpriv * 8;
       }
     }
     if (sumRequired > sumExtras) {
@@ -5272,12 +4571,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.requiredCompletarIncapacidadPrivada,
         this.requiredCompletarAutorizado
       );
-      console.log(
-        'extras',
-        this.totalExtrasDiurnas,
-        this.totalExtrasMixtas,
-        this.totalExtrasNocturnas
-      );
+      console.log('extras', this.totalExtrasDiurnas, this.totalExtrasMixtas, this.totalExtrasNocturnas);
       this.promedio();
     }
   }
@@ -5310,15 +4604,10 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.incapacidadpendiente = 0;
       this.valorIncapacidadPub = 0;
     } else {
-      if (
-        this.descriForm.get('sabadoSelect').value === 'incapacidadpubparcial' &&
-        this.incapacidadpendiente > 0
-      ) {
+      if (this.descriForm.get('sabadoSelect').value === 'incapacidadpubparcial' && this.incapacidadpendiente > 0) {
         this.septimo = 0;
       }
-      this.valorIncapacidadPub = this.round2Decimal(
-        (valorTotal / dias) * this.incapacidadpubparcial
-      );
+      this.valorIncapacidadPub = this.round2Decimal((valorTotal / dias) * this.incapacidadpubparcial);
       var temp = this.resumenForm.get('incapacidad').value;
       this.valorIncapacidadPub = this.valorIncapacidadPub + temp;
       console.log(temp, this.valorIncapacidadPub);
@@ -5342,33 +4631,23 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       document.getElementById('btnCalcular').setAttribute('disabled', 'true');
       this.extraForm.get('incpub').enable();
     } else {
-      this.valorIncapacidadPub =
-        this.incapacidadpub * 8 * this.salarioMinimoPerHour;
+      this.valorIncapacidadPub = this.incapacidadpub * 8 * this.salarioMinimoPerHour;
       this.valorIncapacidadPub = this.truncator(this.valorIncapacidadPub);
       this.resumenForm.get('incapacidad').setValue(this.valorIncapacidadPub);
     }
   }
   incapacidadPub() {
     if (this.diferencia >= 8) {
-      this.valorIncapacidadPub = this.round2Decimal(
-        this.extraForm.get('incpub').value
-      );
+      this.valorIncapacidadPub = this.round2Decimal(this.extraForm.get('incpub').value);
       for (let i = 0; i < this.listNomina.length; i++) {
         if (this.listNomina[i].id === this.idEmpleado) {
-          this.listNominaFinal[i].ingresoBruto = this.round2Decimal(
-            this.listNominaFinal[i].ingresoBruto - this.valorIncapacidadPub
-          );
+          this.listNominaFinal[i].ingresoBruto = this.round2Decimal(this.listNominaFinal[i].ingresoBruto - this.valorIncapacidadPub);
           this.listNominaFinal[i].incapacidad = this.valorIncapacidadPub;
           this.totalAPagar = this.totalAPagar - this.listNomina[i].totalPagar;
-          this.listNominaFinal[i].totalPagar = this.round2Decimal(
-            this.listNominaFinal[i].ingresos -
-              this.listNominaFinal[i].deducciones
-          );
+          this.listNominaFinal[i].totalPagar = this.round2Decimal(this.listNominaFinal[i].ingresos - this.listNominaFinal[i].deducciones);
           this.totalAPagar = this.totalAPagar + this.listNomina[i].totalPagar;
           console.log(this.totalAPagar);
-          this.sueldoString = this.numberWithCommas(
-            this.listNomina[i].ingresos
-          );
+          this.sueldoString = this.numberWithCommas(this.listNomina[i].ingresos);
         }
       }
       console.log(this.valorIncapacidadPub);
@@ -5377,9 +4656,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
       this.isVisibleDivPrimario = false;
       this.extraForm.reset();
     } else {
-      this.valorIncapacidadPub = this.truncator(
-        this.extraForm.get('incpub').value
-      );
+      this.valorIncapacidadPub = this.truncator(this.extraForm.get('incpub').value);
       this.resumenForm.get('incapacidad').setValue(this.valorIncapacidadPub);
       if (this.incapacidadpriv <= 0) {
         document.getElementById('btnCalcular').removeAttribute('disabled');
@@ -5413,18 +4690,9 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.extraFormSecundario.get('jornadaSelect').value,
         this.listIncapacidadPrivada[i],
         completarPriv,
-        this.retornarJornada(
-          this.extraFormSecundario.get('jornadaSelect').value,
-          this.listIncapacidadPrivada[i],
-          'incapacidadpriv'
-        )
+        this.retornarJornada(this.extraFormSecundario.get('jornadaSelect').value, this.listIncapacidadPrivada[i], 'incapacidadpriv')
       );
-      console.log(
-        'YA PASO',
-        this.totalExtrasDiurnas,
-        this.totalExtrasMixtas,
-        this.totalExtrasNocturnas
-      );
+      console.log('YA PASO', this.totalExtrasDiurnas, this.totalExtrasMixtas, this.totalExtrasNocturnas);
 
       this.tarjetas(
         moment.invalid(),
@@ -5456,15 +4724,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     var permanente: boolean;
     var idTemporal: number = this.idEmpleado;
     //calcula valor hora normal
-    this.valorNormal = this.round2Decimal(
-      this.totalTrabNormales * this.salarioMinimoPerHour
-    );
+    this.valorNormal = this.round2Decimal(this.totalTrabNormales * this.salarioMinimoPerHour);
     this.resumenForm.get('hn').setValue(this.valorNormal);
     //calcula valor hora diurna
     roundRecargoDiurna = this.round2Decimal(this.recargo * 1.25);
-    this.valorHED = this.truncator(
-      this.totalExtrasDiurnas * roundRecargoDiurna
-    );
+    this.valorHED = this.truncator(this.totalExtrasDiurnas * roundRecargoDiurna);
     this.resumenForm.get('hed').setValue(this.valorHED);
     //calcula valor hora mixta
     roundRecargoMixta = this.round2Decimal(this.recargo * 1.5);
@@ -5472,29 +4736,19 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.resumenForm.get('hem').setValue(this.valorHEM);
     //calcula valor hora nocturna
     roundRecargoNocturna = this.round2Decimal(this.recargo * 1.25 * 1.75);
-    this.valorHEN = this.truncator(
-      this.totalExtrasNocturnas * roundRecargoNocturna
-    );
+    this.valorHEN = this.truncator(this.totalExtrasNocturnas * roundRecargoNocturna);
     this.resumenForm.get('hen').setValue(this.valorHEN);
     //valor ajuste positivo
-    this.ajustePositivo = this.round2Decimal(
-      this.resumenForm.get('ajuste').value
-    );
+    this.ajustePositivo = this.round2Decimal(this.resumenForm.get('ajuste').value);
     this.resumenForm.get('ajuste').disable();
     //calcula valor feriados
-    this.valorFeriado = this.truncator(
-      this.feriado * 8 * this.salarioMinimoPerHour
-    );
+    this.valorFeriado = this.truncator(this.feriado * 8 * this.salarioMinimoPerHour);
     this.resumenForm.get('feriado').setValue(this.valorFeriado);
     //calcula valor del septimo dia
-    this.valorSeptimo = this.truncator(
-      this.septimo * 8 * this.salarioMinimoPerHour
-    );
+    this.valorSeptimo = this.truncator(this.septimo * 8 * this.salarioMinimoPerHour);
     this.resumenForm.get('septimo').setValue(this.valorSeptimo);
     //calcula valor de vacaciones
-    this.valorVacacion = this.truncator(
-      this.vacacion * 8 * this.salarioMinimoPerHour
-    );
+    this.valorVacacion = this.truncator(this.vacacion * 8 * this.salarioMinimoPerHour);
     this.resumenForm.get('vacacion').setValue(this.valorVacacion);
     //sumatoria del salario
     this.sueldo =
@@ -5572,8 +4826,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         }
         this.listNomina[i].ingresos = this.sueldo;
         this.listNomina[i].deducciones = 0;
-        this.listNomina[i].totalPagar =
-          this.sueldo - this.listNomina[i].deducciones;
+        this.listNomina[i].totalPagar = this.sueldo - this.listNomina[i].deducciones;
         this.totalAPagar = this.totalAPagar + this.listNomina[i].totalPagar;
         this.listNominaFinal[i].recargo = this.recargo;
         this.listNominaFinal[i].horasNormales = this.totalTrabNormales;
@@ -5591,19 +4844,13 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.listNominaFinal[i].septimo = this.valorSeptimo;
         this.listNominaFinal[i].ingresos = this.sueldo;
         this.listNominaFinal[i].diasferiado = this.feriado;
-        this.listNominaFinal[i].diasincapacidad =
-          this.incapacidadpub +
-          this.incapacidadpubparcial +
-          this.incapacidadpriv +
-          this.incapacidadcanc;
-        this.listNominaFinal[i].diasvacacion =
-          this.vacacioncanc + this.vacacion;
+        this.listNominaFinal[i].diasincapacidad = this.incapacidadpub + this.incapacidadpubparcial + this.incapacidadpriv + this.incapacidadcanc;
+        this.listNominaFinal[i].diasvacacion = this.vacacioncanc + this.vacacion;
         this.listNominaFinal[i].diasautorizados = this.conpermiso;
         this.listNominaFinal[i].diasnoautorizados = this.falta;
         this.listNominaFinal[i].diassuspension = this.suspension;
         this.listNominaFinal[i].cantOI = this.cantOI;
-        this.listNominaFinal[i].totalObs =
-          this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
+        this.listNominaFinal[i].totalObs = this.listNominaFinal[i].cantOI + this.listNominaFinal[i].cantOD;
         if (this.switchValuePP === true) {
           permanente = false;
           this.setOfCheckedId.delete(this.idEmpleado);
@@ -5615,12 +4862,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         }
         this.permanente(idTemporal, permanente);
         this.idEmpleado = idTemporal;
-        console.log(
-          this.listNominaFinal[i].totalObs,
-          this.idEmpleado,
-          this.switchValuePP,
-          this.setOfCheckedId
-        );
+        console.log(this.listNominaFinal[i].totalObs, this.idEmpleado, this.switchValuePP, this.setOfCheckedId);
       }
     }
     document.getElementById('btnnext').removeAttribute('disabled');
@@ -5644,9 +4886,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         planillaID: data.planillaID,
       };
       console.log(empleado);
-      this.EmpleadosService.actualizarEmpleado(id, empleado).subscribe(
-        (data) => {}
-      );
+      this.EmpleadosService.actualizarEmpleado(id, empleado).subscribe((data) => {});
     });
   }
   numberWithCommas(x: number) {
@@ -5745,8 +4985,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.confirm({
       nzCentered: true,
       nzTitle: 'CONFIRMACIÓN',
-      nzContent:
-        '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Diurna?. Perderá los datos ingresados.</b>',
+      nzContent: '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Diurna?. Perderá los datos ingresados.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,
@@ -5762,8 +5001,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.confirm({
       nzCentered: true,
       nzTitle: 'CONFIRMACIÓN',
-      nzContent:
-        '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Nocturna?. Perderá los datos ingresados.</b>',
+      nzContent: '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Nocturna?. Perderá los datos ingresados.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,
@@ -5779,8 +5017,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.confirm({
       nzCentered: true,
       nzTitle: 'CONFIRMACIÓN',
-      nzContent:
-        '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Mixta?. Perderá los datos ingresados.</b>',
+      nzContent: '<b style="color: red;">¿Desea llenar el control de asistencia como una Jornada Mixta?. Perderá los datos ingresados.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,
@@ -5793,38 +5030,23 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     });
   }
 
-  horas(
-    entrada: moment.Moment,
-    salida: moment.Moment,
-    horas: number,
-    dia: string
-  ) {
+  horas(entrada: moment.Moment, salida: moment.Moment, horas: number, dia: string) {
     var a: number = 0,
       exd: number = 0,
       exn: number = 0,
       exm: number = 0,
       jornada: number = 0;
     //jornada diurna con extras diurnas
-    if (
-      entrada >= this.diurnaI &&
-      entrada < this.diurnaO &&
-      salida <= this.diurnaO &&
-      salida > this.diurnaI &&
-      salida > entrada
-    ) {
+    if (entrada >= this.diurnaI && entrada < this.diurnaO && salida <= this.diurnaO && salida > this.diurnaI && salida > entrada) {
       if (dia === 'Sabado' && horas >= 4) {
         this.totalExtrasDiurnas = this.totalExtrasDiurnas + this.extrasSabados;
-        console.log(
-          'jornada diurna ' + 'extras diurnas ' + this.extrasSabados,
-          horas
-        );
+        console.log('jornada diurna ' + 'extras diurnas ' + this.extrasSabados, horas);
         this.jornada = 'Diurna';
         this.extrasDiurna = this.extrasSabados;
         this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
         this.sabadoHorasNormales = 4;
         this.diaDiurno = this.diaDiurno + 1;
-        this.totalTrabRealesCompletas =
-          this.totalTrabRealesCompletas + this.hoursSabado;
+        this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + this.hoursSabado;
       } else if (dia === 'Sabado' && horas < 4) {
         this.requiredCompletarDiurna = this.requiredCompletarDiurna + 4 - horas;
         this.totalTrabReales = this.totalTrabReales + horas;
@@ -5832,8 +5054,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.jornada = 'Diurna';
         this.ajusteDias = this.ajusteDias + 1;
         this.diaDiurno = this.diaDiurno + 1;
-        this.totalTrabRealesCompletas =
-          this.totalTrabRealesCompletas + this.hoursSabado;
+        this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + this.hoursSabado;
       } else if (horas >= this.hrsJornadaDiurna) {
         exd = horas - this.hrsJornadaDiurna;
         this.totalExtrasDiurnas = this.totalExtrasDiurnas + exd;
@@ -5844,8 +5065,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.diaDiurno = this.diaDiurno + 1;
         this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
       } else if (horas < this.hrsJornadaDiurna) {
-        this.requiredCompletarDiurna =
-          this.requiredCompletarDiurna + this.hrsJornadaDiurna - horas;
+        this.requiredCompletarDiurna = this.requiredCompletarDiurna + this.hrsJornadaDiurna - horas;
         this.totalTrabReales = this.totalTrabReales + horas;
         console.log('jornada diurna no completo ' + horas);
         this.jornada = 'Diurna';
@@ -5854,11 +5074,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
       }
       //jornada nocturna extras nocturas
-    } else if (
-      entrada >= this.nocturnaIa &&
-      entrada < this.reset &&
-      (salida > this.nocturnaIa || salida <= this.mixtaIa)
-    ) {
+    } else if (entrada >= this.nocturnaIa && entrada < this.reset && (salida > this.nocturnaIa || salida <= this.mixtaIa)) {
       if (horas >= this.hrsJornadaNocturna) {
         exn = horas - this.hrsJornadaNocturna;
         this.totalExtrasNocturnas = this.totalExtrasNocturnas + exn;
@@ -5869,8 +5085,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.diaNocturno = this.diaNocturno + 1;
         this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
       } else if (horas < this.hrsJornadaNocturna) {
-        this.requiredCompletarNocturna =
-          this.requiredCompletarNocturna + this.hrsJornadaNocturna - horas;
+        this.requiredCompletarNocturna = this.requiredCompletarNocturna + this.hrsJornadaNocturna - horas;
         this.totalTrabReales = this.totalTrabReales + horas;
         console.log('jornada nocturna no completo ' + horas);
         this.jornada = 'Nocturna';
@@ -5879,11 +5094,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
         this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
       }
       //jornada diurna con extras mixtas y nocturnas
-    } else if (
-      entrada >= this.diurnaI &&
-      entrada < this.mixtaIa &&
-      (salida > this.nocturnaI || salida <= this.reset)
-    ) {
+    } else if (entrada >= this.diurnaI && entrada < this.mixtaIa && (salida > this.nocturnaI || salida <= this.reset)) {
       a = moment.duration(this.diurnaO.diff(entrada)).asHours();
       //dia sabado
       if (dia === 'Sabado') {
@@ -5893,45 +5104,27 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             exm = moment.duration(salida.diff(this.diurnaO)).asHours();
             this.totalExtrasDiurnas = this.totalExtrasDiurnas + exd;
             this.totalExtrasMixtas = this.totalExtrasMixtas + exm;
-            console.log(
-              'jornada diurna ' +
-                horas +
-                ' extras diurnas ' +
-                exd +
-                ' extras mixtas ' +
-                exm
-            );
+            console.log('jornada diurna ' + horas + ' extras diurnas ' + exd + ' extras mixtas ' + exm);
             this.jornada = 'Diurna';
             this.extrasDiurna = exd;
             this.extrasMixta = exm;
-            this.totalTrabNormales =
-              this.totalTrabNormales + this.hrsJornadaDiurna;
+            this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
             this.sabadoHorasNormales = 4;
             this.diaDiurno = this.diaDiurno + 1;
-            this.totalTrabRealesCompletas =
-              this.totalTrabRealesCompletas + this.hoursSabado;
+            this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + this.hoursSabado;
           } else if (salida > this.mixtaOc && salida <= this.reset) {
             exd = a - 4;
             exn = moment.duration(salida.diff(this.nocturnaI)).asHours();
             this.totalExtrasDiurnas = this.totalExtrasDiurnas + exd;
             this.totalExtrasNocturnas = this.totalExtrasNocturnas + exn;
-            console.log(
-              'jornada diurna ' +
-                horas +
-                ' extras diurnas ' +
-                exd +
-                ' extras nocturnas ' +
-                exn
-            );
+            console.log('jornada diurna ' + horas + ' extras diurnas ' + exd + ' extras nocturnas ' + exn);
             this.jornada = 'Diurna';
             this.extrasDiurna = exd;
             this.extrasNocturna = exn;
-            this.totalTrabNormales =
-              this.totalTrabNormales + this.hrsJornadaDiurna;
+            this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
             this.sabadoHorasNormales = 4;
             this.diaDiurno = this.diaDiurno + 1;
-            this.totalTrabRealesCompletas =
-              this.totalTrabRealesCompletas + horas;
+            this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
           }
         }
         //dia normal
@@ -5942,90 +5135,60 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
             exm = moment.duration(salida.diff(this.diurnaO)).asHours();
             this.totalExtrasDiurnas = this.totalExtrasDiurnas + exd;
             this.totalExtrasMixtas = this.totalExtrasMixtas + exm;
-            console.log(
-              'jornada diurna ' +
-                horas +
-                ' extras diurnas ' +
-                exd +
-                ' extras mixtas ' +
-                exm
-            );
+            console.log('jornada diurna ' + horas + ' extras diurnas ' + exd + ' extras mixtas ' + exm);
             this.jornada = 'Diurna';
             this.extrasDiurna = exd;
             this.extrasMixta = exm;
-            this.totalTrabNormales =
-              this.totalTrabNormales + this.hrsJornadaDiurna;
+            this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
             this.diaDiurno = this.diaDiurno + 1;
-            this.totalTrabRealesCompletas =
-              this.totalTrabRealesCompletas + horas;
+            this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
           } else if (salida > this.mixtaOc && salida <= this.reset) {
             exd = a - this.hrsJornadaDiurna;
             exn = moment.duration(salida.diff(this.nocturnaI)).asHours();
             this.totalExtrasDiurnas = this.totalExtrasDiurnas + exd;
             this.totalExtrasNocturnas = this.totalExtrasNocturnas + exn;
-            console.log(
-              'jornada diurna ' +
-                horas +
-                ' extras diurnas ' +
-                exd +
-                ' extras nocturnas ' +
-                exn
-            );
+            console.log('jornada diurna ' + horas + ' extras diurnas ' + exd + ' extras nocturnas ' + exn);
             this.jornada = 'Diurna';
             this.extrasDiurna = exd;
             this.extrasNocturna = exn;
-            this.totalTrabNormales =
-              this.totalTrabNormales + this.hrsJornadaDiurna;
+            this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
             this.diaDiurno = this.diaDiurno + 1;
-            this.totalTrabRealesCompletas =
-              this.totalTrabRealesCompletas + horas;
+            this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
           }
         } else if (a < this.hrsJornadaDiurna) {
           if (salida > this.nocturnaI && salida <= this.mixtaOc) {
             exm = horas - this.hrsJornadaDiurna;
             if (exm < 0) {
-              this.requiredCompletarDiurna =
-                this.requiredCompletarDiurna + this.hrsJornadaDiurna - horas;
+              this.requiredCompletarDiurna = this.requiredCompletarDiurna + this.hrsJornadaDiurna - horas;
               this.totalTrabReales = this.totalTrabReales + horas;
               console.log('jornada diurna no completo ' + horas);
               this.jornada = 'Diurna';
               this.ajusteDias = this.ajusteDias + 1;
               this.diaDiurno = this.diaDiurno + 1;
-              this.totalTrabRealesCompletas =
-                this.totalTrabRealesCompletas + horas;
+              this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
             } else {
               this.totalExtrasMixtas = this.totalExtrasMixtas + exm;
               console.log('jornada diurna ' + horas + ' extras mixtas ' + exm);
               this.jornada = 'Diurna';
               this.extrasMixta = exm;
-              this.totalTrabNormales =
-                this.totalTrabNormales + this.hrsJornadaDiurna;
+              this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
               this.diaDiurno = this.diaDiurno + 1;
-              this.totalTrabRealesCompletas =
-                this.totalTrabRealesCompletas + horas;
+              this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
             }
           } else if (salida > this.mixtaOc && salida <= this.reset) {
             exn = horas - this.hrsJornadaNocturna;
             this.totalExtrasNocturnas = this.totalExtrasNocturnas + exn;
-            console.log(
-              'jornada nocturna ' + horas + ' extras nocturnas ' + exn
-            );
+            console.log('jornada nocturna ' + horas + ' extras nocturnas ' + exn);
             this.jornada = 'Nocturna';
             this.extrasNocturna = exn;
-            this.totalTrabNormales =
-              this.totalTrabNormales + this.hrsJornadaDiurna;
+            this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
             this.diaNocturno = this.diaNocturno + 1;
-            this.totalTrabRealesCompletas =
-              this.totalTrabRealesCompletas + horas;
+            this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
           }
         }
       }
       //jornada mixta extras mixtas y nocturnas
-    } else if (
-      entrada >= this.mixtaIa &&
-      entrada <= this.mixtaIc &&
-      (salida <= this.diurnaI || salida >= this.diurnaO)
-    ) {
+    } else if (entrada >= this.mixtaIa && entrada <= this.mixtaIc && (salida <= this.diurnaI || salida >= this.diurnaO)) {
       if (salida > this.mixtaOc || salida <= this.diurnaI) {
         jornada = moment.duration(this.mixtaOc.diff(entrada)).asHours();
         exm = jornada - this.hrsJornadaMixta;
@@ -6034,27 +5197,21 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           exn = exn + 24;
           this.totalExtrasMixtas = this.totalExtrasMixtas + exm;
           this.totalExtrasNocturnas = this.totalExtrasNocturnas + exn;
-          console.log(
-            'jornada mixta ' + 'extras mixtas ' + exm + ' extra nocturna ' + exn
-          );
+          console.log('jornada mixta ' + 'extras mixtas ' + exm + ' extra nocturna ' + exn);
           this.jornada = 'Mixta';
           this.extrasMixta = exm;
           this.extrasNocturna = exn;
-          this.totalTrabNormales =
-            this.totalTrabNormales + this.hrsJornadaDiurna;
+          this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
           this.diaMixto = this.diaMixto + 1;
           this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
         } else {
           this.totalExtrasMixtas = this.totalExtrasMixtas + exm;
           this.totalExtrasNocturnas = this.totalExtrasNocturnas + exn;
-          console.log(
-            'jornada mixta ' + 'extras mixtas ' + exm + ' extra nocturna ' + exn
-          );
+          console.log('jornada mixta ' + 'extras mixtas ' + exm + ' extra nocturna ' + exn);
           this.jornada = 'Mixta';
           this.extrasMixta = exm;
           this.extrasNocturna = exn;
-          this.totalTrabNormales =
-            this.totalTrabNormales + this.hrsJornadaDiurna;
+          this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
           this.diaMixto = this.diaMixto + 1;
           this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
         }
@@ -6066,13 +5223,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           console.log('jornada mixta ' + 'extras mixtas ' + exm);
           this.jornada = 'Mixta';
           this.extrasMixta = exm;
-          this.totalTrabNormales =
-            this.totalTrabNormales + this.hrsJornadaDiurna;
+          this.totalTrabNormales = this.totalTrabNormales + this.hrsJornadaDiurna;
           this.diaMixto = this.diaMixto + 1;
           this.totalTrabRealesCompletas = this.totalTrabRealesCompletas + horas;
         } else {
-          this.requiredCompletarMixta =
-            this.requiredCompletarMixta + this.hrsJornadaMixta - horas;
+          this.requiredCompletarMixta = this.requiredCompletarMixta + this.hrsJornadaMixta - horas;
           this.totalTrabReales = this.totalTrabReales + horas;
           console.log('jornada mixta no completo ' + horas);
           this.jornada = 'Mixta';
@@ -6146,13 +5301,11 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
           planillaID: data.planillaID,
         };
         console.log(empleado);
-        this.EmpleadosService.actualizarEmpleado(this.Id, empleado).subscribe(
-          (data) => {
-            this.cargarEmpleadoByPlanillaIdEditSalario(this.idTP, this.Id);
-            this.NzMessageService.success('¡Salario actualizado exitosamente!');
-            this.handleEmpleadoClear(this.Id);
-          }
-        );
+        this.EmpleadosService.actualizarEmpleado(this.Id, empleado).subscribe((data) => {
+          this.cargarEmpleadoByPlanillaIdEditSalario(this.idTP, this.Id);
+          this.NzMessageService.success('¡Salario actualizado exitosamente!');
+          this.handleEmpleadoClear(this.Id);
+        });
       });
       this.Search('');
       this.tempForm.get('busqueda').setValue('');
@@ -6220,8 +5373,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.modal.confirm({
       nzCentered: true,
       nzTitle: 'CONFIRMACIÓN',
-      nzContent:
-        '<b style="color: red;">¿Esta seguro de haber ingresado las horas correctas?</b>',
+      nzContent: '<b style="color: red;">¿Esta seguro de haber ingresado las horas correctas?</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,
@@ -6453,9 +5605,7 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     this.refreshCheckedStatus();
   }
   onAllCheckedComprobantes(value: boolean): void {
-    this.listOfCurrentPageData.forEach((item) =>
-      this.updateCheckedSet(item.id, value)
-    );
+    this.listOfCurrentPageData.forEach((item) => this.updateCheckedSet(item.id, value));
     this.refreshCheckedStatus();
   }
   onCurrentPageDataChange($event: readonly null[]): void {
@@ -6484,13 +5634,8 @@ export class NominaComponent implements OnInit, PuedeDesactivar {
     console.log(this.setOfCheckedId);
   }
   refreshCheckedStatus(): void {
-    this.seleccionado = this.listOfCurrentPageData.every((item) =>
-      this.setOfCheckedId.has(item.id)
-    );
-    this.indeterminados =
-      this.listOfCurrentPageData.some((item) =>
-        this.setOfCheckedId.has(item.id)
-      ) && !this.seleccionado;
+    this.seleccionado = this.listOfCurrentPageData.every((item) => this.setOfCheckedId.has(item.id));
+    this.indeterminados = this.listOfCurrentPageData.some((item) => this.setOfCheckedId.has(item.id)) && !this.seleccionado;
     console.log(this.seleccionado, this.listComprobantes);
     this.sort(this.setOfCheckedId);
   }

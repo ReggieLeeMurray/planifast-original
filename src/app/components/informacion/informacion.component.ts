@@ -21,11 +21,7 @@ export class InformacionComponent implements OnInit {
   date = null;
   DEBUG = false;
 
-  constructor(
-    private router: Router,
-    private InfoService: InfoService,
-    private fb: FormBuilder
-  ) {
+  constructor(private router: Router, private InfoService: InfoService, private fb: FormBuilder) {
     this.InfoForm = this.fb.group({
       razon: ['', Validators.required],
       fecha: ['', Validators.required],
@@ -101,13 +97,10 @@ export class InformacionComponent implements OnInit {
         bio: this.InfoForm.get('bio').value,
         techoEM_IHSS: this.listInfo[0].techoEM_IHSS,
         techoIVM_IHSS: this.listInfo[0].techoIVM_IHSS,
-        porcentajeContribucionTrabajadorEM_IHSS:
-          this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS,
-        porcentajeContribucionTrabajadorIVM_IHSS:
-          this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS,
+        porcentajeContribucionTrabajadorEM_IHSS: this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS,
+        porcentajeContribucionTrabajadorIVM_IHSS: this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS,
         techoIVM_RAP: this.listInfo[0].techoIVM_RAP,
-        porcentajeContribucionTrabajador_RAP:
-          this.listInfo[0].porcentajeContribucionTrabajador_RAP,
+        porcentajeContribucionTrabajador_RAP: this.listInfo[0].porcentajeContribucionTrabajador_RAP,
         techoExento_ISR: this.listInfo[0].techoExento_ISR,
         techo15_ISR: this.listInfo[0].techo15_ISR,
         techo20_ISR: this.listInfo[0].techo20_ISR,
@@ -130,13 +123,10 @@ export class InformacionComponent implements OnInit {
         bio: this.InfoForm.get('bio').value,
         techoEM_IHSS: this.listInfo[0].techoEM_IHSS,
         techoIVM_IHSS: this.listInfo[0].techoIVM_IHSS,
-        porcentajeContribucionTrabajadorEM_IHSS:
-          this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS,
-        porcentajeContribucionTrabajadorIVM_IHSS:
-          this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS,
+        porcentajeContribucionTrabajadorEM_IHSS: this.listInfo[0].porcentajeContribucionTrabajadorEM_IHSS,
+        porcentajeContribucionTrabajadorIVM_IHSS: this.listInfo[0].porcentajeContribucionTrabajadorIVM_IHSS,
         techoIVM_RAP: this.listInfo[0].techoIVM_RAP,
-        porcentajeContribucionTrabajador_RAP:
-          this.listInfo[0].porcentajeContribucionTrabajador_RAP,
+        porcentajeContribucionTrabajador_RAP: this.listInfo[0].porcentajeContribucionTrabajador_RAP,
         techoExento_ISR: this.listInfo[0].techoExento_ISR,
         techo15_ISR: this.listInfo[0].techo15_ISR,
         techo20_ISR: this.listInfo[0].techo20_ISR,

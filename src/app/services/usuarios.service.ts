@@ -28,11 +28,7 @@ export class UsuariosService {
   }
   //post
   guardarUsuarios(usuarios: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(
-      this.myAppUrl + this.myApiUrl,
-      usuarios,
-      this.httpOptions
-    );
+    return this.http.post<Usuario>(this.myAppUrl + this.myApiUrl, usuarios, this.httpOptions);
   }
   //get id
   cargarUsuarios(id: number): Observable<Usuario> {
@@ -40,16 +36,10 @@ export class UsuariosService {
   }
   //get usuarios con rol
   getListUsuariosConRol(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl
-    );
+    return this.http.get<Usuario[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl);
   }
   //put
   actualizarUsuarios(id: number, usuarios: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(
-      this.myAppUrl + this.myApiUrl + id,
-      usuarios,
-      this.httpOptions
-    );
+    return this.http.put<Usuario>(this.myAppUrl + this.myApiUrl + id, usuarios, this.httpOptions);
   }
 }

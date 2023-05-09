@@ -2,18 +2,9 @@
   <h1>Nuevo Cálculo</h1>
   <br />
   <nz-steps [nzCurrent]="current">
-    <nz-step
-      nzTitle="Planilla y Fecha"
-      nzDescription="Información General"
-    ></nz-step>
-    <nz-step
-      nzTitle="Ingresos y Deducciones"
-      nzDescription="Llena / Revisa los datos requeridos"
-    ></nz-step>
-    <nz-step
-      nzTitle="Cálculo Finalizado"
-      nzDescription="Descarga la planilla"
-    ></nz-step>
+    <nz-step nzTitle="Planilla y Fecha" nzDescription="Información General"></nz-step>
+    <nz-step nzTitle="Ingresos y Deducciones" nzDescription="Llena / Revisa los datos requeridos"></nz-step>
+    <nz-step nzTitle="Cálculo Finalizado" nzDescription="Descarga la planilla"></nz-step>
   </nz-steps>
   <nz-modal
     [(nzVisible)]="isVisibleAguinaldo"
@@ -49,12 +40,8 @@
               (ngModelChange)="enableAguinaldo()"
               [ngModelOptions]="{ standalone: true }"
             ></nz-switch>
-            <ng-template #checkedTemplate
-              ><i nz-icon nzType="edit" nzTheme="outline"></i
-            ></ng-template>
-            <ng-template #unCheckedTemplate
-              ><i nz-icon nzType="check"></i
-            ></ng-template>
+            <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+            <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
           </td>
         </nz-form-item>
       </form>
@@ -62,9 +49,7 @@
   </nz-modal>
   <nz-modal
     [(nzVisible)]="isVisibleAguinaldoDeduccion"
-    nzTitle="Calculando Deducciones | {{
-      this.nombreCompleto
-    }} — Salario Bruto: Lps. {{ this.sueldoAlDeducirString }}"
+    nzTitle="Calculando Deducciones | {{ this.nombreCompleto }} — Salario Bruto: Lps. {{ this.sueldoAlDeducirString }}"
     (nzOnCancel)="handleMainDeduccionCancel()"
     [nzFooter]="null"
     nzClosable="false"
@@ -92,9 +77,7 @@
                         </div>
                       </div>
                     </td>
-                    <nz-form-label [nzNoColon]="true" [nzSm]="24" [nzXs]="24"
-                      >Marcar Todos</nz-form-label
-                    >
+                    <nz-form-label [nzNoColon]="true" [nzSm]="24" [nzXs]="24">Marcar Todos</nz-form-label>
                   </tr>
                 </div>
                 <form nz-form [formGroup]="aguinaldoForm">
@@ -114,19 +97,10 @@
                       </div>
                     </td>
                     <td>
-                      <nz-form-label [nzSm]="24" [nzXs]="24"
-                        >Anticipo</nz-form-label
-                      >
+                      <nz-form-label [nzSm]="24" [nzXs]="24">Anticipo</nz-form-label>
                     </td>
                     <td>
-                      <input
-                        formControlName="ajuste"
-                        nz-input
-                        placeholder="0"
-                        type="number"
-                        min="0"
-                        nzSize="default"
-                      />
+                      <input formControlName="ajuste" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                     </td>
                   </tr>
 
@@ -153,14 +127,7 @@
                       </nz-form-label>
                     </td>
                     <td>
-                      <input
-                        formControlName="varios"
-                        nz-input
-                        placeholder="0"
-                        type="number"
-                        min="0"
-                        nzSize="default"
-                      />
+                      <input formControlName="varios" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                     </td>
                   </tr>
                 </form>
@@ -180,33 +147,16 @@
                         data-placement="bottom"
                         title="Calcular Deducciones"
                       >
-                        <i
-                          nz-icon
-                          class="center"
-                          nzType="calculator"
-                          nzTheme="fill"
-                        ></i>
+                        <i nz-icon class="center" nzType="calculator" nzTheme="fill"></i>
                       </button>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-info"
-                        (click)="limpiarMainDeduccion()"
-                        data-placement="bottom"
-                        title="Limpiar"
-                      >
+                      <button type="button" class="btn btn-info" (click)="limpiarMainDeduccion()" data-placement="bottom" title="Limpiar">
                         <i class="bi bi-stars"></i>
                       </button>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-danger"
-                        (click)="handleMainDeduccionCancel()"
-                        data-placement="bottom"
-                        title="Cancelar"
-                      >
+                      <button type="button" class="btn btn-danger" (click)="handleMainDeduccionCancel()" data-placement="bottom" title="Cancelar">
                         <i class="bi bi-x-lg"></i>
                       </button>
                     </td>
@@ -214,9 +164,7 @@
                 </table>
               </div>
             </div>
-            <h2 style="text-align: center" class="h2">
-              Total Deducciones: Lps. {{ this.deduccionString }}
-            </h2>
+            <h2 style="text-align: center" class="h2">Total Deducciones: Lps. {{ this.deduccionString }}</h2>
           </div>
         </td>
       </div>
@@ -233,24 +181,12 @@
     nzCentered
   >
     <ng-container *nzModalContent>
-      <div
-        id="main_reviewcontent"
-        class="inner-content"
-        style="overflow: hidden"
-      >
+      <div id="main_reviewcontent" class="inner-content" style="overflow: hidden">
         <div class="card">
           <div class="card-body">
             <!-- add scroll to file preview
             [nzScroll]="{ x: '1150px', y: '480px' }" -->
-            <nz-table
-              #basicTable
-              [nzData]="listFinal"
-              nzSize="small"
-              nzBordered
-              nzTemplateMode
-              id="reviewUpload"
-              class="table table-md table-hover"
-            >
+            <nz-table #basicTable [nzData]="listFinal" nzSize="small" nzBordered nzTemplateMode id="reviewUpload" class="table table-md table-hover">
               <thead>
                 <tr>
                   <th colspan="2">Información</th>
@@ -335,10 +271,7 @@
               <tbody>
                 <tr>
                   <td colspan="23" *ngIf="listFinal?.length <= 0">
-                    <nz-empty
-                      [nzNotFoundImage]="notFound"
-                      [nzNotFoundContent]="contentTpl"
-                    ></nz-empty>
+                    <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
                     <ng-template #contentTpl>
                       <span>No hay datos.</span>
                     </ng-template>
@@ -348,26 +281,26 @@
                 <tr *ngFor="let data of basicTable.data">
                   <td>{{ data.id }}</td>
                   <td>{{ data.nombreCompleto }}</td>
-                  <td>{{ data.lunesEntrada | date : "shortTime" }}</td>
-                  <td>{{ data.lunesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.lunesEntrada | date : 'shortTime' }}</td>
+                  <td>{{ data.lunesSalida | date : 'shortTime' }}</td>
                   <td>{{ data.lunesEvento }}</td>
-                  <td>{{ data.martesEntrada | date : "shortTime" }}</td>
-                  <td>{{ data.martesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.martesEntrada | date : 'shortTime' }}</td>
+                  <td>{{ data.martesSalida | date : 'shortTime' }}</td>
                   <td>{{ data.martesEvento }}</td>
-                  <td>{{ data.miercolesEntrada | date : "shortTime" }}</td>
-                  <td>{{ data.miercolesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.miercolesEntrada | date : 'shortTime' }}</td>
+                  <td>{{ data.miercolesSalida | date : 'shortTime' }}</td>
                   <td>{{ data.miercolesEvento }}</td>
-                  <td>{{ data.juevesEntrada | date : "shortTime" }}</td>
-                  <td>{{ data.juevesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.juevesEntrada | date : 'shortTime' }}</td>
+                  <td>{{ data.juevesSalida | date : 'shortTime' }}</td>
                   <td>{{ data.juevesEvento }}</td>
-                  <td>{{ data.viernesEntrada | date : "shortTime" }}</td>
-                  <td>{{ data.viernesSalida | date : "shortTime" }}</td>
+                  <td>{{ data.viernesEntrada | date : 'shortTime' }}</td>
+                  <td>{{ data.viernesSalida | date : 'shortTime' }}</td>
                   <td>{{ data.viernesEvento }}</td>
-                  <td>{{ data.sabadoEntrada | date : "shortTime" }}</td>
-                  <td>{{ data.sabadoSalida | date : "shortTime" }}</td>
+                  <td>{{ data.sabadoEntrada | date : 'shortTime' }}</td>
+                  <td>{{ data.sabadoSalida | date : 'shortTime' }}</td>
                   <td>{{ data.sabadoEvento }}</td>
-                  <td>{{ data.domingoEntrada | date : "shortTime" }}</td>
-                  <td>{{ data.domingoSalida | date : "shortTime" }}</td>
+                  <td>{{ data.domingoEntrada | date : 'shortTime' }}</td>
+                  <td>{{ data.domingoSalida | date : 'shortTime' }}</td>
                   <td>{{ data.domingoEvento }}</td>
                 </tr>
               </tbody>
@@ -391,25 +324,12 @@
   >
     <ng-container *nzModalContent>
       <nz-collapse nzAccordion>
-        <nz-collapse-panel
-          nzHeader="IHSS"
-          nzExpandedIcon="double-right"
-          nzActive
-        >
+        <nz-collapse-panel nzHeader="IHSS" nzExpandedIcon="double-right" nzActive>
           <form nz-form [formGroup]="infoForm">
             <nz-form-item>
-              <nz-form-label [nzSm]="10" nzRequired
-                >Techo EM (Enfermedad y Maternidad)</nz-form-label
-              >
+              <nz-form-label [nzSm]="10" nzRequired>Techo EM (Enfermedad y Maternidad)</nz-form-label>
               <nz-form-control [nzSm]="10">
-                <input
-                  nz-input
-                  placeholder="Ingrese cantidad en lps"
-                  type="number"
-                  nzSize="default"
-                  formControlName="techoEM_IHSS"
-                  min="0"
-                />
+                <input nz-input placeholder="Ingrese cantidad en lps" type="number" nzSize="default" formControlName="techoEM_IHSS" min="0" />
               </nz-form-control>
               <td>
                 <nz-switch
@@ -419,19 +339,13 @@
                   (ngModelChange)="enableTechoEM_IHSS()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
 
             <nz-form-item>
-              <nz-form-label [nzSm]="10" nzRequired
-                >% de Contribución EM</nz-form-label
-              >
+              <nz-form-label [nzSm]="10" nzRequired>% de Contribución EM</nz-form-label>
               <nz-form-control [nzSm]="10">
                 <input
                   nz-input
@@ -450,28 +364,15 @@
                   (ngModelChange)="enablePorcentajeEM_IHSS()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
 
             <nz-form-item>
-              <nz-form-label [nzSm]="10" nzRequired
-                >Techo IVM (Invalidez, Vejez y Muerte)</nz-form-label
-              >
+              <nz-form-label [nzSm]="10" nzRequired>Techo IVM (Invalidez, Vejez y Muerte)</nz-form-label>
               <nz-form-control [nzSm]="10">
-                <input
-                  nz-input
-                  placeholder="Ingrese cantidad en lps"
-                  type="number"
-                  nzSize="default"
-                  formControlName="techoIVM_IHSS"
-                  min="0"
-                />
+                <input nz-input placeholder="Ingrese cantidad en lps" type="number" nzSize="default" formControlName="techoIVM_IHSS" min="0" />
               </nz-form-control>
               <td>
                 <nz-switch
@@ -481,19 +382,13 @@
                   (ngModelChange)="enableTechoIVM_IHSS()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
 
             <nz-form-item>
-              <nz-form-label [nzSm]="10" nzRequired
-                >% de Contribución IVM</nz-form-label
-              >
+              <nz-form-label [nzSm]="10" nzRequired>% de Contribución IVM</nz-form-label>
               <nz-form-control [nzSm]="10">
                 <input
                   nz-input
@@ -512,12 +407,8 @@
                   (ngModelChange)="enablePorcentajeIVM_IHSS()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
           </form>
@@ -528,14 +419,7 @@
             <nz-form-item>
               <nz-form-label [nzSm]="10" nzRequired>Techo Exento</nz-form-label>
               <nz-form-control [nzSm]="10">
-                <input
-                  nz-input
-                  placeholder="Ingrese cantidad en lps"
-                  type="number"
-                  nzSize="default"
-                  formControlName="techoExento_ISR"
-                  min="0"
-                />
+                <input nz-input placeholder="Ingrese cantidad en lps" type="number" nzSize="default" formControlName="techoExento_ISR" min="0" />
               </nz-form-control>
               <td>
                 <nz-switch
@@ -545,26 +429,15 @@
                   (ngModelChange)="enableTechoExento_ISR()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
 
             <nz-form-item>
               <nz-form-label [nzSm]="10" nzRequired>Techo 15%</nz-form-label>
               <nz-form-control [nzSm]="10">
-                <input
-                  nz-input
-                  placeholder="Ingrese cantidad en lps"
-                  type="number"
-                  nzSize="default"
-                  formControlName="techo15_ISR"
-                  min="0"
-                />
+                <input nz-input placeholder="Ingrese cantidad en lps" type="number" nzSize="default" formControlName="techo15_ISR" min="0" />
               </nz-form-control>
               <td>
                 <nz-switch
@@ -574,26 +447,15 @@
                   (ngModelChange)="enableTecho15_ISR()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
 
             <nz-form-item>
               <nz-form-label [nzSm]="10" nzRequired>Techo 20%</nz-form-label>
               <nz-form-control [nzSm]="10">
-                <input
-                  nz-input
-                  placeholder="Ingrese cantidad en lps"
-                  type="number"
-                  nzSize="default"
-                  formControlName="techo20_ISR"
-                  min="0"
-                />
+                <input nz-input placeholder="Ingrese cantidad en lps" type="number" nzSize="default" formControlName="techo20_ISR" min="0" />
               </nz-form-control>
               <td>
                 <nz-switch
@@ -603,19 +465,13 @@
                   (ngModelChange)="enableTecho20_ISR()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
 
             <nz-form-item>
-              <nz-form-label [nzSm]="10" nzRequired
-                >Monto Servicios Médicos</nz-form-label
-              >
+              <nz-form-label [nzSm]="10" nzRequired>Monto Servicios Médicos</nz-form-label>
               <nz-form-control [nzSm]="10">
                 <input
                   nz-input
@@ -634,12 +490,8 @@
                   (ngModelChange)="enableMontoServicioMedico_ISR()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
           </form>
@@ -648,18 +500,9 @@
         <nz-collapse-panel nzHeader="AFPC" nzExpandedIcon="double-right">
           <form nz-form [formGroup]="infoForm">
             <nz-form-item>
-              <nz-form-label [nzSm]="10" nzRequired
-                >Valor correspondiente</nz-form-label
-              >
+              <nz-form-label [nzSm]="10" nzRequired>Valor correspondiente</nz-form-label>
               <nz-form-control [nzSm]="10">
-                <input
-                  nz-input
-                  placeholder="Ingrese cantidad en lps"
-                  type="number"
-                  nzSize="default"
-                  formControlName="techoIVM_RAP"
-                  min="0"
-                />
+                <input nz-input placeholder="Ingrese cantidad en lps" type="number" nzSize="default" formControlName="techoIVM_RAP" min="0" />
               </nz-form-control>
               <td>
                 <nz-switch
@@ -669,19 +512,13 @@
                   (ngModelChange)="enableTechoIVM_RAP()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
 
             <nz-form-item>
-              <nz-form-label [nzSm]="10" nzRequired
-                >% de Contribución</nz-form-label
-              >
+              <nz-form-label [nzSm]="10" nzRequired>% de Contribución</nz-form-label>
               <nz-form-control [nzSm]="10">
                 <input
                   nz-input
@@ -700,12 +537,8 @@
                   (ngModelChange)="enablePorcentajeIVM_RAP()"
                   [ngModelOptions]="{ standalone: true }"
                 ></nz-switch>
-                <ng-template #checkedTemplate
-                  ><i nz-icon nzType="edit" nzTheme="outline"></i
-                ></ng-template>
-                <ng-template #unCheckedTemplate
-                  ><i nz-icon nzType="check"></i
-                ></ng-template>
+                <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
               </td>
             </nz-form-item>
           </form>
@@ -719,9 +552,7 @@
       [nzStyle]="{ top: '20px' }"
       nzClosable="false"
       [(nzVisible)]="isMainVisible"
-      nzTitle="Calculando Ingresos | {{
-        this.nombreCompleto
-      }} — Valor Dia: Lps. {{ this.salarioMinimoPerDia.toFixed(2) }}"
+      nzTitle="Calculando Ingresos | {{ this.nombreCompleto }} — Valor Dia: Lps. {{ this.salarioMinimoPerDia.toFixed(2) }}"
       nzWidth="35%"
       (nzOnCancel)="handleCancel()"
       [nzFooter]="null"
@@ -751,9 +582,7 @@
                   </nz-form-item>
 
                   <nz-form-item>
-                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true"
-                      >Autorizado : {{ this.conpermiso }}
-                    </nz-form-label>
+                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true">Autorizado : {{ this.conpermiso }} </nz-form-label>
                     <nz-form-control [nzSm]="10" [nzXs]="24">
                       <input
                         nz-input
@@ -769,9 +598,7 @@
                   </nz-form-item>
 
                   <nz-form-item>
-                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true"
-                      >Faltas : {{ this.falta }}</nz-form-label
-                    >
+                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true">Faltas : {{ this.falta }}</nz-form-label>
                     <nz-form-control [nzSm]="10" [nzXs]="24">
                       <input
                         nz-input
@@ -787,9 +614,7 @@
                   </nz-form-item>
 
                   <nz-form-item>
-                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true"
-                      >Feriados : {{ this.feriado }}
-                    </nz-form-label>
+                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true">Feriados : {{ this.feriado }} </nz-form-label>
                     <nz-form-control [nzSm]="10" [nzXs]="24">
                       <input
                         nz-input
@@ -805,10 +630,7 @@
                   </nz-form-item>
 
                   <nz-form-item>
-                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true"
-                      >Incapacidades Públicas :
-                      {{ this.incapacidadpub }}</nz-form-label
-                    >
+                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true">Incapacidades Públicas : {{ this.incapacidadpub }}</nz-form-label>
                     <nz-form-control [nzSm]="10" [nzXs]="24">
                       <input
                         nz-input
@@ -824,10 +646,7 @@
                   </nz-form-item>
 
                   <nz-form-item>
-                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true"
-                      >Incapacidades Privadas :
-                      {{ this.incapacidadpriv }}</nz-form-label
-                    >
+                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true">Incapacidades Privadas : {{ this.incapacidadpriv }}</nz-form-label>
                     <nz-form-control [nzSm]="10" [nzXs]="24">
                       <input
                         nz-input
@@ -843,9 +662,7 @@
                   </nz-form-item>
 
                   <nz-form-item>
-                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true"
-                      >Suspensiones : {{ this.suspension }}
-                    </nz-form-label>
+                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true">Suspensiones : {{ this.suspension }} </nz-form-label>
                     <nz-form-control [nzSm]="10" [nzXs]="24">
                       <input
                         nz-input
@@ -861,9 +678,7 @@
                     </nz-form-control>
                   </nz-form-item>
                   <nz-form-item>
-                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true"
-                      >Vacaciones : {{ this.vacacion }}
-                    </nz-form-label>
+                    <nz-form-label [nzSm]="8" [nzXs]="24" [nzNoColon]="true">Vacaciones : {{ this.vacacion }} </nz-form-label>
                     <nz-form-control [nzSm]="10" [nzXs]="24">
                       <input
                         nz-input
@@ -890,33 +705,16 @@
                         data-placement="bottom"
                         title="Calcular Ingresos"
                       >
-                        <i
-                          nz-icon
-                          class="center"
-                          nzType="calculator"
-                          nzTheme="fill"
-                        ></i>
+                        <i nz-icon class="center" nzType="calculator" nzTheme="fill"></i>
                       </button>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-info"
-                        (click)="limpiar()"
-                        data-placement="bottom"
-                        title="Limpiar"
-                      >
+                      <button type="button" class="btn btn-info" (click)="limpiar()" data-placement="bottom" title="Limpiar">
                         <i class="bi bi-stars"></i>
                       </button>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-danger"
-                        (click)="handleCancel()"
-                        data-placement="bottom"
-                        title="Cancelar"
-                      >
+                      <button type="button" class="btn btn-danger" (click)="handleCancel()" data-placement="bottom" title="Cancelar">
                         <i class="bi bi-x-lg"></i>
                       </button>
                     </td>
@@ -924,9 +722,7 @@
                 </table>
               </div>
             </div>
-            <h2 style="text-align: center" class="h2">
-              Sueldo Bruto: Lps. {{ this.sueldoString }}
-            </h2>
+            <h2 style="text-align: center" class="h2">Sueldo Bruto: Lps. {{ this.sueldoString }}</h2>
           </div>
           <nz-modal
             [(nzVisible)]="isVisibleDivPrimario"
@@ -942,26 +738,12 @@
                     <h1 style="text-align: center">Información Adicional</h1>
                     <form [formGroup]="extraForm">
                       <tr>
-                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                          >Valor de la incapacidad pública
-                        </nz-form-label>
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Valor de la incapacidad pública </nz-form-label>
                         <td>
-                          <input
-                            formControlName="incpub"
-                            nz-input
-                            placeholder="0"
-                            type="number"
-                            min="0"
-                            nzSize="default"
-                          />
+                          <input formControlName="incpub" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                         </td>
                         <td>
-                          <button
-                            type="button"
-                            class="btn btn-primary"
-                            [disabled]="extraForm.invalid"
-                            (click)="incapacidadPub()"
-                          >
+                          <button type="button" class="btn btn-primary" [disabled]="extraForm.invalid" (click)="incapacidadPub()">
                             <i class="bi bi-check-lg"></i>
                           </button>
                         </td>
@@ -977,9 +759,7 @@
     </nz-modal>
     <nz-modal
       [(nzVisible)]="isVisibleDeduccion"
-      nzTitle="Calculando Deducciones | {{
-        this.nombreCompleto
-      }} — Salario Bruto: Lps. {{ this.sueldoAlDeducirString }}"
+      nzTitle="Calculando Deducciones | {{ this.nombreCompleto }} — Salario Bruto: Lps. {{ this.sueldoAlDeducirString }}"
       (nzOnCancel)="handleMainDeduccionCancel()"
       nzClosable="false"
       [nzFooter]="null"
@@ -1006,9 +786,7 @@
                           </div>
                         </div>
                       </td>
-                      <nz-form-label [nzNoColon]="true" [nzSm]="24" [nzXs]="24"
-                        >Marcar Todos</nz-form-label
-                      >
+                      <nz-form-label [nzNoColon]="true" [nzSm]="24" [nzXs]="24">Marcar Todos</nz-form-label>
                     </tr>
                   </div>
                   <form nz-form [formGroup]="automaticForm">
@@ -1028,19 +806,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >IHSS</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">IHSS</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="ihss"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="ihss" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                       <td style="padding-left: 0px">
                         <nz-switch
@@ -1051,12 +820,8 @@
                           [nzDisabled]="isDisabledIHSS"
                           [ngModelOptions]="{ standalone: true }"
                         ></nz-switch>
-                        <ng-template #checkedTemplate
-                          ><i nz-icon nzType="edit" nzTheme="outline"></i
-                        ></ng-template>
-                        <ng-template #unCheckedTemplate
-                          ><i nz-icon nzType="check"></i
-                        ></ng-template>
+                        <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                        <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
                       </td>
                     </tr>
 
@@ -1075,19 +840,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >ISR</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">ISR</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="isr"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="isr" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                       <td style="padding-left: 0px">
                         <nz-switch
@@ -1098,12 +854,8 @@
                           [nzDisabled]="isDisabledISR"
                           [ngModelOptions]="{ standalone: true }"
                         ></nz-switch>
-                        <ng-template #checkedTemplate
-                          ><i nz-icon nzType="edit" nzTheme="outline"></i
-                        ></ng-template>
-                        <ng-template #unCheckedTemplate
-                          ><i nz-icon nzType="check"></i
-                        ></ng-template>
+                        <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                        <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
                       </td>
                     </tr>
 
@@ -1122,19 +874,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >AFPC</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">AFPC</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="afpc"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="afpc" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                       <td style="padding-left: 0px">
                         <nz-switch
@@ -1145,12 +888,8 @@
                           [nzDisabled]="isDisableAFPC"
                           [ngModelOptions]="{ standalone: true }"
                         ></nz-switch>
-                        <ng-template #checkedTemplate
-                          ><i nz-icon nzType="edit" nzTheme="outline"></i
-                        ></ng-template>
-                        <ng-template #unCheckedTemplate
-                          ><i nz-icon nzType="check"></i
-                        ></ng-template>
+                        <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                        <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
                       </td>
                     </tr>
                   </form>
@@ -1171,19 +910,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Impuesto Vecinal</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">Impuesto Vecinal</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="impvecinal"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="impvecinal" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -1202,19 +932,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Préstamo RAP</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">Préstamo RAP</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="prestamorap"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="prestamorap" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -1233,19 +954,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Anticipo</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">Anticipo</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="anticipo"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="anticipo" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -1264,22 +976,12 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          nzTooltipTitle="Valor a deducir por actos negligentes durante horas laborales"
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzTooltipTitle="Valor a deducir por actos negligentes durante horas laborales"
                           >CTA. Empresa
                         </nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="ctaempresa"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="ctaempresa" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -1298,19 +1000,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Transporte</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">Transporte</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="transporte"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="transporte" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -1329,19 +1022,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Ajuste</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">Ajuste</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="ajuste"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="ajuste" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -1368,14 +1052,7 @@
                         </nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="varios"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="varios" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
                   </form>
@@ -1395,33 +1072,16 @@
                           data-placement="bottom"
                           title="Calcular Deducciones"
                         >
-                          <i
-                            nz-icon
-                            class="center"
-                            nzType="calculator"
-                            nzTheme="fill"
-                          ></i>
+                          <i nz-icon class="center" nzType="calculator" nzTheme="fill"></i>
                         </button>
                       </td>
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-info"
-                          (click)="limpiarMainDeduccion()"
-                          data-placement="bottom"
-                          title="Limpiar"
-                        >
+                        <button type="button" class="btn btn-info" (click)="limpiarMainDeduccion()" data-placement="bottom" title="Limpiar">
                           <i class="bi bi-stars"></i>
                         </button>
                       </td>
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger"
-                          (click)="handleMainDeduccionCancel()"
-                          data-placement="bottom"
-                          title="Cancelar"
-                        >
+                        <button type="button" class="btn btn-danger" (click)="handleMainDeduccionCancel()" data-placement="bottom" title="Cancelar">
                           <i class="bi bi-x-lg"></i>
                         </button>
                       </td>
@@ -1429,9 +1089,7 @@
                   </table>
                 </div>
               </div>
-              <h2 style="text-align: center" class="h2">
-                Total Deducciones: Lps. {{ this.deduccionString }}
-              </h2>
+              <h2 style="text-align: center" class="h2">Total Deducciones: Lps. {{ this.deduccionString }}</h2>
             </div>
           </td>
         </div>
@@ -1514,12 +1172,7 @@
     <nz-table id="finalv2" nzTemplateMode hidden>
       <tbody>
         <td class="mix">
-          <nz-table
-            nzSize="small"
-            nzBordered
-            nzTemplateMode
-            *ngFor="let data of listComprobantes; let i = index"
-          >
+          <nz-table nzSize="small" nzBordered nzTemplateMode *ngFor="let data of listComprobantes; let i = index">
             <thead *ngIf="i % 2 === 1">
               <tr>
                 <th>:</th>
@@ -1607,7 +1260,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">SALARIO NORMAL</td>
-                <td colspan="2">{{ data.ingresoBruto | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ingresoBruto | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1617,7 +1270,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">{{ this.mesAguinaldo | uppercase }}</td>
-                <td colspan="2">{{ data.aguinaldo | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.aguinaldo | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1627,7 +1280,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">FERIADO</td>
-                <td colspan="2">{{ data.feriado | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.feriado | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1637,7 +1290,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">INCAPACIDAD</td>
-                <td colspan="2">{{ data.incapacidad | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.incapacidad | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1647,7 +1300,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">VACACION</td>
-                <td colspan="2">{{ data.vacacion | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.vacacion | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1657,7 +1310,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">(+) AJUSTE</td>
-                <td colspan="2">{{ data.ajusteP | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ajusteP | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -1668,7 +1321,7 @@
                 <td>:</td>
                 <td colspan="2">IHSS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ihss | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ihss | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1678,7 +1331,7 @@
                 <td>:</td>
                 <td colspan="2">RETENCION ISRENTA {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.isr | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.isr | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1688,7 +1341,7 @@
                 <td>:</td>
                 <td colspan="2">AFPC</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.afpc | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.afpc | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1698,7 +1351,7 @@
                 <td>:</td>
                 <td colspan="2">IMP. PER MUNI {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.impvecinal | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.impvecinal | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1708,7 +1361,7 @@
                 <td>:</td>
                 <td colspan="2">PRESTAMO RAP</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.prestamorap | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.prestamorap | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1718,7 +1371,7 @@
                 <td>:</td>
                 <td colspan="2">(-) ANTICIPO</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.anticipo | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.anticipo | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1728,7 +1381,7 @@
                 <td>:</td>
                 <td colspan="2">CTA. EMPRESA</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.cta | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.cta | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1738,7 +1391,7 @@
                 <td>:</td>
                 <td colspan="2">TRANSPORTE</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.viaticos | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.viaticos | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1749,7 +1402,7 @@
                 <td colspan="2" *ngIf="totalAguinaldo === 0">(-) AJUSTE</td>
                 <td colspan="2" *ngIf="totalAguinaldo > 0">(-) ANTICIPO</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ajuste | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ajuste | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1759,7 +1412,7 @@
                 <td>:</td>
                 <td colspan="2">OTROS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.otros | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -1812,9 +1465,9 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">TOTALES</td>
-                <td colspan="2">{{ data.ingresos | currency : "LPS " }}</td>
-                <td colspan="2">{{ data.deducciones | currency : "LPS " }}</td>
-                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ingresos | currency : 'LPS ' }}</td>
+                <td colspan="2">{{ data.deducciones | currency : 'LPS ' }}</td>
+                <td colspan="2">{{ data.totalPagar | currency : 'LPS ' }}</td>
                 <td>:</td>
               </tr>
               <tr>
@@ -1906,11 +1559,8 @@
                 <td>:</td>
                 <td>:</td>
                 <td>:</td>
-                <td colspan="6">
-                  RECIBI
-                  CONFORME:_________________________________________________.
-                </td>
-                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
+                <td colspan="6">RECIBI CONFORME:_________________________________________________.</td>
+                <td colspan="2">{{ data.totalPagar | currency : 'LPS ' }}</td>
                 <td>:</td>
               </tr>
               <tr>
@@ -1931,13 +1581,7 @@
     <nz-table id="final" nzTemplateMode hidden>
       <tbody>
         <td class="mix">
-          <nz-table
-            nzSize="small"
-            nzBordered
-            style="display: none"
-            nzTemplateMode
-            *ngFor="let data of listComprobantes; let i = index"
-          >
+          <nz-table nzSize="small" nzBordered style="display: none" nzTemplateMode *ngFor="let data of listComprobantes; let i = index">
             <thead *ngIf="i % 2 === 0">
               <tr>
                 <th>:</th>
@@ -1996,42 +1640,42 @@
               <tr *ngIf="this.totalAguinaldo <= 0">
                 <td>:</td>
                 <td colspan="2">SALARIO NORMAL</td>
-                <td colspan="2">{{ data.ingresoBruto | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ingresoBruto | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.aguinaldo > 0">
                 <td>:</td>
                 <td colspan="2">{{ this.mesAguinaldo | uppercase }}</td>
-                <td colspan="2">{{ data.aguinaldo | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.aguinaldo | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.feriado > 0">
                 <td>:</td>
                 <td colspan="2">FERIADO</td>
-                <td colspan="2">{{ data.feriado | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.feriado | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.incapacidad > 0">
                 <td>:</td>
                 <td colspan="2">INCAPACIDAD</td>
-                <td colspan="2">{{ data.incapacidad | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.incapacidad | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.vacacion > 0">
                 <td>:</td>
                 <td colspan="2">VACACION</td>
-                <td colspan="2">{{ data.vacacion | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.vacacion | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.ajusteP > 0">
                 <td>:</td>
                 <td colspan="2">(+) AJUSTE</td>
-                <td colspan="2">{{ data.ajusteP | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ajusteP | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
@@ -2039,56 +1683,56 @@
                 <td>:</td>
                 <td colspan="2">IHSS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ihss | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ihss | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.isr > 0">
                 <td>:</td>
                 <td colspan="2">RETENCION ISRENTA {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.isr | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.isr | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.afpc > 0">
                 <td>:</td>
                 <td colspan="2">AFPC</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.afpc | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.afpc | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.impvecinal > 0">
                 <td>:</td>
                 <td colspan="2">IMP. PER MUNI {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.impvecinal | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.impvecinal | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.prestamorap > 0">
                 <td>:</td>
                 <td colspan="2">PRESTAMO RAP</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.prestamorap | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.prestamorap | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.anticipo > 0">
                 <td>:</td>
                 <td colspan="2">(-) ANTICIPO</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.anticipo | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.anticipo | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.cta > 0">
                 <td>:</td>
                 <td colspan="2">CTA. EMPRESA</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.cta | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.cta | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.viaticos > 0">
                 <td>:</td>
                 <td colspan="2">TRANSPORTE</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.viaticos | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.viaticos | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.ajuste > 0">
@@ -2096,14 +1740,14 @@
                 <td colspan="2" *ngIf="totalAguinaldo === 0">(-) AJUSTE</td>
                 <td colspan="2" *ngIf="totalAguinaldo > 0">(-) ANTICIPO</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ajuste | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ajuste | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.otros > 0">
                 <td>:</td>
                 <td colspan="2">OTROS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.otros | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
 
@@ -2131,9 +1775,9 @@
               <tr *ngIf="data.totalPagar > 0">
                 <td>:</td>
                 <td colspan="2">TOTALES</td>
-                <td colspan="2">{{ data.ingresos | currency : "LPS " }}</td>
-                <td colspan="2">{{ data.deducciones | currency : "LPS " }}</td>
-                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ingresos | currency : 'LPS ' }}</td>
+                <td colspan="2">{{ data.deducciones | currency : 'LPS ' }}</td>
+                <td colspan="2">{{ data.totalPagar | currency : 'LPS ' }}</td>
               </tr>
               <tr>
                 <th>:</th>
@@ -2194,11 +1838,8 @@
               </tr>
               <tr>
                 <td>:</td>
-                <td colspan="6">
-                  RECIBI
-                  CONFORME:_________________________________________________.
-                </td>
-                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
+                <td colspan="6">RECIBI CONFORME:_________________________________________________.</td>
+                <td colspan="2">{{ data.totalPagar | currency : 'LPS ' }}</td>
               </tr>
               <tr>
                 <th>:</th>
@@ -2218,11 +1859,7 @@
     <nz-modal
       [nzStyle]="{ top: '20px' }"
       [(nzVisible)]="isMainVisible"
-      nzTitle="Calculando Ingresos | {{
-        this.nombreCompleto
-      }} — Salario: Lps. {{ this.salarioString }} — Valor Hora: {{
-        this.recargo
-      }}"
+      nzTitle="Calculando Ingresos | {{ this.nombreCompleto }} — Salario: Lps. {{ this.salarioString }} — Valor Hora: {{ this.recargo }}"
       (nzOnCancel)="handleMainCancel()"
       [nzFooter]="null"
       nzClosable="false"
@@ -2238,19 +1875,14 @@
                     <tr>
                       <td style="width: 70%">
                         <nz-collapse>
-                          <nz-collapse-panel
-                            nzHeader="Leyenda de los Tipos de Observación 💡"
-                          >
+                          <nz-collapse-panel nzHeader="Leyenda de los Tipos de Observación 💡">
                             <div>
                               <tr>
                                 <td class="mix">
                                   <label><strong>1. Autorizado:</strong></label>
                                 </td>
                                 <td class="mix">
-                                  <p style="font-style: italic">
-                                    Se completa la jornada con horas extras,
-                                    sino hay suficientes se le hace promedio.
-                                  </p>
+                                  <p style="font-style: italic">Se completa la jornada con horas extras, sino hay suficientes se le hace promedio.</p>
                                 </td>
                               </tr>
                               <tr>
@@ -2258,77 +1890,48 @@
                                   <label><strong>2. Feriado:</strong></label>
                                 </td>
                                 <td class="mix">
+                                  <p style="font-style: italic">No se paga el dia, se remunera por separado.</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="mix">
+                                  <label><strong>3. Incapacidad Pública:</strong></label>
+                                </td>
+                                <td class="mix">
                                   <p style="font-style: italic">
-                                    No se paga el dia, se remunera por separado.
+                                    Al ser menos de 4 instancias se paga el valor del dia, caso contrario se ingresa valor a pagar.
                                   </p>
                                 </td>
                               </tr>
                               <tr>
                                 <td class="mix">
-                                  <label
-                                    ><strong
-                                      >3. Incapacidad Pública:</strong
-                                    ></label
-                                  >
+                                  <label><strong>4. Incapacidad Parcial:</strong></label>
                                 </td>
                                 <td class="mix">
                                   <p style="font-style: italic">
-                                    Al ser menos de 4 instancias se paga el
-                                    valor del dia, caso contrario se ingresa
-                                    valor a pagar.
+                                    Se paga por partes, debe especificar valor total y cantidad total de dias que abarcará.
                                   </p>
                                 </td>
                               </tr>
                               <tr>
                                 <td class="mix">
-                                  <label
-                                    ><strong
-                                      >4. Incapacidad Parcial:</strong
-                                    ></label
-                                  >
+                                  <label><strong>5. Incapacidad Privada:</strong></label>
                                 </td>
                                 <td class="mix">
-                                  <p style="font-style: italic">
-                                    Se paga por partes, debe especificar valor
-                                    total y cantidad total de dias que abarcará.
-                                  </p>
+                                  <p style="font-style: italic">Es igual al dia Autorizado.</p>
                                 </td>
                               </tr>
                               <tr>
                                 <td class="mix">
-                                  <label
-                                    ><strong
-                                      >5. Incapacidad Privada:</strong
-                                    ></label
-                                  >
+                                  <label><strong>6. Incapacidad / Vacacion Cancelada:</strong></label>
                                 </td>
                                 <td class="mix">
-                                  <p style="font-style: italic">
-                                    Es igual al dia Autorizado.
-                                  </p>
+                                  <p style="font-style: italic">No se paga el dia, representa que fue remunerada con anterioridad.</p>
                                 </td>
                               </tr>
                               <tr>
                                 <td class="mix">
-                                  <label
-                                    ><strong
-                                      >6. Incapacidad / Vacacion
-                                      Cancelada:</strong
-                                    ></label
-                                  >
-                                </td>
-                                <td class="mix">
-                                  <p style="font-style: italic">
-                                    No se paga el dia, representa que fue
-                                    remunerada con anterioridad.
-                                  </p>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="mix">
-                                  <label
-                                    ><strong>7. Séptimo dia:</strong></label
-                                  >
+                                  <label><strong>7. Séptimo dia:</strong></label>
                                 </td>
                                 <td class="mix">
                                   <p style="font-style: italic">Libre.</p>
@@ -2339,24 +1942,15 @@
                                   <label><strong>8. Vacación:</strong></label>
                                 </td>
                                 <td class="mix">
-                                  <p style="font-style: italic">
-                                    Es igual al dia Feriado.
-                                  </p>
+                                  <p style="font-style: italic">Es igual al dia Feriado.</p>
                                 </td>
                               </tr>
                               <tr>
                                 <td class="mix">
-                                  <label
-                                    ><strong
-                                      >9. Falta / Suspensión:</strong
-                                    ></label
-                                  >
+                                  <label><strong>9. Falta / Suspensión:</strong></label>
                                 </td>
                                 <td class="mix">
-                                  <p style="font-style: italic">
-                                    No se paga el dia, además, no se le remunera
-                                    el séptimo dia.
-                                  </p>
+                                  <p style="font-style: italic">No se paga el dia, además, no se le remunera el séptimo dia.</p>
                                 </td>
                               </tr>
                               <tr>
@@ -2364,10 +1958,7 @@
                                   <label><strong>10. Renuncia:</strong></label>
                                 </td>
                                 <td class="mix">
-                                  <p style="font-style: italic">
-                                    No continua laborando, automáticamente se
-                                    rellena los dias posteriores como tal.
-                                  </p>
+                                  <p style="font-style: italic">No continua laborando, automáticamente se rellena los dias posteriores como tal.</p>
                                 </td>
                               </tr>
                             </div>
@@ -2375,20 +1966,8 @@
                         </nz-collapse>
                       </td>
                       <td style="width: 30%" *ngIf="this.fileUploaded === true">
-                        <button
-                          nz-button
-                          nzType="primary"
-                          nzSize="large"
-                          nzShape="round"
-                          (click)="showArchivoById()"
-                        >
-                          <span
-                            nz-icon
-                            class="center"
-                            nzType="eye"
-                            nzTheme="outline"
-                          ></span
-                          >Ver Horario
+                        <button nz-button nzType="primary" nzSize="large" nzShape="round" (click)="showArchivoById()">
+                          <span nz-icon class="center" nzType="eye" nzTheme="outline"></span>Ver Horario
                         </button>
                       </td>
                     </tr>
@@ -2405,59 +1984,30 @@
                     <h1 style="text-align: center">Control de asistencia</h1>
                     <form [formGroup]="horasForm">
                       <tr>
-                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                          >Lunes</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Lunes</nz-form-label>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="luIControl"
-                            (ngModelChange)="horasLuI($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="luIControl" (ngModelChange)="horasLuI($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Entrada</div>
                         </td>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="luOControl"
-                            (ngModelChange)="horasLuO($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="luOControl" (ngModelChange)="horasLuO($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Salida</div>
                         </td>
                         <td>
                           <form [formGroup]="descriForm">
-                            <select
-                              class="form-select"
-                              formControlName="lunesSelect"
-                              id="lunesSelect"
-                              (ngModelChange)="onChangeLunes()"
-                            >
+                            <select class="form-select" formControlName="lunesSelect" id="lunesSelect" (ngModelChange)="onChangeLunes()">
                               <option label="Ninguna" value=""></option>
                               <option value="notrabajaba">No Laboraba</option>
                               <optgroup label="Con Permiso">
                                 <option value="conpermiso">Autorizado</option>
                                 <option value="feriado">Feriado</option>
-                                <option value="incapacidadpub">
-                                  Incapacidad Pública
-                                </option>
-                                <option value="incapacidadpubparcial">
-                                  Incapacidad Pública Parcial
-                                </option>
-                                <option value="incapacidadpriv">
-                                  Incapacidad Privada
-                                </option>
-                                <option value="incapacidadcancelada">
-                                  Incapacidad Cancelada
-                                </option>
+                                <option value="incapacidadpub">Incapacidad Pública</option>
+                                <option value="incapacidadpubparcial">Incapacidad Pública Parcial</option>
+                                <option value="incapacidadpriv">Incapacidad Privada</option>
+                                <option value="incapacidadcancelada">Incapacidad Cancelada</option>
                                 <option value="septimo">Séptimo dia</option>
                                 <option value="vacacion">Vacación</option>
-                                <option value="vacacioncancelada">
-                                  Vacación Cancelada
-                                </option>
+                                <option value="vacacioncancelada">Vacación Cancelada</option>
                               </optgroup>
                               <optgroup label="Sin Permiso">
                                 <option value="falta">Falta</option>
@@ -2470,59 +2020,30 @@
                         </td>
                       </tr>
                       <tr>
-                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                          >Martes</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Martes</nz-form-label>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="maIControl"
-                            (ngModelChange)="horasMaI($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="maIControl" (ngModelChange)="horasMaI($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Entrada</div>
                         </td>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="maOControl"
-                            (ngModelChange)="horasMaO($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="maOControl" (ngModelChange)="horasMaO($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Salida</div>
                         </td>
                         <td>
                           <form [formGroup]="descriForm">
-                            <select
-                              class="form-select"
-                              formControlName="martesSelect"
-                              id="martesSelect"
-                              (ngModelChange)="onChangeMartes()"
-                            >
+                            <select class="form-select" formControlName="martesSelect" id="martesSelect" (ngModelChange)="onChangeMartes()">
                               <option label="Ninguna" value=""></option>
                               <option value="notrabajaba">No Laboraba</option>
                               <optgroup label="Con Permiso">
                                 <option value="conpermiso">Autorizado</option>
                                 <option value="feriado">Feriado</option>
-                                <option value="incapacidadpub">
-                                  Incapacidad Pública
-                                </option>
-                                <option value="incapacidadpubparcial">
-                                  Incapacidad Pública Parcial
-                                </option>
-                                <option value="incapacidadpriv">
-                                  Incapacidad Privada
-                                </option>
-                                <option value="incapacidadcancelada">
-                                  Incapacidad Cancelada
-                                </option>
+                                <option value="incapacidadpub">Incapacidad Pública</option>
+                                <option value="incapacidadpubparcial">Incapacidad Pública Parcial</option>
+                                <option value="incapacidadpriv">Incapacidad Privada</option>
+                                <option value="incapacidadcancelada">Incapacidad Cancelada</option>
                                 <option value="septimo">Séptimo dia</option>
                                 <option value="vacacion">Vacación</option>
-                                <option value="vacacioncancelada">
-                                  Vacación Cancelada
-                                </option>
+                                <option value="vacacioncancelada">Vacación Cancelada</option>
                               </optgroup>
                               <optgroup label="Sin Permiso">
                                 <option value="falta">Falta</option>
@@ -2535,59 +2056,30 @@
                         </td>
                       </tr>
                       <tr>
-                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                          >Miércoles</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Miércoles</nz-form-label>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="miIControl"
-                            (ngModelChange)="horasMiI($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="miIControl" (ngModelChange)="horasMiI($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Entrada</div>
                         </td>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="miOControl"
-                            (ngModelChange)="horasMiO($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="miOControl" (ngModelChange)="horasMiO($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Salida</div>
                         </td>
                         <td>
                           <form [formGroup]="descriForm">
-                            <select
-                              class="form-select"
-                              formControlName="miercolesSelect"
-                              id="miercolesSelect"
-                              (ngModelChange)="onChangeMiercoles()"
-                            >
+                            <select class="form-select" formControlName="miercolesSelect" id="miercolesSelect" (ngModelChange)="onChangeMiercoles()">
                               <option label="Ninguna" value=""></option>
                               <option value="notrabajaba">No Laboraba</option>
                               <optgroup label="Con Permiso">
                                 <option value="conpermiso">Autorizado</option>
                                 <option value="feriado">Feriado</option>
-                                <option value="incapacidadpub">
-                                  Incapacidad Pública
-                                </option>
-                                <option value="incapacidadpubparcial">
-                                  Incapacidad Pública Parcial
-                                </option>
-                                <option value="incapacidadpriv">
-                                  Incapacidad Privada
-                                </option>
-                                <option value="incapacidadcancelada">
-                                  Incapacidad Cancelada
-                                </option>
+                                <option value="incapacidadpub">Incapacidad Pública</option>
+                                <option value="incapacidadpubparcial">Incapacidad Pública Parcial</option>
+                                <option value="incapacidadpriv">Incapacidad Privada</option>
+                                <option value="incapacidadcancelada">Incapacidad Cancelada</option>
                                 <option value="septimo">Séptimo dia</option>
                                 <option value="vacacion">Vacación</option>
-                                <option value="vacacioncancelada">
-                                  Vacación Cancelada
-                                </option>
+                                <option value="vacacioncancelada">Vacación Cancelada</option>
                               </optgroup>
                               <optgroup label="Sin Permiso">
                                 <option value="falta">Falta</option>
@@ -2600,59 +2092,30 @@
                         </td>
                       </tr>
                       <tr>
-                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                          >Jueves</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Jueves</nz-form-label>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="juIControl"
-                            (ngModelChange)="horasJuI($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="juIControl" (ngModelChange)="horasJuI($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Entrada</div>
                         </td>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="juOControl"
-                            (ngModelChange)="horasJuO($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="juOControl" (ngModelChange)="horasJuO($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Salida</div>
                         </td>
                         <td>
                           <form [formGroup]="descriForm">
-                            <select
-                              class="form-select"
-                              formControlName="juevesSelect"
-                              id="juevesSelect"
-                              (ngModelChange)="onChangeJueves()"
-                            >
+                            <select class="form-select" formControlName="juevesSelect" id="juevesSelect" (ngModelChange)="onChangeJueves()">
                               <option label="Ninguna" value=""></option>
                               <option value="notrabajaba">No Laboraba</option>
                               <optgroup label="Con Permiso">
                                 <option value="conpermiso">Autorizado</option>
                                 <option value="feriado">Feriado</option>
-                                <option value="incapacidadpub">
-                                  Incapacidad Pública
-                                </option>
-                                <option value="incapacidadpubparcial">
-                                  Incapacidad Pública Parcial
-                                </option>
-                                <option value="incapacidadpriv">
-                                  Incapacidad Privada
-                                </option>
-                                <option value="incapacidadcancelada">
-                                  Incapacidad Cancelada
-                                </option>
+                                <option value="incapacidadpub">Incapacidad Pública</option>
+                                <option value="incapacidadpubparcial">Incapacidad Pública Parcial</option>
+                                <option value="incapacidadpriv">Incapacidad Privada</option>
+                                <option value="incapacidadcancelada">Incapacidad Cancelada</option>
                                 <option value="septimo">Séptimo dia</option>
                                 <option value="vacacion">Vacación</option>
-                                <option value="vacacioncancelada">
-                                  Vacación Cancelada
-                                </option>
+                                <option value="vacacioncancelada">Vacación Cancelada</option>
                               </optgroup>
                               <optgroup label="Sin Permiso">
                                 <option value="falta">Falta</option>
@@ -2665,59 +2128,30 @@
                         </td>
                       </tr>
                       <tr>
-                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                          >Viernes</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Viernes</nz-form-label>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="viIControl"
-                            (ngModelChange)="horasViI($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="viIControl" (ngModelChange)="horasViI($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Entrada</div>
                         </td>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="viOControl"
-                            (ngModelChange)="horasViO($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="viOControl" (ngModelChange)="horasViO($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Salida</div>
                         </td>
                         <td>
                           <form [formGroup]="descriForm">
-                            <select
-                              class="form-select"
-                              formControlName="viernesSelect"
-                              id="viernesSelect"
-                              (ngModelChange)="onChangeViernes()"
-                            >
+                            <select class="form-select" formControlName="viernesSelect" id="viernesSelect" (ngModelChange)="onChangeViernes()">
                               <option label="Ninguna" value=""></option>
                               <option value="notrabajaba">No Laboraba</option>
                               <optgroup label="Con Permiso">
                                 <option value="conpermiso">Autorizado</option>
                                 <option value="feriado">Feriado</option>
-                                <option value="incapacidadpub">
-                                  Incapacidad Pública
-                                </option>
-                                <option value="incapacidadpubparcial">
-                                  Incapacidad Pública Parcial
-                                </option>
-                                <option value="incapacidadpriv">
-                                  Incapacidad Privada
-                                </option>
-                                <option value="incapacidadcancelada">
-                                  Incapacidad Cancelada
-                                </option>
+                                <option value="incapacidadpub">Incapacidad Pública</option>
+                                <option value="incapacidadpubparcial">Incapacidad Pública Parcial</option>
+                                <option value="incapacidadpriv">Incapacidad Privada</option>
+                                <option value="incapacidadcancelada">Incapacidad Cancelada</option>
                                 <option value="septimo">Séptimo dia</option>
                                 <option value="vacacion">Vacación</option>
-                                <option value="vacacioncancelada">
-                                  Vacación Cancelada
-                                </option>
+                                <option value="vacacioncancelada">Vacación Cancelada</option>
                               </optgroup>
                               <optgroup label="Sin Permiso">
                                 <option value="falta">Falta</option>
@@ -2730,59 +2164,30 @@
                         </td>
                       </tr>
                       <tr>
-                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                          >Sábado</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Sábado</nz-form-label>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="saIControl"
-                            (ngModelChange)="horasSaI($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="saIControl" (ngModelChange)="horasSaI($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Entrada</div>
                         </td>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="saOControl"
-                            (ngModelChange)="horasSaO($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="saOControl" (ngModelChange)="horasSaO($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Salida</div>
                         </td>
                         <td>
                           <form [formGroup]="descriForm">
-                            <select
-                              class="form-select"
-                              formControlName="sabadoSelect"
-                              id="sabadoSelect"
-                              (ngModelChange)="onChangeSabado()"
-                            >
+                            <select class="form-select" formControlName="sabadoSelect" id="sabadoSelect" (ngModelChange)="onChangeSabado()">
                               <option label="Ninguna" value=""></option>
                               <option value="notrabajaba">No Laboraba</option>
                               <optgroup label="Con Permiso">
                                 <option value="conpermiso">Autorizado</option>
                                 <option value="feriado">Feriado</option>
-                                <option value="incapacidadpub">
-                                  Incapacidad Pública
-                                </option>
-                                <option value="incapacidadpubparcial">
-                                  Incapacidad Pública Parcial
-                                </option>
-                                <option value="incapacidadpriv">
-                                  Incapacidad Privada
-                                </option>
-                                <option value="incapacidadcancelada">
-                                  Incapacidad Cancelada
-                                </option>
+                                <option value="incapacidadpub">Incapacidad Pública</option>
+                                <option value="incapacidadpubparcial">Incapacidad Pública Parcial</option>
+                                <option value="incapacidadpriv">Incapacidad Privada</option>
+                                <option value="incapacidadcancelada">Incapacidad Cancelada</option>
                                 <option value="septimo">Séptimo dia</option>
                                 <option value="vacacion">Vacación</option>
-                                <option value="vacacioncancelada">
-                                  Vacación Cancelada
-                                </option>
+                                <option value="vacacioncancelada">Vacación Cancelada</option>
                               </optgroup>
                               <optgroup label="Sin Permiso">
                                 <option value="falta">Falta</option>
@@ -2795,59 +2200,30 @@
                         </td>
                       </tr>
                       <tr>
-                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                          >Domingo</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Domingo</nz-form-label>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="doIControl"
-                            (ngModelChange)="horasDoI($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="doIControl" (ngModelChange)="horasDoI($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Entrada</div>
                         </td>
                         <td>
-                          <input
-                            type="time"
-                            formControlName="doOControl"
-                            (ngModelChange)="horasDoO($event)"
-                            step="900"
-                            class="form-control"
-                          />
+                          <input type="time" formControlName="doOControl" (ngModelChange)="horasDoO($event)" step="900" class="form-control" />
                           <div class="form-text">Hora de Salida</div>
                         </td>
                         <td>
                           <form [formGroup]="descriForm">
-                            <select
-                              class="form-select"
-                              formControlName="domingoSelect"
-                              id="domingoSelect"
-                              (ngModelChange)="onChangeDomingo()"
-                            >
+                            <select class="form-select" formControlName="domingoSelect" id="domingoSelect" (ngModelChange)="onChangeDomingo()">
                               <option label="Ninguna" value=""></option>
                               <option value="notrabajaba">No Laboraba</option>
                               <optgroup label="Con Permiso">
                                 <option value="conpermiso">Autorizado</option>
                                 <option value="feriado">Feriado</option>
-                                <option value="incapacidadpub">
-                                  Incapacidad Pública
-                                </option>
-                                <option value="incapacidadpubparcial">
-                                  Incapacidad Pública Parcial
-                                </option>
-                                <option value="incapacidadpriv">
-                                  Incapacidad Privada
-                                </option>
-                                <option value="incapacidadcancelada">
-                                  Incapacidad Cancelada
-                                </option>
+                                <option value="incapacidadpub">Incapacidad Pública</option>
+                                <option value="incapacidadpubparcial">Incapacidad Pública Parcial</option>
+                                <option value="incapacidadpriv">Incapacidad Privada</option>
+                                <option value="incapacidadcancelada">Incapacidad Cancelada</option>
                                 <option value="septimo">Séptimo dia</option>
                                 <option value="vacacion">Vacación</option>
-                                <option value="vacacioncancelada">
-                                  Vacación Cancelada
-                                </option>
+                                <option value="vacacioncancelada">Vacación Cancelada</option>
                               </optgroup>
                               <optgroup label="Sin Permiso">
                                 <option value="falta">Falta</option>
@@ -2911,13 +2287,7 @@
                             </button>
                           </td>
                           <td>
-                            <nz-form-label
-                              style="padding-top: 5px"
-                              [nzNoColon]="true"
-                              [nzSm]="24"
-                              [nzXs]="24"
-                              >Periodo de Prueba
-                            </nz-form-label>
+                            <nz-form-label style="padding-top: 5px" [nzNoColon]="true" [nzSm]="24" [nzXs]="24">Periodo de Prueba </nz-form-label>
                             <nz-switch
                               [(ngModel)]="switchValuePP"
                               [nzDisabled]="isDisabledPP"
@@ -2925,12 +2295,8 @@
                               [nzCheckedChildren]="checkedTemplate"
                               [nzUnCheckedChildren]="unCheckedTemplate"
                             ></nz-switch>
-                            <ng-template #checkedTemplate
-                              ><i nz-icon nzType="check"></i
-                            ></ng-template>
-                            <ng-template #unCheckedTemplate
-                              ><i nz-icon nzType="close"></i
-                            ></ng-template>
+                            <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+                            <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template>
                           </td>
                         </tr>
                       </table>
@@ -2950,31 +2316,15 @@
                   <div id="divPrincipal" class="card">
                     <div class="card-body">
                       <div>
-                        <h1 style="text-align: center">
-                          Información Adicional
-                        </h1>
+                        <h1 style="text-align: center">Información Adicional</h1>
                         <form [formGroup]="extraForm">
                           <tr>
-                            <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                              >Valor de la incapacidad pública</nz-form-label
-                            >
+                            <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Valor de la incapacidad pública</nz-form-label>
                             <td>
-                              <input
-                                formControlName="incpub"
-                                nz-input
-                                placeholder="0"
-                                type="number"
-                                min="0"
-                                nzSize="default"
-                              />
+                              <input formControlName="incpub" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                             </td>
                             <td>
-                              <button
-                                type="button"
-                                class="btn btn-primary"
-                                [disabled]="extraForm.invalid"
-                                (click)="incapacidadPub()"
-                              >
+                              <button type="button" class="btn btn-primary" [disabled]="extraForm.invalid" (click)="incapacidadPub()">
                                 <i class="bi bi-check-lg"></i>
                               </button>
                             </td>
@@ -2997,26 +2347,13 @@
                   <div id="divSecundario" class="card">
                     <div class="card-body">
                       <div>
-                        <h1 style="text-align: center">
-                          Información Adicional
-                        </h1>
+                        <h1 style="text-align: center">Información Adicional</h1>
                         <form [formGroup]="extraFormSecundario">
                           <tr>
-                            <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                              >Jornada de la Incapacidad Privada</nz-form-label
-                            >
+                            <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Jornada de la Incapacidad Privada</nz-form-label>
                             <td>
-                              <select
-                                class="form-select"
-                                formControlName="jornadaSelect"
-                                id="jornadaSelect"
-                                (ngModelChange)="onChangeJornada()"
-                              >
-                                <option
-                                  label="Seleccione"
-                                  selected
-                                  disabled
-                                ></option>
+                              <select class="form-select" formControlName="jornadaSelect" id="jornadaSelect" (ngModelChange)="onChangeJornada()">
+                                <option label="Seleccione" selected disabled></option>
                                 <option value="Diurna">Diurna</option>
                                 <option value="Mixta">Mixta</option>
                                 <option value="Nocturna">Nocturna</option>
@@ -3024,12 +2361,7 @@
                             </td>
 
                             <td>
-                              <button
-                                type="button"
-                                class="btn btn-primary"
-                                [disabled]="extraFormSecundario.invalid"
-                                (click)="incapacidadPriv()"
-                              >
+                              <button type="button" class="btn btn-primary" [disabled]="extraFormSecundario.invalid" (click)="incapacidadPriv()">
                                 <i class="bi bi-check-lg"></i>
                               </button>
                             </td>
@@ -3052,46 +2384,21 @@
                   <div id="divTercero" class="card">
                     <div class="card-body">
                       <div>
-                        <h1 style="text-align: center">
-                          Información Adicional
-                        </h1>
+                        <h1 style="text-align: center">Información Adicional</h1>
                         <form [formGroup]="extraFormTercero">
                           <tr>
-                            <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                              >Valor total de la incapacidad</nz-form-label
-                            >
+                            <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Valor total de la incapacidad</nz-form-label>
                             <td>
-                              <input
-                                formControlName="incpub"
-                                nz-input
-                                placeholder="0"
-                                type="number"
-                                min="0"
-                                nzSize="default"
-                              />
+                              <input formControlName="incpub" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                             </td>
                           </tr>
                           <tr>
-                            <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired
-                              >Suma de dias de la incapacidad</nz-form-label
-                            >
+                            <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired>Suma de dias de la incapacidad</nz-form-label>
                             <td>
-                              <input
-                                formControlName="dias"
-                                nz-input
-                                placeholder="0"
-                                type="number"
-                                min="0"
-                                nzSize="default"
-                              />
+                              <input formControlName="dias" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                             </td>
                             <td>
-                              <button
-                                type="button"
-                                class="btn btn-primary"
-                                [disabled]="extraFormTercero.invalid"
-                                (click)="incapacidadPubParcial()"
-                              >
+                              <button type="button" class="btn btn-primary" [disabled]="extraFormTercero.invalid" (click)="incapacidadPubParcial()">
                                 <i class="bi bi-check-lg"></i>
                               </button>
                             </td>
@@ -3111,198 +2418,79 @@
                     <h1 style="text-align: center">Resumen</h1>
                     <form [formGroup]="resumenForm">
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Horas Normales :
-                          {{ this.totalTrabNormales }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Horas Normales : {{ this.totalTrabNormales }}</nz-form-label>
                         <td>
-                          <input
-                            formControlName="hn"
-                            nz-input
-                            placeholder="0"
-                            type="text"
-                            nzSize="default"
-                          />
+                          <input formControlName="hn" nz-input placeholder="0" type="text" nzSize="default" />
                         </td>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Horas Extras Diurnas :
-                          {{ this.totalExtrasDiurnas }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Horas Extras Diurnas : {{ this.totalExtrasDiurnas }}</nz-form-label>
                         <td>
-                          <input
-                            formControlName="hed"
-                            nz-input
-                            placeholder="0"
-                            type="text"
-                            nzSize="default"
-                          />
+                          <input formControlName="hed" nz-input placeholder="0" type="text" nzSize="default" />
                         </td>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Horas Extras Mixtas :
-                          {{ this.totalExtrasMixtas }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Horas Extras Mixtas : {{ this.totalExtrasMixtas }}</nz-form-label>
                         <td>
-                          <input
-                            formControlName="hem"
-                            nz-input
-                            placeholder="0"
-                            type="text"
-                            nzSize="default"
-                          />
+                          <input formControlName="hem" nz-input placeholder="0" type="text" nzSize="default" />
                         </td>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Horas Extras Nocturnas :
-                          {{ this.totalExtrasNocturnas }}</nz-form-label
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true"
+                          >Horas Extras Nocturnas : {{ this.totalExtrasNocturnas }}</nz-form-label
                         >
                         <td>
-                          <input
-                            formControlName="hen"
-                            nz-input
-                            placeholder="0"
-                            type="text"
-                            nzSize="default"
-                          />
+                          <input formControlName="hen" nz-input placeholder="0" type="text" nzSize="default" />
                         </td>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Ajuste</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Ajuste</nz-form-label>
                         <td>
-                          <input
-                            formControlName="ajuste"
-                            nz-input
-                            placeholder="0"
-                            type="number"
-                            min="0"
-                            nzSize="default"
-                          />
+                          <input formControlName="ajuste" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                         </td>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Feriados : {{ this.feriado }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Feriados : {{ this.feriado }}</nz-form-label>
                         <td>
-                          <input
-                            formControlName="feriado"
-                            nz-input
-                            placeholder="0"
-                            type="text"
-                            nzSize="default"
-                          />
+                          <input formControlName="feriado" nz-input placeholder="0" type="text" nzSize="default" />
                         </td>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Septimo Dia : {{ this.septimo }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Septimo Dia : {{ this.septimo }}</nz-form-label>
                         <td>
-                          <input
-                            formControlName="septimo"
-                            nz-input
-                            placeholder="0"
-                            type="text"
-                            nzSize="default"
-                          />
+                          <input formControlName="septimo" nz-input placeholder="0" type="text" nzSize="default" />
                         </td>
                       </tr>
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Vacaciones : {{ this.vacacion }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Vacaciones : {{ this.vacacion }}</nz-form-label>
                         <td>
-                          <input
-                            formControlName="vacacion"
-                            nz-input
-                            placeholder="0"
-                            type="text"
-                            nzSize="default"
-                          />
+                          <input formControlName="vacacion" nz-input placeholder="0" type="text" nzSize="default" />
                         </td>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Incapacidades Públicas :
-                          {{ this.incapacidadpub }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Incapacidades Públicas : {{ this.incapacidadpub }}</nz-form-label>
                         <td>
-                          <input
-                            formControlName="incapacidad"
-                            nz-input
-                            placeholder="0"
-                            type="text"
-                            nzSize="default"
-                          />
+                          <input formControlName="incapacidad" nz-input placeholder="0" type="text" nzSize="default" />
                         </td>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Incapacidades Privadas :
-                          {{ this.incapacidadpriv }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Incapacidades Privadas : {{ this.incapacidadpriv }}</nz-form-label>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Faltas: {{ this.falta }}</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Faltas: {{ this.falta }}</nz-form-label>
                       </tr>
 
                       <tr>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          [nzNoColon]="true"
-                          >Suspensiones: {{ this.suspension }}
-                        </nz-form-label>
+                        <nz-form-label [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Suspensiones: {{ this.suspension }} </nz-form-label>
                       </tr>
                     </form>
                     <table style="margin: 0 auto">
@@ -3318,33 +2506,16 @@
                             data-placement="bottom"
                             title="Calcular Ingresos"
                           >
-                            <i
-                              nz-icon
-                              class="center"
-                              nzType="calculator"
-                              nzTheme="fill"
-                            ></i>
+                            <i nz-icon class="center" nzType="calculator" nzTheme="fill"></i>
                           </button>
                         </td>
                         <td>
-                          <button
-                            type="button"
-                            class="btn btn-info"
-                            (click)="limpiarMain()"
-                            data-placement="bottom"
-                            title="Limpiar"
-                          >
+                          <button type="button" class="btn btn-info" (click)="limpiarMain()" data-placement="bottom" title="Limpiar">
                             <i class="bi bi-stars"></i>
                           </button>
                         </td>
                         <td>
-                          <button
-                            type="button"
-                            class="btn btn-danger"
-                            (click)="handleMainCancel()"
-                            data-placement="bottom"
-                            title="Cancelar"
-                          >
+                          <button type="button" class="btn btn-danger" (click)="handleMainCancel()" data-placement="bottom" title="Cancelar">
                             <i class="bi bi-x-lg"></i>
                           </button>
                         </td>
@@ -3352,9 +2523,7 @@
                     </table>
                   </div>
                 </div>
-                <h2 style="text-align: center" class="h2">
-                  Sueldo Bruto: Lps. {{ this.sueldoString }}
-                </h2>
+                <h2 style="text-align: center" class="h2">Sueldo Bruto: Lps. {{ this.sueldoString }}</h2>
               </div>
             </td>
           </tr>
@@ -3363,9 +2532,7 @@
     </nz-modal>
     <nz-modal
       [(nzVisible)]="isVisibleDeduccion"
-      nzTitle="Calculando Deducciones | {{
-        this.nombreCompleto
-      }} — Salario Bruto: Lps. {{ this.sueldoAlDeducirString }}"
+      nzTitle="Calculando Deducciones | {{ this.nombreCompleto }} — Salario Bruto: Lps. {{ this.sueldoAlDeducirString }}"
       (nzOnCancel)="handleMainDeduccionCancel()"
       nzClosable="false"
       [nzFooter]="null"
@@ -3392,9 +2559,7 @@
                           </div>
                         </div>
                       </td>
-                      <nz-form-label [nzNoColon]="true" [nzSm]="24" [nzXs]="24"
-                        >Marcar Todos</nz-form-label
-                      >
+                      <nz-form-label [nzNoColon]="true" [nzSm]="24" [nzXs]="24">Marcar Todos</nz-form-label>
                     </tr>
                   </div>
                   <form nz-form [formGroup]="automaticForm">
@@ -3414,19 +2579,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >IHSS</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">IHSS</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="ihss"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="ihss" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                       <td style="padding-left: 0px">
                         <nz-switch
@@ -3437,12 +2593,8 @@
                           [nzDisabled]="isDisabledIHSS"
                           [ngModelOptions]="{ standalone: true }"
                         ></nz-switch>
-                        <ng-template #checkedTemplate
-                          ><i nz-icon nzType="edit" nzTheme="outline"></i
-                        ></ng-template>
-                        <ng-template #unCheckedTemplate
-                          ><i nz-icon nzType="check"></i
-                        ></ng-template>
+                        <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                        <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
                       </td>
                     </tr>
 
@@ -3461,19 +2613,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >ISR</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">ISR</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="isr"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="isr" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                       <td style="padding-left: 0px">
                         <nz-switch
@@ -3484,12 +2627,8 @@
                           [nzDisabled]="isDisabledISR"
                           [ngModelOptions]="{ standalone: true }"
                         ></nz-switch>
-                        <ng-template #checkedTemplate
-                          ><i nz-icon nzType="edit" nzTheme="outline"></i
-                        ></ng-template>
-                        <ng-template #unCheckedTemplate
-                          ><i nz-icon nzType="check"></i
-                        ></ng-template>
+                        <ng-template #checkedTemplate><i nz-icon nzType="edit" nzTheme="outline"></i></ng-template>
+                        <ng-template #unCheckedTemplate><i nz-icon nzType="check"></i></ng-template>
                       </td>
                     </tr>
                   </form>
@@ -3510,19 +2649,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Impuesto Vecinal</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">Impuesto Vecinal</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="impvecinal"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="impvecinal" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -3541,22 +2671,12 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label
-                          [nzSm]="24"
-                          [nzXs]="24"
-                          nzTooltipTitle="Valor a deducir por actos negligentes durante horas laborales"
+                        <nz-form-label [nzSm]="24" [nzXs]="24" nzTooltipTitle="Valor a deducir por actos negligentes durante horas laborales"
                           >CTA. Empresa
                         </nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="ctaempresa"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="ctaempresa" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -3575,19 +2695,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Transporte</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">Transporte</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="transporte"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="transporte" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -3606,19 +2717,10 @@
                         </div>
                       </td>
                       <td>
-                        <nz-form-label [nzSm]="24" [nzXs]="24"
-                          >Ajuste</nz-form-label
-                        >
+                        <nz-form-label [nzSm]="24" [nzXs]="24">Ajuste</nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="ajuste"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="ajuste" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
 
@@ -3645,14 +2747,7 @@
                         </nz-form-label>
                       </td>
                       <td>
-                        <input
-                          formControlName="varios"
-                          nz-input
-                          placeholder="0"
-                          type="number"
-                          min="0"
-                          nzSize="default"
-                        />
+                        <input formControlName="varios" nz-input placeholder="0" type="number" min="0" nzSize="default" />
                       </td>
                     </tr>
                   </form>
@@ -3672,33 +2767,16 @@
                           data-placement="bottom"
                           title="Calcular Deducciones"
                         >
-                          <i
-                            nz-icon
-                            class="center"
-                            nzType="calculator"
-                            nzTheme="fill"
-                          ></i>
+                          <i nz-icon class="center" nzType="calculator" nzTheme="fill"></i>
                         </button>
                       </td>
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-info"
-                          (click)="limpiarMainDeduccion()"
-                          data-placement="bottom"
-                          title="Limpiar"
-                        >
+                        <button type="button" class="btn btn-info" (click)="limpiarMainDeduccion()" data-placement="bottom" title="Limpiar">
                           <i class="bi bi-stars"></i>
                         </button>
                       </td>
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger"
-                          (click)="handleMainDeduccionCancel()"
-                          data-placement="bottom"
-                          title="Cancelar"
-                        >
+                        <button type="button" class="btn btn-danger" (click)="handleMainDeduccionCancel()" data-placement="bottom" title="Cancelar">
                           <i class="bi bi-x-lg"></i>
                         </button>
                       </td>
@@ -3706,9 +2784,7 @@
                   </table>
                 </div>
               </div>
-              <h2 style="text-align: center" class="h2">
-                Total Deducciones: Lps. {{ this.deduccionString }}
-              </h2>
+              <h2 style="text-align: center" class="h2">Total Deducciones: Lps. {{ this.deduccionString }}</h2>
             </div>
           </td>
         </div>
@@ -3876,12 +2952,7 @@
     <nz-table nzTemplateMode id="finalv2" hidden>
       <tbody>
         <td class="mix">
-          <nz-table
-            nzSize="small"
-            nzBordered
-            nzTemplateMode
-            *ngFor="let data of listComprobantes; let i = index"
-          >
+          <nz-table nzSize="small" nzBordered nzTemplateMode *ngFor="let data of listComprobantes; let i = index">
             <thead *ngIf="i % 2 === 1">
               <tr>
                 <th>:</th>
@@ -3969,27 +3040,18 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">SALARIO NORMAL</td>
-                <td colspan="2">{{ data.lpsNormales | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.lpsNormales | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
-              <tr
-                *ngIf="
-                  !isNumber(
-                    data.lpsDiurnas + data.lpsMixtas + data.lpsNocturnas
-                  ) && this.totalAguinaldo <= 0
-                "
-              >
+              <tr *ngIf="!isNumber(data.lpsDiurnas + data.lpsMixtas + data.lpsNocturnas) && this.totalAguinaldo <= 0">
                 <td>:</td>
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">SALARIO EXTRA</td>
                 <td colspan="2">
-                  {{
-                    data.lpsDiurnas + data.lpsMixtas + data.lpsNocturnas
-                      | currency : "LPS "
-                  }}
+                  {{ data.lpsDiurnas + data.lpsMixtas + data.lpsNocturnas | currency : 'LPS ' }}
                 </td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
@@ -4000,7 +3062,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">{{ this.mesAguinaldo | uppercase }}</td>
-                <td colspan="2">{{ data.aguinaldo | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.aguinaldo | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -4010,7 +3072,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">FERIADO</td>
-                <td colspan="2">{{ data.feriado | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.feriado | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -4020,7 +3082,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">INCAPACIDAD</td>
-                <td colspan="2">{{ data.incapacidad | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.incapacidad | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -4030,7 +3092,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">VACACION</td>
-                <td colspan="2">{{ data.vacacion | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.vacacion | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -4040,7 +3102,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">(+) AJUSTE</td>
-                <td colspan="2">{{ data.ajusteP | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ajusteP | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -4050,7 +3112,7 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">SEPTIMO DIA</td>
-                <td colspan="2">{{ data.septimo | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.septimo | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -4061,7 +3123,7 @@
                 <td>:</td>
                 <td colspan="2">IHSS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ihss | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ihss | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -4071,7 +3133,7 @@
                 <td>:</td>
                 <td colspan="2">RETENCION ISRENTA {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.isr | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.isr | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -4081,7 +3143,7 @@
                 <td>:</td>
                 <td colspan="2">IMP. PER MUNI {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.impvecinal | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.impvecinal | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -4091,7 +3153,7 @@
                 <td>:</td>
                 <td colspan="2">CTA. EMPRESA</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.cta | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.cta | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -4101,7 +3163,7 @@
                 <td>:</td>
                 <td colspan="2">TRANSPORTE</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.viaticos | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.viaticos | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -4112,7 +3174,7 @@
                 <td colspan="2" *ngIf="totalAguinaldo === 0">(-) AJUSTE</td>
                 <td colspan="2" *ngIf="totalAguinaldo > 0">(-) ANTICIPO</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ajuste | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ajuste | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -4122,7 +3184,7 @@
                 <td>:</td>
                 <td colspan="2">OTROS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.otros | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td>:</td>
               </tr>
@@ -4175,9 +3237,9 @@
                 <td>:</td>
                 <td>:</td>
                 <td colspan="2">TOTALES</td>
-                <td colspan="2">{{ data.ingresos | currency : "LPS " }}</td>
-                <td colspan="2">{{ data.deducciones | currency : "LPS " }}</td>
-                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ingresos | currency : 'LPS ' }}</td>
+                <td colspan="2">{{ data.deducciones | currency : 'LPS ' }}</td>
+                <td colspan="2">{{ data.totalPagar | currency : 'LPS ' }}</td>
                 <td>:</td>
               </tr>
               <tr>
@@ -4262,11 +3324,8 @@
                 <td>:</td>
                 <td>:</td>
                 <td>:</td>
-                <td colspan="6">
-                  RECIBI
-                  CONFORME:_________________________________________________.
-                </td>
-                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
+                <td colspan="6">RECIBI CONFORME:_________________________________________________.</td>
+                <td colspan="2">{{ data.totalPagar | currency : 'LPS ' }}</td>
                 <td>:</td>
               </tr>
               <tr>
@@ -4287,12 +3346,7 @@
     <nz-table nzTemplateMode id="final" hidden>
       <tbody>
         <td class="mix">
-          <nz-table
-            nzSize="small"
-            nzBordered
-            nzTemplateMode
-            *ngFor="let data of listComprobantes; let i = index"
-          >
+          <nz-table nzSize="small" nzBordered nzTemplateMode *ngFor="let data of listComprobantes; let i = index">
             <thead *ngIf="i % 2 === 0">
               <tr>
                 <th>:</th>
@@ -4351,24 +3405,15 @@
               <tr *ngIf="this.totalAguinaldo <= 0">
                 <td>:</td>
                 <td colspan="2">SALARIO NORMAL</td>
-                <td colspan="2">{{ data.lpsNormales | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.lpsNormales | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
-              <tr
-                *ngIf="
-                  !isNumber(
-                    data.lpsDiurnas + data.lpsMixtas + data.lpsNocturnas
-                  ) && this.totalAguinaldo <= 0
-                "
-              >
+              <tr *ngIf="!isNumber(data.lpsDiurnas + data.lpsMixtas + data.lpsNocturnas) && this.totalAguinaldo <= 0">
                 <td>:</td>
                 <td colspan="2">SALARIO EXTRA</td>
                 <td colspan="2">
-                  {{
-                    data.lpsDiurnas + data.lpsMixtas + data.lpsNocturnas
-                      | currency : "LPS "
-                  }}
+                  {{ data.lpsDiurnas + data.lpsMixtas + data.lpsNocturnas | currency : 'LPS ' }}
                 </td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
@@ -4376,35 +3421,35 @@
               <tr *ngIf="data.aguinaldo > 0">
                 <td>:</td>
                 <td colspan="2">{{ this.mesAguinaldo | uppercase }}</td>
-                <td colspan="2">{{ data.aguinaldo | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.aguinaldo | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.feriado > 0">
                 <td>:</td>
                 <td colspan="2">FERIADO</td>
-                <td colspan="2">{{ data.feriado | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.feriado | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.incapacidad > 0">
                 <td>:</td>
                 <td colspan="2">INCAPACIDAD</td>
-                <td colspan="2">{{ data.incapacidad | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.incapacidad | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.vacacion > 0">
                 <td>:</td>
                 <td colspan="2">VACACION</td>
-                <td colspan="2">{{ data.vacacion | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.vacacion | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.ajusteP > 0">
                 <td>:</td>
                 <td colspan="2">(+) AJUSTE</td>
-                <td colspan="2">{{ data.ajusteP | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ajusteP | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
                 <td>:</td>
@@ -4412,7 +3457,7 @@
               <tr *ngIf="data.septimo > 0">
                 <td>:</td>
                 <td colspan="2">SEPTIMO DIA</td>
-                <td colspan="2">{{ data.septimo | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.septimo | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
                 <td colspan="2"></td>
               </tr>
@@ -4420,35 +3465,35 @@
                 <td>:</td>
                 <td colspan="2">IHSS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ihss | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ihss | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.isr > 0">
                 <td>:</td>
                 <td colspan="2">RETENCION ISRENTA {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.isr | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.isr | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.impvecinal > 0">
                 <td>:</td>
                 <td colspan="2">IMP. PER MUNI {{ this.yearAguinaldo }}</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.impvecinal | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.impvecinal | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.cta > 0">
                 <td>:</td>
                 <td colspan="2">CTA. EMPRESA</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.cta | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.cta | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.viaticos > 0">
                 <td>:</td>
                 <td colspan="2">TRANSPORTE</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.viaticos | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.viaticos | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.ajuste > 0">
@@ -4456,14 +3501,14 @@
                 <td colspan="2" *ngIf="totalAguinaldo === 0">(-) AJUSTE</td>
                 <td colspan="2" *ngIf="totalAguinaldo > 0">(-) ANTICIPO</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.ajuste | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ajuste | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="data.otros > 0">
                 <td>:</td>
                 <td colspan="2">OTROS</td>
                 <td colspan="2"></td>
-                <td colspan="2">{{ data.otros | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.otros | currency : 'LPS ' }}</td>
                 <td colspan="2"></td>
               </tr>
               <tr *ngIf="totalAguinaldo > 0 && data.ajuste <= 0">
@@ -4490,9 +3535,9 @@
               <tr *ngIf="data.totalPagar > 0">
                 <td>:</td>
                 <td colspan="2">TOTALES</td>
-                <td colspan="2">{{ data.ingresos | currency : "LPS " }}</td>
-                <td colspan="2">{{ data.deducciones | currency : "LPS " }}</td>
-                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
+                <td colspan="2">{{ data.ingresos | currency : 'LPS ' }}</td>
+                <td colspan="2">{{ data.deducciones | currency : 'LPS ' }}</td>
+                <td colspan="2">{{ data.totalPagar | currency : 'LPS ' }}</td>
               </tr>
               <tr>
                 <td>:</td>
@@ -4550,11 +3595,8 @@
               </tr>
               <tr>
                 <td>:</td>
-                <td colspan="6">
-                  RECIBI
-                  CONFORME:_________________________________________________.
-                </td>
-                <td colspan="2">{{ data.totalPagar | currency : "LPS " }}</td>
+                <td colspan="6">RECIBI CONFORME:_________________________________________________.</td>
+                <td colspan="2">{{ data.totalPagar | currency : 'LPS ' }}</td>
               </tr>
               <tr>
                 <td>:</td>
@@ -4600,9 +3642,7 @@
           <td>{{ data.lunesS }}</td>
           <td>{{ data.horasL }}</td>
           <td>
-            {{
-              data.horasL - data.jornadaL > 0 ? 0 : data.horasL - data.jornadaL
-            }}
+            {{ data.horasL - data.jornadaL > 0 ? 0 : data.horasL - data.jornadaL }}
           </td>
           <td>{{ data.jornadaL }}</td>
           <td>{{ data.XDL }}</td>
@@ -4615,9 +3655,7 @@
           <td>{{ data.martesS }}</td>
           <td>{{ data.horasM }}</td>
           <td>
-            {{
-              data.horasM - data.jornadaM > 0 ? 0 : data.horasM - data.jornadaM
-            }}
+            {{ data.horasM - data.jornadaM > 0 ? 0 : data.horasM - data.jornadaM }}
           </td>
           <td>{{ data.jornadaM }}</td>
           <td>{{ data.XDM }}</td>
@@ -4630,11 +3668,7 @@
           <td>{{ data.miercolesS }}</td>
           <td>{{ data.horasMi }}</td>
           <td>
-            {{
-              data.horasMi - data.jornadaMi > 0
-                ? 0
-                : data.horasMi - data.jornadaMi
-            }}
+            {{ data.horasMi - data.jornadaMi > 0 ? 0 : data.horasMi - data.jornadaMi }}
           </td>
           <td>{{ data.jornadaMi }}</td>
           <td>{{ data.XDMi }}</td>
@@ -4647,9 +3681,7 @@
           <td>{{ data.juevesS }}</td>
           <td>{{ data.horasJ }}</td>
           <td>
-            {{
-              data.horasJ - data.jornadaJ > 0 ? 0 : data.horasJ - data.jornadaJ
-            }}
+            {{ data.horasJ - data.jornadaJ > 0 ? 0 : data.horasJ - data.jornadaJ }}
           </td>
           <td>{{ data.jornadaJ }}</td>
           <td>{{ data.XDJ }}</td>
@@ -4662,9 +3694,7 @@
           <td>{{ data.viernesS }}</td>
           <td>{{ data.horasV }}</td>
           <td>
-            {{
-              data.horasV - data.jornadaV > 0 ? 0 : data.horasV - data.jornadaV
-            }}
+            {{ data.horasV - data.jornadaV > 0 ? 0 : data.horasV - data.jornadaV }}
           </td>
           <td>{{ data.jornadaV }}</td>
           <td>{{ data.XDV }}</td>
@@ -4677,9 +3707,7 @@
           <td>{{ data.sabadoS }}</td>
           <td>{{ data.horasS }}</td>
           <td>
-            {{
-              data.horasS - data.jornadaS > 0 ? 0 : data.horasS - data.jornadaS
-            }}
+            {{ data.horasS - data.jornadaS > 0 ? 0 : data.horasS - data.jornadaS }}
           </td>
           <td>{{ data.jornadaS }}</td>
           <td>{{ data.XDS }}</td>
@@ -4692,9 +3720,7 @@
           <td>{{ data.domingoS }}</td>
           <td>{{ data.horasD }}</td>
           <td>
-            {{
-              data.horasD - data.jornadaD > 0 ? 0 : data.horasD - data.jornadaD
-            }}
+            {{ data.horasD - data.jornadaD > 0 ? 0 : data.horasD - data.jornadaD }}
           </td>
           <td>{{ data.jornadaD }}</td>
           <td>{{ data.XDD }}</td>
@@ -4707,27 +3733,11 @@
           <td></td>
           <td></td>
           <td>
-            {{
-              data.horasL +
-                data.horasM +
-                data.horasMi +
-                data.horasJ +
-                data.horasV +
-                data.horasS +
-                data.horasD
-            }}
+            {{ data.horasL + data.horasM + data.horasMi + data.horasJ + data.horasV + data.horasS + data.horasD }}
           </td>
           <td></td>
           <td>
-            {{
-              data.jornadaL +
-                data.jornadaM +
-                data.jornadaMi +
-                data.jornadaJ +
-                data.jornadaV +
-                data.jornadaS +
-                data.jornadaD
-            }}
+            {{ data.jornadaL + data.jornadaM + data.jornadaMi + data.jornadaJ + data.jornadaV + data.jornadaS + data.jornadaD }}
           </td>
           <td>
             {{ data.totalD }}
@@ -4750,18 +3760,12 @@
       <nz-form-item>
         <nz-form-label [nzSm]="8" nzRequired>Planilla</nz-form-label>
         <nz-form-control [nzSm]="8">
-          <nz-select
-            nzPlaceHolder="Seleccione"
-            formControlName="tplanilla"
-            (ngModelChange)="log($event)"
-          >
+          <nz-select nzPlaceHolder="Seleccione" formControlName="tplanilla" (ngModelChange)="log($event)">
             <nz-option
               type="number"
               *ngFor="let tp of listTP"
               nzValue="{{ tp.id }}"
-              nzLabel="{{ tp.descripcion | uppercase }} ⇄ {{
-                tp.tipo | uppercase
-              }}"
+              nzLabel="{{ tp.descripcion | uppercase }} ⇄ {{ tp.tipo | uppercase }}"
             >
             </nz-option>
           </nz-select>
@@ -4789,53 +3793,21 @@
           >Archivo</nz-form-label
         >
         <nz-form-control [nzSm]="6">
-          <input
-            nz-input
-            class="form-control"
-            type="file"
-            formControlName="archivo"
-            (change)="handleChange($event)"
-            id="formFile"
-          />
+          <input nz-input class="form-control" type="file" formControlName="archivo" (change)="handleChange($event)" id="formFile" />
           <div class="form-text" style="text-align: left">(Opcional)</div>
         </nz-form-control>
 
         <nz-form-control style="text-align: left">
-          <button
-            nz-button
-            nzType="link"
-            [disabled]="this.jDatos.length === 0"
-            (click)="showArchivo()"
-          >
-            Revisar Archivo
-          </button>
+          <button nz-button nzType="link" [disabled]="this.jDatos.length === 0" (click)="showArchivo()">Revisar Archivo</button>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item [hidden]="hideObv">
         <nz-form-label [nzSm]="8">{{ obv }}</nz-form-label>
         <nz-form-control [nzSm]="8">
-          <nz-alert
-            style="padding-bottom: 1%"
-            nzType="info"
-            nzMessage="⇝INFORMACIÓN GENERAL⇜"
-            [nzDescription]="msgInfo"
-            nzShowIcon
-          ></nz-alert>
-          <nz-alert
-            style="padding-bottom: 1%"
-            nzType="success"
-            [hidden]="hideDetectados"
-            [nzMessage]="msgDetectados"
-            nzShowIcon
-          ></nz-alert>
-          <nz-alert
-            style="padding-bottom: 1%"
-            nzType="error"
-            [hidden]="hideErroneos"
-            [nzMessage]="msgErroneos"
-            nzShowIcon
-          ></nz-alert>
+          <nz-alert style="padding-bottom: 1%" nzType="info" nzMessage="⇝INFORMACIÓN GENERAL⇜" [nzDescription]="msgInfo" nzShowIcon></nz-alert>
+          <nz-alert style="padding-bottom: 1%" nzType="success" [hidden]="hideDetectados" [nzMessage]="msgDetectados" nzShowIcon></nz-alert>
+          <nz-alert style="padding-bottom: 1%" nzType="error" [hidden]="hideErroneos" [nzMessage]="msgErroneos" nzShowIcon></nz-alert>
           <nz-alert
             style="padding-bottom: 1%"
             nzType="warning"
@@ -4848,79 +3820,39 @@
 
       <nz-form-item>
         <nz-form-control>
-          <button
-            nz-button
-            [disabled]="inicialForm.invalid"
-            nzType="primary"
-            id="btncontinuar"
-            (click)="warning()"
-          >
-            <i
-              class="bi bi-hand-thumbs-up-fill"
-              style="padding-right: 5px; padding-bottom: 2px"
-            ></i>
+          <button nz-button [disabled]="inicialForm.invalid" nzType="primary" id="btncontinuar" (click)="warning()">
+            <i class="bi bi-hand-thumbs-up-fill" style="padding-right: 5px; padding-bottom: 2px"></i>
             Confirmar
           </button>
 
-          <button
-            nz-button
-            nzType="primary"
-            nzDanger
-            [disabled]="true"
-            id="btnreintentar"
-            (click)="retry()"
-          >
-            <span nz-icon nzType="clear" nzTheme="outline" class="center"></span
-            >Re-Ingresar Datos
+          <button nz-button nzType="primary" nzDanger [disabled]="true" id="btnreintentar" (click)="retry()">
+            <span nz-icon nzType="clear" nzTheme="outline" class="center"></span>Re-Ingresar Datos
           </button>
 
-          <button
-            type="button"
-            id="btncontinuar"
-            (click)="modificarDeducibles()"
-            class="btn btn-warning btn-sm"
-          >
+          <button type="button" id="btncontinuar" (click)="modificarDeducibles()" class="btn btn-warning btn-sm">
             <i class="bi bi-exclamation-triangle-fill"></i> Deducibles
           </button>
 
-         <button
-            type="button"
-            (click)="descargarPlantilla()"
-            class="btn btn-success btn-sm"
-          >
-            <i
-              nz-icon
-              nzType="cloud-download"
-              class="centerSmall"
-              nzTheme="outline"
-            ></i>
+          <button type="button" (click)="descargarPlantilla()" class="btn btn-success btn-sm">
+            <i nz-icon nzType="cloud-download" class="centerSmall" nzTheme="outline"></i>
             Descargar Plantilla
-          </button> 
+          </button>
         </nz-form-control>
       </nz-form-item>
     </form>
   </div>
   <div class="steps-content" *ngIf="current === 1">
     <ng-template #totalTemplate let-total>
-      <strong>{{ total }} </strong> colaboradores en la nómina |
-      <strong>{{ totalCalculados }} </strong> colaboradores remunerados
+      <strong>{{ total }} </strong> colaboradores en la nómina | <strong>{{ totalCalculados }} </strong> colaboradores remunerados
     </ng-template>
     <h1>
       <strong>{{ this.planidescrip | uppercase }}</strong>
     </h1>
     <h3 *ngIf="this.totalAguinaldo <= 0">
-      <strong>{{
-        this.planitipo + " — FECHA: " + this.fecha | uppercase
-      }}</strong>
+      <strong>{{ this.planitipo + ' — FECHA: ' + this.fecha | uppercase }}</strong>
     </h3>
     <h3 *ngIf="this.totalAguinaldo > 0">
-      <strong>{{
-        this.planitipo +
-          " — " +
-          this.mesAguinaldo +
-          " MES AÑO " +
-          this.yearAguinaldo | uppercase
-      }}</strong>
+      <strong>{{ this.planitipo + ' — ' + this.mesAguinaldo + ' MES AÑO ' + this.yearAguinaldo | uppercase }}</strong>
     </h3>
     <nz-table
       #basicTable
@@ -4961,65 +3893,32 @@
                   placeholder="Buscar por nombre o apellido"
                 />
               </nz-input-group>
-              <ng-template #prefixTemplateUser
-                ><i class="bi bi-search"></i
-              ></ng-template>
+              <ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
             </form>
           </th>
-          <th nzWidth="3%" style="text-align: center; vertical-align: middle">
-            ID
-          </th>
+          <th nzWidth="3%" style="text-align: center; vertical-align: middle">ID</th>
           <th nzWidth="10%" style="text-align: center; vertical-align: middle">
-            <nz-form-label
-              [nzNoColon]="true"
-              nzTooltipTitle="Se permite editar directamente al dar click sobre el valor."
+            <nz-form-label [nzNoColon]="true" nzTooltipTitle="Se permite editar directamente al dar click sobre el valor."
               >Salario Mensual</nz-form-label
             >
           </th>
-          <th
-            nzWidth="10%"
-            style="text-align: center; vertical-align: middle"
-            *ngIf="diferencia > 8"
-          >
-            Salario Diario
-          </th>
-          <th
-            nzWidth="10%"
-            style="text-align: center; vertical-align: middle"
-            *ngIf="diferencia <= 7"
-          >
-            Salario por Hora
-          </th>
-          <th nzWidth="10%" style="text-align: center; vertical-align: middle">
-            Ingresos
-          </th>
-          <th nzWidth="10%" style="text-align: center; vertical-align: middle">
-            Deducciones
-          </th>
-          <th nzWidth="10%" style="text-align: center; vertical-align: middle">
-            Total a Pagar
-          </th>
-          <th nzWidth="10%" style="text-align: center; vertical-align: middle">
-            Aguinaldo
-          </th>
-          <th nzWidth="10%" style="text-align: center; vertical-align: middle">
-            Acciones
-          </th>
+          <th nzWidth="10%" style="text-align: center; vertical-align: middle" *ngIf="diferencia > 8">Salario Diario</th>
+          <th nzWidth="10%" style="text-align: center; vertical-align: middle" *ngIf="diferencia <= 7">Salario por Hora</th>
+          <th nzWidth="10%" style="text-align: center; vertical-align: middle">Ingresos</th>
+          <th nzWidth="10%" style="text-align: center; vertical-align: middle">Deducciones</th>
+          <th nzWidth="10%" style="text-align: center; vertical-align: middle">Total a Pagar</th>
+          <th nzWidth="10%" style="text-align: center; vertical-align: middle">Aguinaldo</th>
+          <th nzWidth="10%" style="text-align: center; vertical-align: middle">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td colspan="9" *ngIf="listNomina?.length === 0">
-            <nz-empty
-              [nzNotFoundImage]="notFound"
-              [nzNotFoundContent]="contentTpl"
-            ></nz-empty>
+            <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
             <ng-template #contentTpl>
               <span>
                 Planilla "{{ this.planidescrip }}" esta vacia.
-                <a routerLink="/listado"
-                  >Agregue colaboradores existentes aquí
-                </a>
+                <a routerLink="/listado">Agregue colaboradores existentes aquí </a>
                 ó<a routerLink="/agregar"> registre nuevos aquí.</a>
               </span>
             </ng-template>
@@ -5027,25 +3926,16 @@
         </tr>
 
         <tr *ngFor="let data of basicTable.data">
-          <td
-            [nzChecked]="setOfCheckedId.has(data.id)"
-            (nzCheckedChange)="onItemChecked(data.id, $event)"
-          ></td>
+          <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
           <td>{{ data.nombres }} {{ data.apellidos }}</td>
           <td>{{ data.id }}</td>
           <td>
-            <div
-              class="editable-cell"
-              [hidden]="editId === data.id"
-              (click)="startEdit(data.id)"
-            >
-              {{ data.salarioBase | currency : "LPS " }}
+            <div class="editable-cell" [hidden]="editId === data.id" (click)="startEdit(data.id)">
+              {{ data.salarioBase | currency : 'LPS ' }}
             </div>
             <a
               nz-popconfirm
-              nzPopconfirmTitle="¿Desea modificar el salario de {{
-                data.nombres
-              }} {{ data.apellidos }}?"
+              nzPopconfirmTitle="¿Desea modificar el salario de {{ data.nombres }} {{ data.apellidos }}?"
               nzPopconfirmPlacement="bottom"
               (nzOnConfirm)="confirm()"
               (nzOnCancel)="cancel()"
@@ -5065,32 +3955,17 @@
             </a>
           </td>
           <td *ngIf="diferencia > 8">
-            {{
-              this.truncator(data.salarioBase / 30).toFixed(2)
-                | currency : "LPS "
-            }}
+            {{ this.truncator(data.salarioBase / 30).toFixed(2) | currency : 'LPS ' }}
           </td>
           <td *ngIf="diferencia <= 7">
-            {{
-              (this.truncator(data.salarioBase / 30) / 8).toFixed(5)
-                | currency : "LPS "
-            }}
+            {{ (this.truncator(data.salarioBase / 30) / 8).toFixed(5) | currency : 'LPS ' }}
           </td>
-          <td>{{ data.ingresos | currency : "LPS " }}</td>
-          <td>{{ data.deducciones | currency : "LPS " }}</td>
-          <td>{{ data.totalPagar | currency : "LPS " }}</td>
+          <td>{{ data.ingresos | currency : 'LPS ' }}</td>
+          <td>{{ data.deducciones | currency : 'LPS ' }}</td>
+          <td>{{ data.totalPagar | currency : 'LPS ' }}</td>
           <td>
-            <button
-              class="btn btn-success btn-sm"
-              (click)="handleAguinaldoSemanal(data.id)"
-              title="Aguinaldo"
-            >
-              <span
-                nz-icon
-                nzType="dollar-circle"
-                nzTheme="outline"
-                class="centerAguinaldo"
-              ></span>
+            <button class="btn btn-success btn-sm" (click)="handleAguinaldoSemanal(data.id)" title="Aguinaldo">
+              <span nz-icon nzType="dollar-circle" nzTheme="outline" class="centerAguinaldo"></span>
             </button>
           </td>
           <td width="15%">
@@ -5103,42 +3978,21 @@
               <i class="bi bi-check2-circle"></i>
             </button>
             <button
-              *ngIf="
-                (this.totalAguinaldo === 0 && diferencia <= 7) ||
-                (this.totalAguinaldo === 0 && diferencia > 8)
-              "
+              *ngIf="(this.totalAguinaldo === 0 && diferencia <= 7) || (this.totalAguinaldo === 0 && diferencia > 8)"
               class="btn btn-primary btn-sm"
-              (click)="
-                handleEmpleado(
-                  data.id,
-                  data.salarioBase,
-                  data.nombres,
-                  data.apellidos
-                )
-              "
+              (click)="handleEmpleado(data.id, data.salarioBase, data.nombres, data.apellidos)"
               title="Ingresos"
             >
               <i class="bi bi-person-check-fill"></i>
             </button>
             <button
               class="btn btn-danger btn-sm"
-              (click)="
-                handleEmpleadoDeduccion(
-                  data.id,
-                  data.salarioBase,
-                  data.nombres,
-                  data.apellidos
-                )
-              "
+              (click)="handleEmpleadoDeduccion(data.id, data.salarioBase, data.nombres, data.apellidos)"
               title="Deducciones"
             >
               <i class="bi bi-person-dash-fill"></i>
             </button>
-            <button
-              class="btn btn-secondary btn-sm"
-              (click)="handleEmpleadoClear(data.id)"
-              title="Limpiar"
-            >
+            <button class="btn btn-secondary btn-sm" (click)="handleEmpleadoClear(data.id)" title="Limpiar">
               <i class="bi bi-trash-fill"></i>
             </button>
           </td>
@@ -5150,22 +4004,11 @@
     <nz-result
       nzStatus="success"
       nzTitle="¡Archivo Generado Exitosamente!"
-      nzSubTitle="{{
-        this.nombre
-      }} en formato de Excel con resumen detallado del control de asistencia y comprobantes de pago."
+      nzSubTitle="{{ this.nombre }} en formato de Excel con resumen detallado del control de asistencia y comprobantes de pago."
     >
       <div nz-result-extra>
-        <button
-          type="button"
-          class="btn btn-primary"
-          onClick="window.location.reload()"
-        >
-          <i
-            nz-icon
-            nzType="file-done"
-            class="centerSmall"
-            nzTheme="outline"
-          ></i>
+        <button type="button" class="btn btn-primary" onClick="window.location.reload()">
+          <i nz-icon nzType="file-done" class="centerSmall" nzTheme="outline"></i>
           Calcular nueva Planilla
         </button>
         <button type="button" class="btn btn-info" routerLink="/historial">
@@ -5173,26 +4016,14 @@
           Revisar Historial
         </button>
         <button type="button" class="btn btn-success" (click)="exportExcel()">
-          <i
-            nz-icon
-            nzType="download"
-            class="centerSmall"
-            nzTheme="outline"
-          ></i>
+          <i nz-icon nzType="download" class="centerSmall" nzTheme="outline"></i>
           Descargar XLSX otra vez
         </button>
       </div>
     </nz-result>
   </div>
   <div class="steps-action">
-    <button
-      nz-button
-      id="btnnext"
-      nzType="primary"
-      (click)="next()"
-      disabled
-      *ngIf="current < 2"
-    >
+    <button nz-button id="btnnext" nzType="primary" (click)="next()" disabled *ngIf="current < 2">
       <span>Siguiente</span>
     </button>
   </div>

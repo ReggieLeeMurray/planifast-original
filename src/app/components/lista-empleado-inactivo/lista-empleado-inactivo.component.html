@@ -2,28 +2,14 @@
   <div class="col-lg-6">
     <h1>
       Lista de Colaboradores Inactivos
-      <i
-        nz-icon
-        nzType="info-circle"
-        nzTheme="twotone"
-        nz-popover
-        class="center"
-        [nzPopoverContent]="contentTemplate"
-        nzPopoverTrigger="hover"
-      ></i>
+      <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="center" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover"></i>
     </h1>
   </div>
 </div>
 <ng-template #contentTemplate>
   <div>
-    <p>
-      Haz click sobre el lapiz azul para editar los datos de baja del
-      colaborador.
-    </p>
-    <p>
-      Si eliminas un colaborador de la lista de inactivos al hacer click en la
-      papelera roja se le dara de alta automáticamente.
-    </p>
+    <p>Haz click sobre el lapiz azul para editar los datos de baja del colaborador.</p>
+    <p>Si eliminas un colaborador de la lista de inactivos al hacer click en la papelera roja se le dara de alta automáticamente.</p>
     <p>Puedes buscar colaboradores por su nombre o motivo de baja</p>
   </div>
 </ng-template>
@@ -47,21 +33,9 @@
 <ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
 <div>
   <nz-spin nzTip="Cargando..." *ngIf="loading">
-    <nz-alert
-      nzType="info"
-      nzMessage="ALERTA"
-      nzDescription="Los colaboradores se mostrarán en breve."
-    >
-    </nz-alert>
+    <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="Los colaboradores se mostrarán en breve."> </nz-alert>
   </nz-spin>
-  <nz-table
-    #basicTable
-    [nzData]="listEmpleadoInactivo"
-    nzPaginationPosition="top"
-    nzBordered
-    nzTemplateMode
-    id="cssTable"
-  >
+  <nz-table #basicTable [nzData]="listEmpleadoInactivo" nzPaginationPosition="top" nzBordered nzTemplateMode id="cssTable">
     <thead>
       <tr>
         <th scope="col" style="text-align: center">Nombre Completo</th>
@@ -76,38 +50,25 @@
     <tbody>
       <tr>
         <td colspan="7" *ngIf="listEmpleadoInactivo?.length <= 0">
-          <nz-empty
-            [nzNotFoundImage]="notFound"
-            [nzNotFoundContent]="contentTpl"
-          ></nz-empty>
+          <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
           <ng-template #contentTpl>
-            <span>
-              No hay datos.<a routerLink="/rebajar">
-                Puede dar de baja a colaboradores aquí.</a
-              >
-            </span>
+            <span> No hay datos.<a routerLink="/rebajar"> Puede dar de baja a colaboradores aquí.</a> </span>
           </ng-template>
         </td>
       </tr>
       <tr *ngFor="let data of basicTable.data">
         <td>{{ data.nombres }} {{ data.apellidos }}</td>
         <td>{{ data.empleadoID }}</td>
-        <td *ngIf="data.valor === 0">{{ "N/E" }}</td>
-        <td *ngIf="data.valor !== 0">{{ data.valor | currency : "LPS " }}</td>
+        <td *ngIf="data.valor === 0">{{ 'N/E' }}</td>
+        <td *ngIf="data.valor !== 0">{{ data.valor | currency : 'LPS ' }}</td>
         <td>{{ data.motivo }}</td>
         <!-- <td >{{ data.nota }}</td> -->
-        <td>{{ data.fechaSalida | date : "dd/MM/yyyy" }}</td>
+        <td>{{ data.fechaSalida | date : 'dd/MM/yyyy' }}</td>
         <td>
-          <button
-            class="btn btn-primary btn-sm"
-            [routerLink]="['/editarbaja', data.id]"
-          >
+          <button class="btn btn-primary btn-sm" [routerLink]="['/editarbaja', data.id]">
             <i class="bi bi-pencil-fill"></i>
           </button>
-          <button
-            class="btn btn-danger btn-sm"
-            (click)="showDeleteConfirm(data.id)"
-          >
+          <button class="btn btn-danger btn-sm" (click)="showDeleteConfirm(data.id)">
             <i class="bi bi-trash-fill"></i>
           </button>
         </td>

@@ -35,19 +35,11 @@ export class EmpleadosService {
   }
   //post
   guardarEmpleados(empleado: Empleado): Observable<Empleado> {
-    return this.http.post<Empleado>(
-      this.myAppUrl + this.myApiUrl,
-      empleado,
-      this.httpOptions
-    );
+    return this.http.post<Empleado>(this.myAppUrl + this.myApiUrl, empleado, this.httpOptions);
   }
   //post masivo
   guardarMuchosEmpleados(empleado: Empleado[]): Observable<Empleado[]> {
-    return this.http.post<Empleado[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl6,
-      empleado,
-      this.httpOptions
-    );
+    return this.http.post<Empleado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl6, empleado, this.httpOptions);
   }
   //get id
   cargarEmpleados(id: number): Observable<Empleado> {
@@ -55,52 +47,34 @@ export class EmpleadosService {
   }
   //get id planilla
   cargarEmpleadosByPlanillaId(id: number): Observable<Empleado> {
-    return this.http.get<Empleado>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl5 + id
-    );
+    return this.http.get<Empleado>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl5 + id);
   }
   //get empleado by depto
   getEmpleadoByDepto(): Observable<Empleado[]> {
-    return this.http.get<Empleado[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl
-    );
+    return this.http.get<Empleado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl);
   }
   //get empleado by planilla
   getEmpleadoByPlanilla(): Observable<Empleado[]> {
-    return this.http.get<Empleado[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl2
-    );
+    return this.http.get<Empleado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl2);
   }
   //get count activos
   getCountActivo(): Observable<Empleado[]> {
-    return this.http.get<Empleado[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl3
-    );
+    return this.http.get<Empleado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl3);
   }
   //get count inactivos
   getCountInactivo(): Observable<Empleado[]> {
-    return this.http.get<Empleado[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl4
-    );
+    return this.http.get<Empleado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl4);
   }
   //get count personal contratado por fecha
   getCountPersonalByFechaIngreso(): Observable<Empleado[]> {
-    return this.http.get<Empleado[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl7
-    );
+    return this.http.get<Empleado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl7);
   }
   //get count personal despedido por fecha
   getCountPersonalByFechaSalida(): Observable<Empleado[]> {
-    return this.http.get<Empleado[]>(
-      this.myAppUrl + this.myApiUrl + this.myCustomApiUrl8
-    );
+    return this.http.get<Empleado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl8);
   }
   //put
   actualizarEmpleado(id: number, empleado: Empleado): Observable<Empleado> {
-    return this.http.put<Empleado>(
-      this.myAppUrl + this.myApiUrl + id,
-      empleado,
-      this.httpOptions
-    );
+    return this.http.put<Empleado>(this.myAppUrl + this.myApiUrl + id, empleado, this.httpOptions);
   }
 }

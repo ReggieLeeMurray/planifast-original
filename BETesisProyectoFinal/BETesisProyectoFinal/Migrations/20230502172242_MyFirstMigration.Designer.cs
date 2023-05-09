@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BEProyectoFinal.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20230417164155_myFirstMigration")]
-    partial class myFirstMigration
+    [Migration("20230502172242_MyFirstMigration")]
+    partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -300,9 +300,6 @@ namespace BEProyectoFinal.Migrations
 
                     b.Property<double>("Otros")
                         .HasColumnType("double");
-
-                    b.Property<bool>("Permanente")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<double>("Prestamorap")
                         .HasColumnType("double");

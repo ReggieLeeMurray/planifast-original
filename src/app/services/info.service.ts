@@ -24,11 +24,7 @@ export class InfoService {
   }
   //post
   guardarInfo(info: Info): Observable<Info> {
-    return this.http.post<Info>(
-      this.myAppUrl + this.myApiUrl,
-      info,
-      this.httpOptions
-    );
+    return this.http.post<Info>(this.myAppUrl + this.myApiUrl, info, this.httpOptions);
   }
   //get id
   cargarInfo(id: number): Observable<Info> {
@@ -36,10 +32,6 @@ export class InfoService {
   }
   //put
   actualizarInfo(id: number, info: Info): Observable<Info> {
-    return this.http.put<Info>(
-      this.myAppUrl + this.myApiUrl + id,
-      info,
-      this.httpOptions
-    );
+    return this.http.put<Info>(this.myAppUrl + this.myApiUrl + id, info, this.httpOptions);
   }
 }

@@ -82,9 +82,7 @@ export class AgregarRolesComponent implements OnInit {
   Search() {
     if (this.Roles != '' && this.Roles != undefined && this.Roles != null) {
       this.listRol = this.listRol.filter((res) => {
-        return res.descripcion
-          .toLocaleLowerCase()
-          .match(this.Roles.toLocaleLowerCase());
+        return res.descripcion.toLocaleLowerCase().match(this.Roles.toLocaleLowerCase());
       });
     } else {
       this.ngOnInit();
@@ -93,8 +91,7 @@ export class AgregarRolesComponent implements OnInit {
   showDeleteConfirm(id): void {
     this.modal.confirm({
       nzTitle: '¿Está seguro que desea eliminar este rol?',
-      nzContent:
-        '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se elimináran todos los usuarios con dicho rol.</b>',
+      nzContent: '<b style="color: red;">ADVERTENCIA: Esta acción es permanente y se elimináran todos los usuarios con dicho rol.</b>',
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzClosable: false,

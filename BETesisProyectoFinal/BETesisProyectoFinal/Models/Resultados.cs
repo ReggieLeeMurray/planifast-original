@@ -20,9 +20,6 @@ namespace BEProyectoFinal.Models
     public string NombreCompleto { get; set; }
 
     [Required]
-    public bool Permanente { get; set; }
-
-    [Required]
     public bool Incompleto { get; set; }
 
     [Required]

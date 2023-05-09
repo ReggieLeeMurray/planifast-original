@@ -27,11 +27,7 @@ export class RolesService {
   }
   //post
   guardarRoles(roles: Rol): Observable<Rol> {
-    return this.http.post<Rol>(
-      this.myAppUrl + this.myApiUrl,
-      roles,
-      this.httpOptions
-    );
+    return this.http.post<Rol>(this.myAppUrl + this.myApiUrl, roles, this.httpOptions);
   }
   //get id
   cargarRoles(id: number): Observable<Rol> {
@@ -39,10 +35,6 @@ export class RolesService {
   }
   //put
   actualizarRoles(id: number, roles: Rol): Observable<Rol> {
-    return this.http.put<Rol>(
-      this.myAppUrl + this.myApiUrl + id,
-      roles,
-      this.httpOptions
-    );
+    return this.http.put<Rol>(this.myAppUrl + this.myApiUrl + id, roles, this.httpOptions);
   }
 }

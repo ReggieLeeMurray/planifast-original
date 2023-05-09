@@ -28,11 +28,7 @@ export class DepartamentosService {
   }
   //post
   guardarDeptos(depto: Departamento): Observable<Departamento> {
-    return this.http.post<Departamento>(
-      this.myAppUrl + this.myApiUrl,
-      depto,
-      this.httpOptions
-    );
+    return this.http.post<Departamento>(this.myAppUrl + this.myApiUrl, depto, this.httpOptions);
   }
   //get id
   cargarDeptos(id: number): Observable<Departamento> {
@@ -40,10 +36,6 @@ export class DepartamentosService {
   }
   //put
   actualizarDepto(id: number, depto: Departamento): Observable<Departamento> {
-    return this.http.put<Departamento>(
-      this.myAppUrl + this.myApiUrl + id,
-      depto,
-      this.httpOptions
-    );
+    return this.http.put<Departamento>(this.myAppUrl + this.myApiUrl + id, depto, this.httpOptions);
   }
 }
