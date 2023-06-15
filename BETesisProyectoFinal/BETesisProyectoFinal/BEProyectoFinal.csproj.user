@@ -1,14 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Controller_SelectedScaffolderID>ApiControllerWithActionsScaffolder</Controller_SelectedScaffolderID>
-    <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
-    <WebStackScaffolding_ControllerDialogWidth>650</WebStackScaffolding_ControllerDialogWidth>
-    <NameOfLastUsedPublishProfile>IISProfile1</NameOfLastUsedPublishProfile>
-    <_SelectedScaffolderID>ApiControllerWithActionsScaffolder</_SelectedScaffolderID>
-    <_SelectedScaffolderCategoryPath>root/Common/Api</_SelectedScaffolderCategoryPath>
-    <View_SelectedScaffolderID>RazorViewEmptyScaffolder</View_SelectedScaffolderID>
-    <View_SelectedScaffolderCategoryPath>root/Common/MVC/View</View_SelectedScaffolderCategoryPath>
-    <WebStackScaffolding_ViewDialogWidth>650</WebStackScaffolding_ViewDialogWidth>
-  </PropertyGroup>
-</Project>
+version https://git-lfs.github.com/spec/v1
+oid sha256:ef2426024bce30e78596eadcd93b974373d3759e6bf5dd21a86a6e70a6152ca6
+size 1007

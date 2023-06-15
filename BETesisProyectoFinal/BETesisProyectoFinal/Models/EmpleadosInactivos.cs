@@ -1,33 +1,3 @@
-using BETesisProyectoFinal.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BEProyectoFinal.Models
-{
-  public class EmpleadosInactivos
-  {
-    [Key]
-    public int Id { get; set; }
-
-    [Required]
-    public decimal Valor { get; set; }
-
-    [Required]
-    public string Motivo { get; set; }
-
-    [Required]
-    public string Nota { get; set; }
-
-    [Required]
-    public DateTime FechaSalida { get; set; }
-
-    [Required]
-    public int EmpleadoID { get; set; }
-    [ForeignKey("EmpleadoID")]
-    public Empleados Empleados { get; set; }
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:296908c5727a22435cb1d7e50c51bb478c6764f5c86f90c4fd9789a5d2d270bd
+size 708

@@ -1,23 +1,3 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { LayoutComponent } from './layout.component';
-import { ListComponent } from './list.component';
-import { AddEditComponent } from './add-edit.component';
-
-const routes: Routes = [
-    {
-        path: '', component: LayoutComponent,
-        children: [
-            { path: '', component: ListComponent },
-            { path: 'add', component: AddEditComponent },
-            { path: 'edit/:id', component: AddEditComponent }
-        ]
-    }
-];
-
-@NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
-})
-export class UsersRoutingModule { }
+version https://git-lfs.github.com/spec/v1
+oid sha256:750800bf8f7f1d188a7f9a191305734e04a0425cd7316732d3d010be07b01530
+size 674

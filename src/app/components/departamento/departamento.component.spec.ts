@@ -1,25 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DepartamentoComponent } from './departamento.component';
-
-describe('DepartamentoComponent', () => {
-  let component: DepartamentoComponent;
-  let fixture: ComponentFixture<DepartamentoComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DepartamentoComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DepartamentoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:91f006b20a62eb9dac4765638f86607ef06868289bf9380a808007228d636f40
+size 668

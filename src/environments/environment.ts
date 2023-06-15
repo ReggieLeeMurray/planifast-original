@@ -1,22 +1,3 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
-export const environment = {
-  production: false,
-  myAppUrl: 'https://localhost:44301/',
-  myAppUrlAccount: 'http://localhost:53852',
-  appVersion: require('package.json').version + '-dev',
-  // myAppUrl: 'http://192.168.0.111/',
-  // myAppUrlAccount: 'http://192.168.0.111',
-};
-/********** MODIFICAR IMPORTANTE: Hide console.logs with DEBUG = FALSE **********/
-/* Nombrar la Version antes del build con: npm version (major.minor.patch) || npm run prebuild (patch no github tag)
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+version https://git-lfs.github.com/spec/v1
+oid sha256:fa6932c92f030c82f9c2911d1384a9adf3a032de79028e72ee049ccd622e3fca
+size 1089

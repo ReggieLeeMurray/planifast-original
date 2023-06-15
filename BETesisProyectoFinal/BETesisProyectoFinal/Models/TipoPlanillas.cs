@@ -1,21 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using BEProyectoFinal.Models;
-using BETesisProyectoFinal.Models;
-namespace BEProyectoFinal.Models
-{
-  public class TipoPlanillas
-  {
-    [Key]
-    public int Id { get; set; }
-
-    [Required]
-    public string Descripcion { get; set; }
-
-    [Required]
-    public string Tipo { get; set; }
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f78a65e6eb52993fe14bcb3d3333bbe5ee76d912ee56a18dd98dcc9d6ed855ee
+size 436

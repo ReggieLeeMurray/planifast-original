@@ -1,18 +1,3 @@
-nz-date-picker {
-  margin: 0 8px 12px 0;
-}
-[nz-form] {
-  max-width: 600px;
-}
-[nz-button] {
-  margin-right: 8px;
-  margin-bottom: 12px;
-}
-nz-select {
-  width: 120px;
-}
-.center {
-  vertical-align: middle;
-  text-align: center;
-  margin-bottom: 5px;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b65c56991bf1e275346c6fef678ed0578c768683fd05b564f4aee519acaf7af9
+size 249

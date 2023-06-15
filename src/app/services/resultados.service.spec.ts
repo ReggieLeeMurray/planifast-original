@@ -1,16 +1,3 @@
-import { TestBed } from '@angular/core/testing';
-
-import { ResultadosService } from './resultados.service';
-
-describe('ResultadosService', () => {
-  let service: ResultadosService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ResultadosService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:976fc9c73ee097d6421b0e307617a992651877855c0050f13e81c3cf8cc31924
+size 377

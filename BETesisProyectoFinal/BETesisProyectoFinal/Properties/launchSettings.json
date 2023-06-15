@@ -1,31 +1,3 @@
-{
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:53852",
-      "sslPort": 44301
-    }
-  },
-  "$schema": "http://json.schemastore.org/launchsettings.json",
-  "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": false,
-      "launchUrl": "https://localhost:44301/api/empleado",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "ancmHostingModel": "OutOfProcess"
-    },
-    "BETesisProyectoFinal": {
-      "commandName": "Project",
-      "launchBrowser": false,
-      "launchUrl": "https://localhost:44301/api/empleado",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
-    }
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:62fffce82383ff547f85f0481d4afbe3902aa15d01940be88e94bfc3aea363e9
+size 883

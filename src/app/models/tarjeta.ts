@@ -1,30 +1,3 @@
-export class Tarjeta {
-  id?: number;
-  nombres: string;
-  apellidos: string;
-  luI: string;
-  luO: string;
-  maI: string;
-  maO: string;
-  miI: string;
-  miO: string;
-  juI: string;
-  juO: string;
-  viI: string;
-  viO: string;
-  saI: string;
-  saO: string;
-  doI: string;
-  doO: string;
-  hoursLunes: number;
-  hoursMartes: number;
-  hoursMiercoles: number;
-  hoursJueves: number;
-  hoursViernes: number;
-  hoursSabado: number;
-  hoursDomingo: number;
-  extrasDiurna: number;
-  extrasNocturna: number;
-  extrasMixta: number;
-  empleadoID: number;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5ff8138a5d1f52e0839a77677e91719004e243e3eb389c21ba2c9130b99e7e3d
+size 550

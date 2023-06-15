@@ -1,21 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using BEProyectoFinal.Models;
-using BETesisProyectoFinal.Models;
-
-namespace BEProyectoFinal.Models
-{
-  public class Departamentos
-  {
-    [Key]
-    public int Id { get; set; }
-
-    [Required]
-    public string Descripcion { get; set; }
-
-  }
-}
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:682fed8200ab0aaba052a2ec18f43ef366a43a07455a6b0750c69f1638b41ad6
+size 386

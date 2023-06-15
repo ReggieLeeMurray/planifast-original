@@ -1,19 +1,3 @@
-using System;
-using System.Globalization;
-
-namespace WebApi.Helpers
-{
-    // Custom exception class for throwing application specific exceptions (e.g. for validation) 
-    // that can be caught and handled within the application
-    public class AppException : Exception
-    {
-        public AppException() : base() {}
-
-        public AppException(string message) : base(message) { }
-
-        public AppException(string message, params object[] args) 
-            : base(String.Format(CultureInfo.CurrentCulture, message, args))
-        {
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2d593c6515c1006fdd6cdc6915390d0e303728cfb5e519e8230268b305b9db7b
+size 556

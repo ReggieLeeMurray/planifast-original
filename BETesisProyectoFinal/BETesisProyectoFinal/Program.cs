@@ -1,29 +1,3 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-
-namespace BETesisProyectoFinal
-{
-
-  public class Program
-  {
-    public static void Main(string[] args)
-    {
-      CreateHostBuilder(args).Build().Run();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-              webBuilder.UseStartup<Startup>();
-            });
-  }
-}
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:aaeb0ed57d682406b6156134a35f209bb26bf62adda9d035f2145b4cdfd00080
+size 658

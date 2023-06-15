@@ -1,15 +1,3 @@
-namespace WebApi.Entities
-{
-    public class User
-    {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Role { get; set; }
-        public string Token { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:323c4afb633f2a6432928b0b337817bbc2a078470fd637db0edb4e384ab88344
+size 459

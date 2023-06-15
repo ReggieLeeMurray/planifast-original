@@ -1,12 +1,3 @@
-namespace WebApi.Models.Users
-{
-  public class UpdateModel
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string Role { get; set; }
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5cdcaf248a3c67278f62121e0c7530652d4f96619c6b1546b3184fbb63cfe5f8
+size 335

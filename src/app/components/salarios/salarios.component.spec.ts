@@ -1,25 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SalariosComponent } from './salarios.component';
-
-describe('SalariosComponent', () => {
-  let component: SalariosComponent;
-  let fixture: ComponentFixture<SalariosComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SalariosComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SalariosComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:5ff30ea8a5b3e5603ffef2b4a1c1a9145aea740fc0f129979f767a515bc6c606
+size 640

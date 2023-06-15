@@ -1,14 +1,3 @@
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-
-import { AccountRoutingModule } from './account-routing.module';
-import { LayoutComponent } from './layout.component';
-import { LoginComponent } from 'src/app/account/login.component';
-import { RegisterComponent } from './register.component';
-
-@NgModule({
-  imports: [CommonModule, ReactiveFormsModule, AccountRoutingModule],
-  declarations: [LayoutComponent, LoginComponent, RegisterComponent],
-})
-export class AccountModule {}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f6bcfb754eb8a3f7d06a17e54636bc05092a9608435710d976e8b8ae5a8faa29
+size 574

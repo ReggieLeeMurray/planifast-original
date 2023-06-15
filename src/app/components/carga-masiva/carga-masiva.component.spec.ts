@@ -1,25 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CargaMasivaComponent } from './carga-masiva.component';
-
-describe('CargaMasivaComponent', () => {
-  let component: CargaMasivaComponent;
-  let fixture: ComponentFixture<CargaMasivaComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CargaMasivaComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CargaMasivaComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:fc50684793cdf55849c24b4d15123a6abefcfdabfc80043db09cdf64d8dd1d00
+size 662

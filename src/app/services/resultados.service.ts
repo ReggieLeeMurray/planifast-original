@@ -1,28 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Resultado } from '../models/resultado';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class ResultadosService {
-  myAppUrl = environment.myAppUrl;
-  myApiUrl = 'api/Resultado/';
-  myCustomApiUrl = 'CargaMasiva';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
-  constructor(private http: HttpClient) {}
-  //get
-  getResultados(): Observable<Resultado[]> {
-    return this.http.get<Resultado[]>(this.myAppUrl + this.myApiUrl);
-  }
-  //post all
-  guardarContenidoCompleto(resultado: Resultado[]): Observable<Resultado[]> {
-    return this.http.post<Resultado[]>(this.myAppUrl + this.myApiUrl + this.myCustomApiUrl, resultado, this.httpOptions);
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:aead365173ba8c22090d778ad3228b61674bd7d2668da3f891ca04bdc9215e73
+size 918

@@ -1,9 +1,3 @@
-export const environment = {
-  production: true,
-  // myAppUrl: 'https://planifasthn.azurewebsites.net/',
-  // myAppUrlAccount: 'https://planifasthn.azurewebsites.net',
-  // myAppUrl: 'https://localhost:44301/',
-  // myAppUrlAccount: 'http://localhost:53852',
-  myAppUrl: 'http://192.168.0.111/',
-  myAppUrlAccount: 'http://192.168.0.111',
-};
+version https://git-lfs.github.com/spec/v1
+oid sha256:540d8ff985ed3bc3f28a050a4f3c8a22024bfe95488690f2d2d73b77bca7cc0b
+size 343

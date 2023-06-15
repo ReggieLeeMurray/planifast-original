@@ -1,17 +1,3 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class BlobsService {
-  myAppUrl = environment.myAppUrl;
-  myApiUrl = 'api/upload';
-
-  constructor(private http: HttpClient) {}
-
-  upload(archivo: Blob) {
-    return this.http.post<{ path: string }>(this.myAppUrl + this.myApiUrl, archivo);
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b38c57e1054f07acc2fae2df09e6ae55f435ff717ec600f4e6564709da53ed6d
+size 447

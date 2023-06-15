@@ -1,34 +1,3 @@
-﻿import { Injectable } from '@angular/core';
-import {
-  Router,
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-} from '@angular/router';
-
-import { AccountService } from 'src/app/_services';
-
-@Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private accountService: AccountService) {}
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const user = this.accountService.userValue;
-    if (user) {
-      // check if route is restricted by role
-      if (route.data.roles && route.data.roles.indexOf(user.rol) === -1) {
-        // role not authorised so redirect to home page
-        this.router.navigate(['/']);
-        return false;
-      }
-      // authorised so return true
-      return true;
-    }
-
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/account/login'], {
-      queryParams: { returnUrl: state.url },
-    });
-    return false;
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:db13327b5591103fffd6045f846d48f59b7753f0a590574865f64e50497e7cb7
+size 1011

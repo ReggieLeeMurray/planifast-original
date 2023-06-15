@@ -1,16 +1,3 @@
-import { TestBed } from '@angular/core/testing';
-
-import { TipoplanillaService } from './tipoplanilla.service';
-
-describe('TipoplanillaService', () => {
-  let service: TipoplanillaService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(TipoplanillaService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:136466a494199ee4eded61d4c7792e79916f8a2aa989c3dbcbcc696f95138bf6
+size 387

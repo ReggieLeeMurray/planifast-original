@@ -1,20 +1,3 @@
-export class Info {
-  id?: number;
-  razonSocial: string;
-  sitioWeb: string;
-  fechaFundacion: Date;
-  direccionPrincipal: string;
-  email: string;
-  codigoPostal: string;
-  bio: string;
-  techoEM_IHSS: number;
-  techoIVM_IHSS: number;
-  porcentajeContribucionTrabajadorEM_IHSS: number;
-  porcentajeContribucionTrabajadorIVM_IHSS: number;
-  techoIVM_RAP: number;
-  porcentajeContribucionTrabajador_RAP: number;
-  techoExento_ISR: number;
-  techo15_ISR: number;
-  techo20_ISR: number;
-  montoServicioMedico_ISR: number;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b7ab9bf09bec7b9d90b17adbf4dd3a2c4c4fcfae6f6e71fad0adac7d3b8cebc5
+size 522
