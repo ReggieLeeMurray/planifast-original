@@ -1,0 +1,90 @@
+<div style="padding-top: 10px">
+  <h1>Administración de Planillas</h1>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="{{ accion }} Planillas"
+  (nzOnCancel)="handleCancel()"
+  [nzOkDisabled]="TPForm.invalid"
+  (nzOnOk)="guardarTP()"
+  nzCentered
+  nzClosable="false"
+>
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="TPForm">
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Descripción</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="descriErrorTpl">
+          <input nz-input type="text" formControlName="descripcion" style="width: 90%" placeholder="ej. Quincenal , Semanal" /><ng-template
+            #descriErrorTpl
+            let-control
+          >
+            <ng-container *ngIf="TPForm.get('descripcion').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Tipo de Planilla</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-select formControlName="tipo" id="tipoPlanillaSelect" nzPlaceHolder="{{ selectedValuePlanilla }}" (ngModelChange)="onChange($event)">
+            <nz-option nzValue="Semanal" nzLabel="Semanal"></nz-option>
+            <nz-option nzValue="Quincenal" nzLabel="Quincenal"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+
+<div>
+  <tr>
+    <td>
+      <button nz-button style="margin-right: 10px" nzSize="default" nzType="primary" (click)="showModal()">Nueva Planilla</button>
+    </td>
+    <td style="width: 100%">
+      <nz-input-group [nzPrefix]="prefixTemplateUser">
+        <input type="text" (ngModelChange)="Search($event)" [(ngModel)]="planillas" nz-input placeholder="Buscar por planilla" />
+      </nz-input-group>
+      <ng-template #prefixTemplateUser><i nz-icon nzType="user"></i></ng-template>
+    </td>
+  </tr>
+</div>
+
+<nz-spin nzTip="Cargando..." *ngIf="loading">
+  <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="Las nóminas se motrarán en breve"> </nz-alert>
+</nz-spin>
+<nz-table #basicTable [nzData]="listTP" [nzPageSize]="pageSize" id="myTable" nzPaginationPosition="top" nzBordered nzTemplateMode>
+  <thead>
+    <tr>
+      <th scope="col" style="text-align: center">ID</th>
+      <th scope="col" style="text-align: center">Descripción</th>
+      <th scope="col" style="text-align: center">Tipo de Planilla</th>
+      <th scope="col" style="text-align: center">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="4" *ngIf="listTP?.length <= 0">
+        <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
+        <ng-template #contentTpl>
+          <span>No hay planillas ingresadas.</span>
+        </ng-template>
+      </td>
+    </tr>
+    <tr *ngFor="let data of basicTable.data" style="text-align: center">
+      <td>{{ data.id }}</td>
+      <td>{{ data.descripcion | uppercase }}</td>
+      <td>{{ data.tipo }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="esEditar(data.id)">
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="showDeleteConfirm(data.id)">
+          <i class="bi bi-trash-fill"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

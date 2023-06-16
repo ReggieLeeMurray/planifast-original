@@ -1,0 +1,14 @@
+#cssTable td {
+  text-align: center;
+  vertical-align: middle;
+}
+.center {
+  vertical-align: middle;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.centerNube {
+  vertical-align: middle;
+  text-align: center;
+  margin-bottom: 2px;
+}

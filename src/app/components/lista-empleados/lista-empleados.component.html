@@ -1,0 +1,453 @@
+<div style="padding-top: 10px">
+  <h1>
+    Lista de Colaboradores Activos
+    <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="center" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover"></i>
+  </h1>
+</div>
+<ng-template #contentTemplate>
+  <div>
+    <p>Haz click sobre el lápiz azul para editar los datos del colaborador.</p>
+    <p>Si eliminas un colaborador al hacer click en la papelera roja tendrás que volver a ingresar sus datos.</p>
+    <p>Puedes buscar colaboradores por su nombre, departamento o planilla a la que pertenecen</p>
+    <p>Puedes visualizar la lista de colaboradores actualmente trabajando y a los que se les dio de baja.</p>
+  </div>
+</ng-template>
+<nz-content>
+  <div class="logo"></div>
+  <ul nz-menu nzTheme="light" nzMode="horizontal">
+    <li nz-menu-item nzSelected><a href="/listado">Activos</a></li>
+    <li nz-menu-item><a href="/inactivos">Inactivos</a></li>
+  </ul>
+</nz-content>
+<br />
+
+<nz-modal
+  [(nzVisible)]="isVisibleMacro"
+  (nzOnCancel)="handleCancelMacro()"
+  [nzFooter]="null"
+  nzCentered
+  nzClosable="false"
+  nzTitle="Instrucciones para uso de macro"
+>
+  <ng-container>
+    <strong> <p>1. Escriba %AppData% en la barra del explorador de Windows.</p></strong>
+    <img style="padding-bottom: 10px" nz-image width="470" height="315px" nzSrc="/assets/2.gif" />
+    <strong><p>2. Navegue hacia la carpeta: Microsoft > Excel > XLSTART.</p></strong>
+    <strong><p>3. Copie el archivo macro descargado a esa ubicación.</p></strong>
+    <strong><p>4. Cierre todas las pestañas de MS-Excel</p></strong>
+    <strong
+      ><p>
+        5. Abra el archivo dentro MS-Excel al que desea aplicar la macro de Planifast, busque y ejecute la misma en la pestaña de acuerdo al nombre.
+      </p></strong
+    >
+    <br />
+    <br />
+    <br />
+    <div class="form-text">* Este proceso solo debe realizarse una vez o en caso de haber perdido el archivo.</div>
+  </ng-container>
+</nz-modal>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="null"
+  nzCentered
+  nzClosable="false"
+  nzTitle="Seleccione tipo de tarjetas — {{ this.fecha | uppercase }}"
+>
+  <ng-container *nzModalContent>
+    <form [formGroup]="fechaForm">
+      <nz-form-item>
+        <tr>
+          <td>
+            <nz-form-label>Fecha</nz-form-label>
+          </td>
+          <td>
+            <nz-range-picker formControlName="fechaplanilla" (ngModelChange)="onChange($event)"></nz-range-picker>
+            <div class="form-text">(Opcional)</div>
+          </td>
+        </tr>
+      </nz-form-item>
+    </form>
+
+    <button nz-button nzType="primary" nzBlock id="btnTarjetasSemanales" nzShape="round" nzSize="large" (click)="tarjetasSemanales()">
+      Generar Tarjetas Semanales
+    </button>
+    <br />
+    <button nz-button nzType="primary" nzBlock id="btnTarjetasQuincenales" nzShape="round" nzSize="large" (click)="tarjetasQuincenales()">
+      Generar Tarjetas Quincenales
+    </button>
+    <button nz-button nzType="primary" nzBlock nzShape="round" nzSize="large" (click)="showMacroModal()">
+      Descargar macro MS-Excel para las tarjetas y calculos.
+    </button>
+    <table>
+      <tr>
+        <td style="width: 500px">
+          <nz-progress *ngIf="porcentaje > 0" [nzPercent]="porcentaje" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"> </nz-progress>
+        </td>
+        <td>
+          <button nz-button nzType="primary" *ngIf="porcentaje == 100" (click)="exportExcel()" nzSize="large" nzShape="circle">
+            <i nz-icon class="center" nzType="download"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+</nz-modal>
+<div>
+  <tr>
+    <td>
+      <button nz-button nzType="primary" (click)="showModal()">Generar Tarjetas</button>
+    </td>
+    <td style="width: 100%">
+      <nz-input-group [nzPrefix]="prefixTemplateUser">
+        <input
+          type="text"
+          (ngModelChange)="Search($event)"
+          [(ngModel)]="nombres"
+          nz-input
+          placeholder="Buscar colaboradores por nombre, departamento o planilla"
+        />
+      </nz-input-group>
+      <ng-template #prefixTemplateUser><i class="bi bi-search"></i></ng-template>
+    </td>
+  </tr>
+</div>
+<div>
+  <nz-spin nzTip="Cargando..." *ngIf="loading">
+    <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="Los colaboradores se mostrarán en breve."> </nz-alert>
+  </nz-spin>
+  <nz-table #basicTable [nzData]="listEmpleadoActivo" nzPaginationPosition="top" nzBordered nzTemplateMode id="cssTable">
+    <thead>
+      <tr>
+        <th scope="col" style="text-align: center">Nombre Completo</th>
+        <th scope="col" style="text-align: center">ID</th>
+        <th scope="col" style="text-align: center">N° Cédula</th>
+        <th scope="col" style="text-align: center">Dirección</th>
+        <th scope="col" style="text-align: center">Fecha Ingreso</th>
+        <th scope="col" style="text-align: center">Salario Base</th>
+        <th scope="col" style="text-align: center">Planilla</th>
+        <th scope="col" style="text-align: center">Departamento</th>
+        <th style="text-align: center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="9" *ngIf="listEmpleadoActivo?.length <= 0">
+          <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
+          <ng-template #contentTpl>
+            <span> No hay datos.<a routerLink="/agregar"> Registre nuevos colaboradores aquí.</a> </span>
+          </ng-template>
+        </td>
+      </tr>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.nombres }} {{ data.apellidos }}</td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.n_Cedula }}</td>
+        <td>{{ data.direccion }}</td>
+        <td>{{ data.fechaIngreso | date : 'dd/MM/yyyy' }}</td>
+        <td>{{ data.salarioBase | currency : 'LPS ' }}</td>
+        <td>
+          {{ data.descriPlanilla | uppercase }} ⇄
+          {{ data.tipoPlanilla | uppercase }}
+        </td>
+        <td>{{ data.descriDepto }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" [routerLink]="['/editar', data.id]">
+            <i class="bi bi-pencil-fill"></i>
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="showDeleteConfirm(data.id)">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+<table hidden>
+  <td id="tarjeta_par">
+    <nz-table nzBordered nzTemplateMode *ngFor="let data of listEmpleadoFirst">
+      <tbody>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="capitalize">
+            {{ data.descriPlanilla | uppercase }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" rowspan="2">
+            NOMBRE: {{ data.nombres | uppercase }}
+            {{ data.apellidos | uppercase }}
+          </td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <td colspan="3">SEMANA: {{ this.fecha | uppercase }}</td>
+        </tr>
+        <tr>
+          <td colspan="3">HORAS TRABAJADAS:</td>
+        </tr>
+        <tr>
+          <td colspan="3">TURNO:</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">LUNES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">MARTES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">MIERCOLES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">JUEVES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">VIERNES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">SABADO</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">DOMINGO</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </td>
+  <td id="tarjeta_impar">
+    <nz-table nzBordered nzTemplateMode *ngFor="let data of listEmpleadoSecond">
+      <tbody>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="capitalize">
+            {{ data.descriPlanilla | uppercase }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" rowspan="2">
+            NOMBRE: {{ data.nombres | uppercase }}
+            {{ data.apellidos | uppercase }}
+          </td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <td colspan="3">SEMANA: {{ this.fecha | uppercase }}</td>
+        </tr>
+        <tr>
+          <td colspan="3">HORAS TRABAJADAS:</td>
+        </tr>
+        <tr>
+          <td colspan="3">TURNO:</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">LUNES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">MARTES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">MIERCOLES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">JUEVES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">VIERNES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">SABADO</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">DOMINGO</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </td>
+  <td id="tarjeta_v3">
+    <nz-table nzBordered nzTemplateMode *ngFor="let data of listEmpleadoThird">
+      <tbody>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+        <tr>
+          <td colspan="3">{{ data.descriPlanilla | uppercase }}</td>
+        </tr>
+        <tr>
+          <td colspan="3" rowspan="2">
+            NOMBRE: {{ data.nombres | uppercase }}
+            {{ data.apellidos | uppercase }}
+          </td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <td colspan="3">SEMANA: {{ this.fecha | uppercase }}</td>
+        </tr>
+        <tr>
+          <td colspan="3">HORAS TRABAJADAS:</td>
+        </tr>
+        <tr>
+          <td colspan="3">TURNO:</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">LUNES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">MARTES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">MIERCOLES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">JUEVES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">VIERNES</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">SABADO</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td rowspan="2">DOMINGO</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </td>
+</table>

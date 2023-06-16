@@ -1,0 +1,381 @@
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.exe
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.deps.json
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.json
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.dev.json
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csprojAssemblyReference.cache
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfoInputs.cache
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfo.cs
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CoreCompileInputs.cache
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.Manifest.cache
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.xml
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\scopedcss\bundle\BEProyectoFinal.styles.css
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.RazorTargetAssemblyInfo.cache
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CopyComplete
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\Desktop\TesisProyectoFinal\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.genruntimeconfig.cache
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.exe
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.deps.json
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.json
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.dev.json
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfoInputs.cache
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfo.cs
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CoreCompileInputs.cache
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.Manifest.cache
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.xml
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\scopedcss\bundle\BEProyectoFinal.styles.css
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.RazorTargetAssemblyInfo.cache
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CopyComplete
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.genruntimeconfig.cache
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.exe
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.deps.json
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.json
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.dev.json
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csprojAssemblyReference.cache
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfoInputs.cache
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfo.cs
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CoreCompileInputs.cache
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.Manifest.cache
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.xml
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\scopedcss\bundle\BEProyectoFinal.styles.css
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.RazorTargetAssemblyInfo.cache
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CopyComplete
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\Desktop\nuevo repo\TesisProyectoFinal-master\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.genruntimeconfig.cache
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.exe
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.deps.json
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.json
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.dev.json
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csprojAssemblyReference.cache
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfoInputs.cache
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfo.cs
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CoreCompileInputs.cache
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.Manifest.cache
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.xml
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\scopedcss\bundle\BEProyectoFinal.styles.css
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.RazorTargetAssemblyInfo.cache
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CopyComplete
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\repo\Tesis-master\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.genruntimeconfig.cache
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.exe
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.deps.json
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.json
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.dev.json
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csprojAssemblyReference.cache
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfoInputs.cache
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfo.cs
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CoreCompileInputs.cache
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.Manifest.cache
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.xml
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\scopedcss\bundle\BEProyectoFinal.styles.css
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.RazorTargetAssemblyInfo.cache
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CopyComplete
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.genruntimeconfig.cache
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\web.config
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Core.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Storage.Blobs.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Storage.Common.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Memory.Data.dll
+C:\Users\Reggie\repo\planifast\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\web.config
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Core.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Storage.Blobs.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Storage.Common.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Memory.Data.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.AssemblyReference.cache
+C:\Users\Reggie\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\web.config
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.exe
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.deps.json
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.json
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.dev.json
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Core.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Storage.Blobs.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Storage.Common.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Memory.Data.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.AssemblyReference.cache
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfoInputs.cache
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfo.cs
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CoreCompileInputs.cache
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.Manifest.cache
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.xml
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\scopedcss\bundle\BEProyectoFinal.styles.css
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.RazorTargetAssemblyInfo.cache
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CopyComplete
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\thaRe\repo\TesisProyectoFinal\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.genruntimeconfig.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\web.config
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.exe
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.deps.json
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.json
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.runtimeconfig.dev.json
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Core.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Storage.Blobs.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Azure.Storage.Common.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Memory.Data.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.AssemblyReference.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfoInputs.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.AssemblyInfo.cs
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CoreCompileInputs.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.Manifest.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\staticwebassets\BEProyectoFinal.StaticWebAssets.xml
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\scopedcss\bundle\BEProyectoFinal.styles.css
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.RazorTargetAssemblyInfo.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.csproj.CopyComplete
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.dll
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.pdb
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\obj\Debug\netcoreapp3.1\BEProyectoFinal.genruntimeconfig.cache
+C:\Users\thaRe\repo\planifast\BETesisProyectoFinal\BETesisProyectoFinal\bin\Debug\netcoreapp3.1\BEProyectoFinal.Views.dll

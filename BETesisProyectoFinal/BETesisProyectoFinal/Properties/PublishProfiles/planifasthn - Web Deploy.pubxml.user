@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/hh7hVyHJUWYjdblssUYUgAAAAACAAAAAAAQZgAAAAEAACAAAADNATg8PF07l8jvdGAEWgehOJaqOstVIN+q9/qnF5QBZgAAAAAOgAAAAAIAACAAAABsWyGDjiZSHAARvw9FETcm24EyfhiTbSM+DXOJasYNmIAAAAB7Mh2Hp6uOxZjbM6E+wW/13ZwQPhaKaZCQkEl4qiV/QwPfh4/b2SWp7Oggt3xQYON5lsw/2blhTm0oaFlZMJd1l+8cOFxCGNps+QCtP5Gpm/yAMyZY2g0xsSIaCJz+MKmR239SquJWDCNz0aHkTI0jXxSp32DVoQFBpFIAGdJagEAAAAAJ7eFHzJpOoWQerNztTnYweMY1oDR9eNtWhWsUoT8UgMWNIqxdrisB9Hr9O+40VZrMK/c8d6+NajGMTeWeeZjQ</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="Conexion">
+      <Value>Server=planifast-my-sql-db.mysql.database.azure.com%3bDatabase=PlaniFast%3bUid=reggiemurray%40planifast-my-sql-db%3bPwd=Incorrect201</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

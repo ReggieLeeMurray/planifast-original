@@ -1,0 +1,148 @@
+<div>
+  <h1>Mi Empresa<i nz-icon nzType="edit" nzTheme="twotone" class="center" (click)="esEditar()"></i></h1>
+</div>
+<br />
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Datos generales de la empresa" (nzOnCancel)="handleCancel()" [nzFooter]="null" nzClosable="false">
+  <ng-container *nzModalContent
+    ><form nz-form [formGroup]="InfoForm">
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Razon Social</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="nameErrorTpl">
+          <input nz-input type="text" formControlName="razon" placeholder="ej. Mi Empresa S.A de C.V" />
+          <ng-template #nameErrorTpl let-control>
+            <ng-container *ngIf="InfoForm.get('razon').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Sitio Web</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="webErrorTpl">
+          <input nz-input type="text" formControlName="sitio" placeholder="ej. www.miempresa.com" />
+          <ng-template #webErrorTpl let-control>
+            <ng-container *ngIf="InfoForm.get('sitio').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Fecha de Fundación</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="fechaErrorTpl">
+          <nz-date-picker [(ngModel)]="date" formControlName="fecha"> </nz-date-picker
+          ><ng-template #fechaErrorTpl let-control>
+            <ng-container *ngIf="InfoForm.get('fecha').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Dirección Principal</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="direccionErrorTpl">
+          <input nz-input type="text" formControlName="dir" placeholder="ej. Colonia, # de Bloque y Casa" /><ng-template
+            #direccionErrorTpl
+            let-control
+          >
+            <ng-container *ngIf="InfoForm.get('dir').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Email</nz-form-label>
+        <nz-form-control nzfor="email" [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+          <input id="email" nz-input type="text" formControlName="email" placeholder="ej. xyz@mail.com" />
+          <ng-template #emailErrorTpl let-control>
+            <ng-container *ngIf="InfoForm.get('email').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Código Postal</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="codigoErrorTpl">
+          <input
+            nz-input
+            type="number"
+            maxlength="5"
+            min="0"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            formControlName="codigop"
+            placeholder="ej. 21101"
+          /><ng-template #codigoErrorTpl let-control>
+            <ng-container *ngIf="InfoForm.get('codigop').hasError('required') && InfoForm.get('codigop').touched">
+              Ups! No dejes este campo en blanco
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Bio</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="bioErrorTpl">
+          <textarea formControlName="comment" nz-input rows="2" formControlName="bio" placeholder="Describe tu empresa"></textarea
+          ><ng-template #bioErrorTpl let-control>
+            <ng-container *ngIf="InfoForm.get('bio').hasError('required') && InfoForm.get('bio').touched">
+              Ups! No dejes este campo en blanco
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <tr>
+        <td>
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button nz-button nzType="primary" style="margin: 10px" (click)="guardarInfo()" [disabled]="InfoForm.invalid">Guardar</button>
+          </nz-form-control>
+        </td>
+        <td>
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button nz-button (click)="resetForm($event)" nzType="default" style="margin: 10px">Limpiar</button>
+          </nz-form-control>
+        </td>
+        <td>
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button nz-button nzType="primary" style="margin: 10px" nzDanger (click)="handleCancel()">Cancelar</button>
+          </nz-form-control>
+        </td>
+      </tr>
+    </form>
+  </ng-container>
+</nz-modal>
+
+<div>
+  <div class="card">
+    <div class="card-body">
+      <nz-table class="table table-md table-hover" id="cssTable" nzTemplateMode>
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: center">Nombre</th>
+            <th scope="col" style="text-align: center">Sitio Web</th>
+            <th scope="col" style="text-align: center">Fecha de Fundación</th>
+            <th scope="col" style="text-align: center">Dirección Principal</th>
+            <th scope="col" style="text-align: center">Email</th>
+            <th scope="col" style="text-align: center">Código Postal</th>
+            <th scope="col" style="text-align: center">Bio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="7" *ngIf="listInfo?.length <= 0">
+              <nz-empty [nzNotFoundImage]="notFound" [nzNotFoundContent]="contentTpl"></nz-empty>
+              <ng-template #contentTpl>
+                <span>No hay datos.</span>
+              </ng-template>
+            </td>
+          </tr>
+          <tr *ngFor="let data of listInfo">
+            <td>{{ data.razonSocial }}</td>
+            <td>{{ data.sitioWeb }}</td>
+            <td>{{ data.fechaFundacion | date : 'dd/MM/yyyy' }}</td>
+            <td>{{ data.direccionPrincipal }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{ data.codigoPostal }}</td>
+            <td style="text-align: justify">{{ data.bio }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

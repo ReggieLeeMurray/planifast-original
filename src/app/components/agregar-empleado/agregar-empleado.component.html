@@ -1,0 +1,209 @@
+<div style="padding-top: 10px">
+  <h1>
+    {{ accion }} Colaborador
+    <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="center" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover"></i>
+  </h1>
+</div>
+<ng-template #contentTemplate>
+  <div>
+    <p>Deberá tener DEPARTAMENTOS y PLANILLAS registrados en el sistema antes de poder agregar un COLABORADOR.</p>
+    <p>No debe dejar ningún campo vacío para poder ingresar un colaborador al sistema, al igual que al modificar de sus datos.</p>
+  </div>
+</ng-template>
+<nz-spin nzTip="Reconectando..." *ngIf="loading">
+  <nz-alert nzType="info" nzMessage="ALERTA" nzDescription="Ha perdido su conexión Internet o a la base de datos."> </nz-alert>
+</nz-spin>
+<br />
+<div>
+  <tr>
+    <td style="width: 500px; padding-right: 60px">
+      <form nz-form [formGroup]="empleadosForm" (ngSubmit)="guardarEmpleados()">
+        <legend>Información Personal</legend>
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Nombres</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="nombreErrorTpl">
+            <input nz-input type="text" formControlName="nombre" placeholder="ej. Pablo Lara , María José" />
+            <ng-template #nombreErrorTpl let-control>
+              <ng-container *ngIf="empleadosForm.get('nombre').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Apellidos</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="apellidoErrorTpl">
+            <input nz-input type="text" formControlName="apellido" placeholder="ej. Méndez Hernandéz, Romero Sanchéz" /><ng-template
+              #apellidoErrorTpl
+              let-control
+            >
+              <ng-container *ngIf="empleadosForm.get('apellido').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Domicilio</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="direccionErrorTpl">
+            <input nz-input type="text" formControlName="direccion" placeholder="ej. Colonia, # de Bloque y Casa" /><ng-template
+              #direccionErrorTpl
+              let-control
+            >
+              <ng-container *ngIf="empleadosForm.get('direccion').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Nacimiento</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="fechaErrorTpl">
+            <nz-date-picker [(ngModel)]="dateNac" (ngModelChange)="onChange($event)" formControlName="fechanac" nzPlaceHolder="Elija Fecha">
+            </nz-date-picker
+            ><ng-template #fechaErrorTpl let-control>
+              <ng-container *ngIf="empleadosForm.get('fechanac').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">N° Cédula</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="cedulaErrorTpl">
+            <input
+              nz-input
+              maxlength="13"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              formControlName="n_cedula"
+              placeholder="ej. 0501151202154"
+            /><ng-template #cedulaErrorTpl let-control>
+              <ng-container *ngIf="empleadosForm.get('n_cedula').hasError('required')"> Ups! No dejes este campo en blanco </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- <nz-form-item>
+            <nz-form-label nzRequired [nzSm]="8" [nzXs]="24"
+              >Email</nz-form-label
+            >
+            <nz-form-control
+              nzfor="email"
+              [nzSm]="14"
+              [nzXs]="24"
+              nzHasFeedback
+              [nzErrorTip]="emailErrorTpl"
+            >
+              <input
+                id="email"
+                nz-input
+                type="text"
+                formControlName="email"
+                placeholder="ej. xyz@mail.com"
+              />
+              <ng-template #emailErrorTpl let-control>
+                <ng-container
+                  *ngIf="empleadosForm.get('email').hasError('required')"
+                >
+                  Ups! No dejes este campo en blanco
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item> -->
+
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Permanente</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-switch
+              [(ngModel)]="switchValue"
+              [nzDisabled]="isDisabled"
+              [nzCheckedChildren]="checkedTemplate"
+              [nzUnCheckedChildren]="unCheckedTemplate"
+              [ngModelOptions]="{ standalone: true }"
+            ></nz-switch>
+            <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
+            <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSm]="8" [nzXs]="24">Género</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback>
+            <nz-radio-group formControlName="genero" [(ngModel)]="radioValue">
+              <label nz-radio nzValue="Masculino">Masculino</label>
+              <label nz-radio nzValue="Femenino">Femenino</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </td>
+    <td style="width: 500px">
+      <form nz-form [formGroup]="empleadosForm" (ngSubmit)="guardarEmpleados()">
+        <legend>Información Empresarial</legend>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Departamento</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback>
+            <nz-select formControlName="depto" nzPlaceHolder="{{ selectedValueDepto }}">
+              <nz-option
+                type="number"
+                *ngFor="let departamento of listDeptos"
+                nzValue="{{ departamento.id }}"
+                nzLabel="{{ departamento.descripcion }}"
+              ></nz-option>
+            </nz-select> </nz-form-control
+        ></nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Planilla</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24" nzHasFeedback>
+            <nz-select formControlName="tplanilla" nzPlaceHolder="{{ selectedValuePlanilla }}">
+              <nz-option
+                type="number"
+                *ngFor="let tp of listTP"
+                nzValue="{{ tp.id }}"
+                nzLabel="{{ tp.descripcion | uppercase }} ⇄ {{ tp.tipo | uppercase }}"
+              ></nz-option>
+            </nz-select> </nz-form-control
+        ></nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Sueldo Mensual</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="salarioErrorTpl">
+            <input
+              nz-input
+              type="number"
+              maxlength="9"
+              min="0"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              formControlName="salariobase"
+              placeholder="Lps. 00,000.00"
+            /><ng-template #salarioErrorTpl let-control>
+              <ng-container *ngIf="empleadosForm.get('salariobase').hasError('required') && empleadosForm.get('salariobase').touched">
+                Ups! No dejes este campo en blanco
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzRequired [nzSm]="6" [nzXs]="24">Fecha de Alta </nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="fechaingresoErrorTpl">
+            <nz-date-picker [(ngModel)]="dateI" (ngModelChange)="onChange($event)" formControlName="fechaingreso" nzPlaceHolder="Elija Fecha">
+            </nz-date-picker
+            ><ng-template #fechaingresoErrorTpl let-control>
+              <ng-container *ngIf="empleadosForm.get('fechaingreso').hasError('required') && empleadosForm.get('fechaingreso').touched">
+                Ups! No dejes este campo en blanco
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" [disabled]="empleadosForm.invalid">{{ accion }} Colaborador</button>
+        </nz-form-control>
+        <nz-form-control [nzSpan]="14" [nzOffset]="6" *ngIf="isHidden != true">
+          <button nz-button (click)="resetForm()" id="btnLimpiar">Limpiar</button>
+        </nz-form-control>
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" nzDanger [routerLink]="['/listado']">Cancelar</button>
+        </nz-form-control>
+        <br />
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <span> Si desea agregar multiples colaboradores a la plataforma simultaneamente,<a routerLink="/entrada"> ingrese aquí.</a> </span>
+        </nz-form-control>
+      </form>
+    </td>
+  </tr>
+</div>
